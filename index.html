@@ -3,959 +3,491 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist Publicaciones Multi-negocio</title>
+    <title>KSHAI DESIGN · Publicidad & Branding</title>
+    <!-- Fuente Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-        }
-        body {
-            background: #f0f4f8;
             margin: 0;
-            min-height: 100vh;
-            padding: 24px;
-            display: flex;
-            justify-content: center;
+            padding: 0;
+            box-sizing: border-box;
         }
-        #app {
-            max-width: 1300px;
-            width: 100%;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: #1e1e2f;
+            background-color: #ffffff;
         }
-        h1 {
-            color: #1e293b;
-            font-size: 2rem;
-            margin-top: 0;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 600;
-            flex-wrap: wrap;
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 0;
         }
-        .selector-negocio {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: white;
-            padding: 8px 16px;
-            border-radius: 40px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .selector-negocio label {
-            font-weight: 600;
-            color: #475569;
-        }
-        .selector-negocio select {
-            padding: 8px 16px;
-            border-radius: 40px;
-            border: 1px solid #cbd5e1;
-            background: white;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        .tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 8px;
-        }
-        .tab {
-            padding: 10px 24px;
-            background: #f1f5f9;
-            border-radius: 40px 40px 0 0;
-            font-weight: 600;
-            color: #475569;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid #e2e8f0;
-            border-bottom: none;
-        }
-        .tab.active {
-            background: white;
-            color: #2563eb;
-            border-color: #cbd5e1;
-            border-bottom: 2px solid white;
-            margin-bottom: -2px;
-        }
-        .tab:hover {
-            background: #e2e8f0;
-        }
-        .tab-content {
-            display: none;
-            background: transparent;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .progress-container {
-            background: white;
-            border-radius: 24px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            margin-bottom: 20px;
-        }
-        .progress-header {
+
+        .header-container {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: #334155;
-        }
-        .progress-bar-bg {
-            background: #e2e8f0;
-            height: 24px;
-            border-radius: 40px;
-            overflow: hidden;
-        }
-        .progress-bar-fill {
-            background: #10b981;
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 40px;
-        }
-        .action-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .btn {
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            padding: 1rem 0;
         }
-        .btn-primary {
-            background: #2563eb;
-            color: white;
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e1e2f;
+            text-decoration: none;
         }
-        .btn-primary:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(37,99,235,0.2);
+        .logo span {
+            color: #5f2eea;
         }
-        .btn-secondary {
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-        .btn-secondary:hover {
-            background: #e2e8f0;
-        }
-        .btn-danger {
-            background: #fee2e2;
-            color: #b91c1c;
-        }
-        .btn-danger:hover {
-            background: #fecaca;
-        }
-        .publicaciones-grid {
+
+        .nav-links {
             display: flex;
-            flex-direction: column;
-            gap: 16px;
+            gap: 2rem;
         }
-        .publicacion-card {
-            background: white;
-            border-radius: 24px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        .nav-links a {
+            text-decoration: none;
+            color: #1e1e2f;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #5f2eea;
+        }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            background-color: #5f2eea;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background-color: #4b1fb8;
+            transform: scale(1.02);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: #5f2eea;
+            border: 2px solid #5f2eea;
+        }
+        .btn-outline:hover {
+            background-color: #5f2eea;
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f0ff 0%, #ffffff 100%);
+            text-align: center;
+            padding: 5rem 0;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e1e2f;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #4a4a68;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            color: #5f2eea;
+        }
+        .hero-tags span {
+            background-color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Sección Servicios */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #1e1e2f;
+        }
+        .services-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr 2fr auto auto;
-            gap: 16px;
-            align-items: start;
-            border: 1px solid #e9eef3;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
-        @media (max-width: 900px) {
-            .publicacion-card {
+        .service-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(95,46,234,0.1);
+            border-color: #5f2eea20;
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            color: #5f2eea;
+            margin-bottom: 1.5rem;
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .service-card p {
+            color: #4a4a68;
+        }
+
+        /* Por qué elegirnos */
+        .why-us {
+            background-color: #fafaff;
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        .why-item i {
+            font-size: 2rem;
+            color: #5f2eea;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(95,46,234,0.1);
+            margin-bottom: 1rem;
+        }
+        .why-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Acerca de */
+        .about {
+            background-color: #fff;
+        }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #4a4a68;
+        }
+
+        /* Contacto */
+        .contact {
+            background: linear-gradient(135deg, #fff 0%, #f5f0ff 100%);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .contact-info {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: #4a4a68;
+        }
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .contact-detail i {
+            font-size: 1.5rem;
+            color: #5f2eea;
+            width: 2rem;
+        }
+        .contact-form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #5f2eea;
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e1e2f;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        footer p {
+            margin-bottom: 0.5rem;
+            color: #aaa;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: #5f2eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .contact-grid {
                 grid-template-columns: 1fr;
             }
-        }
-        .campo {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .campo label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-        }
-        select, input, textarea {
-            padding: 10px 14px;
-            border: 1px solid #cbd5e1;
-            border-radius: 16px;
-            font-size: 0.95rem;
-            background: #ffffff;
-            transition: 0.15s;
-            width: 100%;
-        }
-        select:focus, input:focus, textarea:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
-        }
-        .checks-group {
-            background: #f8fafc;
-            padding: 14px;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .check-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-        .check-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #10b981;
-        }
-        .btn-eliminar {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #94a3b8;
-            padding: 8px;
-            border-radius: 40px;
-            transition: 0.2s;
-            align-self: center;
-        }
-        .btn-eliminar:hover {
-            background: #f1f5f9;
-            color: #ef4444;
-        }
-        .empty-state {
-            background: white;
-            border-radius: 24px;
-            padding: 40px;
-            text-align: center;
-            color: #64748b;
-            border: 2px dashed #cbd5e1;
-        }
-        .historial-lista {
-            background: white;
-            border-radius: 24px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            margin-bottom: 20px;
-        }
-        .historial-lista h3 {
-            margin-top: 0;
-            margin-bottom: 16px;
-            font-size: 1.3rem;
-            color: #0f172a;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .badge-negocio {
-            background: #e2e8f0;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #334155;
-        }
-        .historial-items {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        .historial-item {
-            background: #f8fafc;
-            border-radius: 16px;
-            padding: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #e2e8f0;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .historial-item:hover {
-            background: #e2e8f0;
-        }
-        .historial-item.selected {
-            background: #dbeafe;
-            border-color: #2563eb;
-        }
-        .historial-info {
-            font-weight: 500;
-            color: #1e293b;
-        }
-        .historial-fecha {
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-top: 4px;
-        }
-        .historial-acciones {
-            display: flex;
-            gap: 6px;
-        }
-        .btn-icon {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 6px;
-            border-radius: 30px;
-            width: 32px;
-            height: 32px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-        }
-        .btn-icon:hover {
-            background: #e2e8f0;
-        }
-        .detalle-historial {
-            background: white;
-            border-radius: 24px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-        }
-        .detalle-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .detalle-titulo {
-            font-weight: 600;
-            color: #0f172a;
-            font-size: 1.1rem;
-        }
-        .publicacion-card-readonly {
-            background: #f8fafc;
-            border-radius: 24px;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr 2fr 2fr 1fr;
-            gap: 16px;
-            align-items: start;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 12px;
-            opacity: 0.9;
-        }
-        .publicacion-card-readonly .campo span {
-            padding: 10px 14px;
-            background: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            display: block;
-        }
-        .footer-note {
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: #94a3b8;
-            text-align: center;
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="app">
-        <h1>
-            📋 Checklist de Publicaciones
-            <div class="selector-negocio">
-                <label>Negocio:</label>
-                <select id="selector-negocio">
-                    <option value="asia">Asia</option>
-                    <option value="importadora">Importadora DYe</option>
-                    <option value="dayana">Dayana</option>
-                </select>
-            </div>
-        </h1>
-
-        <!-- Pestañas -->
-        <div class="tabs">
-            <div class="tab active" data-tab="dia-actual">📌 Día actual</div>
-            <div class="tab" data-tab="historial">📆 Historial</div>
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">KSHAI <span>DESIGN</span></a>
+            <nav class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
         </div>
+    </header>
 
-        <!-- Contenido Día actual -->
-        <div id="tab-dia-actual" class="tab-content active">
-            <div class="progress-container">
-                <div class="progress-header">
-                    <span>Progreso del día</span>
-                    <span id="porcentaje-texto">0%</span>
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="hero">
+            <div class="container">
+                <h1>Impulsa tu marca con soluciones creativas de diseño & publicidad</h1>
+                <p>Transformamos ideas en identidad visual y estrategias digitales que conectan con tu audiencia.</p>
+                <div class="hero-tags">
+                    <span>✨ Diseño de logos</span>
+                    <span>📱 Publicidad digital</span>
+                    <span>🎯 Branding</span>
+                    <span>🚀 Marketing creativo</span>
                 </div>
-                <div class="progress-bar-bg">
-                    <div id="barra-progreso" class="progress-bar-fill" style="width: 0%;"></div>
-                </div>
-            </div>
-
-            <div class="action-bar">
-                <button class="btn btn-primary" id="btn-agregar">➕ Nueva publicación</button>
-                <button class="btn btn-secondary" id="btn-guardar-historial">📅 Guardar historial del día</button>
-                <button class="btn btn-danger" id="btn-limpiar-dia">🧹 Limpiar día</button>
-            </div>
-
-            <div id="publicaciones-container" class="publicaciones-grid">
-                <!-- Se llena con JS -->
-            </div>
-        </div>
-
-        <!-- Contenido Historial -->
-        <div id="tab-historial" class="tab-content">
-            <div class="historial-lista">
-                <h3>
-                    📆 Historial guardado
-                    <span id="badge-negocio-historial" class="badge-negocio">Asia</span>
-                </h3>
-                <div id="lista-historial" class="historial-items">
-                    <!-- Se llena con JS -->
+                <div class="hero-buttons">
+                    <a href="#contacto" class="btn">Comienza tu proyecto</a>
+                    <a href="#servicios" class="btn btn-outline">Descubre más</a>
                 </div>
             </div>
-            <div id="detalle-historial" class="detalle-historial" style="display: none;">
-                <div class="detalle-header">
-                    <span class="detalle-titulo" id="detalle-fecha"></span>
-                    <button class="btn btn-secondary" id="btn-cargar-historial">📂 Cargar al día actual</button>
+        </section>
+
+        <!-- SERVICIOS -->
+        <section id="servicios" class="container">
+            <h2 class="section-title">Nuestros servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>Branding & Identidad</h3>
+                    <p>Creación de logotipos, colores corporativos y manual de marca que reflejan la esencia de tu negocio.</p>
                 </div>
-                <div id="detalle-publicaciones" class="publicaciones-grid">
-                    <!-- Se llena con JS -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Marketing Digital</h3>
+                    <p>Campañas en redes, anuncios pagados, posicionamiento y estrategias para hacer crecer tu marca.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3>Diseño Gráfico</h3>
+                    <p>Piezas visuales para redes sociales, web y material promocional con un acabado profesional.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-hashtag"></i></div>
+                    <h3>Redes Sociales</h3>
+                    <p>Planeación y gestión de contenido creativo que genera engagement y comunidad.</p>
                 </div>
             </div>
-            <div id="sin-seleccion" class="empty-state" style="display: block;">
-                Selecciona un historial para ver su detalle.
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#contacto" class="btn">¿No sabes por dónde empezar? Escríbenos</a>
             </div>
-        </div>
+        </section>
 
-        <div class="footer-note">
-            ✅ Guardado automático en tu navegador (localStorage) - Datos separados por negocio
-        </div>
-    </div>
+        <!-- POR QUÉ ELEGIRNOS -->
+        <section class="why-us">
+            <div class="container">
+                <h2 class="section-title">¿Por qué elegir KSHAI DESIGN?</h2>
+                <div class="why-grid">
+                    <div class="why-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <h4>6+ años de experiencia</h4>
+                        <p>En publicidad y diseño comercial, trabajando con diversas marcas.</p>
+                    </div>
+                    <div class="why-item">
+                        <i class="fas fa-cogs"></i>
+                        <h4>Soluciones personalizadas</h4>
+                        <p>Estrategias a medida según tus objetivos y presupuesto.</p>
+                    </div>
+                    <div class="why-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <h4>Resultados medibles</h4>
+                        <p>Enfoque claro en visibilidad y retorno de inversión.</p>
+                    </div>
+                    <div class="why-item">
+                        <i class="fas fa-user-tie"></i>
+                        <h4>Atención profesional</h4>
+                        <p>Trato directo y cercano, de la mano de expertos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <script>
-        (function() {
-            // ==================== CONFIGURACIÓN ====================
-            const NEGOCIOS = ['asia', 'importadora', 'dayana'];
-            const NEGOCIO_DEFAULT = 'asia';
-            const NOMBRES_NEGOCIO = {
-                asia: 'Asia',
-                importadora: 'Importadora DYe',
-                dayana: 'Dayana'
-            };
+        <!-- ACERCA DE -->
+        <section id="nosotros" class="about">
+            <div class="container">
+                <h2 class="section-title">Acerca de la empresa</h2>
+                <div class="about-content">
+                    <p><strong>KSHAI DESIGN SPA</strong> — Agencia creativa con base en Santiago de Chile, especializada en publicidad y soluciones visuales para empresas que desean crecer y destacar en su mercado. Con más de 6 años de trayectoria, hemos ayudado a decenas de marcas a construir su identidad y conectar con sus audiencias a través de estrategias innovadoras y diseño de alto impacto.</p>
+                    <p style="margin-top: 1.5rem;"><i class="fas fa-map-marker-alt" style="color: #5f2eea;"></i> San Diego 358, Dpto. 28, Santiago, Región Metropolitana.</p>
+                </div>
+            </div>
+        </section>
 
-            // Estado: negocio actual
-            let negocioActual = localStorage.getItem('negocioActual') || NEGOCIO_DEFAULT;
-
-            // Datos: objeto con clave negocio => { publicaciones, historial }
-            let datosPorNegocio = {};
-
-            // Referencias DOM
-            const selectorNegocio = document.getElementById('selector-negocio');
-            const container = document.getElementById('publicaciones-container');
-            const listaHistorial = document.getElementById('lista-historial');
-            const detalleHistorial = document.getElementById('detalle-historial');
-            const sinSeleccion = document.getElementById('sin-seleccion');
-            const detalleFecha = document.getElementById('detalle-fecha');
-            const detallePublicaciones = document.getElementById('detalle-publicaciones');
-            const btnCargarHistorial = document.getElementById('btn-cargar-historial');
-            const btnAgregar = document.getElementById('btn-agregar');
-            const btnGuardarHistorial = document.getElementById('btn-guardar-historial');
-            const btnLimpiarDia = document.getElementById('btn-limpiar-dia');
-            const barraProgreso = document.getElementById('barra-progreso');
-            const porcentajeTexto = document.getElementById('porcentaje-texto');
-            const badgeNegocioHistorial = document.getElementById('badge-negocio-historial');
-
-            // Pestañas
-            const tabs = document.querySelectorAll('.tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-
-            // Historial seleccionado (para el detalle)
-            let historialSeleccionado = null; // { negocio, id }
-
-            // ==================== FUNCIONES AUXILIARES ====================
-            function generarId() {
-                return Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-            }
-
-            function formatearFecha(timestamp) {
-                const fecha = new Date(timestamp);
-                return fecha.toLocaleDateString() + ' ' + fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            }
-
-            // Inicializar estructura de datos vacía para todos los negocios
-            function inicializarDatosVacios() {
-                NEGOCIOS.forEach(n => {
-                    datosPorNegocio[n] = { publicaciones: [], historial: [] };
-                });
-            }
-
-            // Cargar todos los datos desde localStorage
-            function cargarTodo() {
-                const stored = localStorage.getItem('multiNegocioData');
-                if (stored) {
-                    try {
-                        datosPorNegocio = JSON.parse(stored);
-                        // Asegurar estructura para cada negocio existente
-                        NEGOCIOS.forEach(n => {
-                            if (!datosPorNegocio[n]) {
-                                datosPorNegocio[n] = { publicaciones: [], historial: [] };
-                            } else {
-                                // Asegurar que las publicaciones tengan la estructura correcta
-                                datosPorNegocio[n].publicaciones = (datosPorNegocio[n].publicaciones || []).map(p => ({
-                                    id: p.id || generarId(),
-                                    plataforma: p.plataforma || 'mercado-libre',
-                                    titulo: p.titulo || '',
-                                    descripcion: p.descripcion || '',
-                                    checks: {
-                                        tituloListo: p.checks?.tituloListo || false,
-                                        descripcionLista: p.checks?.descripcionLista || false,
-                                        publicado: p.checks?.publicado || false
-                                    }
-                                }));
-                                datosPorNegocio[n].historial = datosPorNegocio[n].historial || [];
-                            }
-                        });
-                    } catch (e) {
-                        console.error('Error cargando datos', e);
-                        inicializarDatosVacios();
-                    }
-                } else {
-                    inicializarDatosVacios();
-                }
-            }
-
-            function guardarTodo() {
-                localStorage.setItem('multiNegocioData', JSON.stringify(datosPorNegocio));
-            }
-
-            // Obtener datos del negocio actual
-            function getNegocioData(negocio) {
-                return datosPorNegocio[negocio];
-            }
-
-            // ==================== PROGRESO ====================
-            function calcularProgreso(publicaciones) {
-                if (publicaciones.length === 0) return 0;
-                let totalChecks = 0;
-                let checksCompletados = 0;
-                publicaciones.forEach(p => {
-                    totalChecks += 3;
-                    if (p.checks.tituloListo) checksCompletados++;
-                    if (p.checks.descripcionLista) checksCompletados++;
-                    if (p.checks.publicado) checksCompletados++;
-                });
-                return Math.round((checksCompletados / totalChecks) * 100);
-            }
-
-            function actualizarProgreso() {
-                const data = getNegocioData(negocioActual);
-                const porcentaje = calcularProgreso(data.publicaciones);
-                barraProgreso.style.width = porcentaje + '%';
-                porcentajeTexto.innerText = porcentaje + '%';
-            }
-
-            // ==================== RENDERIZAR PUBLICACIONES (DÍA ACTUAL) ====================
-            function escapeHtml(text) {
-                if (!text) return '';
-                return String(text)
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&#039;');
-            }
-
-            function renderizarPublicaciones() {
-                const data = getNegocioData(negocioActual);
-                const publicaciones = data.publicaciones;
-
-                if (publicaciones.length === 0) {
-                    container.innerHTML = `<div class="empty-state">✨ No hay publicaciones para este negocio. Agrega una nueva.</div>`;
-                    actualizarProgreso();
-                    return;
-                }
-
-                let html = '';
-                publicaciones.forEach(pub => {
-                    html += `
-                        <div class="publicacion-card" data-id="${pub.id}">
-                            <div class="campo">
-                                <label>Plataforma</label>
-                                <select class="select-plataforma" data-id="${pub.id}">
-                                    <option value="mercado-libre" ${pub.plataforma === 'mercado-libre' ? 'selected' : ''}>Mercado Libre</option>
-                                    <option value="marketplace" ${pub.plataforma === 'marketplace' ? 'selected' : ''}>Marketplace (Facebook)</option>
-                                    <option value="falabella" ${pub.plataforma === 'falabella' ? 'selected' : ''}>Falabella</option>
-                                    <option value="ripley" ${pub.plataforma === 'ripley' ? 'selected' : ''}>Ripley</option>
-                                    <option value="paris" ${pub.plataforma === 'paris' ? 'selected' : ''}>Paris</option>
-                                </select>
-                            </div>
-                            <div class="campo">
-                                <label>Título</label>
-                                <input type="text" class="input-titulo" data-id="${pub.id}" value="${escapeHtml(pub.titulo)}" placeholder="Ej: Zapatillas running">
-                            </div>
-                            <div class="campo">
-                                <label>Descripción</label>
-                                <textarea class="textarea-descripcion" data-id="${pub.id}" placeholder="Ej: Talla 42, color negro...">${escapeHtml(pub.descripcion)}</textarea>
-                            </div>
-                            <div class="checks-group">
-                                <div class="check-item">
-                                    <input type="checkbox" class="check-titulo" data-id="${pub.id}" ${pub.checks.tituloListo ? 'checked' : ''}>
-                                    <span>✅ Título listo</span>
-                                </div>
-                                <div class="check-item">
-                                    <input type="checkbox" class="check-descripcion" data-id="${pub.id}" ${pub.checks.descripcionLista ? 'checked' : ''}>
-                                    <span>📄 Descripción lista</span>
-                                </div>
-                                <div class="check-item">
-                                    <input type="checkbox" class="check-publicado" data-id="${pub.id}" ${pub.checks.publicado ? 'checked' : ''}>
-                                    <span>🚀 Publicado</span>
-                                </div>
-                            </div>
-                            <button class="btn-eliminar" data-id="${pub.id}" title="Eliminar publicación">🗑️</button>
+        <!-- CONTACTO -->
+        <section id="contacto" class="contact">
+            <div class="container">
+                <h2 class="section-title">¿Listo para llevar tu marca al siguiente nivel?</h2>
+                <div class="contact-grid">
+                    <!-- Info -->
+                    <div class="contact-info">
+                        <h3>Conversemos</h3>
+                        <p>Cuéntanos tu proyecto y te asesoraremos sin compromiso. Puedes escribirnos a través del formulario o usando nuestros datos de contacto.</p>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <span>contacto@kshaidesign.cl</span>
                         </div>
-                    `;
-                });
-                container.innerHTML = html;
-                actualizarProgreso();
-                asignarEventosPublicaciones();
-            }
-
-            function asignarEventosPublicaciones() {
-                document.querySelectorAll('.select-plataforma').forEach(select => {
-                    select.addEventListener('change', function(e) {
-                        const id = this.dataset.id;
-                        const data = getNegocioData(negocioActual);
-                        const pub = data.publicaciones.find(p => p.id === id);
-                        if (pub) {
-                            pub.plataforma = this.value;
-                            guardarTodo();
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.input-titulo').forEach(input => {
-                    input.addEventListener('input', function(e) {
-                        const id = this.dataset.id;
-                        const data = getNegocioData(negocioActual);
-                        const pub = data.publicaciones.find(p => p.id === id);
-                        if (pub) {
-                            pub.titulo = this.value;
-                            guardarTodo();
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.textarea-descripcion').forEach(textarea => {
-                    textarea.addEventListener('input', function(e) {
-                        const id = this.dataset.id;
-                        const data = getNegocioData(negocioActual);
-                        const pub = data.publicaciones.find(p => p.id === id);
-                        if (pub) {
-                            pub.descripcion = this.value;
-                            guardarTodo();
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.check-titulo').forEach(chk => {
-                    chk.addEventListener('change', function(e) {
-                        const id = this.dataset.id;
-                        const data = getNegocioData(negocioActual);
-                        const pub = data.publicaciones.find(p => p.id === id);
-                        if (pub) {
-                            pub.checks.tituloListo = this.checked;
-                            guardarTodo();
-                            actualizarProgreso();
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.check-descripcion').forEach(chk => {
-                    chk.addEventListener('change', function(e) {
-                        const id = this.dataset.id;
-                        const data = getNegocioData(negocioActual);
-                        const pub = data.publicaciones.find(p => p.id === id);
-                        if (pub) {
-                            pub.checks.descripcionLista = this.checked;
-                            guardarTodo();
-                            actualizarProgreso();
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.check-publicado').forEach(chk => {
-                    chk.addEventListener('change', function(e) {
-                        const id = this.dataset.id;
-                        const data = getNegocioData(negocioActual);
-                        const pub = data.publicaciones.find(p => p.id === id);
-                        if (pub) {
-                            pub.checks.publicado = this.checked;
-                            guardarTodo();
-                            actualizarProgreso();
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.btn-eliminar').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        const id = this.dataset.id;
-                        const data = getNegocioData(negocioActual);
-                        data.publicaciones = data.publicaciones.filter(p => p.id !== id);
-                        guardarTodo();
-                        renderizarPublicaciones();
-                    });
-                });
-            }
-
-            // ==================== RENDERIZAR HISTORIAL (LISTA) ====================
-            function renderizarListaHistorial() {
-                const data = getNegocioData(negocioActual);
-                const historial = data.historial || [];
-
-                // Actualizar badge con nombre del negocio
-                badgeNegocioHistorial.textContent = NOMBRES_NEGOCIO[negocioActual] || negocioActual;
-
-                if (historial.length === 0) {
-                    listaHistorial.innerHTML = `<div style="color: #94a3b8; text-align: center; padding: 20px;">No hay historiales guardados para este negocio</div>`;
-                    return;
-                }
-
-                const sorted = [...historial].sort((a,b) => b.timestamp - a.timestamp);
-                let html = '';
-                sorted.forEach(item => {
-                    const fechaStr = formatearFecha(item.timestamp);
-                    const cantPub = item.publicaciones.length;
-                    const selectedClass = (historialSeleccionado && historialSeleccionado.negocio === negocioActual && historialSeleccionado.id === item.id) ? 'selected' : '';
-                    html += `
-                        <div class="historial-item ${selectedClass}" data-id="${item.id}">
-                            <div>
-                                <div class="historial-info">📌 ${fechaStr}</div>
-                                <div class="historial-fecha">${cantPub} publicación(es)</div>
-                            </div>
-                            <div class="historial-acciones">
-                                <button class="btn-icon btn-eliminar-hist" title="Eliminar este historial" data-id="${item.id}">🗑️</button>
-                            </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+56 9 1234 5678</span>
                         </div>
-                    `;
-                });
-                listaHistorial.innerHTML = html;
-
-                // Eventos para seleccionar historial
-                document.querySelectorAll('.historial-item').forEach(item => {
-                    item.addEventListener('click', (e) => {
-                        if (e.target.classList.contains('btn-eliminar-hist') || e.target.closest('.btn-eliminar-hist')) return;
-                        const id = item.dataset.id;
-                        seleccionarHistorial(id);
-                    });
-                });
-
-                // Eventos para eliminar historial
-                document.querySelectorAll('.btn-eliminar-hist').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const id = btn.dataset.id;
-                        const data = getNegocioData(negocioActual);
-                        data.historial = data.historial.filter(h => h.id !== id);
-                        if (historialSeleccionado && historialSeleccionado.negocio === negocioActual && historialSeleccionado.id === id) {
-                            historialSeleccionado = null;
-                            detalleHistorial.style.display = 'none';
-                            sinSeleccion.style.display = 'block';
-                        }
-                        guardarTodo();
-                        renderizarListaHistorial();
-                    });
-                });
-            }
-
-            function seleccionarHistorial(id) {
-                historialSeleccionado = { negocio: negocioActual, id };
-                // Actualizar clase selected en la lista
-                document.querySelectorAll('.historial-item').forEach(item => {
-                    item.classList.remove('selected');
-                    if (item.dataset.id === id) item.classList.add('selected');
-                });
-
-                const data = getNegocioData(negocioActual);
-                const item = data.historial.find(h => h.id === id);
-                if (item) {
-                    detalleFecha.innerText = `Historial de ${NOMBRES_NEGOCIO[negocioActual]} - ${formatearFecha(item.timestamp)}`;
-                    // Renderizar publicaciones del historial (solo lectura)
-                    let html = '';
-                    item.publicaciones.forEach(pub => {
-                        let plataformaTexto = pub.plataforma;
-                        if (pub.plataforma === 'mercado-libre') plataformaTexto = 'Mercado Libre';
-                        else if (pub.plataforma === 'marketplace') plataformaTexto = 'Marketplace';
-                        else if (pub.plataforma === 'falabella') plataformaTexto = 'Falabella';
-                        else if (pub.plataforma === 'ripley') plataformaTexto = 'Ripley';
-                        else if (pub.plataforma === 'paris') plataformaTexto = 'Paris';
-                        else plataformaTexto = pub.plataforma;
-
-                        html += `
-                            <div class="publicacion-card-readonly">
-                                <div class="campo">
-                                    <label>Plataforma</label>
-                                    <span>${escapeHtml(plataformaTexto)}</span>
-                                </div>
-                                <div class="campo">
-                                    <label>Título</label>
-                                    <span>${escapeHtml(pub.titulo) || '—'}</span>
-                                </div>
-                                <div class="campo">
-                                    <label>Descripción</label>
-                                    <span>${escapeHtml(pub.descripcion) || '—'}</span>
-                                </div>
-                                <div class="checks-group">
-                                    <div class="check-item">
-                                        <input type="checkbox" disabled ${pub.checks.tituloListo ? 'checked' : ''}>
-                                        <span>✅ Título</span>
-                                    </div>
-                                    <div class="check-item">
-                                        <input type="checkbox" disabled ${pub.checks.descripcionLista ? 'checked' : ''}>
-                                        <span>📄 Descripción</span>
-                                    </div>
-                                    <div class="check-item">
-                                        <input type="checkbox" disabled ${pub.checks.publicado ? 'checked' : ''}>
-                                        <span>🚀 Publicado</span>
-                                    </div>
-                                </div>
+                        <div class="contact-detail">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>+56 9 8765 4321</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun a Vie 9:00 - 18:00</span>
+                        </div>
+                    </div>
+                    <!-- Formulario -->
+                    <div class="contact-form">
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <input type="text" placeholder="Nombre completo" required>
                             </div>
-                        `;
-                    });
-                    detallePublicaciones.innerHTML = html;
-                    detalleHistorial.style.display = 'block';
-                    sinSeleccion.style.display = 'none';
-                }
-            }
+                            <div class="form-group">
+                                <input type="email" placeholder="Correo electrónico" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Empresa (opcional)">
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Cuéntanos tu idea o proyecto..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn" style="width: 100%;">Enviar mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-            // ==================== ACCIONES PRINCIPALES ====================
-            function agregarPublicacion() {
-                const data = getNegocioData(negocioActual);
-                const nueva = {
-                    id: generarId(),
-                    plataforma: 'mercado-libre',
-                    titulo: '',
-                    descripcion: '',
-                    checks: { tituloListo: false, descripcionLista: false, publicado: false }
-                };
-                data.publicaciones.push(nueva);
-                guardarTodo();
-                renderizarPublicaciones();
-            }
-
-            function guardarHistorialDia() {
-                const data = getNegocioData(negocioActual);
-                if (data.publicaciones.length === 0) {
-                    alert('No hay publicaciones para guardar en el historial.');
-                    return;
-                }
-                const nuevoHistorial = {
-                    id: generarId(),
-                    timestamp: Date.now(),
-                    publicaciones: JSON.parse(JSON.stringify(data.publicaciones))
-                };
-                data.historial.push(nuevoHistorial);
-                guardarTodo();
-                renderizarListaHistorial();
-                alert('Historial guardado correctamente.');
-            }
-
-            function limpiarDia() {
-                if (confirm('¿Estás seguro de que quieres eliminar TODAS las publicaciones del día actual? Esta acción no borra el historial.')) {
-                    const data = getNegocioData(negocioActual);
-                    data.publicaciones = [];
-                    guardarTodo();
-                    renderizarPublicaciones();
-                }
-            }
-
-            // ==================== CAMBIO DE NEGOCIO ====================
-            function cambiarNegocio(nuevoNegocio) {
-                if (nuevoNegocio === negocioActual) return;
-                negocioActual = nuevoNegocio;
-                localStorage.setItem('negocioActual', negocioActual);
-                selectorNegocio.value = negocioActual;
-
-                // Limpiar selección de historial
-                historialSeleccionado = null;
-                detalleHistorial.style.display = 'none';
-                sinSeleccion.style.display = 'block';
-
-                // Renderizar vistas
-                renderizarPublicaciones();
-                renderizarListaHistorial();
-            }
-
-            // ==================== PESTAÑAS ====================
-            function activarPestania(tabId) {
-                tabs.forEach(tab => {
-                    if (tab.dataset.tab === tabId) {
-                        tab.classList.add('active');
-                    } else {
-                        tab.classList.remove('active');
-                    }
-                });
-                tabContents.forEach(content => {
-                    if (content.id === `tab-${tabId}`) {
-                        content.classList.add('active');
-                    } else {
-                        content.classList.remove('active');
-                    }
-                });
-            }
-
-            // ==================== INICIALIZACIÓN ====================
-            cargarTodo();
-
-            // Establecer selector de negocio
-            selectorNegocio.value = negocioActual;
-            selectorNegocio.addEventListener('change', (e) => {
-                cambiarNegocio(e.target.value);
-            });
-
-            // Renderizar vistas iniciales
-            renderizarPublicaciones();
-            renderizarListaHistorial();
-
-            // Eventos botones día actual
-            btnAgregar.addEventListener('click', agregarPublicacion);
-            btnGuardarHistorial.addEventListener('click', guardarHistorialDia);
-            btnLimpiarDia.addEventListener('click', limpiarDia);
-
-            // Evento cargar historial al día actual
-            btnCargarHistorial.addEventListener('click', () => {
-                if (!historialSeleccionado || historialSeleccionado.negocio !== negocioActual) return;
-                const data = getNegocioData(negocioActual);
-                const item = data.historial.find(h => h.id === historialSeleccionado.id);
-                if (item) {
-                    data.publicaciones = JSON.parse(JSON.stringify(item.publicaciones));
-                    guardarTodo();
-                    renderizarPublicaciones();
-                    activarPestania('dia-actual');
-                }
-            });
-
-            // Pestañas
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    activarPestania(tab.dataset.tab);
-                });
-            });
-
-        })();
-    </script>
+    <footer>
+        <div class="container">
+            <div class="logo" style="color: #fff; margin-bottom: 1rem;">KSHAI <span>DESIGN</span></div>
+            <p>Publicidad · Branding · Diseño visual</p>
+            <p>San Diego 358, Dpto. 28, Santiago, Chile</p>
+            <div class="social-links">
+                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">&copy; 2025 KSHAI DESIGN SPA. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
