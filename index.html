@@ -1,826 +1,415 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todokcl | Los Más Vendidos en Sublimación</title>
-
-<style>
-:root{
-  --black:#0c0c0c;
-  --gray:#6e6e73;
-  --light:#f5f5f7;
-  --gold:#c6a75e;
-  --gold-light:#dbbc7c;
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  color:var(--black);
-  background:white;
-  line-height:1.6;
-}
-
-h1,h2,h3{
-  font-family: Georgia, 'Times New Roman', serif;
-  letter-spacing:-0.02em;
-}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:0 24px;
-}
-
-.topbar{
-  background:var(--black);
-  color:white;
-  text-align:center;
-  font-size:0.85rem;
-  padding:10px 0;
-  letter-spacing:.5px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.topbar span{
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.hero{
-  padding:120px 0;
-  text-align:center;
-  background: linear-gradient(to bottom, #fff, var(--light));
-}
-
-.hero h1{
-  font-size:clamp(2.5rem,6vw,4rem);
-  max-width:900px;
-  margin:auto;
-}
-
-.hero span{
-  color:var(--gold);
-}
-
-.hero p{
-  margin:25px auto 40px;
-  max-width:600px;
-  font-size:1.15rem;
-  color:var(--gray);
-}
-
-.btn{
-  display:inline-block;
-  padding:16px 42px;
-  border-radius:50px;
-  background:var(--black);
-  color:white;
-  text-decoration:none;
-  font-weight:600;
-  transition:.3s;
-  border: none;
-  cursor: pointer;
-}
-
-.btn:hover{
-  background:var(--gold);
-  color:black;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(198,167,94,0.3);
-}
-
-.btn-gold{
-  background: var(--gold);
-  color: var(--black);
-}
-
-.btn-gold:hover{
-  background: var(--gold-light);
-}
-
-.section{
-  padding:100px 0;
-}
-
-.section-title{
-  text-align:center;
-  margin-bottom:70px;
-}
-
-.section-title h2{
-  font-size:2.4rem;
-  position: relative;
-  display: inline-block;
-}
-
-.section-title h2:after{
-  content: '';
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--gold);
-  margin: 15px auto 0;
-}
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:50px;
-}
-
-.card{
-  background:white;
-  border-radius:24px;
-  padding:40px 30px;
-  text-align:center;
-  transition:.4s;
-  border:1px solid #eee;
-  position: relative;
-}
-
-.card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 30px 60px -20px rgba(0,0,0,.15);
-  border-color: var(--gold);
-}
-
-.card-badge{
-  position: absolute;
-  top: 20px;
-  left: 30px;
-  background: var(--gold);
-  color: var(--black);
-  padding: 5px 15px;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.card img{
-  max-width:200px;
-  margin-bottom:25px;
-  border-radius: 8px;
-}
-
-.card h3{
-  font-size:1.5rem;
-  margin-bottom:10px;
-}
-
-.card p{
-  color:var(--gray);
-  margin-bottom:20px;
-  font-size: 0.95rem;
-}
-
-.price{
-  font-size:1.8rem;
-  font-weight:700;
-  margin-bottom:20px;
-}
-
-.price small{
-  font-size:1rem;
-  color:#999;
-  text-decoration:line-through;
-  margin-right:8px;
-}
-
-.complementos{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  margin-top: 60px;
-}
-
-.complemento-card{
-  background: var(--light);
-  border-radius: 16px;
-  padding: 25px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: .3s;
-  text-decoration: none;
-  color: inherit;
-}
-
-.complemento-card:hover{
-  background: var(--gold);
-  transform: scale(1.02);
-}
-
-.complemento-card img{
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.complemento-info h4{
-  font-size: 1.1rem;
-  margin-bottom: 5px;
-}
-
-.complemento-info p{
-  color: var(--gray);
-  font-weight: 600;
-}
-
-/* Estilos para la sección de video */
-.video-section {
-  background: white;
-  padding: 60px 0;
-}
-
-.video-container {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  aspect-ratio: 16 / 9;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 20px 40px -15px rgba(0,0,0,0.2);
-  border: 1px solid #eee;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-.video-caption {
-  text-align: center;
-  margin-top: 25px;
-  font-size: 1.2rem;
-  color: var(--gray);
-  font-style: italic;
-}
-
-.video-caption p {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-/* Control de audio hint */
-.audio-hint {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 0.9rem;
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.audio-hint span {
-  font-size: 1.2rem;
-}
-
-.features{
-  background:var(--light);
-}
-
-.features-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:50px;
-  text-align:center;
-}
-
-.feature .emoji-icon{
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-.feature h3{
-  margin-bottom:10px;
-}
-
-.feature p{
-  color:var(--gray);
-}
-
-.testimonials{
-  background: white;
-}
-
-.testimonial-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.testimonial-card{
-  background: var(--light);
-  border-radius: 20px;
-  padding: 30px;
-  position: relative;
-}
-
-.testimonial-card .quote-icon{
-  font-size: 2rem;
-  opacity: 0.3;
-  margin-bottom: 15px;
-  color: var(--gold);
-}
-
-.testimonial-card p{
-  font-style: italic;
-  margin-bottom: 20px;
-}
-
-.testimonial-author{
-  font-weight: 700;
-  color: var(--black);
-}
-
-.testimonial-role{
-  font-size: 0.85rem;
-  color: var(--gray);
-}
-
-.garantia{
-  background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 100%);
-  color: white;
-  text-align: center;
-  padding: 80px 0;
-}
-
-.garantia h2{
-  color: white;
-  font-size: 2.2rem;
-}
-
-.garantia p{
-  max-width: 700px;
-  margin: 20px auto 40px;
-  color: #ccc;
-}
-
-.garantia-items{
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  flex-wrap: wrap;
-  margin-top: 40px;
-}
-
-.garantia-item{
-  text-align: center;
-}
-
-.garantia-item .emoji-icon{
-  font-size: 2rem;
-  margin-bottom: 15px;
-}
-
-.cta{
-  background:var(--black);
-  color:white;
-  text-align:center;
-  padding:120px 0;
-}
-
-.cta h2{
-  font-size:2.5rem;
-  color: white;
-}
-
-.cta p{
-  margin:20px 0 40px;
-  color:#cfcfcf;
-  font-size: 1.2rem;
-}
-
-/* WHATSAPP FLOTANTE - ACTUALIZADO CON IMAGEN DESDE POSTIMAGES */
-.whatsapp-float{
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: #25D366;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  transition: .3s;
-  z-index: 999;
-  text-decoration: none;
-}
-
-.whatsapp-float:hover{
-  transform: scale(1.1);
-  background: #20ba5a;
-}
-
-.whatsapp-float img{
-  width: 45px;
-  height: 45px;
-  object-fit: contain;
-  filter: brightness(0) invert(1); /* Hace que el logo sea blanco */
-}
-
-.whatsapp-float span{
-  position: absolute;
-  right: 85px;
-  background: var(--black);
-  color: white;
-  padding: 8px 15px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  display: none;
-  font-weight: 500;
-}
-
-.whatsapp-float:hover span{
-  display: block;
-}
-
-.trust-badges{
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin: 30px 0;
-  color: var(--gray);
-}
-
-.trust-badges span{
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.social-section{
-  background: linear-gradient(to bottom, var(--light), white);
-  padding: 60px 0;
-  text-align: center;
-  border-top: 1px solid #eee;
-}
-
-.social-section h3{
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: var(--black);
-}
-
-.social-grid{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  max-width: 900px;
-  margin: 0 auto 30px;
-}
-
-.social-btn{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 15px 30px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: .3s;
-  background: white;
-  color: var(--black);
-  border: 1px solid #ddd;
-  min-width: 240px;
-  justify-content: center;
-}
-
-.social-btn:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  border-color: var(--gold);
-}
-
-.social-btn .emoji-icon{
-  font-size: 1.4rem;
-}
-
-.social-tagline{
-  font-size: 1.1rem;
-  color: var(--gray);
-  margin-top: 20px;
-  font-weight: 500;
-}
-
-footer{
-  text-align:center;
-  padding:40px 0;
-  font-size:.9rem;
-  color:#888;
-  border-top: 1px solid #eee;
-}
-
-.phone-number{
-  font-weight: 600;
-  color: var(--gold);
-}
-
-@media (max-width: 768px){
-  .hero{padding: 80px 0;}
-  .section{padding: 60px 0;}
-  .whatsapp-float{width: 60px; height: 60px;}
-  .whatsapp-float img{width: 35px; height: 35px;}
-  .whatsapp-float span{right: 70px; font-size: 0.8rem;}
-  .social-btn{min-width: 200px; padding: 12px 20px;}
-  .topbar{flex-direction: column; gap: 5px;}
-  .video-container {
-    border-radius: 16px;
-  }
-  .video-caption {
-    font-size: 1rem;
-    margin-top: 15px;
-  }
-  .audio-hint {
-    font-size: 0.8rem;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Máquinas e insumos para sublimación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            background: #f4f7fb;
+            padding: 2rem 1.5rem;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h1 span {
+            background: #ffedd5;
+            color: #9a3412;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+        }
+        .subhead {
+            color: #475569;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            border-left: 5px solid #f97316;
+            padding-left: 1rem;
+            background: #fff7ed;
+            padding: 1rem 1.5rem;
+            border-radius: 0 1rem 1rem 0;
+            font-weight: 500;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.8rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.6rem 1.5rem 1.8rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(249, 115, 22, 0.1);
+            border-color: #fed7aa;
+        }
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        .product-title .emoji-badge {
+            background: #f97316;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .description {
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.3rem;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 1rem;
+            border-left: 3px solid #f97316;
+        }
+        .description ul {
+            list-style: none;
+            margin-top: 0.6rem;
+        }
+        .description li {
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 0.8rem 0 1rem;
+        }
+        .badge {
+            background: #f1f5f9;
+            padding: 0.4rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1e293b;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid #e2e8f0;
+        }
+        .badge.urgent {
+            background: #fee2e2;
+            color: #b91c1c;
+            border-color: #fecaca;
+        }
+        .badge.social {
+            background: #fef9c3;
+            color: #854d0e;
+            border-color: #fde047;
+        }
+        .badge.bonus {
+            background: #dcfce7;
+            color: #166534;
+            border-color: #bbf7d0;
+        }
+        .badge.guarantee {
+            background: #dbeafe;
+            color: #1e40af;
+            border-color: #bfdbfe;
+        }
+        .closing-question {
+            background: #fff7ed;
+            padding: 0.9rem 1.2rem;
+            border-radius: 1rem;
+            font-weight: 600;
+            color: #7b341e;
+            margin: 1rem 0 0.8rem;
+            border: 1px dashed #f97316;
+            font-size: 1rem;
+        }
+        .pack-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            background: #f1f5f9;
+            padding: 0.6rem 1rem;
+            border-radius: 2rem;
+            color: #0f172a;
+            font-weight: 500;
+            width: fit-content;
+            border: 1px solid #cbd5e1;
+            margin-top: 0.3rem;
+        }
+        .footer-note {
+            margin-top: 3rem;
+            background: #0f172a;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 2rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .footer-note span {
+            background: #f97316;
+            color: black;
+            font-weight: 700;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            margin: 0 4px;
+        }
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #f97316, #facc15, #f97316);
+            margin: 2rem 0;
+        }
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            h1 { font-size: 1.8rem; flex-wrap: wrap; }
+        }
+    </style>
 </head>
 <body>
-
-<!-- WHATSAPP FLOTANTE - Con imagen desde PostImages -->
-<a href="https://wa.me/56958037047?text=Hola%20Todokcl!%20Vengo%20de%20la%20landing%20page%20y%20quiero%20asesor%C3%ADa%20sobre%20los%20productos%20m%C3%A1s%20vendidos" class="whatsapp-float" target="_blank">
-  <img src="https://i.postimg.cc/25zv3Xh3/vecteezy-whatsapp-logo-png-whatsapp-icon-png-whatsapp-transparent-18930564.png" alt="WhatsApp">
-  <span>¿Dudas? Te asesoramos</span>
-</a>
-
-<!-- TOPBAR con teléfono visible y formateado -->
-<div class="topbar">
-  <span>🚚 Importador directo en Chile</span>
-  <span>📱 <span class="phone-number">+56 9 5803 7047</span></span>
-  <span>🛡️ Soporte real post-venta</span>
-  <span>👥 Comunidad activa</span>
-</div>
-
-<section class="hero">
 <div class="container">
-  <div class="trust-badges">
-    <span><span>✅</span> 2500+ clientes satisfechos</span>
-    <span><span>🛡️</span> Garantía de fábrica</span>
-    <span><span>⏰</span> Stock inmediato</span>
-  </div>
-<h1>Los equipos de sublimación <span>más vendidos por emprendedores chilenos</span></h1>
-<p>Herramientas profesionales con soporte real y stock inmediato. Lo que todo taller necesita para escalar.</p>
-<a href="#productos" class="btn">Ver productos destacados <span>⬇️</span></a>
-</div>
-</section>
+    <h1>
+        🔥 FÁBRICA DE INGRESOS <span>sublimación profesional</span>
+    </h1>
+    <div class="subhead">
+        ⚡ Cada ficha incluye: urgencia · prueba social · garantía · pregunta de cierre · opción de pack · ¡todo pensado para convertir!
+    </div>
 
-<section class="section" id="productos">
-<div class="container">
-<div class="section-title">
-<h2>Nuestros más vendidos 🔥</h2>
-<p style="color: var(--gray); margin-top: 15px;">Los favoritos de nuestra comunidad</p>
-</div>
+    <div class="product-grid">
 
-<div class="products">
+        <!-- PRODUCTO 1 - 15 en 1 -->
+        <div class="product-card">
+            <div class="product-title">🔥 1️⃣ Máquina Sublimadora 15 en 1 <span class="emoji-badge">TOP</span></div>
+            <div class="description">
+                <strong>💬 Convierte tu casa en una fábrica de ingresos.</strong> Personaliza tazones, poleras, platos, gorros… calidad profesional. 
+                <ul>
+                    <li>✔️ Más opciones = más ventas</li>
+                    <li>✔️ Equipamiento completo en una inversión</li>
+                    <li>✔️ Fácil de usar</li>
+                </ul>
+                ⚠️ <em>El modelo que eligen los emprendedores que quieren vender ya.</em>
+            </div>
+            <div class="badge-row">
+                <span class="badge urgent">⏳ ¡Vende ya! Disponible</span>
+                <span class="badge social">⭐ Preferido por emprendedores</span>
+                <span class="badge bonus">🎁 Asesoría básica incluida</span>
+                <span class="badge guarantee">✅ Garantía de satisfacción</span>
+            </div>
+            <div class="closing-question">
+                👉 ¿Prefieres comenzar con la 8 en 1 o ir directo a la 15 en 1 y tener todas las opciones?
+            </div>
+            <div class="pack-option">
+                📦 Opción de pack: + tintas y papel (consúltanos)
+            </div>
+        </div>
 
-<!-- Plancha 8 en 1 Plus -->
-<div class="card">
-<div class="card-badge">🔥 MÁS VENDIDA 2024</div>
-<img src="https://i.postimg.cc/k4W5gRWf/maquina_sublimadora_estampadora_8_en_1.png" alt="Plancha 8 en 1 Plus">
-<h3>Plancha 8 en 1 Plus</h3>
-<p>La más versátil: tazas, gorras, platos, rompecabezas y más. Todo en un solo equipo.</p>
-<div class="price"><small>$299.990</small>$269.990</div>
-<a href="https://todokcl.com/maquina-estampadora-8-en-1/7-maquina-sublimadora-estampadora-8-en-1.html" class="btn" target="_blank">Comprar ahora</a>
-</div>
+        <!-- PRODUCTO 2 - 8 en 1 -->
+        <div class="product-card">
+            <div class="product-title">🔥 2️⃣ Máquina Sublimadora 8 en 1</div>
+            <div class="description">
+                <strong>💬 Si quieres empezar rentable y sin sobreinvertir, esta es la más elegida.</strong> Trabaja los productos más vendidos: tazas, poleras, gorras…
+                <ul>
+                    <li>⭐ Equilibrio perfecto precio-versatilidad</li>
+                </ul>
+                ⏳ <em>Stock limitado esta semana.</em>
+            </div>
+            <div class="badge-row">
+                <span class="badge urgent">⏳ Stock limitado ¡solo esta semana!</span>
+                <span class="badge social">⭐ Una de las más vendidas</span>
+                <span class="badge guarantee">✅ Garantía de satisfacción</span>
+            </div>
+            <div class="closing-question">
+                👉 ¿Te la dejamos reservada?
+            </div>
+            <div class="pack-option">
+                📦 Pack inicio: incluye 5 tazas + papel muestra
+            </div>
+        </div>
 
-<!-- Plancha 38x38 -->
-<div class="card">
-<div class="card-badge">⭐ RECOMENDADA</div>
-<img src="https://i.postimg.cc/DZ1zw41P/estampadora_plancha_de_sublimacion_38x38_color_negro.png" alt="Plancha 38x38 Profesional">
-<h3>Plancha 38x38 Profesional</h3>
-<p>El estándar para poleras, cojines y textiles. La más duradera del mercado.</p>
-<div class="price">$179.990</div>
-<a href="https://todokcl.com/plancha-de-sublimacion-38x38/404-estampadora-plancha-de-sublimacion-38x38-color-negro-8435498087356.html" class="btn" target="_blank">Comprar ahora</a>
-</div>
+        <!-- PRODUCTO 3 - Sublimadora de Tazas 11oz -->
+        <div class="product-card">
+            <div class="product-title">🔥 3️⃣ Sublimadora de Tazas 11oz</div>
+            <div class="description">
+                <strong>💬 Si quieres un producto que se venda todos los días, empieza con tazas.</strong>
+                <ul>
+                    <li>✔️ Bajo costo de producción</li>
+                    <li>✔️ Alta rotación · Margen atractivo</li>
+                </ul>
+                ⭐ Muchos empezaron solo con esta máquina… hoy venden cientos al mes.<br>
+                ⚠️ <em>Cada día que no la tienes, alguien más vende tazas en tu zona.</em>
+            </div>
+            <div class="badge-row">
+                <span class="badge urgent">⚠️ ¡Urgente! Tú zona se está quedando atrás</span>
+                <span class="badge social">⭐ Cientos de emprendedores empezaron así</span>
+                <span class="badge guarantee">✅ Garantía de satisfacción</span>
+            </div>
+            <div class="closing-question">
+                👉 ¿La llevas sola o con pack de tazones?
+            </div>
+            <div class="pack-option">
+                📦 Pack tazones: 12 unidades + cinta térmica
+            </div>
+        </div>
 
-<!-- Plancha 40x60 -->
-<div class="card">
-<div class="card-badge">🚀 FORMATO XXL</div>
-<img src="https://i.postimg.cc/VNx6wW0V/plancha_plana_sublimadora_estampadora_40x60.png" alt="Plancha 40x60 XXL">
-<h3>Plancha 40x60 XXL</h3>
-<p>Para piezas de gran formato. Ideal para escalar tu producción.</p>
-<div class="price">$279.990</div>
-<a href="https://todokcl.com/plancha-40x60/405-plancha-plana-sublimadora-estampadora-40x60-8435498079207.html" class="btn" target="_blank">Comprar ahora</a>
-</div>
+        <!-- PRODUCTO 4 - Kit Impresora Epson L3210 + Tintas + Hojas -->
+        <div class="product-card">
+            <div class="product-title">🔥 4️⃣ Kit Impresora Epson L3210 + Tintas + Hojas</div>
+            <div class="description">
+                <strong>💬 No es solo una impresora. Es el inicio de tu negocio.</strong> Kit listo: impresora + tintas + papel. 
+                🎯 Ideal para empezar sin complicaciones, todo compatible.
+                ⚡ <em>Promoción válida por tiempo limitado.</em>
+            </div>
+            <div class="badge-row">
+                <span class="badge urgent">⚡ Promoción por tiempo limitado</span>
+                <span class="badge social">⭐ Kit más elegido para comenzar</span>
+                <span class="badge guarantee">✅ Garantía extendida</span>
+            </div>
+            <div class="closing-question">
+                👉 ¿Prefieres este kit listo o armarlo paso a paso?
+            </div>
+            <div class="pack-option">
+                📦 ¿Agregas +100 hojas sublimación?
+            </div>
+        </div>
 
-</div>
+        <!-- PRODUCTO 5 - Caja de Tazones 11oz (36 uds) -->
+        <div class="product-card">
+            <div class="product-title">🔥 5️⃣ Caja de Tazones 11oz (36 unidades)</div>
+            <div class="description">
+                <strong>💬 El producto que más se vende en sublimación.</strong> Las tazas personalizadas nunca pasan de moda.
+                <ul>
+                    <li>📦 36 uds para producir sin parar</li>
+                    <li>💰 Compra al por mayor = mayor margen</li>
+                </ul>
+                Si ya tienes máquina, este es tu siguiente paso lógico.
+            </div>
+            <div class="badge-row">
+                <span class="badge urgent">⏳ ¡No te quedes sin stock! Alta rotación</span>
+                <span class="badge social">⭐ El más vendido en sublimación</span>
+                <span class="badge guarantee">✅ Garantía de calidad</span>
+            </div>
+            <div class="closing-question">
+                👉 ¿Agregamos una caja extra para que no te quedes sin stock?
+            </div>
+            <div class="pack-option">
+                📦 2ª caja con 5% dto. (pack ahorro)
+            </div>
+        </div>
 
-<!-- Complementos indispensables -->
-<div class="complementos">
+        <!-- PRODUCTO 6 - Pack 4 Tintas Sublimación TodokPrint -->
+        <div class="product-card">
+            <div class="product-title">🔥 6️⃣ Pack 4 Tintas Sublimación TodokPrint</div>
+            <div class="description">
+                <strong>💬 Colores intensos. Resultados profesionales.</strong> Las tintas son el corazón. Si fallan, pierdes material y clientes.
+                <ul>
+                    <li>✔️ Colores vivos · Alta transferencia</li>
+                    <li>✔️ Compatibles con Epson</li>
+                </ul>
+                ⚠️ <em>Muchos clientes vuelven por este pack por la calidad constante.</em>
+            </div>
+            <div class="badge-row">
+                <span class="badge urgent">⏳ Precio especial por tiempo limitado</span>
+                <span class="badge social">⭐ Favoritas por su calidad constante</span>
+                <span class="badge guarantee">✅ Garantía de color y fijación</span>
+            </div>
+            <div class="closing-question">
+                👉 ¿Te agrego un pack adicional para asegurar producción continua?
+            </div>
+            <div class="pack-option">
+                📦 Pack x2 tintas (ahorro 10%)
+            </div>
+        </div>
 
-<a href="https://todokcl.com/sublimacion/47-tazon-11oz-categoria-aaa-36-tazas-.html" class="complemento-card" target="_blank">
-<img src="https://i.postimg.cc/N03Mtk26/tazon_11oz_categoria_aaa_36_tazas.png" alt="Tazas sublimables AAA">
-<div class="complemento-info">
-<h4>Tazas sublimables AAA</h4>
-<p>Pack 12 unidades · Calidad premium</p>
-</div>
-</a>
+        <!-- PRODUCTO 7 - Cinta Térmica Sublimación -->
+        <div class="product-card">
+            <div class="product-title">🔥 7️⃣ Cinta Térmica Sublimación</div>
+            <div class="description">
+                <strong>💬 Pequeño detalle. Gran diferencia.</strong> Evita que el diseño se mueva y arruine tu trabajo.
+                🎯 Recomendado para resultados profesionales. No usarla puede costarte productos dañados.
+            </div>
+            <div class="badge-row">
+                <span class="badge urgent">⏳ ¡No te quedes sin ella en producción!</span>
+                <span class="badge social">⭐ Recomendada por profesionales</span>
+                <span class="badge guarantee">✅ Garantía de satisfacción</span>
+            </div>
+            <div class="closing-question">
+                👉 ¿Agregamos un par de rollos para que no te quedes sin ella en plena producción?
+            </div>
+            <div class="pack-option">
+                📦 Lote 3 rollos + 1 regalo
+            </div>
+        </div>
 
-<a href="https://todokcl.com/impresoras-multifuncional-epson/62--impresora-a-color-simple-funcion-epson-surecolor-f170-con-wifi-blanca-100v240v.html" class="complemento-card" target="_blank">
-<img src="https://i.postimg.cc/SxtRThSq/impresora_a_color_simple_funcion_epson_surecolor_f170_con_wifi_blanca_100v240v.png" alt="Impresora Epson SureColor F170 con wifi">
-<div class="complemento-info">
-<h4>Impresora Epson SureColor F170 con wifi</h4>
-<p>Sistema continuo + tinta sublimación</p>
-</div>
-</a>
+        <!-- PRODUCTO 8 - Botellas de Aluminio Sublimables -->
+        <div class="product-card">
+            <div class="product-title">🔥 8️⃣ Botellas de Aluminio Sublimables</div>
+            <div class="description">
+                <strong>💬 Producto tendencia para colegios, empresas y regalos corporativos.</strong>
+                <ul>
+                    <li>✔️ Alta demanda · Gran espacio de personalización</li>
+                    <li>✔️ Excelente margen</li>
+                </ul>
+                🎁 Muchos clientes compran ambos (tazas + botellas).
+            </div>
+            <div class="badge-row">
+                <span class="badge urgent">⏳ ¡Tendencia! Stock limitado</span>
+                <span class="badge social">⭐ Los que más repiten: tazas + botellas</span>
+                <span class="badge guarantee">✅ Garantía de satisfacción</span>
+            </div>
+            <div class="closing-question">
+                👉 ¿Las llevas individuales o en pack emprendedor?
+            </div>
+            <div class="pack-option">
+                📦 Pack emprendedor: 12 botellas + 6 tazas
+            </div>
+        </div>
+    </div>
 
-</div>
-</div>
-</section>
+    <hr>
 
-<!-- SECCIÓN DE VIDEO INSPIRACIONAL (CON AUDIO ACTIVADO Y CONTROL DE MUTE) -->
-<section class="section video-section">
-<div class="container">
-  <div class="section-title">
-    <h2>Inspírate con Todokcl</h2>
-    <p style="color: var(--gray);">Mira cómo otros emprendedores están generando ingresos</p>
-  </div>
-  
-  <div class="video-container">
-    <iframe 
-      src="https://www.youtube.com/embed/o-pmT6ae_wY?autoplay=1&mute=0&loop=1&playlist=o-pmT6ae_wY&controls=1&modestbranding=1&showinfo=0&rel=0" 
-      title="YouTube video player" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-      allowfullscreen>
-    </iframe>
-  </div>
-  
-  <!-- Indicador de control de audio -->
-  <div class="audio-hint">
-    <span>🔊</span> El video tiene audio activado - Usa el control de volumen en el reproductor
-  </div>
-  
-  <div class="video-caption">
-    <p>✨ "Muchas mamás y mujeres emprendedoras con ganas de crecer ya confían en nosotros"</p>
-  </div>
-</div>
-</section>
+    <!-- ESTRATEGIA AVANZADA (explicación visual) -->
+    <div class="footer-note">
+        🔥 <span>ESTRATEGIA AVANZADA</span> aplicada en cada ficha 🔥<br>
+        ⚡ Urgencia · ⭐ Prueba social · 🎁 Bono/✅ Garantía · ❓ Pregunta de cierre · 📦 Opción de pack<br>
+        <small style="opacity:0.8;">— Así convertimos visitas en ventas —</small>
+    </div>
 
-<!-- Prueba Social / Testimonios -->
-<section class="section testimonials">
-<div class="container">
-<div class="section-title">
-<h2>Lo que dicen nuestros clientes</h2>
+    <!-- pequeño detalle de cierre -->
+    <div style="text-align: center; margin-top: 2rem; color: #64748b; font-size: 0.9rem;">
+        🧑‍💻 ¿Listo para empezar o ampliar tu negocio? Reserva cualquiera de estos productos con un clic.
+    </div>
 </div>
-
-<div class="testimonial-grid">
-
-<div class="testimonial-card">
-<div class="quote-icon">❝</div>
-<p>"Compré la 8 en 1 Plus y la Epson adaptada. Me llegó al día siguiente y ya estoy vendiendo tazas personalizadas para empresas. 10/10."</p>
-<div class="testimonial-author">Carlos Pérez</div>
-<div class="testimonial-role">@carlosprint · Emprendedor</div>
-</div>
-
-<div class="testimonial-card">
-<div class="quote-icon">❝</div>
-<p>"Llevo un año con la plancha 38x38 y funciona como el primer día. La mejor inversión para mi emprendimiento."</p>
-<div class="testimonial-author">María José</div>
-<div class="testimonial-role">@artemaria · Diseñadora</div>
-</div>
-
-<div class="testimonial-card">
-<div class="quote-icon">❝</div>
-<p>"El soporte de Todokcl es real, me ayudaron a calibrar la impresión por WhatsApp. Eso no te lo da cualquiera."</p>
-<div class="testimonial-author">Diego Rojas</div>
-<div class="testimonial-role">Diseñador Gráfico</div>
-</div>
-
-</div>
-</div>
-</section>
-
-<!-- Beneficios / Por qué elegirnos -->
-<section class="section features">
-<div class="container">
-<div class="section-title">
-<h2>Por qué elegir Todokcl</h2>
-</div>
-
-<div class="features-grid">
-<div class="feature">
-<div class="emoji-icon">📦</div>
-<h3>Stock inmediato</h3>
-<p>Despachos desde Santiago en 24/48 hrs.</p>
-</div>
-<div class="feature">
-<div class="emoji-icon">🛡️</div>
-<h3>Garantía real</h3>
-<p>Equipos revisados antes de despacho.</p>
-</div>
-<div class="feature">
-<div class="emoji-icon">🎧</div>
-<h3>Soporte experto</h3>
-<p>Asesoría post-venta para que produzcas sin fricción.</p>
-</div>
-<div class="feature">
-<div class="emoji-icon">👥</div>
-<h3>Comunidad activa</h3>
-<p>+500 emprendedores creciendo juntos.</p>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Garantía y Seguridad -->
-<section class="garantia">
-<div class="container">
-<h2>Compra con total confianza</h2>
-<p>Cada equipo pasa por control de calidad antes de ser despachado. Respaldo real para tu emprendimiento.</p>
-
-<div class="garantia-items">
-<div class="garantia-item">
-<div class="emoji-icon">📦</div>
-<h4>Garantía de fábrica</h4>
-</div>
-<div class="garantia-item">
-<div class="emoji-icon">🔄</div>
-<h4>Cambios y devoluciones fáciles</h4>
-</div>
-<div class="garantia-item">
-<div class="emoji-icon">🔒</div>
-<h4>Pago seguro vía Webpay</h4>
-</div>
-</div>
-</div>
-</section>
-
-<!-- CTA Final con urgencia -->
-<section class="cta">
-<div class="container">
-<h2>¿Listo para escalar tu taller de sublimación?</h2>
-<p>Stock limitado · Despacho inmediato · Precios de importador directo</p>
-<a href="https://todokcl.com/coleccion/mas-vendidos" class="btn btn-gold" target="_blank">Ver colección completa <span>→</span></a>
-<p style="margin-top: 20px; font-size: 0.9rem;">Incluye repuestos, tintas y todo lo que necesitas</p>
-</div>
-</section>
-
-<!-- REDES SOCIALES con número de teléfono visible -->
-<section class="social-section">
-<div class="container">
-  <h3><span>📱</span> Síguenos en nuestras redes</h3>
-  
-  <div class="social-grid">
-    
-    <a href="https://www.facebook.com/Todok.cl" class="social-btn" target="_blank">
-      <span class="emoji-icon">📘</span> Facebook
-    </a>
-    
-    <a href="https://www.instagram.com/Todok.cl" class="social-btn" target="_blank">
-      <span class="emoji-icon">📷</span> Instagram
-    </a>
-    
-    <a href="https://www.youtube.com/@canaltodok/?sub_confirmation=1" class="social-btn" target="_blank">
-      <span class="emoji-icon">▶️</span> YouTube
-    </a>
-    
-    <a href="https://wa.me/56958037047" class="social-btn" target="_blank">
-      <span class="emoji-icon">📱</span> WhatsApp 
-    </a>
-    
-    <a href="https://todokcl.com" class="social-btn" target="_blank">
-      <span class="emoji-icon">🌐</span> Web Oficial
-    </a>
-    
-  </div>
-  
-  <div class="social-tagline">
-    ✨ Todok – Equipos y apoyo para emprendedores que quieren crecer. 💼💡
-  </div>
-</div>
-</section>
-
-<footer>
-  <div class="container">
-    <p>Todokcl.com · Equipos profesionales de sublimación · Importador directo en Chile</p>
-    <p style="margin-top: 10px;">📱 <span class="phone-number">+56 9 5803 7047</span> · © 2025 Todos los derechos reservados</p>
-  </div>
-</footer>
-
 </body>
 </html>
