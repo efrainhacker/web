@@ -3,111 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Cocina Caraqueña · Menú interactivo</title>
+  <title>Comida Venezolana · Vista desde un Caraqueño</title>
   <style>
+    /* ===== ESTILOS BASE (CLARO) ===== */
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
     }
 
     body {
-      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-      background: #fff3e0;
-      margin: 0;
-      padding: 0;
+      background: #fff8e6;  /* crema cálido */
+      color: #2c1e12;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
     }
 
+    /* --- MODO OSCURO (clase dark activa en body) --- */
+    body.dark {
+      background: #1e1a16;      /* fondo oscuro con tono tierra */
+      color: #e7d9cc;
+    }
+
+    body.dark header {
+      background: #3e2b1c;
+      color: #f5ddc4;
+      border-bottom: 2px solid #b97c4b;
+    }
+
+    body.dark .menu-recetas {
+      background: #2b221b;
+      border-bottom: 2px solid #9e6a3e;
+    }
+
+    body.dark .menu-item {
+      background: #3f3329;
+      color: #f0d5b8;
+      border-color: #aa7b4c;
+      box-shadow: none;
+    }
+
+    body.dark .menu-item:hover,
+    body.dark .menu-item.activo {
+      background: #b87c4b;
+      color: #1f160f;
+      border-color: #e6b07e;
+    }
+
+    body.dark .receta-individual {
+      background: #2d251f;
+      border: 1px solid #7b5a3e;
+      box-shadow: 0 15px 25px -8px black;
+    }
+
+    body.dark .receta-header h2 {
+      color: #f3c9a2;
+      text-shadow: none;
+    }
+
+    body.dark h3 {
+      color: #e7bf91;
+      border-left-color: #bb7e4b;
+    }
+
+    body.dark ul li::marker,
+    body.dark ol li::marker {
+      color: #e7a56e;
+    }
+
+    body.dark .mensaje-inicial {
+      background: #2f261e;
+      color: #eaceb5;
+      border-color: #a76f3d;
+    }
+
+    body.dark footer {
+      background: #221c16;
+      color: #cfa87a;
+      border-top: 2px solid #7b5a3c;
+    }
+
+    body.dark #buscador {
+      background: #3f362e;
+      color: #f5e1cf;
+      border: 1px solid #8e673f;
+    }
+
+    body.dark #buscador::placeholder {
+      color: #b99c82;
+    }
+
+    /* ===== CABECERA ===== */
     header {
       background: #8B0000;
       color: white;
-      padding: 1.5rem 1rem;
+      padding: 1.2rem 1rem;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    header h1 {
-      font-size: 2.2rem;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
-    }
-
-    .buscador-wrapper {
       display: flex;
-      justify-content: center;
-      margin-top: 0.8rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    #buscador {
-      width: 90%;
-      max-width: 500px;
-      padding: 12px 20px;
+    .titulo-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .titulo-header h1 {
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    .titulo-header h2 {
       font-size: 1rem;
-      border: none;
+      font-weight: 400;
+      opacity: 0.9;
+      font-style: italic;
+    }
+
+    .modo-boton {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid white;
+      color: white;
+      padding: 8px 18px;
       border-radius: 40px;
-      outline: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(4px);
       transition: 0.2s;
     }
 
-    #buscador:focus {
-      box-shadow: 0 4px 14px rgba(139, 0, 0, 0.4);
+    .modo-boton:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.02);
     }
 
-    /* menú horizontal de recetas */
+    body.dark .modo-boton {
+      background: #5f4230;
+      border-color: #ebbc93;
+      color: #ffebd2;
+    }
+
+    .buscador-wrapper {
+      flex: 1 1 100%;
+      margin-top: 15px;
+    }
+
+    #buscador {
+      width: 100%;
+      max-width: 550px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 60px;
+      outline: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: white;
+    }
+
+    /* ===== MENÚ DE RECETAS ===== */
     .menu-recetas {
       background: #fff0da;
-      padding: 0.8rem 1rem;
+      padding: 0.9rem 1.2rem;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.6rem 1.2rem;
+      gap: 0.7rem 1.3rem;
       border-bottom: 2px solid #8B0000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
     .menu-item {
       background: white;
       color: #8B0000;
-      border: 1px solid #d0a47c;
-      padding: 0.5rem 1.2rem;
+      border: 1px solid #b88a62;
+      padding: 0.5rem 1.4rem;
       border-radius: 40px;
       font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
       transition: 0.2s;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
 
-    .menu-item:hover, .menu-item.activo {
+    .menu-item:hover,
+    .menu-item.activo {
       background: #8B0000;
       color: white;
       border-color: #8B0000;
-      transform: scale(1.02);
     }
 
-    /* contenedor principal */
+    /* ===== CONTENEDOR PRINCIPAL ===== */
     .container {
-      padding: 2rem 1.5rem;
-      max-width: 1200px;
+      padding: 2.5rem 1.5rem;
+      max-width: 1100px;
       margin: 0 auto;
       width: 100%;
       flex: 1;
     }
 
-    /* tarjeta de receta individual */
+    /* ===== TARJETA DE RECETA INDIVIDUAL ===== */
     .receta-individual {
       background: white;
-      border-radius: 28px;
-      padding: 2rem 2rem 2.5rem 2rem;
+      border-radius: 36px;
+      padding: 2.2rem 2.2rem 3rem;
       box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
-      max-width: 950px;
-      margin: 0 auto;
-      border: 1px solid #fad1b0;
-      transition: 0.3s;
+      border: 1px solid #facba0;
     }
 
     .receta-header {
@@ -120,48 +230,45 @@
 
     .receta-header h2 {
       color: #8B0000;
-      font-size: 2.5rem;
+      font-size: 2.4rem;
       font-weight: 700;
-      text-shadow: 1px 1px 0 #ffe3c2;
-      margin: 0;
-      line-height: 1.2;
       flex: 1 1 250px;
     }
 
-    /* imagen del plato */
     .img-plato {
       flex: 0 0 200px;
       height: 170px;
       border-radius: 40px 40px 40px 10px;
-      background: #f7d9b5;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 4.5rem;
-      box-shadow: 0 12px 16px -8px rgba(139, 0, 0, 0.3);
-      border: 3px solid white;
-      transition: 0.2s;
+      font-size: 4.8rem;
+      box-shadow: 0 16px 20px -8px rgba(139, 0, 0, 0.4);
+      border: 4px solid white;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      color: #8B0000;
-      text-shadow: 2px 2px 0 rgba(255,255,255,0.7);
+      color: #4b2a10;
+      text-shadow: 0 2px 6px white;
     }
 
-    /* emojis como placeholder de imágenes (cada receta tiene su propia imagen de fondo) */
+    body.dark .img-plato {
+      border-color: #5a3a28;
+      box-shadow: 0 16px 20px -8px black;
+    }
+
     .receta-detalles h3 {
       color: #6b3f1f;
-      margin: 1.8rem 0 0.8rem 0;
-      font-size: 1.8rem;
-      border-left: 12px solid #8B0000;
-      padding-left: 1rem;
+      font-size: 1.9rem;
+      margin: 2rem 0 1rem;
+      border-left: 14px solid #8B0000;
+      padding-left: 1.2rem;
     }
 
     ul, ol {
-      margin-left: 1.8rem;
-      font-size: 1.15rem;
-      line-height: 1.7;
-      color: #2e1b0e;
+      margin-left: 2rem;
+      font-size: 1.18rem;
+      line-height: 1.75;
     }
 
     li {
@@ -172,7 +279,6 @@
       color: #8B0000;
       font-weight: bold;
     }
-
     ol li::marker {
       color: #8B0000;
       font-weight: 600;
@@ -180,14 +286,12 @@
 
     .mensaje-inicial {
       text-align: center;
-      font-size: 1.8rem;
-      color: #b96f4b;
+      font-size: 2rem;
       background: #ffefdb;
-      padding: 3rem 2rem;
+      padding: 3.5rem 2rem;
       border-radius: 60px;
       border: 3px dashed #8B0000;
     }
-
     .mensaje-inicial span {
       font-size: 5rem;
       display: block;
@@ -195,284 +299,241 @@
 
     footer {
       text-align: center;
-      padding: 1.5rem;
-      color: #5f3e28;
-      font-weight: 500;
+      padding: 1.6rem;
       background: #fde9d4;
-      border-top: 2px solid #c0815a;
+      color: #4f351f;
+      font-weight: 500;
+      border-top: 2px solid #b5703a;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
     }
 
     /* responsive */
-    @media (max-width: 650px) {
+    @media (max-width: 680px) {
       .receta-header {
         flex-direction: column;
         text-align: center;
       }
       .img-plato {
-        width: 100%;
+        width: 90%;
         max-width: 280px;
       }
-      header h1 {
-        font-size: 1.8rem;
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+      .titulo-header {
+        align-items: center;
       }
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="titulo-header">
+      <h1>🍲 Comida Venezolana</h1>
+      <h2>vista desde un caraqueño</h2>
+    </div>
+    <button class="modo-boton" id="modoOscuroBtn">🌙 Modo Oscuro</button>
+    <div class="buscador-wrapper">
+      <input type="text" id="buscador" placeholder="🔍 Busca por nombre o ingrediente...">
+    </div>
+  </header>
 
-<header>
-  <h1>🍽️ Mi Cocina Caraqueña</h1>
-  <div class="buscador-wrapper">
-    <input type="text" id="buscador" placeholder="🔍 Buscar receta por nombre o ingrediente...">
-  </div>
-</header>
+  <!-- menú generado dinámicamente -->
+  <div class="menu-recetas" id="menuRecetas"></div>
 
-<!-- menú interactivo con todas las recetas -->
-<div class="menu-recetas" id="menuRecetas"></div>
+  <div class="container" id="listaRecetas"></div>
 
-<div class="container" id="listaRecetas">
-  <!-- aquí se renderiza la receta seleccionada o el mensaje de bienvenida -->
-</div>
+  <footer>
+    © 2026 Comida Venezolana Vista Desde un Caraqueño
+  </footer>
 
-<footer>
-  🇻🇪 Sabores de Caracas · recetas tradicionales venezolanas
-</footer>
+  <script>
+    (function() {
+      // ----- BASE DE DATOS DE RECETAS (con imágenes emoji + fondos) -----
+      const recetas = [
+        {
+          titulo: "Arepas Tradicionales",
+          ingredientes: ["2 tazas harina de maíz precocida", "2 ½ tazas agua", "1 cdta sal"],
+          preparacion: ["Mezclar harina, agua y sal.", "Amasar hasta masa suave.", "Formar discos.", "Cocinar en plancha 7 min por lado."],
+          emoji: "🫓",
+          fondo: "linear-gradient(145deg, #eab47a, #c8823a)"
+        },
+        {
+          titulo: "Pabellón Criollo",
+          ingredientes: ["Carne mechada", "Arroz blanco", "Caraotas negras", "Plátano maduro"],
+          preparacion: ["Cocinar el arroz.", "Preparar caraotas con aliños.", "Sofreír y desmechar la carne.", "Freír el plátano y servir."],
+          emoji: "🍛",
+          fondo: "radial-gradient(circle at 20% 30%, #d37c42, #914e1e)"
+        },
+        {
+          titulo: "Asado Negro",
+          ingredientes: ["1 kg muchacho redondo", "1 taza azúcar", "2 cebollas", "4 ajos", "1 taza vino tinto"],
+          preparacion: ["Sellar la carne.", "Caramelizar azúcar y agregar carne.", "Añadir sofrito y vino.", "Cocinar lento 2-3 h hasta tierno."],
+          emoji: "🥩",
+          fondo: "linear-gradient(145deg, #603a21, #351f10)"
+        },
+        {
+          titulo: "Tequenos",
+          ingredientes: ["250 g queso blanco duro", "Masa para tequeños (trigo)", "Aceite para freír"],
+          preparacion: ["Cortar queso en tiras.", "Envolver con tiras de masa.", "Freír en aceite caliente hasta dorar."],
+          emoji: "🧀",
+          fondo: "#dcb078"
+        }
+      ];
 
-<script>
-  // Array de recetas enriquecido con imagen (emoji representativo y color de fondo)
-  const recetas = [
-    {
-      titulo: "Arepas Tradicionales",
-      ingredientes: [
-        "2 tazas harina de maíz precocida",
-        "2 1/2 tazas agua",
-        "1 cucharadita sal"
-      ],
-      preparacion: [
-        "Mezclar harina, agua y sal hasta integrar.",
-        "Amasar por 3 minutos hasta obtener masa suave y homogénea.",
-        "Formar discos de 1 cm de grosor.",
-        "Cocinar en plancha caliente 5-7 min por lado, hasta que suenen huecas."
-      ],
-      emoji: "🫓",
-      fondo: "linear-gradient(145deg, #f5b87e, #e6a15e)"  // color arepa
-    },
-    {
-      titulo: "Pabellón Criollo",
-      ingredientes: [
-        "Carne mechada",
-        "Arroz blanco",
-        "Caraotas negras",
-        "Plátano maduro"
-      ],
-      preparacion: [
-        "Cocinar el arroz con sal y un diente de ajo.",
-        "Preparar las caraotas en olla lenta con aliños.",
-        "Sofreír y desmechar la carne con cebolla y pimentón.",
-        "Freír el plátano en rodajas y servir todo junto en un plato."
-      ],
-      emoji: "🍛",
-      fondo: "radial-gradient(circle at 30% 30%, #d4753b, #9e4e1f)"
-    },
-    {
-      titulo: "Asado Negro",
-      ingredientes: [
-        "1 kg muchacho redondo",
-        "1 taza de azúcar",
-        "2 cebollas grandes",
-        "4 dientes de ajo",
-        "1 taza de vino tinto",
-        "Papelón al gusto"
-      ],
-      preparacion: [
-        "Sellar la carne en aceite caliente por todos lados.",
-        "Caramelizar el azúcar en la misma olla, agregar la carne y cubrir de agua.",
-        "Añadir sofrito de cebolla, ajo, vino tinto y papelón.",
-        "Cocinar a fuego lento 2-3 horas hasta que la carne esté tierna."
-      ],
-      emoji: "🥩",
-      fondo: "linear-gradient(135deg, #522e1a, #2f1b0e)"
-    },
-    {
-      titulo: "Tequenos",
-      ingredientes: [
-        "250 g queso blanco duro (para freír)",
-        "1 paquete de masa de harina de trigo (para tequeños)",
-        "Aceite para freír",
-        "Palitos de brocheta (opcional)"
-      ],
-      preparacion: [
-        "Cortar el queso en tiras de 1 cm de grosor.",
-        "Enrollar cada tira con tiras de masa, cubriendo bien.",
-        "Calentar abundante aceite y freír hasta dorar (3-4 min).",
-        "Escurrir en papel absorbente y servir calientes."
-      ],
-      emoji: "🧀",
-      fondo: "#eebe6c"
-    }
-  ];
+      // Elementos del DOM
+      const body = document.body;
+      const modoBtn = document.getElementById('modoOscuroBtn');
+      const buscador = document.getElementById('buscador');
+      const menuDiv = document.getElementById('menuRecetas');
+      const contenedor = document.getElementById('listaRecetas');
 
-  // Elementos del DOM
-  const buscador = document.getElementById('buscador');
-  const contenedor = document.getElementById('listaRecetas');
-  const menuDiv = document.getElementById('menuRecetas');
+      // ---------- MODO OSCURO (persistencia en localStorage) ----------
+      const modoActual = localStorage.getItem('modo-oscuro-caraqueno');
+      if (modoActual === 'dark') body.classList.add('dark');
 
-  // Función para mostrar el menú horizontal (se genera con los títulos)
-  function renderMenu() {
-    menuDiv.innerHTML = ''; 
-    recetas.forEach((r, index) => {
-      const boton = document.createElement('button');
-      boton.className = 'menu-item';
-      boton.textContent = r.titulo;
-      boton.dataset.index = index;
-      boton.addEventListener('click', () => {
-        // Quitar clase activo de todos y poner al actual
-        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
-        boton.classList.add('activo');
-        mostrarRecetaIndividual(r);
+      modoBtn.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        if (body.classList.contains('dark')) {
+          localStorage.setItem('modo-oscuro-caraqueno', 'dark');
+          modoBtn.innerHTML = '☀️ Modo Claro';
+        } else {
+          localStorage.setItem('modo-oscuro-caraqueno', 'light');
+          modoBtn.innerHTML = '🌙 Modo Oscuro';
+        }
       });
-      menuDiv.appendChild(boton);
-    });
-  }
 
-  // Mostrar UNA SOLA receta (vista detalle con imagen y texto)
-  function mostrarRecetaIndividual(receta) {
-    // Crear HTML completo con la imagen personalizada (fondo + emoji)
-    const estiloImagen = `background: ${receta.fondo}; background-size: cover; background-blend-mode: overlay;`;
-    
-    const html = `
-      <div class="receta-individual">
-        <div class="receta-header">
-          <h2>${receta.titulo}</h2>
-          <div class="img-plato" style="${estiloImagen} background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2215%22 y=%2270%22 font-size=%2265%22>${receta.emoji}</text></svg>'); background-repeat: no-repeat; background-position: center 20px; background-size: 90px;">
+      // Actualizar texto del botón si arranca en oscuro
+      if (body.classList.contains('dark')) modoBtn.innerHTML = '☀️ Modo Claro';
+
+      // ---------- FUNCIONES DE VISUALIZACIÓN ----------
+      function mostrarRecetaIndividual(receta) {
+        const estiloImagen = `background: ${receta.fondo}; background-size: cover; background-blend-mode: overlay;`;
+        // SVG con emoji gigante (para que se vea bien en cualquier fondo)
+        const svgEmoji = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="15" y="75" font-size="70" fill="black" stroke="white" stroke-width="1.5">${receta.emoji}</text></svg>')`;
+        
+        const html = `
+          <div class="receta-individual">
+            <div class="receta-header">
+              <h2>${receta.titulo}</h2>
+              <div class="img-plato" style="${estiloImagen} background-image: ${svgEmoji}; background-repeat: no-repeat; background-position: center 20px; background-size: 100px;">
+              </div>
+            </div>
+            <div class="receta-detalles">
+              <h3>🥄 Ingredientes</h3>
+              <ul>${receta.ingredientes.map(i => `<li>${i}</li>`).join('')}</ul>
+              <h3>👩‍🍳 Preparación</h3>
+              <ol>${receta.preparacion.map(p => `<li>${p}</li>`).join('')}</ol>
+            </div>
           </div>
-        </div>
-        <div class="receta-detalles">
-          <h3>🥄 Ingredientes</h3>
-          <ul>
-            ${receta.ingredientes.map(i => `<li>${i}</li>`).join('')}
-          </ul>
-          <h3>👩‍🍳 Preparación</h3>
-          <ol>
-            ${receta.preparacion.map(p => `<li>${p}</li>`).join('')}
-          </ol>
-        </div>
-      </div>
-    `;
-    contenedor.innerHTML = html;
-  }
+        `;
+        contenedor.innerHTML = html;
+      }
 
-  // Mostrar mensaje de bienvenida (cuando no se ha elegido nada)
-  function mostrarBienvenida() {
-    contenedor.innerHTML = `
-      <div class="mensaje-inicial">
-        <span>🍲🇻🇪</span>
-        Selecciona una receta del menú<br> o busca tu plato favorito 🔍
-      </div>
-    `;
-    // quitar clase activa del menú
-    document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
-  }
-
-  // Función de filtrado: actualiza menú y muestra resultados según búsqueda
-  function filtrarRecetas() {
-    const texto = buscador.value.toLowerCase().trim();
-    
-    if (texto === '') {
-      // Si no hay texto, volver a mostrar menú completo y pantalla de bienvenida
-      renderMenu();
-      mostrarBienvenida();
-      return;
-    }
-
-    const filtradas = recetas.filter(r => 
-      r.titulo.toLowerCase().includes(texto) ||
-      r.ingredientes.join(' ').toLowerCase().includes(texto)
-    );
-
-    // Volver a generar el menú pero solo con los botones de las recetas filtradas
-    menuDiv.innerHTML = '';
-    if (filtradas.length === 0) {
-      // si no hay coincidencias, mostrar menú vacío (opcional) y mensaje
-      menuDiv.innerHTML = '<span style="padding:0.5rem; background:#f0c0a0; border-radius:30px; color:#5e2e0f;">🔎 sin coincidencias</span>';
-      contenedor.innerHTML = `
-        <div class="mensaje-inicial" style="background:#ffe1ce;">
-          <span>😕</span>
-          No encontramos ninguna receta con "<strong>${texto}</strong>"
-        </div>
-      `;
-      return;
-    }
-
-    // Renderizar botones para cada receta filtrada
-    filtradas.forEach((r, idx) => {
-      const boton = document.createElement('button');
-      boton.className = 'menu-item';
-      boton.textContent = r.titulo;
-      // Guardamos la receta directamente
-      boton.addEventListener('click', () => {
+      function mostrarBienvenida() {
+        contenedor.innerHTML = `
+          <div class="mensaje-inicial">
+            <span>🥑🌽</span>
+            Elige una receta del menú<br> o busca tu plato favorito
+          </div>
+        `;
+        // quitar clase activa de todos los items del menú
         document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
-        boton.classList.add('activo');
-        mostrarRecetaIndividual(r);
+      }
+
+      // ---------- RENDER MENÚ (completo) ----------
+      function renderMenuCompleto() {
+        menuDiv.innerHTML = '';
+        recetas.forEach((r, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'menu-item';
+          btn.textContent = r.titulo;
+          btn.dataset.index = idx;
+          menuDiv.appendChild(btn);
+        });
+      }
+
+      // ---------- FILTRO Y ACTUALIZACIÓN DE MENÚ/RECETAS ----------
+      function filtrarYBuscador() {
+        const texto = buscador.value.toLowerCase().trim();
+
+        if (texto === '') {
+          // vacío: mostramos todo el menú y bienvenida
+          renderMenuCompleto();
+          mostrarBienvenida();
+          return;
+        }
+
+        const filtradas = recetas.filter(r => 
+          r.titulo.toLowerCase().includes(texto) ||
+          r.ingredientes.join(' ').toLowerCase().includes(texto)
+        );
+
+        // reconstruir menú solo con filtradas
+        menuDiv.innerHTML = '';
+        if (filtradas.length === 0) {
+          menuDiv.innerHTML = '<span style="background:#efcfb0; padding:0.5rem 1.8rem; border-radius:30px; color:#4f2c12;">⛔ sin coincidencias</span>';
+          contenedor.innerHTML = `
+            <div class="mensaje-inicial" style="background:#ffe1ce;">
+              <span>😕</span>
+              No hay recetas para "<strong>${texto}</strong>"
+            </div>
+          `;
+          return;
+        }
+
+        // crear botones para cada receta filtrada
+        filtradas.forEach(r => {
+          const btn = document.createElement('button');
+          btn.className = 'menu-item';
+          btn.textContent = r.titulo;
+          menuDiv.appendChild(btn);
+        });
+
+        // activar el primero y mostrar esa receta
+        const primerBoton = menuDiv.querySelector('.menu-item');
+        if (primerBoton) {
+          document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
+          primerBoton.classList.add('activo');
+          // mostrar la receta que corresponde al botón activo (filtradas[0])
+          mostrarRecetaIndividual(filtradas[0]);
+        }
+      }
+
+      // ---------- DELEGACIÓN DE EVENTOS (menú dinámico) ----------
+      menuDiv.addEventListener('click', (e) => {
+        const boton = e.target.closest('.menu-item');
+        if (!boton) return;
+
+        const tituloReceta = boton.textContent;
+        const recetaSel = recetas.find(r => r.titulo === tituloReceta);
+        if (recetaSel) {
+          // quitar activo de todos y poner a este
+          document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
+          boton.classList.add('activo');
+          mostrarRecetaIndividual(recetaSel);
+
+          // (Opcional) si quieres que al elegir menú se limpie el buscador, descomenta:
+          // buscador.value = '';
+        }
       });
-      menuDiv.appendChild(boton);
-    });
 
-    // Si hay al menos una, mostrar la primera del filtro (para que no quede vacío)
-    if (filtradas.length > 0) {
-      // quitar activo previo, activar primer botón
-      document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
-      if (menuDiv.firstChild) menuDiv.firstChild.classList.add('activo');
-      mostrarRecetaIndividual(filtradas[0]);
-    } else {
-      mostrarBienvenida();
-    }
-  }
+      // ---------- BUSCADOR EN TIEMPO REAL ----------
+      buscador.addEventListener('keyup', filtrarYBuscador);
+      buscador.addEventListener('search', filtrarYBuscador); // para el botón "X" en algunos navegadores
 
-  // Al hacer clic en cualquier receta (desde el menú dinámico) ya manejamos con evento propio.
-  // Inicialización: mostrar menú completo y bienvenida
-  function init() {
-    renderMenu();            // genera todos los botones en el menú
-    mostrarBienvenida();     // mensaje inicial
-    
-    // Asignar evento a cada botón del menú (ya se asignó en renderMenu) pero al recargar el DOM por búsqueda se pierde, 
-    // por eso usamos delegación en el menú para los clics (más robusto)
-  }
+      // ---------- INICIALIZAR PÁGINA ----------
+      function init() {
+        renderMenuCompleto();
+        mostrarBienvenida();
+      }
+      init();
 
-  // DELEGACIÓN: eventos de los botones del menú (incluso los generados dinámicamente)
-  menuDiv.addEventListener('click', (e) => {
-    const boton = e.target.closest('.menu-item');
-    if (!boton) return; // ignorar si no es botón
-
-    const tituloBoton = boton.textContent; // nombre exacto de la receta
-    // Buscar la receta completa en el array original (o filtrado, pero usamos el original para evitar duplicados)
-    // OJO: si está filtrado, el texto del botón coincide con alguna receta original.
-    const recetaEncontrada = recetas.find(r => r.titulo === tituloBoton);
-    if (recetaEncontrada) {
-      // quitar clase activo a todos, y poner activo a este botón
-      document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
-      boton.classList.add('activo');
-      mostrarRecetaIndividual(recetaEncontrada);
-    }
-  });
-
-  // Buscador en tiempo real
-  buscador.addEventListener('keyup', filtrarRecetas);
-
-  // también ejecutar filtrar si cambia el input (por si pegan con mouse)
-  buscador.addEventListener('search', filtrarRecetas);
-
-  // Inicializar la página
-  init();
-
-  // (opcional) si queremos que al tocar una receta se limpie el buscador, no lo hacemos para no confundir
-  // pero se podría añadir un botón de limpiar búsqueda. sin embargo, está bien así.
-
-  // EXTRA: imagen personalizada con emoji y fondo único (ya incluido en mostrarRecetaIndividual)
-  // también aseguramos que los botones del menú reflejen todas las recetas después de borrar búsqueda
-  // para ello en filtrar cuando texto=='' llamamos a renderMenu y bienvenida
-</script>
-
-<!-- pequeña mejora: al borrar el buscador, recuperamos menú completo -->
+      // ---------- ACTUALIZAR MODO TEXTO SI SE CAMBIA MANUALMENTE (EXTRA) ----------
+      // (opcional) Si el usuario cambia el modo con el botón y queremos asegurar que los estilos oscuros se mantengan coherentes, ya está.
+    })();
+  </script>
 </body>
 </html>
