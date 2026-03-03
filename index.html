@@ -1,493 +1,478 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSHAI DESIGN · Publicidad & Branding</title>
-    <!-- Fuente Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <!-- Font Awesome para íconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Cocina Caraqueña · Menú interactivo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.5;
-            color: #1e1e2f;
-            background-color: #ffffff;
-        }
+    body {
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      background: #fff3e0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
+    header {
+      background: #8B0000;
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
 
-        /* Header */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    header h1 {
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
 
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
+    .buscador-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 0.8rem;
+    }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1e1e2f;
-            text-decoration: none;
-        }
-        .logo span {
-            color: #5f2eea;
-        }
+    #buscador {
+      width: 90%;
+      max-width: 500px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 40px;
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: 0.2s;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #1e1e2f;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: #5f2eea;
-        }
+    #buscador:focus {
+      box-shadow: 0 4px 14px rgba(139, 0, 0, 0.4);
+    }
 
-        /* Botones */
-        .btn {
-            display: inline-block;
-            background-color: #5f2eea;
-            color: #fff;
-            padding: 0.8rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s, transform 0.2s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .btn:hover {
-            background-color: #4b1fb8;
-            transform: scale(1.02);
-        }
-        .btn-outline {
-            background-color: transparent;
-            color: #5f2eea;
-            border: 2px solid #5f2eea;
-        }
-        .btn-outline:hover {
-            background-color: #5f2eea;
-            color: #fff;
-        }
+    /* menú horizontal de recetas */
+    .menu-recetas {
+      background: #fff0da;
+      padding: 0.8rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem 1.2rem;
+      border-bottom: 2px solid #8B0000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #f5f0ff 0%, #ffffff 100%);
-            text-align: center;
-            padding: 5rem 0;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #1e1e2f;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: #4a4a68;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-        .hero-tags {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-            font-weight: 600;
-            color: #5f2eea;
-        }
-        .hero-tags span {
-            background-color: #fff;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    .menu-item {
+      background: white;
+      color: #8B0000;
+      border: 1px solid #d0a47c;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 
-        /* Sección Servicios */
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #1e1e2f;
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        .service-card {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #f0f0f0;
-        }
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(95,46,234,0.1);
-            border-color: #5f2eea20;
-        }
-        .service-icon {
-            font-size: 2.5rem;
-            color: #5f2eea;
-            margin-bottom: 1.5rem;
-        }
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .service-card p {
-            color: #4a4a68;
-        }
+    .menu-item:hover, .menu-item.activo {
+      background: #8B0000;
+      color: white;
+      border-color: #8B0000;
+      transform: scale(1.02);
+    }
 
-        /* Por qué elegirnos */
-        .why-us {
-            background-color: #fafaff;
-        }
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-        .why-item i {
-            font-size: 2rem;
-            color: #5f2eea;
-            background: #fff;
-            padding: 1rem;
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(95,46,234,0.1);
-            margin-bottom: 1rem;
-        }
-        .why-item h4 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
+    /* contenedor principal */
+    .container {
+      padding: 2rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+    }
 
-        /* Acerca de */
-        .about {
-            background-color: #fff;
-        }
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 1.1rem;
-            color: #4a4a68;
-        }
+    /* tarjeta de receta individual */
+    .receta-individual {
+      background: white;
+      border-radius: 28px;
+      padding: 2rem 2rem 2.5rem 2rem;
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+      max-width: 950px;
+      margin: 0 auto;
+      border: 1px solid #fad1b0;
+      transition: 0.3s;
+    }
 
-        /* Contacto */
-        .contact {
-            background: linear-gradient(135deg, #fff 0%, #f5f0ff 100%);
-        }
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-        .contact-info {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        .contact-info p {
-            margin-bottom: 1rem;
-            color: #4a4a68;
-        }
-        .contact-detail {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        .contact-detail i {
-            font-size: 1.5rem;
-            color: #5f2eea;
-            width: 2rem;
-        }
-        .contact-form {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #5f2eea;
-        }
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
+    .receta-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
 
-        /* Footer */
-        footer {
-            background-color: #1e1e2f;
-            color: #fff;
-            text-align: center;
-            padding: 2rem 0;
-        }
-        footer p {
-            margin-bottom: 0.5rem;
-            color: #aaa;
-        }
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 1rem 0;
-        }
-        .social-links a {
-            color: #fff;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-        .social-links a:hover {
-            color: #5f2eea;
-        }
+    .receta-header h2 {
+      color: #8B0000;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-shadow: 1px 1px 0 #ffe3c2;
+      margin: 0;
+      line-height: 1.2;
+      flex: 1 1 250px;
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            .nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
-    </style>
+    /* imagen del plato */
+    .img-plato {
+      flex: 0 0 200px;
+      height: 170px;
+      border-radius: 40px 40px 40px 10px;
+      background: #f7d9b5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      box-shadow: 0 12px 16px -8px rgba(139, 0, 0, 0.3);
+      border: 3px solid white;
+      transition: 0.2s;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #8B0000;
+      text-shadow: 2px 2px 0 rgba(255,255,255,0.7);
+    }
+
+    /* emojis como placeholder de imágenes (cada receta tiene su propia imagen de fondo) */
+    .receta-detalles h3 {
+      color: #6b3f1f;
+      margin: 1.8rem 0 0.8rem 0;
+      font-size: 1.8rem;
+      border-left: 12px solid #8B0000;
+      padding-left: 1rem;
+    }
+
+    ul, ol {
+      margin-left: 1.8rem;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #2e1b0e;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    ul li::marker {
+      color: #8B0000;
+      font-weight: bold;
+    }
+
+    ol li::marker {
+      color: #8B0000;
+      font-weight: 600;
+    }
+
+    .mensaje-inicial {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #b96f4b;
+      background: #ffefdb;
+      padding: 3rem 2rem;
+      border-radius: 60px;
+      border: 3px dashed #8B0000;
+    }
+
+    .mensaje-inicial span {
+      font-size: 5rem;
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #5f3e28;
+      font-weight: 500;
+      background: #fde9d4;
+      border-top: 2px solid #c0815a;
+    }
+
+    /* responsive */
+    @media (max-width: 650px) {
+      .receta-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      .img-plato {
+        width: 100%;
+        max-width: 280px;
+      }
+      header h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container header-container">
-            <a href="#" class="logo">KSHAI <span>DESIGN</span></a>
-            <nav class="nav-links">
-                <a href="#inicio">Inicio</a>
-                <a href="#servicios">Servicios</a>
-                <a href="#nosotros">Nosotros</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
+
+<header>
+  <h1>🍽️ Mi Cocina Caraqueña</h1>
+  <div class="buscador-wrapper">
+    <input type="text" id="buscador" placeholder="🔍 Buscar receta por nombre o ingrediente...">
+  </div>
+</header>
+
+<!-- menú interactivo con todas las recetas -->
+<div class="menu-recetas" id="menuRecetas"></div>
+
+<div class="container" id="listaRecetas">
+  <!-- aquí se renderiza la receta seleccionada o el mensaje de bienvenida -->
+</div>
+
+<footer>
+  🇻🇪 Sabores de Caracas · recetas tradicionales venezolanas
+</footer>
+
+<script>
+  // Array de recetas enriquecido con imagen (emoji representativo y color de fondo)
+  const recetas = [
+    {
+      titulo: "Arepas Tradicionales",
+      ingredientes: [
+        "2 tazas harina de maíz precocida",
+        "2 1/2 tazas agua",
+        "1 cucharadita sal"
+      ],
+      preparacion: [
+        "Mezclar harina, agua y sal hasta integrar.",
+        "Amasar por 3 minutos hasta obtener masa suave y homogénea.",
+        "Formar discos de 1 cm de grosor.",
+        "Cocinar en plancha caliente 5-7 min por lado, hasta que suenen huecas."
+      ],
+      emoji: "🫓",
+      fondo: "linear-gradient(145deg, #f5b87e, #e6a15e)"  // color arepa
+    },
+    {
+      titulo: "Pabellón Criollo",
+      ingredientes: [
+        "Carne mechada",
+        "Arroz blanco",
+        "Caraotas negras",
+        "Plátano maduro"
+      ],
+      preparacion: [
+        "Cocinar el arroz con sal y un diente de ajo.",
+        "Preparar las caraotas en olla lenta con aliños.",
+        "Sofreír y desmechar la carne con cebolla y pimentón.",
+        "Freír el plátano en rodajas y servir todo junto en un plato."
+      ],
+      emoji: "🍛",
+      fondo: "radial-gradient(circle at 30% 30%, #d4753b, #9e4e1f)"
+    },
+    {
+      titulo: "Asado Negro",
+      ingredientes: [
+        "1 kg muchacho redondo",
+        "1 taza de azúcar",
+        "2 cebollas grandes",
+        "4 dientes de ajo",
+        "1 taza de vino tinto",
+        "Papelón al gusto"
+      ],
+      preparacion: [
+        "Sellar la carne en aceite caliente por todos lados.",
+        "Caramelizar el azúcar en la misma olla, agregar la carne y cubrir de agua.",
+        "Añadir sofrito de cebolla, ajo, vino tinto y papelón.",
+        "Cocinar a fuego lento 2-3 horas hasta que la carne esté tierna."
+      ],
+      emoji: "🥩",
+      fondo: "linear-gradient(135deg, #522e1a, #2f1b0e)"
+    },
+    {
+      titulo: "Tequenos",
+      ingredientes: [
+        "250 g queso blanco duro (para freír)",
+        "1 paquete de masa de harina de trigo (para tequeños)",
+        "Aceite para freír",
+        "Palitos de brocheta (opcional)"
+      ],
+      preparacion: [
+        "Cortar el queso en tiras de 1 cm de grosor.",
+        "Enrollar cada tira con tiras de masa, cubriendo bien.",
+        "Calentar abundante aceite y freír hasta dorar (3-4 min).",
+        "Escurrir en papel absorbente y servir calientes."
+      ],
+      emoji: "🧀",
+      fondo: "#eebe6c"
+    }
+  ];
+
+  // Elementos del DOM
+  const buscador = document.getElementById('buscador');
+  const contenedor = document.getElementById('listaRecetas');
+  const menuDiv = document.getElementById('menuRecetas');
+
+  // Función para mostrar el menú horizontal (se genera con los títulos)
+  function renderMenu() {
+    menuDiv.innerHTML = ''; 
+    recetas.forEach((r, index) => {
+      const boton = document.createElement('button');
+      boton.className = 'menu-item';
+      boton.textContent = r.titulo;
+      boton.dataset.index = index;
+      boton.addEventListener('click', () => {
+        // Quitar clase activo de todos y poner al actual
+        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
+        boton.classList.add('activo');
+        mostrarRecetaIndividual(r);
+      });
+      menuDiv.appendChild(boton);
+    });
+  }
+
+  // Mostrar UNA SOLA receta (vista detalle con imagen y texto)
+  function mostrarRecetaIndividual(receta) {
+    // Crear HTML completo con la imagen personalizada (fondo + emoji)
+    const estiloImagen = `background: ${receta.fondo}; background-size: cover; background-blend-mode: overlay;`;
+    
+    const html = `
+      <div class="receta-individual">
+        <div class="receta-header">
+          <h2>${receta.titulo}</h2>
+          <div class="img-plato" style="${estiloImagen} background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2215%22 y=%2270%22 font-size=%2265%22>${receta.emoji}</text></svg>'); background-repeat: no-repeat; background-position: center 20px; background-size: 90px;">
+          </div>
         </div>
-    </header>
-
-    <main>
-        <!-- HERO -->
-        <section id="inicio" class="hero">
-            <div class="container">
-                <h1>Impulsa tu marca con soluciones creativas de diseño & publicidad</h1>
-                <p>Transformamos ideas en identidad visual y estrategias digitales que conectan con tu audiencia.</p>
-                <div class="hero-tags">
-                    <span>✨ Diseño de logos</span>
-                    <span>📱 Publicidad digital</span>
-                    <span>🎯 Branding</span>
-                    <span>🚀 Marketing creativo</span>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#contacto" class="btn">Comienza tu proyecto</a>
-                    <a href="#servicios" class="btn btn-outline">Descubre más</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- SERVICIOS -->
-        <section id="servicios" class="container">
-            <h2 class="section-title">Nuestros servicios</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
-                    <h3>Branding & Identidad</h3>
-                    <p>Creación de logotipos, colores corporativos y manual de marca que reflejan la esencia de tu negocio.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Marketing Digital</h3>
-                    <p>Campañas en redes, anuncios pagados, posicionamiento y estrategias para hacer crecer tu marca.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
-                    <h3>Diseño Gráfico</h3>
-                    <p>Piezas visuales para redes sociales, web y material promocional con un acabado profesional.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-hashtag"></i></div>
-                    <h3>Redes Sociales</h3>
-                    <p>Planeación y gestión de contenido creativo que genera engagement y comunidad.</p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="#contacto" class="btn">¿No sabes por dónde empezar? Escríbenos</a>
-            </div>
-        </section>
-
-        <!-- POR QUÉ ELEGIRNOS -->
-        <section class="why-us">
-            <div class="container">
-                <h2 class="section-title">¿Por qué elegir KSHAI DESIGN?</h2>
-                <div class="why-grid">
-                    <div class="why-item">
-                        <i class="fas fa-calendar-check"></i>
-                        <h4>6+ años de experiencia</h4>
-                        <p>En publicidad y diseño comercial, trabajando con diversas marcas.</p>
-                    </div>
-                    <div class="why-item">
-                        <i class="fas fa-cogs"></i>
-                        <h4>Soluciones personalizadas</h4>
-                        <p>Estrategias a medida según tus objetivos y presupuesto.</p>
-                    </div>
-                    <div class="why-item">
-                        <i class="fas fa-chart-bar"></i>
-                        <h4>Resultados medibles</h4>
-                        <p>Enfoque claro en visibilidad y retorno de inversión.</p>
-                    </div>
-                    <div class="why-item">
-                        <i class="fas fa-user-tie"></i>
-                        <h4>Atención profesional</h4>
-                        <p>Trato directo y cercano, de la mano de expertos.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ACERCA DE -->
-        <section id="nosotros" class="about">
-            <div class="container">
-                <h2 class="section-title">Acerca de la empresa</h2>
-                <div class="about-content">
-                    <p><strong>KSHAI DESIGN SPA</strong> — Agencia creativa con base en Santiago de Chile, especializada en publicidad y soluciones visuales para empresas que desean crecer y destacar en su mercado. Con más de 6 años de trayectoria, hemos ayudado a decenas de marcas a construir su identidad y conectar con sus audiencias a través de estrategias innovadoras y diseño de alto impacto.</p>
-                    <p style="margin-top: 1.5rem;"><i class="fas fa-map-marker-alt" style="color: #5f2eea;"></i> San Diego 358, Dpto. 28, Santiago, Región Metropolitana.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACTO -->
-        <section id="contacto" class="contact">
-            <div class="container">
-                <h2 class="section-title">¿Listo para llevar tu marca al siguiente nivel?</h2>
-                <div class="contact-grid">
-                    <!-- Info -->
-                    <div class="contact-info">
-                        <h3>Conversemos</h3>
-                        <p>Cuéntanos tu proyecto y te asesoraremos sin compromiso. Puedes escribirnos a través del formulario o usando nuestros datos de contacto.</p>
-                        <div class="contact-detail">
-                            <i class="fas fa-envelope"></i>
-                            <span>contacto@kshaidesign.cl</span>
-                        </div>
-                        <div class="contact-detail">
-                            <i class="fas fa-phone-alt"></i>
-                            <span>+56 9 1234 5678</span>
-                        </div>
-                        <div class="contact-detail">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>+56 9 8765 4321</span>
-                        </div>
-                        <div class="contact-detail">
-                            <i class="fas fa-clock"></i>
-                            <span>Lun a Vie 9:00 - 18:00</span>
-                        </div>
-                    </div>
-                    <!-- Formulario -->
-                    <div class="contact-form">
-                        <form action="#" method="post">
-                            <div class="form-group">
-                                <input type="text" placeholder="Nombre completo" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" placeholder="Correo electrónico" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" placeholder="Empresa (opcional)">
-                            </div>
-                            <div class="form-group">
-                                <textarea placeholder="Cuéntanos tu idea o proyecto..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn" style="width: 100%;">Enviar mensaje</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="logo" style="color: #fff; margin-bottom: 1rem;">KSHAI <span>DESIGN</span></div>
-            <p>Publicidad · Branding · Diseño visual</p>
-            <p>San Diego 358, Dpto. 28, Santiago, Chile</p>
-            <div class="social-links">
-                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <p style="margin-top: 1.5rem; font-size: 0.9rem;">&copy; 2025 KSHAI DESIGN SPA. Todos los derechos reservados.</p>
+        <div class="receta-detalles">
+          <h3>🥄 Ingredientes</h3>
+          <ul>
+            ${receta.ingredientes.map(i => `<li>${i}</li>`).join('')}
+          </ul>
+          <h3>👩‍🍳 Preparación</h3>
+          <ol>
+            ${receta.preparacion.map(p => `<li>${p}</li>`).join('')}
+          </ol>
         </div>
-    </footer>
+      </div>
+    `;
+    contenedor.innerHTML = html;
+  }
+
+  // Mostrar mensaje de bienvenida (cuando no se ha elegido nada)
+  function mostrarBienvenida() {
+    contenedor.innerHTML = `
+      <div class="mensaje-inicial">
+        <span>🍲🇻🇪</span>
+        Selecciona una receta del menú<br> o busca tu plato favorito 🔍
+      </div>
+    `;
+    // quitar clase activa del menú
+    document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
+  }
+
+  // Función de filtrado: actualiza menú y muestra resultados según búsqueda
+  function filtrarRecetas() {
+    const texto = buscador.value.toLowerCase().trim();
+    
+    if (texto === '') {
+      // Si no hay texto, volver a mostrar menú completo y pantalla de bienvenida
+      renderMenu();
+      mostrarBienvenida();
+      return;
+    }
+
+    const filtradas = recetas.filter(r => 
+      r.titulo.toLowerCase().includes(texto) ||
+      r.ingredientes.join(' ').toLowerCase().includes(texto)
+    );
+
+    // Volver a generar el menú pero solo con los botones de las recetas filtradas
+    menuDiv.innerHTML = '';
+    if (filtradas.length === 0) {
+      // si no hay coincidencias, mostrar menú vacío (opcional) y mensaje
+      menuDiv.innerHTML = '<span style="padding:0.5rem; background:#f0c0a0; border-radius:30px; color:#5e2e0f;">🔎 sin coincidencias</span>';
+      contenedor.innerHTML = `
+        <div class="mensaje-inicial" style="background:#ffe1ce;">
+          <span>😕</span>
+          No encontramos ninguna receta con "<strong>${texto}</strong>"
+        </div>
+      `;
+      return;
+    }
+
+    // Renderizar botones para cada receta filtrada
+    filtradas.forEach((r, idx) => {
+      const boton = document.createElement('button');
+      boton.className = 'menu-item';
+      boton.textContent = r.titulo;
+      // Guardamos la receta directamente
+      boton.addEventListener('click', () => {
+        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
+        boton.classList.add('activo');
+        mostrarRecetaIndividual(r);
+      });
+      menuDiv.appendChild(boton);
+    });
+
+    // Si hay al menos una, mostrar la primera del filtro (para que no quede vacío)
+    if (filtradas.length > 0) {
+      // quitar activo previo, activar primer botón
+      document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
+      if (menuDiv.firstChild) menuDiv.firstChild.classList.add('activo');
+      mostrarRecetaIndividual(filtradas[0]);
+    } else {
+      mostrarBienvenida();
+    }
+  }
+
+  // Al hacer clic en cualquier receta (desde el menú dinámico) ya manejamos con evento propio.
+  // Inicialización: mostrar menú completo y bienvenida
+  function init() {
+    renderMenu();            // genera todos los botones en el menú
+    mostrarBienvenida();     // mensaje inicial
+    
+    // Asignar evento a cada botón del menú (ya se asignó en renderMenu) pero al recargar el DOM por búsqueda se pierde, 
+    // por eso usamos delegación en el menú para los clics (más robusto)
+  }
+
+  // DELEGACIÓN: eventos de los botones del menú (incluso los generados dinámicamente)
+  menuDiv.addEventListener('click', (e) => {
+    const boton = e.target.closest('.menu-item');
+    if (!boton) return; // ignorar si no es botón
+
+    const tituloBoton = boton.textContent; // nombre exacto de la receta
+    // Buscar la receta completa en el array original (o filtrado, pero usamos el original para evitar duplicados)
+    // OJO: si está filtrado, el texto del botón coincide con alguna receta original.
+    const recetaEncontrada = recetas.find(r => r.titulo === tituloBoton);
+    if (recetaEncontrada) {
+      // quitar clase activo a todos, y poner activo a este botón
+      document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('activo'));
+      boton.classList.add('activo');
+      mostrarRecetaIndividual(recetaEncontrada);
+    }
+  });
+
+  // Buscador en tiempo real
+  buscador.addEventListener('keyup', filtrarRecetas);
+
+  // también ejecutar filtrar si cambia el input (por si pegan con mouse)
+  buscador.addEventListener('search', filtrarRecetas);
+
+  // Inicializar la página
+  init();
+
+  // (opcional) si queremos que al tocar una receta se limpie el buscador, no lo hacemos para no confundir
+  // pero se podría añadir un botón de limpiar búsqueda. sin embargo, está bien así.
+
+  // EXTRA: imagen personalizada con emoji y fondo único (ya incluido en mostrarRecetaIndividual)
+  // también aseguramos que los botones del menú reflejen todas las recetas después de borrar búsqueda
+  // para ello en filtrar cuando texto=='' llamamos a renderMenu y bienvenida
+</script>
+
+<!-- pequeña mejora: al borrar el buscador, recuperamos menú completo -->
 </body>
 </html>
