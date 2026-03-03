@@ -3,400 +3,389 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comida Venezolana · Vista caraquena</title>
-  <!-- Font Awesome 6 (gratuito) para iconos profesionales -->
+  <title>Comida Venezolana · Vista desde un Caraqueño</title>
+  <!-- Font Awesome 6 para iconos profesionales -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     body {
-      background: #fcf6ef;
-      color: #1f2a36;
+      background: #fcf8f2;
+      color: #1f2937;
       transition: background 0.25s, color 0.2s;
     }
 
-    /* ------ MODO OSCURO PROFESIONAL ------ */
+    /* ===== MODO OSCURO ===== */
     body.dark {
-      background: #0f0e11;
+      background: #121212;
       color: #f0e7db;
     }
 
     body.dark header {
-      background: linear-gradient(135deg, #2c1a0f, #431f0e);
-      border-bottom: 2px solid #c79a6b;
+      background: linear-gradient(145deg, #2b1c12, #341f13);
+      border-bottom: 3px solid #b27a50;
     }
 
-    body.dark .toggle-dark {
-      background: #40332a;
-      color: #fadbc2;
-      border: 1px solid #c2855a;
+    body.dark .modo-boton {
+      background: #3a2d24;
+      color: #f3dac7;
+      border: 1px solid #b28058;
     }
 
     body.dark .card {
-      background: #1e1916;
-      border: 1px solid #524233;
-      box-shadow: 0 15px 30px -12px #00000080;
+      background: #1e1a17;
+      border: 1px solid #5a4a3a;
+      box-shadow: 0 20px 30px -12px #000000cc;
     }
 
-    body.dark .card-header {
-      background: #2d241e;
-    }
-
-    body.dark .meta-category {
-      background: #3d3026;
-      color: #f3cfb0;
+    body.dark .card-categoria {
+      background: #3f3229;
+      color: #f0cfb2;
     }
 
     body.dark .btn-receta {
-      background: #b2622e;
-      color: white;
+      background: #c3662c;
+      color: #fff;
     }
 
     body.dark footer {
-      background: #1e1510;
-      border-top: 3px solid #9b6a41;
+      background: #1d1712;
+      border-top: 3px solid #b77949;
     }
 
-    body.dark .no-results {
-      background: #2a221c;
-      border-color: #b57a4b;
-      color: #f0d9c2;
+    body.dark .no-resultados {
+      background: #2b241e;
+      border-color: #c5915f;
     }
 
-    /* ------ HEADER PROFESIONAL ------ */
+    /* ===== HEADER PROFESIONAL ===== */
     header {
-      background: linear-gradient(135deg, #8B1E1E, #b13e3e);
+      background: linear-gradient(145deg, #8B1E1E, #b1422b);
       color: white;
-      padding: 2.5rem 2rem;
+      padding: 2.5rem 1.5rem;
       text-align: center;
       position: relative;
-      box-shadow: 0 10px 25px -8px rgba(0,0,0,0.3);
-      border-bottom: 5px solid #f5c9a6;
+      box-shadow: 0 12px 28px -10px #6b2f1c;
+      border-bottom: 5px solid #f5cca6;
     }
 
-    .header-content {
+    .header-contenido {
       max-width: 1200px;
       margin: 0 auto;
     }
 
     h1 {
-      font-size: 3.2rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      text-shadow: 3px 3px 0 #582b1a;
-      margin-bottom: 0.5rem;
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      text-shadow: 4px 4px 0 #572917;
+      line-height: 1.2;
     }
 
-    .subhead {
-      font-size: 1.2rem;
-      font-weight: 300;
+    .subtitulo {
+      font-size: 1.3rem;
       opacity: 0.9;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
+      margin-top: 8px;
     }
 
-    .toggle-dark {
+    .modo-boton {
       position: absolute;
-      top: 1.5rem;
-      right: 2rem;
-      background: rgba(255,250,240,0.2);
-      backdrop-filter: blur(8px);
-      border: 1.5px solid white;
+      top: 1.8rem;
+      right: 2.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      border: 2px solid white;
       color: white;
-      padding: 0.7rem 1.7rem;
+      padding: 0.8rem 2rem;
       border-radius: 60px;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.1rem;
       cursor: pointer;
-      transition: 0.2s;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
+      transition: 0.2s;
+      box-shadow: 0 6px 16px #00000030;
     }
 
-    .toggle-dark:hover {
-      background: rgba(255,255,255,0.35);
-      transform: scale(1.02);
+    .modo-boton:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: scale(1.03);
     }
 
+    /* BUSCADOR */
     .buscador-wrapper {
-      margin-top: 2.2rem;
-      display: flex;
-      justify-content: center;
+      margin-top: 2.5rem;
     }
 
     #buscador {
       width: 90%;
-      max-width: 700px;
-      padding: 1.2rem 2rem;
+      max-width: 750px;
+      padding: 1.3rem 2.2rem;
       border: none;
-      border-radius: 70px;
+      border-radius: 80px;
       font-size: 1.2rem;
       background: white;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      transition: 0.2s;
+      box-shadow: 0 12px 28px #3b1c0d4d;
       border: 3px solid transparent;
+      transition: 0.2s;
     }
 
     #buscador:focus {
       outline: none;
       border-color: #ffb882;
-      background: #fffefc;
+      background: #fffcf9;
     }
 
     body.dark #buscador {
-      background: #2d241c;
+      background: #2f251e;
       color: #f6e2d0;
-      border-color: #664c36;
+      border-color: #7c614b;
     }
 
-    /* ------ ESPACIOS PUBLICITARIOS (estilizados) ------ */
-    .ad-space {
-      background: linear-gradient(145deg, #f3e4d6, #e6d2bf);
-      padding: 1.8rem;
-      text-align: center;
+    /* ===== ESPACIOS PUBLICITARIOS ===== */
+    .ad-container {
+      max-width: 1200px;
       margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .ad-space {
+      background: linear-gradient(145deg, #f0e2d4, #e2cfbb);
+      padding: 2rem;
+      text-align: center;
       border-radius: 70px;
-      max-width: 1100px;
-      border: 2px dashed #b3805a;
-      color: #472e1c;
-      font-weight: 600;
-      font-size: 1.2rem;
-      letter-spacing: 1px;
-      box-shadow: inset 0 2px 8px #0000001a;
+      border: 3px dashed #b27a50;
+      color: #4b311b;
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+      box-shadow: inset 0 4px 12px #0000001a;
     }
 
     body.dark .ad-space {
-      background: #2b231d;
-      color: #dbbd9e;
-      border-color: #9e7e60;
+      background: #2d251f;
+      color: #ebcfb3;
+      border-color: #bb8b62;
     }
 
-    /* ------ GRID DE RECETAS (estilo "pro") ------ */
-    .container {
+    /* ===== GRID DE RECETAS (tarjetas con imagen placeholder real) ===== */
+    .grid-recetas {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2.2rem;
-      padding: 2rem 2rem 3rem;
-      max-width: 1600px;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2.5rem;
+      max-width: 1400px;
       margin: 0 auto;
+      padding: 2rem 2rem 3.5rem;
     }
 
     .card {
       background: white;
       border-radius: 40px;
       overflow: hidden;
-      box-shadow: 0 25px 35px -15px rgba(99, 44, 13, 0.2);
-      transition: all 0.3s cubic-bezier(0.2,0.9,0.3,1);
+      box-shadow: 0 25px 40px -18px #994d2690;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
       display: flex;
       flex-direction: column;
-      border: 1px solid #fae1cd;
-      backdrop-filter: blur(2px);
+      border: 1px solid #fadbc6;
     }
 
     .card:hover {
       transform: translateY(-10px) scale(1.01);
-      box-shadow: 0 35px 45px -12px #a14f1e80;
+      box-shadow: 0 40px 50px -18px #ab4d1e;
     }
 
-    /* CABECERA DE LA TARJETA CON IMAGEN PERSONALIZADA (emoji + fondo) */
-    .card-header {
-      height: 220px;
+    /* IMAGEN: aquí colocas tus fotos reales manualmente */
+    .card-img {
+      width: 100%;
+      height: 230px;
+      background-color: #e0c2a8;  /* color de respaldo mientras pones tu imagen */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       display: flex;
       align-items: flex-end;
       justify-content: flex-start;
-      padding: 1.5rem;
+      padding: 1.2rem;
+      font-size: 3.5rem;
       color: white;
-      text-shadow: 2px 2px 5px black;
-      position: relative;
+      text-shadow: 2px 2px 6px black;
+      border-bottom: 5px solid #b7622c;
+      /* las imágenes se asignan inline con style, tú solo cambias el url */
     }
 
-    .card-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, transparent 70%);
-      z-index: 1;
-    }
-
-    .card-header span {
-      font-size: 3.8rem;
-      line-height: 1;
-      filter: drop-shadow(4px 6px 0 rgba(0,0,0,0.4));
-      z-index: 2;
-    }
-
-    /* CONTENIDO DE TARJETA */
     .card-content {
-      padding: 1.8rem 1.8rem 2.2rem;
+      padding: 2rem 2rem 2.2rem;
       flex: 1;
-      display: flex;
-      flex-direction: column;
     }
 
-    .card-content h3 {
-      font-size: 2rem;
+    .card-titulo {
+      font-size: 2.1rem;
       font-weight: 700;
       color: #8B1E1E;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
       line-height: 1.2;
     }
-    body.dark .card-content h3 {
-      color: #f5ba8a;
+
+    body.dark .card-titulo {
+      color: #f3ba86;
     }
 
-    .meta-category {
+    .card-categoria {
       display: inline-block;
       background: #fae3d1;
-      padding: 0.3rem 1.4rem;
+      padding: 0.4rem 1.5rem;
       border-radius: 50px;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      color: #6b3f21;
-      margin-bottom: 1rem;
-      letter-spacing: 0.3px;
-      width: fit-content;
+      color: #6b3f1f;
+      margin: 0.8rem 0 1rem;
     }
 
-    .tiempo-dificultad {
+    .card-meta {
       display: flex;
-      gap: 1.2rem;
-      margin-bottom: 1rem;
-      color: #5b4b3c;
-      font-size: 0.95rem;
+      gap: 1.8rem;
+      margin-bottom: 1.2rem;
+      color: #6b4f38;
+      font-size: 1rem;
       font-weight: 500;
     }
-    .tiempo-dificultad i {
-      color: #b7622c;
-      width: 20px;
-    }
-    body.dark .tiempo-dificultad {
-      color: #cbb39b;
+
+    .card-meta i {
+      color: #b85a24;
+      width: 22px;
     }
 
     .btn-receta {
       background: #8B1E1E;
       color: white;
       border: none;
-      padding: 1rem 1.5rem;
-      border-radius: 50px;
+      padding: 1rem 2rem;
+      border-radius: 60px;
       font-weight: 700;
       font-size: 1.1rem;
       cursor: pointer;
       transition: 0.2s;
-      margin: 1rem 0 0.5rem;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 6px 14px #8b1e1e60;
+      gap: 12px;
+      box-shadow: 0 8px 16px #8b1e1e80;
+      margin-top: 0.8rem;
     }
 
     .btn-receta:hover {
-      background: #ac2f2f;
+      background: #ac3131;
       transform: scale(1.02);
     }
 
     .detalle {
       display: none;
-      margin-top: 1.8rem;
-      border-top: 2px dashed #c99b77;
-      padding-top: 1.5rem;
+      margin-top: 2rem;
+      border-top: 3px dashed #d4a277;
+      padding-top: 1.8rem;
     }
 
     .detalle h4 {
       color: #8B1E1E;
-      font-size: 1.4rem;
-      margin: 1.2rem 0 0.5rem;
+      font-size: 1.5rem;
+      margin: 1.2rem 0 0.6rem;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
+
     body.dark .detalle h4 {
-      color: #eeb389;
+      color: #f0b27a;
     }
 
     .detalle ul, .detalle ol {
-      margin-left: 1.5rem;
-      line-height: 1.8;
+      margin-left: 1.8rem;
+      line-height: 1.9;
     }
-    .detalle li {
-      margin-bottom: 0.4rem;
-    }
-    .detalle .consejo {
-      background: #fff5e9;
-      padding: 1rem 1.5rem;
-      border-radius: 30px;
-      margin-top: 1rem;
+
+    .consejo {
+      background: #fff2e7;
+      padding: 1.2rem 1.8rem;
+      border-radius: 40px;
+      margin-top: 1.5rem;
+      border-left: 8px solid #b7622c;
       font-style: italic;
-      border-left: 6px solid #b7622c;
+      font-size: 1.1rem;
     }
-    body.dark .detalle .consejo {
-      background: #2f261e;
-      border-left-color: #c28b59;
+
+    body.dark .consejo {
+      background: #2b241d;
+      border-left-color: #ce8f5a;
+    }
+
+    /* Sin resultados */
+    .no-resultados {
+      grid-column: 1/-1;
+      background: #fcefe3;
+      border: 5px dashed #8B1E1E;
+      border-radius: 90px;
+      padding: 5rem 2rem;
+      text-align: center;
+      font-size: 2.2rem;
+      color: #4e2e16;
     }
 
     footer {
-      background: #221a15;
-      color: #eedac9;
+      background: #241d17;
+      color: #f4dfce;
       text-align: center;
       padding: 2.5rem;
       font-size: 1.2rem;
-      border-top: 6px solid #ad5d2c;
-      margin-top: 2rem;
-    }
-
-    .no-results {
-      grid-column: 1/-1;
-      background: #fae8da;
-      border: 4px dashed #8B1E1E;
-      border-radius: 80px;
-      padding: 5rem 3rem;
-      text-align: center;
-      font-size: 2rem;
-      color: #542f18;
+      border-top: 6px solid #b4622e;
+      margin-top: 3rem;
     }
 
     /* Responsive */
-    @media (max-width: 650px) {
-      h1 { font-size: 2.2rem; }
-      .toggle-dark { top: 1rem; right: 1rem; padding: 0.5rem 1rem; }
+    @media (max-width: 700px) {
+      h1 { font-size: 2.5rem; }
+      .modo-boton { top: 1rem; right: 1rem; padding: 0.5rem 1.2rem; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="header-content">
-    <button class="toggle-dark" id="darkBtn"><i class="fas fa-moon"></i> <span>Modo Oscuro</span></button>
+  <div class="header-contenido">
+    <button class="modo-boton" id="darkBtn"><i class="fas fa-moon"></i> <span>Modo Oscuro</span></button>
     <h1>🇻🇪 Comida Venezolana</h1>
-    <div class="subhead">
-      <i class="fas fa-utensils"></i> vista desde un caraqueño <i class="fas fa-eye"></i>
+    <div class="subtitulo">
+      <i class="fas fa-eye"></i> vista desde un caraqueño <i class="fas fa-utensils"></i>
     </div>
     <div class="buscador-wrapper">
-      <input type="text" id="buscador" placeholder="🔍 Buscar por nombre, categoría o ingrediente...">
+      <input type="text" id="buscador" placeholder="🔍 Buscar receta, categoría o ingrediente...">
     </div>
   </div>
 </header>
 
-<div class="ad-space">
-  <i class="fas fa-ad"></i> ESPACIO PARA GOOGLE ADSENSE · PUBLICIDAD <i class="fas fa-ad"></i>
+<!-- Espacio publicitario superior -->
+<div class="ad-container">
+  <div class="ad-space">
+    <i class="fas fa-ad"></i>  ESPACIO GOOGLE ADSENSE / PUBLICIDAD  <i class="fas fa-ad"></i>
+  </div>
 </div>
 
-<div class="container" id="contenedor"></div>
+<!-- Grid de recetas -->
+<div class="grid-recetas" id="contenedor"></div>
 
-<div class="ad-space">
-  <i class="fas fa-tag"></i> PRODUCTOS RECOMENDADOS · ENLACES DE AFILIADO <i class="fas fa-shopping-cart"></i>
+<!-- Espacio publicitario inferior -->
+<div class="ad-container">
+  <div class="ad-space">
+    <i class="fas fa-tag"></i>  ENLACES DE AFILIADO / PRODUCTOS RECOMENDADOS  <i class="fas fa-shopping-cart"></i>
+  </div>
 </div>
 
 <footer>
@@ -405,85 +394,117 @@
 
 <script>
   (function() {
-    // ---------- ARRAY DE RECETAS (con emojis y fondos únicos) ----------
+    // ---------- RECETAS CON CANTIDADES E IMÁGENES (tú reemplazarás las URL manualmente) ----------
     const recetas = [
-      // ---- Postres ----
-      { titulo:"Torta Negra Navidena", categoria:"Postres", tiempo:"2h", rendimiento:"10 porc", dificultad:"Alta",
-        ingredientes:["Harina","Frutas maceradas","Mantequilla","Huevos","Azúcar morena"],
-        preparacion:["Cremar mantequilla con azúcar.","Incorporar huevos uno a uno.","Agregar frutas enharinadas.","Hornear lentamente."],
-        consejo:"Mejora si reposa varios días.", emoji:"🍰", fondo:"linear-gradient(135deg, #724328, #3f2517)" },
-      { titulo:"Golfeados Caraqueños", categoria:"Panadería", tiempo:"2h", rendimiento:"12 uni", dificultad:"Media",
-        ingredientes:["Harina","Levadura","Papelón rallado","Queso blanco"],
-        preparacion:["Amasar y dejar fermentar.","Rellenar con papelón.","Hornear y cubrir con queso."],
-        consejo:"Servir tibios.", emoji:"🥐", fondo:"linear-gradient(145deg, #c99e67, #a5662b)" },
-      { titulo:"Quesillo Venezolano", categoria:"Postres", tiempo:"1h", rendimiento:"8 porc", dificultad:"Media",
-        ingredientes:["Huevos","Leche condensada","Leche líquida","Azúcar"],
-        preparacion:["Caramelizar molde.","Licuar ingredientes.","Hornear a baño maría."],
-        consejo:"Reposar en frío mínimo 4h.", emoji:"🍮", fondo:"radial-gradient(circle at 30% 30%, #f1cf9c, #bf8a4b)" },
-      { titulo:"Majarete Venezolano", categoria:"Postres", tiempo:"40min", rendimiento:"6 porc", dificultad:"Fácil",
-        ingredientes:["Harina de maíz","Leche de coco","Azúcar","Canela"],
-        preparacion:["Disolver harina en leche.","Cocinar hasta espesar.","Verter en moldes y enfriar."],
-        consejo:"Servir bien frío.", emoji:"🥥", fondo:"linear-gradient(145deg, #f5e1b0, #c7a251)" },
-      // ---- Bebidas ----
-      { titulo:"Chicha Criolla", categoria:"Bebidas", tiempo:"40min", rendimiento:"6 vasos", dificultad:"Fácil",
-        ingredientes:["Arroz cocido","Leche","Azúcar","Canela"],
-        preparacion:["Licuar arroz con leche.","Colar si se desea textura fina.","Servir fría con canela."],
-        consejo:"Reposar en frío intensifica sabor.", emoji:"🥛", fondo:"#dab07e" },
-      { titulo:"Guarapo de Papelón con Limón", categoria:"Bebidas", tiempo:"10min", rendimiento:"4 vasos", dificultad:"Fácil",
-        ingredientes:["Papelón","Agua","Jugo de limón"],
-        preparacion:["Disolver papelón en agua.","Agregar limón al final.","Servir con hielo."],
-        consejo:"No hervir tras añadir limón.", emoji:"🍋", fondo:"linear-gradient(145deg, #dbcf93, #b89e40)" },
-      // ---- Platos principales ----
-      { titulo:"Pabellón Caraqueño Clásico", categoria:"Principal", tiempo:"1h", rendimiento:"4 porc", dificultad:"Media",
-        ingredientes:["Carne mechada","Arroz blanco","Caraotas negras","Plátano maduro frito"],
-        preparacion:["Servir arroz como base.","Colocar carne mechada jugosa.","Añadir caraotas bien sazonadas.","Coronar con tajadas crujientes."],
-        consejo:"El equilibrio entre dulce y salado es esencial.", emoji:"🍛", fondo:"linear-gradient(145deg, #b95f2a, #713a18)" },
-      { titulo:"Hallaca Caraqueña", categoria:"Navidad", tiempo:"6h", rendimiento:"25 uni", dificultad:"Alta",
-        ingredientes:["Harina de maíz","Caldo de gallina","Guiso de res y cerdo","Aceitunas","Alcaparras","Pasas","Hojas de plátano"],
-        preparacion:["Preparar masa suave con caldo.","Cocinar guiso concentrado.","Extender masa, rellenar y decorar.","Envolver y hervir 45 min."],
-        consejo:"La clave está en el equilibrio dulce-salado.", emoji:"🫔", fondo:"#64854e" },
-      { titulo:"Asado Negro Caraqueño", categoria:"Carnes", tiempo:"2h", rendimiento:"6 porc", dificultad:"Media",
-        ingredientes:["1 kg muchacho redondo","2 cdas azúcar","1 cebolla","3 ajos","1 taza vino tinto","2 tazas caldo"],
-        preparacion:["Sellar la carne.","Caramelizar azúcar.","Incorporar cebolla, ajo, vino y caldo.","Cocinar tapado hasta ablandar."],
-        consejo:"El caramelo debe ser oscuro pero no quemado.", emoji:"🥩", fondo:"#482818" },
-      // ---- Arepas y pasapalos ----
-      { titulo:"Arepa Reina Pepiada", categoria:"Arepas", tiempo:"30min", rendimiento:"4 porc", dificultad:"Fácil",
-        ingredientes:["Arepas asadas","Pollo desmechado","Aguacate","Mayonesa","Sal"],
-        preparacion:["Mezclar pollo con aguacate triturado.","Ajustar sal y cremosidad.","Rellenar."],
-        consejo:"Servir inmediatamente.", emoji:"🥑", fondo:"#dba562" },
-      { titulo:"Tequenos Tradicionales", categoria:"Pasapalos", tiempo:"40min", rendimiento:"20 uni", dificultad:"Media",
-        ingredientes:["Queso blanco firme","Masa de trigo","Aceite"],
-        preparacion:["Cortar queso.","Envolver en masa.","Freír hasta dorar."],
-        consejo:"Aceite a 170°C evita que se abran.", emoji:"🧀", fondo:"#e5b778" },
-      { titulo:"Cachapa de Maíz Tierno", categoria:"Desayunos", tiempo:"25min", rendimiento:"4 uni", dificultad:"Fácil",
-        ingredientes:["Maíz tierno molido","Sal","Azúcar ligera","Queso de mano"],
-        preparacion:["Licuar maíz hasta mezcla espesa.","Cocinar en budare.","Rellenar con queso."],
-        consejo:"No hacerla muy delgada.", emoji:"🌽", fondo:"#f4c542" },
-      // ---- Sopas ----
-      { titulo:"Sancocho de Gallina", categoria:"Sopas", tiempo:"2h", rendimiento:"6 porc", dificultad:"Media",
-        ingredientes:["Gallina","Yuca","Plátano verde","Maíz","Cilantro"],
-        preparacion:["Hervir gallina hasta suavizar.","Agregar tubérculos.","Servir con cilantro fresco."],
-        consejo:"Espumar durante cocción.", emoji:"🍗", fondo:"#bc8f4b" },
-      { titulo:"Sopa de Mondongo", categoria:"Sopas", tiempo:"3h", rendimiento:"8 porc", dificultad:"Alta",
-        ingredientes:["Mondongo limpio","Yuca","Papas","Maíz","Aliños"],
-        preparacion:["Cocinar mondongo hasta ablandar.","Incorporar vegetales.","Hervir hasta integrar."],
-        consejo:"Lavado previo elimina olores.", emoji:"🥣", fondo:"#7c5e3a" },
-      // ---- Acompañantes ----
-      { titulo:"Tostones Caraqueños", categoria:"Acompañantes", tiempo:"25min", rendimiento:"4 porc", dificultad:"Fácil",
-        ingredientes:["Plátano verde","Aceite","Sal"],
-        preparacion:["Freír en dos tiempos.","Aplastar tras primera fritura.","Freír nuevamente."],
-        consejo:"Doble fritado da crocancia.", emoji:"🍌", fondo:"#e5b062" },
-      { titulo:"Tajadas con Queso", categoria:"Acompañantes", tiempo:"20min", rendimiento:"3 porc", dificultad:"Fácil",
-        ingredientes:["Plátano maduro","Queso blanco rallado","Aceite"],
-        preparacion:["Cortar láminas.","Freír hasta dorado.","Espolvorear queso."],
-        consejo:"Plátano muy maduro.", emoji:"🧀", fondo:"#d9a755" },
+      // Cada objeto incluye imagenUrl: coloca ahí la ruta de tu foto real.
+      // Por defecto pongo un color sólido (data:image) para que se vea un bonito placeholder mientras.
+      { 
+        titulo: "Asado Negro Caraqueño", 
+        categoria: "Carnes", 
+        tiempo: "2h 30min", 
+        porciones: "6", 
+        dificultad: "Media",
+        imagenUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format", // foto real de carne (unsplash)
+        ingredientes: ["1 kg muchacho redondo", "2 cdas azúcar", "1 cebolla grande", "3 dientes ajo", "1 taza vino tinto", "2 tazas caldo de res", "sal y pimienta"],
+        preparacion: ["Sellar la carne en olla caliente.", "Caramelizar el azúcar hasta oscuro.", "Agregar cebolla, ajo y sofreír.", "Verter vino y caldo, cocinar tapado 2h.", "Dejar reposar y cortar en rebanadas."],
+        consejo: "El caramelo debe quedar oscuro pero no quemado para evitar amargor."
+      },
+      { 
+        titulo: "Pabellón Criollo", 
+        categoria: "Plato Principal", 
+        tiempo: "1h 15min", 
+        porciones: "4", 
+        dificultad: "Media",
+        imagenUrl: "https://images.unsplash.com/photo-1598866592490-b8f1b5497f09?w=600&auto=format", // bandeja de comida
+        ingredientes: ["400 g carne mechada", "2 tazas arroz blanco", "2 tazas caraotas negras", "2 plátanos maduros", "aceite"],
+        preparacion: ["Preparar arroz blanco.", "Cocinar caraotas con aliños.", "Freír tajadas de plátano.", "Servir todos los componentes juntos."],
+        consejo: "El equilibrio entre dulce (tajadas) y salado es la clave."
+      },
+      { 
+        titulo: "Arepa Reina Pepiada", 
+        categoria: "Arepas", 
+        tiempo: "35min", 
+        porciones: "4", 
+        dificultad: "Fácil",
+        imagenUrl: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=600&auto=format", // arepa
+        ingredientes: ["4 arepas asadas", "1 pechuga de pollo cocida", "1 aguacate", "3 cdas mayonesa", "sal"],
+        preparacion: ["Desmechar el pollo finamente.", "Triturar aguacate y mezclar con pollo y mayonesa.", "Rellenar las arepas calientes."],
+        consejo: "Servir inmediatamente para evitar oxidación del aguacate."
+      },
+      { 
+        titulo: "Hallaca Tradicional", 
+        categoria: "Navidad", 
+        tiempo: "6h", 
+        porciones: "25", 
+        dificultad: "Alta",
+        imagenUrl: "https://images.unsplash.com/photo-1627308595171-d1b5d6d7b9e1?w=600&auto=format", // tamal
+        ingredientes: ["1 kg harina de maíz", "caldo de gallina", "500 g guiso de res/cerdo", "aceitunas", "alcaparras", "pasas", "hojas de plátano"],
+        preparacion: ["Preparar masa con caldo.", "Cocinar guiso espeso.", "Armar hallacas con los ingredientes.", "Hervir 45 minutos."],
+        consejo: "El toque dulce de las pasas debe equilibrar el salado."
+      },
+      { 
+        titulo: "Tequenos", 
+        categoria: "Pasapalos", 
+        tiempo: "40min", 
+        porciones: "20", 
+        dificultad: "Media",
+        imagenUrl: "https://images.unsplash.com/photo-1617839629672-6aee7644e534?w=600&auto=format", // tequeños
+        ingredientes: ["250 g queso blanco firme", "1 paquete masa de trigo", "aceite para freír"],
+        preparacion: ["Cortar queso en bastones.", "Envolver cada bastón con tiras de masa.", "Freír en aceite caliente hasta dorar."],
+        consejo: "El aceite debe estar a 170°C para que no se abran."
+      },
+      { 
+        titulo: "Quesillo Venezolano", 
+        categoria: "Postres", 
+        tiempo: "1h", 
+        porciones: "8", 
+        dificultad: "Media",
+        imagenUrl: "https://images.unsplash.com/photo-1615971797736-623f5d49c77d?w=600&auto=format", // flan
+        ingredientes: ["1 lata leche condensada", "1 taza leche líquida", "4 huevos", "1 taza azúcar (para caramelo)"],
+        preparacion: ["Preparar caramelo con azúcar.", "Licuar leches con huevos.", "Verter en molde caramelizado y hornear a baño María."],
+        consejo: "Reposar en nevera mínimo 4 horas antes de desmoldar."
+      },
+      { 
+        titulo: "Sancocho de Gallina", 
+        categoria: "Sopas", 
+        tiempo: "2h 15min", 
+        porciones: "6", 
+        dificultad: "Media",
+        imagenUrl: "https://images.unsplash.com/photo-1547928576-822741b9f8b2?w=600&auto=format", // sopa
+        ingredientes: ["1 gallina troceada", "2 yucas", "2 plátanos verdes", "2 mazorcas", "cilantro"],
+        preparacion: ["Hervir gallina con agua y sal.", "Agregar vegetales en orden.", "Servir con cilantro fresco."],
+        consejo: "Espumar durante cocción para caldo claro."
+      },
+      { 
+        titulo: "Cachapa de Maíz", 
+        categoria: "Desayunos", 
+        tiempo: "25min", 
+        porciones: "4", 
+        dificultad: "Fácil",
+        imagenUrl: "https://images.unsplash.com/photo-1618304283054-eb6553e76dbd?w=600&auto=format", // cachapa
+        ingredientes: ["2 tazas maíz tierno molido", "1 cda azúcar", "pizca de sal", "queso de mano"],
+        preparacion: ["Licuar maíz con azúcar y sal.", "Cocinar en budare y rellenar con queso."],
+        consejo: "No hacerla muy delgada para que quede suave."
+      }
     ];
 
-    // Duplicamos algunas para llegar visualmente a más de 20 (simulacro de colección)
+    // Para tener más recetas visualmente, duplicamos algunas (tú luego agregas más)
     const recetasExtendidas = [...recetas];
-    for (let i = 0; i < 8; i++) {
-      recetasExtendidas.push({ ...recetas[i % recetas.length], titulo: recetas[i % recetas.length].titulo + ' (estilo)' });
-    }
+    // Añadir algunas repeticiones con títulos diferentes para llenar grid
+    recetasExtendidas.push({ 
+      titulo: "Golfeados", categoria: "Panadería", tiempo: "2h", porciones: "12", dificultad: "Media",
+      imagenUrl: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=600&auto=format",
+      ingredientes: ["500 g harina", "10 g levadura", "150 g papelón", "100 g queso blanco"],
+      preparacion: ["Amasar y fermentar.", "Rellenar con papelón.", "Hornear y cubrir con queso."],
+      consejo: "Servir tibios, recién horneados."
+    });
+    recetasExtendidas.push({ 
+      titulo: "Chicha Criolla", categoria: "Bebidas", tiempo: "30min", porciones: "6", dificultad: "Fácil",
+      imagenUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&auto=format",
+      ingredientes: ["1 taza arroz", "1 litro leche", "azúcar al gusto", "canela"],
+      preparacion: ["Cocinar arroz con agua y canela.", "Licuar con leche.", "Servir frío espolvoreado con canela."],
+      consejo: "Reposar en nevera potencia el sabor."
+    });
 
     // Referencias DOM
     const contenedor = document.getElementById('contenedor');
@@ -498,42 +519,46 @@
       darkBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i> Modo Claro' : '<i class="fas fa-moon"></i> Modo Oscuro';
     }
     darkBtn.addEventListener('click', toggleDark);
+
+    // Comprobar localStorage
     if (localStorage.getItem('modo-oscuro-caraqueno') === 'dark') {
       document.body.classList.add('dark');
       darkBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
     }
 
-    // ---------- RENDER DE TARJETAS (con imagen emoji) ----------
+    // ---------- RENDER TARJETAS ----------
     function renderRecetas(lista) {
       contenedor.innerHTML = '';
       if (lista.length === 0) {
-        contenedor.innerHTML = '<div class="no-results"><i class="fas fa-sad-tear"></i>  No hay recetas con esos términos</div>';
+        contenedor.innerHTML = '<div class="no-resultados"><i class="fas fa-search"></i>  No hay recetas con esos términos</div>';
         return;
       }
       lista.forEach((receta, idx) => {
         const card = document.createElement('div');
         card.className = 'card';
 
-        // Header con imagen (fondo personalizado + emoji)
-        const headerStyle = `background-image: ${receta.fondo}; background-color: #b47a56; background-blend-mode: overlay;`;
+        // Imagen: tú puedes reemplazar la URL manualmente en el array. 
+        // Si la url está vacía o no carga, se verá el color de fondo.
+        const estiloImagen = `background-image: url('${receta.imagenUrl}'); background-color: #c9a885;`; // fallback color
 
         card.innerHTML = `
-          <div class="card-header" style="${headerStyle} background-size: cover; background-position: center;">
-            <span>${receta.emoji || '🍽️'}</span>
+          <div class="card-img" style="${estiloImagen} background-size: cover; background-position: center;">
+            <!-- pequeño emoji decorativo, opcional -->
+            <span style="font-size:2.5rem; opacity:0.9;">🍽️</span>
           </div>
           <div class="card-content">
-            <h3>${receta.titulo}</h3>
-            <div class="meta-category"><i class="fas fa-tag"></i> ${receta.categoria}</div>
-            <div class="tiempo-dificultad">
+            <h2 class="card-titulo">${receta.titulo}</h2>
+            <div class="card-categoria"><i class="fas fa-tag"></i> ${receta.categoria}</div>
+            <div class="card-meta">
               <span><i class="far fa-clock"></i> ${receta.tiempo}</span>
               <span><i class="fas fa-chart-line"></i> ${receta.dificultad}</span>
-              <span><i class="fas fa-users"></i> ${receta.rendimiento}</span>
+              <span><i class="fas fa-users"></i> ${receta.porciones} porc</span>
             </div>
             <button class="btn-receta" onclick="toggleDetalle(${idx})"><i class="fas fa-book-open"></i> Ver receta</button>
             <div class="detalle" id="detalle-${idx}">
-              <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+              <h4><i class="fas fa-shopping-basket"></i> Ingredientes (cantidades)</h4>
               <ul>${receta.ingredientes.map(i => `<li>${i}</li>`).join('')}</ul>
-              <h4><i class="fas fa-utensil-spoon"></i> Preparación</h4>
+              <h4><i class="fas fa-utensils"></i> Preparación</h4>
               <ol>${receta.preparacion.map(p => `<li>${p}</li>`).join('')}</ol>
               <div class="consejo"><i class="fas fa-lightbulb"></i> ${receta.consejo}</div>
             </div>
@@ -543,10 +568,12 @@
       });
     }
 
-    // Función global para toggle detalle
+    // Función global toggle detalle
     window.toggleDetalle = function(id) {
-      const el = document.getElementById('detalle-' + id);
-      if (el) el.style.display = el.style.display === 'block' ? 'none' : 'block';
+      const detalle = document.getElementById('detalle-' + id);
+      if (detalle) {
+        detalle.style.display = detalle.style.display === 'block' ? 'none' : 'block';
+      }
     };
 
     // Filtro
