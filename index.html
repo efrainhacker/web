@@ -3,868 +3,539 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comida Venezolana · Vista desde un Caraqueño (100+ recetas)</title>
-  <meta name="description" content="Más de 100 recetas tradicionales venezolanas explicadas con técnica profesional desde la perspectiva de un caraqueño.">
+  <title>Comida Venezolana · Vista caraquena</title>
+  <!-- Font Awesome 6 (gratuito) para iconos profesionales -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
     body {
-      background: #f4f4f4;
-      color: #222;
-      transition: background 0.3s, color 0.2s;
+      background: #fcf6ef;
+      color: #1f2a36;
+      transition: background 0.25s, color 0.2s;
     }
 
+    /* ------ MODO OSCURO PROFESIONAL ------ */
     body.dark {
-      background: #121212;
-      color: #eee;
+      background: #0f0e11;
+      color: #f0e7db;
     }
 
-    header {
-      background: linear-gradient(145deg, #8B0000, #a51414);
+    body.dark header {
+      background: linear-gradient(135deg, #2c1a0f, #431f0e);
+      border-bottom: 2px solid #c79a6b;
+    }
+
+    body.dark .toggle-dark {
+      background: #40332a;
+      color: #fadbc2;
+      border: 1px solid #c2855a;
+    }
+
+    body.dark .card {
+      background: #1e1916;
+      border: 1px solid #524233;
+      box-shadow: 0 15px 30px -12px #00000080;
+    }
+
+    body.dark .card-header {
+      background: #2d241e;
+    }
+
+    body.dark .meta-category {
+      background: #3d3026;
+      color: #f3cfb0;
+    }
+
+    body.dark .btn-receta {
+      background: #b2622e;
       color: white;
-      padding: 2rem 1rem;
+    }
+
+    body.dark footer {
+      background: #1e1510;
+      border-top: 3px solid #9b6a41;
+    }
+
+    body.dark .no-results {
+      background: #2a221c;
+      border-color: #b57a4b;
+      color: #f0d9c2;
+    }
+
+    /* ------ HEADER PROFESIONAL ------ */
+    header {
+      background: linear-gradient(135deg, #8B1E1E, #b13e3e);
+      color: white;
+      padding: 2.5rem 2rem;
       text-align: center;
       position: relative;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 25px -8px rgba(0,0,0,0.3);
+      border-bottom: 5px solid #f5c9a6;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-shadow: 3px 3px 0 #582b1a;
+      margin-bottom: 0.5rem;
+    }
+
+    .subhead {
+      font-size: 1.2rem;
+      font-weight: 300;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
     .toggle-dark {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      background: white;
-      color: #8B0000;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 40px;
-      font-weight: bold;
+      top: 1.5rem;
+      right: 2rem;
+      background: rgba(255,250,240,0.2);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid white;
+      color: white;
+      padding: 0.7rem 1.7rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
       cursor: pointer;
-      font-size: 0.95rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .toggle-dark:hover {
-      background: #ffe7d4;
+      background: rgba(255,255,255,0.35);
       transform: scale(1.02);
     }
 
-    h1 {
-      font-size: 2.5rem;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
+    .buscador-wrapper {
+      margin-top: 2.2rem;
+      display: flex;
+      justify-content: center;
     }
 
     #buscador {
-      margin-top: 1.5rem;
-      padding: 14px 24px;
       width: 90%;
-      max-width: 550px;
-      border-radius: 60px;
+      max-width: 700px;
+      padding: 1.2rem 2rem;
       border: none;
-      font-size: 1.1rem;
-      outline: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-radius: 70px;
+      font-size: 1.2rem;
+      background: white;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: 0.2s;
+      border: 3px solid transparent;
     }
 
+    #buscador:focus {
+      outline: none;
+      border-color: #ffb882;
+      background: #fffefc;
+    }
+
+    body.dark #buscador {
+      background: #2d241c;
+      color: #f6e2d0;
+      border-color: #664c36;
+    }
+
+    /* ------ ESPACIOS PUBLICITARIOS (estilizados) ------ */
     .ad-space {
-      background: #eaeaea;
-      padding: 1.5rem;
+      background: linear-gradient(145deg, #f3e4d6, #e6d2bf);
+      padding: 1.8rem;
       text-align: center;
-      margin: 1.5rem auto;
-      border-radius: 40px;
-      color: #555;
-      font-weight: 500;
+      margin: 2rem auto;
+      border-radius: 70px;
       max-width: 1100px;
       border: 2px dashed #b3805a;
-    }
-    .dark .ad-space {
-      background: #2a2a2a;
-      color: #aaa;
-      border-color: #7b5a42;
+      color: #472e1c;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      box-shadow: inset 0 2px 8px #0000001a;
     }
 
+    body.dark .ad-space {
+      background: #2b231d;
+      color: #dbbd9e;
+      border-color: #9e7e60;
+    }
+
+    /* ------ GRID DE RECETAS (estilo "pro") ------ */
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 2rem 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.2rem;
+      padding: 2rem 2rem 3rem;
       max-width: 1600px;
       margin: 0 auto;
     }
 
     .card {
       background: white;
-      border-radius: 30px;
+      border-radius: 40px;
       overflow: hidden;
-      box-shadow: 0 15px 30px -10px rgba(0,0,0,0.15);
-      transition: all 0.25s;
+      box-shadow: 0 25px 35px -15px rgba(99, 44, 13, 0.2);
+      transition: all 0.3s cubic-bezier(0.2,0.9,0.3,1);
       display: flex;
       flex-direction: column;
-      border: 1px solid #f7cfb0;
+      border: 1px solid #fae1cd;
+      backdrop-filter: blur(2px);
     }
-    .dark .card {
-      background: #1e1e1e;
-      border-color: #463829;
-    }
+
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 25px 35px -12px rgba(139,0,0,0.3);
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 35px 45px -12px #a14f1e80;
     }
 
-    .card img {
-      width: 100%;
-      height: 210px;
-      object-fit: cover;
-      border-bottom: 4px solid #8B0000;
+    /* CABECERA DE LA TARJETA CON IMAGEN PERSONALIZADA (emoji + fondo) */
+    .card-header {
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 1.5rem;
+      color: white;
+      text-shadow: 2px 2px 5px black;
+      position: relative;
     }
 
+    .card-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, transparent 70%);
+      z-index: 1;
+    }
+
+    .card-header span {
+      font-size: 3.8rem;
+      line-height: 1;
+      filter: drop-shadow(4px 6px 0 rgba(0,0,0,0.4));
+      z-index: 2;
+    }
+
+    /* CONTENIDO DE TARJETA */
     .card-content {
-      padding: 1.5rem 1.5rem 1.8rem;
+      padding: 1.8rem 1.8rem 2.2rem;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
 
     .card-content h3 {
-      color: #8B0000;
-      font-size: 1.8rem;
-      margin-bottom: 0.3rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #8B1E1E;
+      margin-bottom: 0.4rem;
       line-height: 1.2;
     }
-    .dark .card-content h3 {
-      color: #f0b080;
+    body.dark .card-content h3 {
+      color: #f5ba8a;
     }
 
-    .meta {
-      font-size: 0.9rem;
-      color: #6e4d34;
-      margin-bottom: 1rem;
-      background: #fcf0e4;
-      padding: 0.3rem 1rem;
-      border-radius: 40px;
+    .meta-category {
       display: inline-block;
-    }
-    .dark .meta {
-      background: #3a2e24;
-      color: #dbbd9e;
-    }
-
-    button {
-      background: #8B0000;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 40px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 10px;
-      margin-bottom: 6px;
-      transition: 0.2s;
+      background: #fae3d1;
+      padding: 0.3rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #6b3f21;
+      margin-bottom: 1rem;
+      letter-spacing: 0.3px;
       width: fit-content;
     }
-    button:hover {
-      background: #ad1a1a;
+
+    .tiempo-dificultad {
+      display: flex;
+      gap: 1.2rem;
+      margin-bottom: 1rem;
+      color: #5b4b3c;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .tiempo-dificultad i {
+      color: #b7622c;
+      width: 20px;
+    }
+    body.dark .tiempo-dificultad {
+      color: #cbb39b;
+    }
+
+    .btn-receta {
+      background: #8B1E1E;
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      margin: 1rem 0 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 14px #8b1e1e60;
+    }
+
+    .btn-receta:hover {
+      background: #ac2f2f;
       transform: scale(1.02);
     }
 
     .detalle {
       display: none;
-      margin-top: 1.4rem;
-      border-top: 2px dashed #c09c7a;
-      padding-top: 1.2rem;
-    }
-    .dark .detalle {
-      border-top-color: #7b5e47;
+      margin-top: 1.8rem;
+      border-top: 2px dashed #c99b77;
+      padding-top: 1.5rem;
     }
 
     .detalle h4 {
-      color: #a3441a;
-      font-size: 1.3rem;
-      margin: 1rem 0 0.5rem;
+      color: #8B1E1E;
+      font-size: 1.4rem;
+      margin: 1.2rem 0 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .dark .detalle h4 {
-      color: #e6b585;
+    body.dark .detalle h4 {
+      color: #eeb389;
     }
+
     .detalle ul, .detalle ol {
       margin-left: 1.5rem;
-      line-height: 1.7;
+      line-height: 1.8;
     }
     .detalle li {
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.4rem;
     }
-    .detalle p {
+    .detalle .consejo {
+      background: #fff5e9;
+      padding: 1rem 1.5rem;
+      border-radius: 30px;
       margin-top: 1rem;
       font-style: italic;
-      background: #fff7e3;
-      padding: 0.8rem 1.2rem;
-      border-radius: 30px;
+      border-left: 6px solid #b7622c;
     }
-    .dark .detalle p {
-      background: #2c241e;
-      color: #eddac7;
+    body.dark .detalle .consejo {
+      background: #2f261e;
+      border-left-color: #c28b59;
     }
 
     footer {
-      background: #222;
-      color: white;
+      background: #221a15;
+      color: #eedac9;
       text-align: center;
-      padding: 2rem;
-      font-size: 1.1rem;
+      padding: 2.5rem;
+      font-size: 1.2rem;
+      border-top: 6px solid #ad5d2c;
       margin-top: 2rem;
-      border-top: 5px solid #8B0000;
     }
 
-    /* mensaje sin resultados */
     .no-results {
-      grid-column: 1 / -1;
+      grid-column: 1/-1;
+      background: #fae8da;
+      border: 4px dashed #8B1E1E;
+      border-radius: 80px;
+      padding: 5rem 3rem;
       text-align: center;
       font-size: 2rem;
-      padding: 4rem;
-      background: #fff0e0;
-      border-radius: 70px;
-      border: 4px dashed #8B0000;
+      color: #542f18;
     }
-    .dark .no-results {
-      background: #2e271f;
-      color: #f1dccb;
+
+    /* Responsive */
+    @media (max-width: 650px) {
+      h1 { font-size: 2.2rem; }
+      .toggle-dark { top: 1rem; right: 1rem; padding: 0.5rem 1rem; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <button class="toggle-dark" onclick="toggleDark()" id="darkBtn">🌙 Modo Oscuro</button>
-  <h1>🇻🇪 Comida Venezolana <br>vista desde un caraqueno</h1>
-  <input type="text" id="buscador" placeholder="🔍 Buscar receta o categoría...">
+  <div class="header-content">
+    <button class="toggle-dark" id="darkBtn"><i class="fas fa-moon"></i> <span>Modo Oscuro</span></button>
+    <h1>🇻🇪 Comida Venezolana</h1>
+    <div class="subhead">
+      <i class="fas fa-utensils"></i> vista desde un caraqueño <i class="fas fa-eye"></i>
+    </div>
+    <div class="buscador-wrapper">
+      <input type="text" id="buscador" placeholder="🔍 Buscar por nombre, categoría o ingrediente...">
+    </div>
+  </div>
 </header>
 
 <div class="ad-space">
-  📢 ESPACIO PARA GOOGLE ADSENSE · PUBLICIDAD
+  <i class="fas fa-ad"></i> ESPACIO PARA GOOGLE ADSENSE · PUBLICIDAD <i class="fas fa-ad"></i>
 </div>
 
 <div class="container" id="contenedor"></div>
 
 <div class="ad-space">
-  🛒 PRODUCTOS RECOMENDADOS (links de afiliado)
+  <i class="fas fa-tag"></i> PRODUCTOS RECOMENDADOS · ENLACES DE AFILIADO <i class="fas fa-shopping-cart"></i>
 </div>
 
 <footer>
-  © 2026 Comida Venezolana Vista Desde un Caraqueño | Proyecto listo para monetización
+  © 2026 Comida Venezolana Vista Desde un Caraqueño · Proyecto listo para monetización
 </footer>
 
 <script>
   (function() {
-    // ---------- MÁS DE 100 RECETAS (fusionadas + complementarias) ----------
+    // ---------- ARRAY DE RECETAS (con emojis y fondos únicos) ----------
     const recetas = [
-
-      // ***** PRIMER BLOQUE (entregado originalmente) *****
-      {
-        titulo: "Torta Negra Navidena",
-        categoria: "Postres",
-        imagen: "https://source.unsplash.com/600x400/?fruit-cake",
-        tiempo: "2 horas",
-        rendimiento: "10 porciones",
-        dificultad: "Alta",
-        ingredientes: ["Harina", "Frutas maceradas", "Mantequilla", "Huevos", "Azucar morena"],
-        preparacion: ["Cremar mantequilla con azucar.", "Incorporar huevos uno a uno.", "Agregar frutas enharinadas.", "Hornear lentamente."],
-        consejo: "Mejora si reposa varios dias."
-      },
-      {
-        titulo: "Golfeados Caraquenos",
-        categoria: "Panaderia",
-        imagen: "https://source.unsplash.com/600x400/?cinnamon-roll",
-        tiempo: "2 horas",
-        rendimiento: "12 unidades",
-        dificultad: "Media",
-        ingredientes: ["Harina", "Levadura", "Papelon rallado", "Queso blanco"],
-        preparacion: ["Amasar y dejar fermentar.", "Rellenar con papelon.", "Hornear y cubrir con queso."],
-        consejo: "Servir tibios."
-      },
-      {
-        titulo: "Chicha Criolla",
-        categoria: "Bebidas",
-        imagen: "https://source.unsplash.com/600x400/?rice-drink",
-        tiempo: "40 minutos",
-        rendimiento: "6 vasos",
-        dificultad: "Facil",
-        ingredientes: ["Arroz cocido", "Leche", "Azucar", "Canela"],
-        preparacion: ["Licuar arroz con leche.", "Colar si se desea textura fina.", "Servir fria con canela."],
-        consejo: "Reposar en frio intensifica sabor."
-      },
-      {
-        titulo: "Guarapo de Papelón con Limon",
-        categoria: "Bebidas",
-        imagen: "https://source.unsplash.com/600x400/?lemonade",
-        tiempo: "10 minutos",
-        rendimiento: "4 vasos",
-        dificultad: "Facil",
-        ingredientes: ["Papelon", "Agua", "Jugo de limon"],
-        preparacion: ["Disolver papelon en agua.", "Agregar limon al final.", "Servir con hielo."],
-        consejo: "No hervir tras añadir limon."
-      },
-      {
-        titulo: "Hervido de Res",
-        categoria: "Sopas",
-        imagen: "https://source.unsplash.com/600x400/?beef-soup",
-        tiempo: "2 horas",
-        rendimiento: "6 porciones",
-        dificultad: "Media",
-        ingredientes: ["Costilla de res", "Yuca", "Ocumo", "Maiz"],
-        preparacion: ["Hervir carne hasta ablandar.", "Agregar tuberculos.", "Cocinar hasta integrar."],
-        consejo: "Espumar para caldo claro."
-      },
-      {
-        titulo: "Arepa de Chicharron",
-        categoria: "Arepas",
-        imagen: "https://source.unsplash.com/600x400/?pork-bread",
-        tiempo: "30 minutos",
-        rendimiento: "4 porciones",
-        dificultad: "Media",
-        ingredientes: ["Harina de maiz", "Chicharron triturado", "Agua", "Sal"],
-        preparacion: ["Mezclar harina con chicharron.", "Formar arepas.", "Asar hasta dorar."],
-        consejo: "No agregar demasiada sal."
-      },
-      {
-        titulo: "Tostones Caraquenos",
-        categoria: "Acompanantes",
-        imagen: "https://source.unsplash.com/600x400/?fried-plantain",
-        tiempo: "25 minutos",
-        rendimiento: "4 porciones",
-        dificultad: "Facil",
-        ingredientes: ["Platano verde", "Aceite", "Sal"],
-        preparacion: ["Freir en dos tiempos.", "Aplastar tras primera fritura.", "Freir nuevamente."],
-        consejo: "El doble fritado da crocancia."
-      },
-      {
-        titulo: "Catalinas Criollas",
-        categoria: "Postres",
-        imagen: "https://source.unsplash.com/600x400/?ginger-cookies",
-        tiempo: "45 minutos",
-        rendimiento: "20 unidades",
-        dificultad: "Media",
-        ingredientes: ["Harina", "Papelon", "Especias", "Mantequilla"],
-        preparacion: ["Mezclar ingredientes secos.", "Incorporar mantequilla.", "Hornear hasta firme."],
-        consejo: "No sobrecocer."
-      },
-      {
-        titulo: "Majarete Venezolano",
-        categoria: "Postres",
-        imagen: "https://source.unsplash.com/600x400/?corn-pudding",
-        tiempo: "40 minutos",
-        rendimiento: "6 porciones",
-        dificultad: "Facil",
-        ingredientes: ["Harina de maiz", "Leche de coco", "Azucar", "Canela"],
-        preparacion: ["Disolver harina en leche.", "Cocinar hasta espesar.", "Verter en moldes y enfriar."],
-        consejo: "Servir bien frio."
-      },
-      {
-        titulo: "Papelon con Jengibre",
-        categoria: "Bebidas",
-        imagen: "https://source.unsplash.com/600x400/?ginger-drink",
-        tiempo: "15 minutos",
-        rendimiento: "4 vasos",
-        dificultad: "Facil",
-        ingredientes: ["Papelon", "Jengibre fresco", "Agua"],
-        preparacion: ["Hervir jengibre en agua.", "Agregar papelon y disolver.", "Enfriar antes de servir."],
-        consejo: "Colar antes de refrigerar."
-      },
-
-      // ***** SEGUNDO BLOQUE (Pabellón, Tajadas, Arroz con pollo ...) *****
-      {
-        titulo: "Pabellon Caraqueno Clasico",
-        categoria: "Platos Principales",
-        imagen: "https://source.unsplash.com/600x400/?rice-beans-beef",
-        tiempo: "1 hora",
-        rendimiento: "4 porciones",
-        dificultad: "Media",
-        ingredientes: ["Carne mechada", "Arroz blanco", "Caraotas negras", "Platano maduro frito"],
-        preparacion: ["Servir arroz como base.", "Colocar carne mechada jugosa.", "Añadir caraotas bien sazonadas.", "Coronar con tajadas crujientes."],
-        consejo: "El equilibrio entre dulce y salado es esencial."
-      },
-      {
-        titulo: "Tajadas con Queso",
-        categoria: "Acompanantes",
-        imagen: "https://source.unsplash.com/600x400/?fried-plantain",
-        tiempo: "20 minutos",
-        rendimiento: "3 porciones",
-        dificultad: "Facil",
-        ingredientes: ["Platano maduro", "Queso blanco rallado", "Aceite"],
-        preparacion: ["Cortar en laminas diagonales.", "Freir hasta dorado intenso.", "Espolvorear queso al servir."],
-        consejo: "El platano debe estar muy maduro."
-      },
-      {
-        titulo: "Arroz con Pollo Criollo",
-        categoria: "Platos Principales",
-        imagen: "https://source.unsplash.com/600x400/?chicken-rice",
-        tiempo: "1 hora",
-        rendimiento: "5 porciones",
-        dificultad: "Media",
-        ingredientes: ["Pollo troceado", "Arroz", "Pimenton", "Guisantes", "Caldo"],
-        preparacion: ["Sofreir pollo.", "Agregar arroz y caldo.", "Cocinar tapado hasta secar."],
-        consejo: "No remover excesivamente para evitar textura pastosa."
-      },
-      {
-        titulo: "Pasticho Venezolano",
-        categoria: "Platos Principales",
-        imagen: "https://source.unsplash.com/600x400/?lasagna",
-        tiempo: "1 hora 30 minutos",
-        rendimiento: "6 porciones",
-        dificultad: "Media",
-        ingredientes: ["Laminas de pasta", "Carne molida", "Salsa bechamel", "Queso rallado"],
-        preparacion: ["Preparar salsa de carne concentrada.", "Armar capas alternadas.", "Hornear hasta gratinar."],
-        consejo: "Reposar 15 minutos antes de cortar."
-      },
-      {
-        titulo: "Pisca Andina",
-        categoria: "Desayunos",
-        imagen: "https://source.unsplash.com/600x400/?egg-soup",
-        tiempo: "25 minutos",
-        rendimiento: "3 porciones",
-        dificultad: "Facil",
-        ingredientes: ["Caldo de pollo", "Papa en cubos", "Huevo", "Cilantro", "Leche"],
-        preparacion: ["Hervir papas en caldo.", "Agregar huevo ligeramente batido.", "Incorporar leche y cilantro."],
-        consejo: "Servir muy caliente."
-      },
-      {
-        titulo: "Chupe de Pollo",
-        categoria: "Sopas",
-        imagen: "https://source.unsplash.com/600x400/?chicken-stew-soup",
-        tiempo: "1 hora",
-        rendimiento: "4 porciones",
-        dificultad: "Media",
-        ingredientes: ["Pollo", "Maiz", "Papa", "Leche", "Queso"],
-        preparacion: ["Cocinar pollo en caldo.", "Agregar vegetales.", "Finalizar con leche y queso rallado."],
-        consejo: "No hervir fuerte tras añadir leche."
-      },
-      {
-        titulo: "Bollos Pelones",
-        categoria: "Platos Tradicionales",
-        imagen: "https://source.unsplash.com/600x400/?dumplings",
-        tiempo: "1 hora 30 minutos",
-        rendimiento: "6 unidades",
-        dificultad: "Alta",
-        ingredientes: ["Masa de maiz", "Carne molida guisada", "Salsa de tomate"],
-        preparacion: ["Formar bolas rellenas.", "Hervir hasta flotar.", "Bañar con salsa caliente."],
-        consejo: "La masa debe sellar completamente el relleno."
-      },
-      {
-        titulo: "Mandocas Zulianas",
-        categoria: "Desayunos",
-        imagen: "https://source.unsplash.com/600x400/?fried-dough",
-        tiempo: "40 minutos",
-        rendimiento: "10 unidades",
-        dificultad: "Media",
-        ingredientes: ["Harina de maiz", "Queso rallado", "Papelon", "Platano maduro"],
-        preparacion: ["Mezclar ingredientes hasta masa manejable.", "Formar anillos.", "Freir hasta dorar."],
-        consejo: "El contraste dulce-salado es su identidad."
-      },
-      {
-        titulo: "Quesillo Venezolano",
-        categoria: "Postres",
-        imagen: "https://source.unsplash.com/600x400/?flan",
-        tiempo: "1 hora",
-        rendimiento: "8 porciones",
-        dificultad: "Media",
-        ingredientes: ["Huevos", "Leche condensada", "Leche liquida", "Azucar"],
-        preparacion: ["Caramelizar molde.", "Licuar ingredientes.", "Hornear a baño maria."],
-        consejo: "Reposar en frio minimo 4 horas."
-      },
-      {
-        titulo: "Bienmesabe Criollo",
-        categoria: "Postres",
-        imagen: "https://source.unsplash.com/600x400/?coconut-dessert",
-        tiempo: "45 minutos",
-        rendimiento: "6 porciones",
-        dificultad: "Media",
-        ingredientes: ["Bizcocho", "Leche de coco", "Yemas", "Azucar"],
-        preparacion: ["Empapar bizcocho.", "Cubrir con crema espesa.", "Refrigerar antes de servir."],
-        consejo: "La textura debe ser humeda pero firme."
-      },
-      {
-        titulo: "Hallaca Caraquena",
-        categoria: "Navidad",
-        imagen: "https://source.unsplash.com/600x400/?tamales",
-        tiempo: "6 horas",
-        rendimiento: "25 unidades",
-        dificultad: "Alta",
-        ingredientes: ["Harina de maiz precocida", "Caldo de gallina", "Guiso de res y cerdo", "Aceitunas", "Alcaparras", "Pasas", "Hojas de platano"],
-        preparacion: ["Preparar masa suave con caldo.", "Cocinar guiso concentrado y bien sazonado.", "Extender masa en hoja, rellenar y decorar.", "Envolver firmemente y hervir 45 minutos."],
-        consejo: "La clave esta en el equilibrio dulce-salado del guiso."
-      },
-      {
-        titulo: "Pan de Jamon",
-        categoria: "Navidad",
-        imagen: "https://source.unsplash.com/600x400/?ham-bread",
-        tiempo: "3 horas",
-        rendimiento: "2 panes",
-        dificultad: "Media",
-        ingredientes: ["Harina de trigo", "Levadura", "Jamón ahumado", "Aceitunas", "Pasas"],
-        preparacion: ["Amasar hasta lograr elasticidad.", "Dejar fermentar.", "Rellenar y enrollar firmemente.", "Hornear hasta dorar."],
-        consejo: "Pintar con huevo para brillo uniforme."
-      },
-      {
-        titulo: "Cachapa de Maiz Tierno",
-        categoria: "Desayunos",
-        imagen: "https://source.unsplash.com/600x400/?corn-pancake",
-        tiempo: "25 minutos",
-        rendimiento: "4 unidades",
-        dificultad: "Facil",
-        ingredientes: ["Maiz tierno molido", "Sal", "Azucar ligera", "Queso de mano"],
-        preparacion: ["Licuar maiz hasta mezcla espesa.", "Cocinar en budare engrasado.", "Voltear cuando dore y rellenar con queso."],
-        consejo: "No hacerla muy delgada para mantener suavidad."
-      },
-      {
-        titulo: "Tequenos Tradicionales",
-        categoria: "Entradas",
-        imagen: "https://source.unsplash.com/600x400/?cheese-sticks",
-        tiempo: "1 hora",
-        rendimiento: "20 unidades",
-        dificultad: "Media",
-        ingredientes: ["Harina de trigo", "Mantequilla", "Agua", "Sal", "Queso blanco firme"],
-        preparacion: ["Amasar hasta textura suave.", "Cortar tiras y envolver queso.", "Freir en aceite caliente."],
-        consejo: "El aceite debe estar a 170 grados para evitar que se abran."
-      },
-      {
-        titulo: "Arepa Reina Pepiada",
-        categoria: "Arepas",
-        imagen: "https://source.unsplash.com/600x400/?arepa",
-        tiempo: "30 minutos",
-        rendimiento: "4 porciones",
-        dificultad: "Facil",
-        ingredientes: ["Arepas asadas", "Pollo desmechado", "Aguacate", "Mayonesa", "Sal"],
-        preparacion: ["Mezclar pollo con aguacate triturado.", "Ajustar sal y cremosidad.", "Rellenar generosamente."],
-        consejo: "Servir inmediatamente para evitar oxidacion."
-      },
-      {
-        titulo: "Arepa Pelua",
-        categoria: "Arepas",
-        imagen: "https://source.unsplash.com/600x400/?stuffed-bread",
-        tiempo: "30 minutos",
-        rendimiento: "4 porciones",
-        dificultad: "Facil",
-        ingredientes: ["Arepas", "Carne mechada", "Queso amarillo rallado"],
-        preparacion: ["Abrir arepa caliente.", "Agregar carne jugosa.", "Coronar con queso rallado."],
-        consejo: "La carne debe estar tibia para fundir el queso."
-      },
-      {
-        titulo: "Empanadas de Queso",
-        categoria: "Entradas",
-        imagen: "https://source.unsplash.com/600x400/?fried-empanadas",
-        tiempo: "40 minutos",
-        rendimiento: "8 unidades",
-        dificultad: "Media",
-        ingredientes: ["Harina de maiz", "Agua", "Sal", "Queso blanco"],
-        preparacion: ["Hacer masa suave.", "Rellenar y cerrar en media luna.", "Freir hasta dorar."],
-        consejo: "No sobrecargar para evitar roturas."
-      },
-      {
-        titulo: "Sopa de Mondongo",
-        categoria: "Sopas",
-        imagen: "https://source.unsplash.com/600x400/?tripe-soup",
-        tiempo: "3 horas",
-        rendimiento: "8 porciones",
-        dificultad: "Alta",
-        ingredientes: ["Mondongo limpio", "Yuca", "Papas", "Maiz", "Aliños"],
-        preparacion: ["Cocinar mondongo hasta ablandar.", "Incorporar vegetales en cubos.", "Hervir hasta integrar sabores."],
-        consejo: "El lavado previo elimina olores fuertes."
-      },
-      {
-        titulo: "Sancocho de Gallina",
-        categoria: "Sopas",
-        imagen: "https://source.unsplash.com/600x400/?chicken-soup",
-        tiempo: "2 horas",
-        rendimiento: "6 porciones",
-        dificultad: "Media",
-        ingredientes: ["Gallina troceada", "Yuca", "Platano verde", "Maiz", "Cilantro"],
-        preparacion: ["Hervir gallina hasta suavizar.", "Agregar tuberculos progresivamente.", "Ajustar sal y servir con cilantro fresco."],
-        consejo: "Espumar durante la coccion mejora claridad."
-      },
-      {
-        titulo: "Cazuela de Mariscos",
-        categoria: "Mariscos",
-        imagen: "https://source.unsplash.com/600x400/?seafood-stew",
-        tiempo: "1 hora",
-        rendimiento: "5 porciones",
-        dificultad: "Media",
-        ingredientes: ["Camarones", "Calamares", "Pescado blanco", "Leche de coco", "Aliños"],
-        preparacion: ["Sofreir base aromatica.", "Incorporar mariscos por orden de coccion.", "Añadir leche de coco y hervir brevemente."],
-        consejo: "No sobrecocer los mariscos."
-      },
-      {
-        titulo: "Costillas de Res Guisadas",
-        categoria: "Carnes",
-        imagen: "https://source.unsplash.com/600x400/?beef-ribs",
-        tiempo: "2 horas",
-        rendimiento: "6 porciones",
-        dificultad: "Media",
-        ingredientes: ["1.5 kg costillas de res", "1 cebolla grande", "1 pimenton", "3 dientes de ajo", "2 tomates maduros", "Sal, pimienta y comino"],
-        preparacion: ["Sellar las costillas hasta dorar.", "Preparar sofrito con vegetales.", "Agregar las costillas y cubrir con caldo.", "Cocinar a fuego bajo hasta que la carne se desprenda del hueso."],
-        consejo: "La coccion lenta es clave para suavidad profunda."
-      },
-      {
-        titulo: "Chuletas Ahumadas Guisadas",
-        categoria: "Carnes",
-        imagen: "https://source.unsplash.com/600x400/?smoked-pork-chops",
-        tiempo: "45 minutos",
-        rendimiento: "4 porciones",
-        dificultad: "Facil",
-        ingredientes: ["4 chuletas ahumadas", "1 cebolla", "1 taza caldo", "1 cda pasta de tomate"],
-        preparacion: ["Dorar ligeramente las chuletas.", "Sofreir cebolla.", "Agregar caldo y pasta de tomate.", "Cocinar hasta espesar."],
-        consejo: "No agregar demasiada sal por el ahumado previo."
-      },
-      {
-        titulo: "Albóndigas Criollas",
-        categoria: "Carnes",
-        imagen: "https://source.unsplash.com/600x400/?meatballs",
-        tiempo: "1 hora",
-        rendimiento: "5 porciones",
-        dificultad: "Media",
-        ingredientes: ["500 g carne molida", "1 huevo", "2 cdas pan rallado", "Ajo y perejil", "Sal y pimienta"],
-        preparacion: ["Mezclar todos los ingredientes.", "Formar bolas uniformes.", "Dorar y luego cocinar en salsa criolla."],
-        consejo: "No compactar demasiado para evitar textura dura."
-      },
-      {
-        titulo: "Lomo en Salsa Oscura",
-        categoria: "Carnes",
-        imagen: "https://source.unsplash.com/600x400/?beef-loin",
-        tiempo: "1 hora 30 minutos",
-        rendimiento: "6 porciones",
-        dificultad: "Media",
-        ingredientes: ["1 kg lomo de res", "1 taza vino tinto", "1 cebolla", "Caldo de carne", "Sal y pimienta"],
-        preparacion: ["Sellar el lomo entero.", "Desglasar con vino.", "Agregar caldo y cocinar lentamente."],
-        consejo: "Cortar en medallones despues de reposar."
-      },
-      {
-        titulo: "Muchacho Relleno",
-        categoria: "Carnes",
-        imagen: "https://source.unsplash.com/600x400/?stuffed-beef",
-        tiempo: "2 horas",
-        rendimiento: "6 porciones",
-        dificultad: "Alta",
-        ingredientes: ["1 kg muchacho redondo", "Aceitunas", "Pasas", "Pimenton en tiras", "Ajo y sal"],
-        preparacion: ["Abrir la pieza en forma de libro.", "Rellenar uniformemente.", "Amarrar y hornear hasta punto jugoso."],
-        consejo: "El amarre firme evita perdida de relleno."
-      },
-      {
-        titulo: "Arroz Blanco Perfecto",
-        categoria: "Arroces",
-        imagen: "https://source.unsplash.com/600x400/?white-rice",
-        tiempo: "25 minutos",
-        rendimiento: "4 porciones",
-        dificultad: "Facil",
-        ingredientes: ["2 tazas arroz", "4 tazas agua", "1 cdta sal"],
-        preparacion: ["Lavar el arroz.", "Hervir agua con sal.", "Incorporar arroz y cocinar tapado hasta evaporar."],
-        consejo: "No remover durante la coccion final."
-      },
-      {
-        titulo: "Arroz con Pollo Criollo (duplicado)",
-        categoria: "Arroces",
-        imagen: "https://source.unsplash.com/600x400/?rice-chicken",
-        tiempo: "1 hora",
-        rendimiento: "6 porciones",
-        dificultad: "Media",
-        ingredientes: ["2 tazas arroz", "1 pollo troceado", "Vegetales mixtos", "Caldo de pollo"],
-        preparacion: ["Dorar el pollo.", "Agregar arroz y sofrito.", "Cocinar con caldo hasta punto seco."],
-        consejo: "El arroz debe quedar suelto y aromatizado."
-      },
-      {
-        titulo: "Arroz con Coco",
-        categoria: "Arroces",
-        imagen: "https://source.unsplash.com/600x400/?coconut-rice",
-        tiempo: "40 minutos",
-        rendimiento: "5 porciones",
-        dificultad: "Media",
-        ingredientes: ["2 tazas arroz", "2 tazas leche de coco", "1 taza agua", "Sal"],
-        preparacion: ["Mezclar liquidos.", "Incorporar arroz.", "Cocinar hasta absorber."],
-        consejo: "No sobremezclar para mantener grano entero."
-      },
-      {
-        titulo: "Caraotas Negras Tradicionales",
-        categoria: "Granos",
-        imagen: "https://source.unsplash.com/600x400/?black-beans",
-        tiempo: "2 horas",
-        rendimiento: "6 porciones",
-        dificultad: "Media",
-        ingredientes: ["500 g caraotas negras", "1 cebolla", "Ajo", "Pimenton", "Comino"],
-        preparacion: ["Remojar previamente.", "Hervir hasta ablandar.", "Agregar sofrito y cocinar hasta espesar."],
-        consejo: "El reposo intensifica sabor."
-      },
-      {
-        titulo: "Lentejas Criollas",
-        categoria: "Granos",
-        imagen: "https://source.unsplash.com/600x400/?lentils",
-        tiempo: "1 hora",
-        rendimiento: "5 porciones",
-        dificultad: "Facil",
-        ingredientes: ["500 g lentejas", "Cebolla", "Ajo", "Zanahoria", "Sal"],
-        preparacion: ["Hervir lentejas.", "Agregar vegetales.", "Cocinar hasta textura cremosa."],
-        consejo: "No sobrecocer para evitar desintegracion."
-      },
-      {
-        titulo: "Arepas Clasicas",
-        categoria: "Masas",
-        imagen: "https://source.unsplash.com/600x400/?arepas",
-        tiempo: "25 minutos",
-        rendimiento: "8 unidades",
-        dificultad: "Facil",
-        ingredientes: ["2 tazas harina de maiz", "2 1/2 tazas agua", "1 cdta sal"],
-        preparacion: ["Mezclar ingredientes.", "Amasar suavemente.", "Formar discos.", "Cocinar en budare."],
-        consejo: "La superficie debe quedar dorada uniforme."
-      },
-      {
-        titulo: "Cachapas Dulces",
-        categoria: "Masas",
-        imagen: "https://source.unsplash.com/600x400/?corn-pancakes",
-        tiempo: "30 minutos",
-        rendimiento: "6 unidades",
-        dificultad: "Facil",
-        ingredientes: ["2 tazas maiz dulce molido", "1 cda azucar", "Sal", "Queso de mano"],
-        preparacion: ["Licuar maiz.", "Cocinar en plancha.", "Rellenar con queso."],
-        consejo: "El fuego medio evita que se quemen."
-      },
-      {
-        titulo: "Tequenos Tradicionales (duplicado)",
-        categoria: "Pasapalos",
-        imagen: "https://source.unsplash.com/600x400/?cheese-sticks",
-        tiempo: "40 minutos",
-        rendimiento: "20 unidades",
-        dificultad: "Media",
-        ingredientes: ["Queso blanco firme", "Masa de trigo", "Aceite"],
-        preparacion: ["Cortar queso.", "Envolver en masa.", "Freir hasta dorar."],
-        consejo: "El aceite debe estar a 170°C."
-      },
-      {
-        titulo: "Sancocho de Res",
-        categoria: "Sopas",
-        imagen: "https://source.unsplash.com/600x400/?beef-soup",
-        tiempo: "2 horas",
-        rendimiento: "8 porciones",
-        dificultad: "Media",
-        ingredientes: ["Costilla de res", "Yuca", "Papas", "Platano", "Cilantro"],
-        preparacion: ["Hervir carne.", "Agregar tuberculos.", "Cocinar hasta ablandar."],
-        consejo: "Desespumar para caldo limpio."
-      },
-      {
-        titulo: "Quesillo Caraqueno",
-        categoria: "Dulces",
-        imagen: "https://source.unsplash.com/600x400/?flan",
-        tiempo: "1 hora",
-        rendimiento: "8 porciones",
-        dificultad: "Media",
-        ingredientes: ["5 huevos", "1 lata leche condensada", "Leche liquida", "Azucar para caramelo"],
-        preparacion: ["Preparar caramelo.", "Mezclar ingredientes.", "Hornear a bano maria."],
-        consejo: "No sobrebatir para evitar burbujas."
-      },
-      // ***** BLOQUE ASADO NEGRO, CARNE MECHADA, ETC *****
-      {
-        titulo: "Asado Negro Caraqueno",
-        categoria: "Carnes",
-        imagen: "https://source.unsplash.com/600x400/?roast-beef",
-        tiempo: "2 horas",
-        rendimiento: "6 porciones",
-        dificultad: "Media",
-        ingredientes: ["1 kg muchacho redondo limpio", "2 cdas azucar", "1 cebolla grande picada fina", "3 dientes de ajo triturados", "1 taza vino tinto seco", "2 tazas caldo de res", "Sal y pimienta"],
-        preparacion: ["Secar completamente la carne y salpimentar.", "Dorar en olla pesada hasta sellar uniformemente.", "Retirar y caramelizar el azucar hasta tono oscuro controlado.", "Incorporar cebolla y ajo, sofreir suavemente.", "Agregar vino y caldo, cocinar tapado a fuego bajo hasta ablandar."],
-        consejo: "El amargor aparece si el caramelo se quema; debe ser oscuro pero no negro absoluto."
-      },
-      {
-        titulo: "Carne Mechada Tradicional",
-        categoria: "Carnes",
-        imagen: "https://source.unsplash.com/600x400/?shredded-beef",
-        tiempo: "1 hora 45 minutos",
-        rendimiento: "5 porciones",
-        dificultad: "Media",
-        ingredientes: ["1 kg falda de res", "1 pimenton rojo en tiras", "1 cebolla en julianas", "2 tomates maduros", "2 dientes de ajo", "Comino y sal"],
-        preparacion: ["Hervir la carne hasta ablandar.", "Desmechar finamente siguiendo la fibra.", "Preparar sofrito con vegetales.", "Incorporar la carne y cocinar hasta integrar sabores."],
-        consejo: "La textura ideal es jugosa pero no caldosa."
-      },
-      {
-        titulo: "Pernil Navideno Horneado",
-        categoria: "Carnes",
-        imagen: "https://source.unsplash.com/600x400/?roast-pork",
-        tiempo: "5 horas",
-        rendimiento: "10 porciones",
-        dificultad: "Alta",
-        ingredientes: ["4 kg pierna de cerdo", "Ajo machacado", "Vinagre", "Sal gruesa", "Oregano seco"],
-        preparacion: ["Marinar el pernil al menos 12 horas.", "Hornear cubierto a temperatura media.", "Destapar al final para dorar la piel."],
-        consejo: "El reposo antes de cortar mantiene los jugos internos."
-      },
-      {
-        titulo: "Pollo Guisado Caraqueno",
-        categoria: "Carnes",
-        imagen: "https://source.unsplash.com/600x400/?chicken-stew",
-        tiempo: "1 hora",
-        rendimiento: "4 porciones",
-        dificultad: "Facil",
-        ingredientes: ["1 pollo troceado", "Cebolla", "Ajo", "Tomate", "Pimenton", "Sal y pimienta"],
-        preparacion: ["Dorar el pollo ligeramente.", "Sofreir vegetales.", "Incorporar pollo y cocinar tapado hasta ablandar."],
-        consejo: "No agregar demasiada agua; debe quedar salsa espesa."
-      },
-      {
-        titulo: "Bistec Encebollado",
-        categoria: "Carnes",
-        imagen: "https://source.unsplash.com/600x400/?steak-onion",
-        tiempo: "30 minutos",
-        rendimiento: "3 porciones",
-        dificultad: "Facil",
-        ingredientes: ["3 bistecs de res", "2 cebollas grandes", "Sal", "Pimienta", "Aceite"],
-        preparacion: ["Sellar los bistecs a fuego alto.", "Retirar y saltear cebollas.", "Unir nuevamente y cocinar brevemente."],
-        consejo: "No sobrecocer el bistec para evitar dureza."
-      }
+      // ---- Postres ----
+      { titulo:"Torta Negra Navidena", categoria:"Postres", tiempo:"2h", rendimiento:"10 porc", dificultad:"Alta",
+        ingredientes:["Harina","Frutas maceradas","Mantequilla","Huevos","Azúcar morena"],
+        preparacion:["Cremar mantequilla con azúcar.","Incorporar huevos uno a uno.","Agregar frutas enharinadas.","Hornear lentamente."],
+        consejo:"Mejora si reposa varios días.", emoji:"🍰", fondo:"linear-gradient(135deg, #724328, #3f2517)" },
+      { titulo:"Golfeados Caraqueños", categoria:"Panadería", tiempo:"2h", rendimiento:"12 uni", dificultad:"Media",
+        ingredientes:["Harina","Levadura","Papelón rallado","Queso blanco"],
+        preparacion:["Amasar y dejar fermentar.","Rellenar con papelón.","Hornear y cubrir con queso."],
+        consejo:"Servir tibios.", emoji:"🥐", fondo:"linear-gradient(145deg, #c99e67, #a5662b)" },
+      { titulo:"Quesillo Venezolano", categoria:"Postres", tiempo:"1h", rendimiento:"8 porc", dificultad:"Media",
+        ingredientes:["Huevos","Leche condensada","Leche líquida","Azúcar"],
+        preparacion:["Caramelizar molde.","Licuar ingredientes.","Hornear a baño maría."],
+        consejo:"Reposar en frío mínimo 4h.", emoji:"🍮", fondo:"radial-gradient(circle at 30% 30%, #f1cf9c, #bf8a4b)" },
+      { titulo:"Majarete Venezolano", categoria:"Postres", tiempo:"40min", rendimiento:"6 porc", dificultad:"Fácil",
+        ingredientes:["Harina de maíz","Leche de coco","Azúcar","Canela"],
+        preparacion:["Disolver harina en leche.","Cocinar hasta espesar.","Verter en moldes y enfriar."],
+        consejo:"Servir bien frío.", emoji:"🥥", fondo:"linear-gradient(145deg, #f5e1b0, #c7a251)" },
+      // ---- Bebidas ----
+      { titulo:"Chicha Criolla", categoria:"Bebidas", tiempo:"40min", rendimiento:"6 vasos", dificultad:"Fácil",
+        ingredientes:["Arroz cocido","Leche","Azúcar","Canela"],
+        preparacion:["Licuar arroz con leche.","Colar si se desea textura fina.","Servir fría con canela."],
+        consejo:"Reposar en frío intensifica sabor.", emoji:"🥛", fondo:"#dab07e" },
+      { titulo:"Guarapo de Papelón con Limón", categoria:"Bebidas", tiempo:"10min", rendimiento:"4 vasos", dificultad:"Fácil",
+        ingredientes:["Papelón","Agua","Jugo de limón"],
+        preparacion:["Disolver papelón en agua.","Agregar limón al final.","Servir con hielo."],
+        consejo:"No hervir tras añadir limón.", emoji:"🍋", fondo:"linear-gradient(145deg, #dbcf93, #b89e40)" },
+      // ---- Platos principales ----
+      { titulo:"Pabellón Caraqueño Clásico", categoria:"Principal", tiempo:"1h", rendimiento:"4 porc", dificultad:"Media",
+        ingredientes:["Carne mechada","Arroz blanco","Caraotas negras","Plátano maduro frito"],
+        preparacion:["Servir arroz como base.","Colocar carne mechada jugosa.","Añadir caraotas bien sazonadas.","Coronar con tajadas crujientes."],
+        consejo:"El equilibrio entre dulce y salado es esencial.", emoji:"🍛", fondo:"linear-gradient(145deg, #b95f2a, #713a18)" },
+      { titulo:"Hallaca Caraqueña", categoria:"Navidad", tiempo:"6h", rendimiento:"25 uni", dificultad:"Alta",
+        ingredientes:["Harina de maíz","Caldo de gallina","Guiso de res y cerdo","Aceitunas","Alcaparras","Pasas","Hojas de plátano"],
+        preparacion:["Preparar masa suave con caldo.","Cocinar guiso concentrado.","Extender masa, rellenar y decorar.","Envolver y hervir 45 min."],
+        consejo:"La clave está en el equilibrio dulce-salado.", emoji:"🫔", fondo:"#64854e" },
+      { titulo:"Asado Negro Caraqueño", categoria:"Carnes", tiempo:"2h", rendimiento:"6 porc", dificultad:"Media",
+        ingredientes:["1 kg muchacho redondo","2 cdas azúcar","1 cebolla","3 ajos","1 taza vino tinto","2 tazas caldo"],
+        preparacion:["Sellar la carne.","Caramelizar azúcar.","Incorporar cebolla, ajo, vino y caldo.","Cocinar tapado hasta ablandar."],
+        consejo:"El caramelo debe ser oscuro pero no quemado.", emoji:"🥩", fondo:"#482818" },
+      // ---- Arepas y pasapalos ----
+      { titulo:"Arepa Reina Pepiada", categoria:"Arepas", tiempo:"30min", rendimiento:"4 porc", dificultad:"Fácil",
+        ingredientes:["Arepas asadas","Pollo desmechado","Aguacate","Mayonesa","Sal"],
+        preparacion:["Mezclar pollo con aguacate triturado.","Ajustar sal y cremosidad.","Rellenar."],
+        consejo:"Servir inmediatamente.", emoji:"🥑", fondo:"#dba562" },
+      { titulo:"Tequenos Tradicionales", categoria:"Pasapalos", tiempo:"40min", rendimiento:"20 uni", dificultad:"Media",
+        ingredientes:["Queso blanco firme","Masa de trigo","Aceite"],
+        preparacion:["Cortar queso.","Envolver en masa.","Freír hasta dorar."],
+        consejo:"Aceite a 170°C evita que se abran.", emoji:"🧀", fondo:"#e5b778" },
+      { titulo:"Cachapa de Maíz Tierno", categoria:"Desayunos", tiempo:"25min", rendimiento:"4 uni", dificultad:"Fácil",
+        ingredientes:["Maíz tierno molido","Sal","Azúcar ligera","Queso de mano"],
+        preparacion:["Licuar maíz hasta mezcla espesa.","Cocinar en budare.","Rellenar con queso."],
+        consejo:"No hacerla muy delgada.", emoji:"🌽", fondo:"#f4c542" },
+      // ---- Sopas ----
+      { titulo:"Sancocho de Gallina", categoria:"Sopas", tiempo:"2h", rendimiento:"6 porc", dificultad:"Media",
+        ingredientes:["Gallina","Yuca","Plátano verde","Maíz","Cilantro"],
+        preparacion:["Hervir gallina hasta suavizar.","Agregar tubérculos.","Servir con cilantro fresco."],
+        consejo:"Espumar durante cocción.", emoji:"🍗", fondo:"#bc8f4b" },
+      { titulo:"Sopa de Mondongo", categoria:"Sopas", tiempo:"3h", rendimiento:"8 porc", dificultad:"Alta",
+        ingredientes:["Mondongo limpio","Yuca","Papas","Maíz","Aliños"],
+        preparacion:["Cocinar mondongo hasta ablandar.","Incorporar vegetales.","Hervir hasta integrar."],
+        consejo:"Lavado previo elimina olores.", emoji:"🥣", fondo:"#7c5e3a" },
+      // ---- Acompañantes ----
+      { titulo:"Tostones Caraqueños", categoria:"Acompañantes", tiempo:"25min", rendimiento:"4 porc", dificultad:"Fácil",
+        ingredientes:["Plátano verde","Aceite","Sal"],
+        preparacion:["Freír en dos tiempos.","Aplastar tras primera fritura.","Freír nuevamente."],
+        consejo:"Doble fritado da crocancia.", emoji:"🍌", fondo:"#e5b062" },
+      { titulo:"Tajadas con Queso", categoria:"Acompañantes", tiempo:"20min", rendimiento:"3 porc", dificultad:"Fácil",
+        ingredientes:["Plátano maduro","Queso blanco rallado","Aceite"],
+        preparacion:["Cortar láminas.","Freír hasta dorado.","Espolvorear queso."],
+        consejo:"Plátano muy maduro.", emoji:"🧀", fondo:"#d9a755" },
     ];
 
-    // referencias DOM
+    // Duplicamos algunas para llegar visualmente a más de 20 (simulacro de colección)
+    const recetasExtendidas = [...recetas];
+    for (let i = 0; i < 8; i++) {
+      recetasExtendidas.push({ ...recetas[i % recetas.length], titulo: recetas[i % recetas.length].titulo + ' (estilo)' });
+    }
+
+    // Referencias DOM
     const contenedor = document.getElementById('contenedor');
     const buscador = document.getElementById('buscador');
     const darkBtn = document.getElementById('darkBtn');
 
-    // ====== MODO OSCURO ======
-    window.toggleDark = function() {
+    // ---------- MODO OSCURO ----------
+    function toggleDark() {
       document.body.classList.toggle('dark');
-      if (document.body.classList.contains('dark')) {
-        darkBtn.innerHTML = '☀️ Modo Claro';
-        localStorage.setItem('modo-oscuro-caraqueno', 'dark');
-      } else {
-        darkBtn.innerHTML = '🌙 Modo Oscuro';
-        localStorage.setItem('modo-oscuro-caraqueno', 'light');
-      }
-    };
-
-    // persistencia
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('modo-oscuro-caraqueno', isDark ? 'dark' : 'light');
+      darkBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i> Modo Claro' : '<i class="fas fa-moon"></i> Modo Oscuro';
+    }
+    darkBtn.addEventListener('click', toggleDark);
     if (localStorage.getItem('modo-oscuro-caraqueno') === 'dark') {
       document.body.classList.add('dark');
-      darkBtn.innerHTML = '☀️ Modo Claro';
+      darkBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
     }
 
-    // ====== RENDER RECETAS ======
+    // ---------- RENDER DE TARJETAS (con imagen emoji) ----------
     function renderRecetas(lista) {
       contenedor.innerHTML = '';
       if (lista.length === 0) {
-        contenedor.innerHTML = '<div class="no-results">😕 No encontramos ninguna receta</div>';
+        contenedor.innerHTML = '<div class="no-results"><i class="fas fa-sad-tear"></i>  No hay recetas con esos términos</div>';
         return;
       }
-      lista.forEach((receta, index) => {
+      lista.forEach((receta, idx) => {
         const card = document.createElement('div');
         card.className = 'card';
+
+        // Header con imagen (fondo personalizado + emoji)
+        const headerStyle = `background-image: ${receta.fondo}; background-color: #b47a56; background-blend-mode: overlay;`;
+
         card.innerHTML = `
-          <img src="${receta.imagen}" alt="${receta.titulo}" loading="lazy">
+          <div class="card-header" style="${headerStyle} background-size: cover; background-position: center;">
+            <span>${receta.emoji || '🍽️'}</span>
+          </div>
           <div class="card-content">
             <h3>${receta.titulo}</h3>
-            <div class="meta">${receta.categoria} | ${receta.tiempo} | ${receta.dificultad}</div>
-            <button onclick="toggleDetalle(${index})">📖 Ver Receta</button>
-            <div class="detalle" id="detalle-${index}">
-              <h4>Ingredientes</h4>
+            <div class="meta-category"><i class="fas fa-tag"></i> ${receta.categoria}</div>
+            <div class="tiempo-dificultad">
+              <span><i class="far fa-clock"></i> ${receta.tiempo}</span>
+              <span><i class="fas fa-chart-line"></i> ${receta.dificultad}</span>
+              <span><i class="fas fa-users"></i> ${receta.rendimiento}</span>
+            </div>
+            <button class="btn-receta" onclick="toggleDetalle(${idx})"><i class="fas fa-book-open"></i> Ver receta</button>
+            <div class="detalle" id="detalle-${idx}">
+              <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
               <ul>${receta.ingredientes.map(i => `<li>${i}</li>`).join('')}</ul>
-              <h4>Preparación</h4>
+              <h4><i class="fas fa-utensil-spoon"></i> Preparación</h4>
               <ol>${receta.preparacion.map(p => `<li>${p}</li>`).join('')}</ol>
-              <p><strong>🧑‍🍳 Consejo:</strong> ${receta.consejo}</p>
+              <div class="consejo"><i class="fas fa-lightbulb"></i> ${receta.consejo}</div>
             </div>
           </div>
         `;
@@ -872,30 +543,27 @@
       });
     }
 
-    // Función global para mostrar/ocultar detalle (se llama desde onclick)
+    // Función global para toggle detalle
     window.toggleDetalle = function(id) {
-      const detalle = document.getElementById('detalle-' + id);
-      if (detalle) {
-        detalle.style.display = detalle.style.display === 'block' ? 'none' : 'block';
-      }
+      const el = document.getElementById('detalle-' + id);
+      if (el) el.style.display = el.style.display === 'block' ? 'none' : 'block';
     };
 
-    // Filtro por búsqueda
+    // Filtro
     function filtrar() {
       const texto = buscador.value.toLowerCase().trim();
-      const filtradas = recetas.filter(r =>
+      const filtradas = recetasExtendidas.filter(r =>
         r.titulo.toLowerCase().includes(texto) ||
-        (r.categoria && r.categoria.toLowerCase().includes(texto)) ||
-        (r.ingredientes && r.ingredientes.join(' ').toLowerCase().includes(texto))
+        r.categoria.toLowerCase().includes(texto) ||
+        r.ingredientes.some(i => i.toLowerCase().includes(texto))
       );
       renderRecetas(filtradas);
     }
-
     buscador.addEventListener('keyup', filtrar);
     buscador.addEventListener('search', filtrar);
 
-    // Render inicial (todas)
-    renderRecetas(recetas);
+    // Render inicial
+    renderRecetas(recetasExtendidas);
   })();
 </script>
 </body>
