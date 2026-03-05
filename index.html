@@ -1,597 +1,494 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comida Venezolana · Vista desde un Caraqueño</title>
-  <!-- Font Awesome 6 para iconos profesionales -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inno.cl | Herramientas de Precisión para Reparación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
 
-    body {
-      background: #fcf8f2;
-      color: #1f2937;
-      transition: background 0.25s, color 0.2s;
-    }
+        body {
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
 
-    /* ===== MODO OSCURO ===== */
-    body.dark {
-      background: #121212;
-      color: #f0e7db;
-    }
+        .web-card {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
 
-    body.dark header {
-      background: linear-gradient(145deg, #2b1c12, #341f13);
-      border-bottom: 3px solid #b27a50;
-    }
+        /* portada estilo facebook */
+        .cover-photo {
+            height: 200px;
+            background: linear-gradient(145deg, #1e2a3a, #2c3e50);
+            position: relative;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="white" d="M20 30 L25 20 L35 18 L30 28 L32 38 L22 35 Z M70 60 L78 55 L85 65 L75 68 L68 75 L62 66 Z" /></svg>');
+            background-size: 80px;
+        }
 
-    body.dark .modo-boton {
-      background: #3a2d24;
-      color: #f3dac7;
-      border: 1px solid #b28058;
-    }
+        /* perfil */
+        .profile-row {
+            display: flex;
+            align-items: flex-end;
+            padding: 0 2rem;
+            margin-top: -50px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-    body.dark .card {
-      background: #1e1a17;
-      border: 1px solid #5a4a3a;
-      box-shadow: 0 20px 30px -12px #000000cc;
-    }
+        .avatar-large {
+            width: 120px;
+            height: 120px;
+            background: #0d1b2a;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 3rem;
+            color: #4a9eff;
+            background: linear-gradient(145deg, #14212e, #1e2f3f);
+        }
 
-    body.dark .card-categoria {
-      background: #3f3229;
-      color: #f0cfb2;
-    }
+        .profile-info {
+            flex: 1;
+            padding-bottom: 0.5rem;
+        }
 
-    body.dark .btn-receta {
-      background: #c3662c;
-      color: #fff;
-    }
+        .profile-info h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #1e293b;
+            letter-spacing: -0.5px;
+        }
 
-    body.dark footer {
-      background: #1d1712;
-      border-top: 3px solid #b77949;
-    }
+        .follow-badge {
+            background: #e6f0ff;
+            color: #1e4f8a;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 6px;
+            border: 1px solid #bcd3ff;
+        }
 
-    body.dark .no-resultados {
-      background: #2b241e;
-      border-color: #c5915f;
-    }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 1rem 2rem 0.5rem 2rem;
+            flex-wrap: wrap;
+        }
 
-    /* ===== HEADER PROFESIONAL ===== */
-    header {
-      background: linear-gradient(145deg, #8B1E1E, #b1422b);
-      color: white;
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 12px 28px -10px #6b2f1c;
-      border-bottom: 5px solid #f5cca6;
-    }
+        .btn {
+            padding: 0.7rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 600;
+            border: none;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+            background: white;
+            border: 1px solid #cfd9e6;
+            color: #1e293b;
+        }
 
-    .header-contenido {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        .btn-primary {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,60,130,0.2);
+        }
 
-    h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      letter-spacing: -1px;
-      text-shadow: 4px 4px 0 #572917;
-      line-height: 1.2;
-    }
+        .btn-primary:hover {
+            background: #132b4f;
+        }
 
-    .subtitulo {
-      font-size: 1.3rem;
-      opacity: 0.9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 8px;
-    }
+        /* barra de menú */
+        .menu-tabs {
+            display: flex;
+            border-bottom: 1px solid #dde3ed;
+            padding: 0 2rem;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
 
-    .modo-boton {
-      position: absolute;
-      top: 1.8rem;
-      right: 2.5rem;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(12px);
-      border: 2px solid white;
-      color: white;
-      padding: 0.8rem 2rem;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      transition: 0.2s;
-      box-shadow: 0 6px 16px #00000030;
-    }
+        .menu-tab {
+            padding: 0.8rem 0.2rem;
+            font-weight: 600;
+            color: #4b5b73;
+            border-bottom: 3px solid transparent;
+            cursor: default;
+        }
 
-    .modo-boton:hover {
-      background: rgba(255, 255, 255, 0.35);
-      transform: scale(1.03);
-    }
+        .menu-tab.active {
+            color: #1d4e89;
+            border-bottom: 3px solid #1d4e89;
+        }
 
-    /* BUSCADOR */
-    .buscador-wrapper {
-      margin-top: 2.5rem;
-    }
+        /* contenido principal de dos columnas */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            padding: 2rem;
+        }
 
-    #buscador {
-      width: 90%;
-      max-width: 750px;
-      padding: 1.3rem 2.2rem;
-      border: none;
-      border-radius: 80px;
-      font-size: 1.2rem;
-      background: white;
-      box-shadow: 0 12px 28px #3b1c0d4d;
-      border: 3px solid transparent;
-      transition: 0.2s;
-    }
+        /* columna izquierda (info) */
+        .info-card {
+            background: #f8fafd;
+            border-radius: 24px;
+            padding: 1.6rem;
+            border: 1px solid #e8ecf3;
+        }
 
-    #buscador:focus {
-      outline: none;
-      border-color: #ffb882;
-      background: #fffcf9;
-    }
+        .info-section {
+            margin-bottom: 2rem;
+        }
 
-    body.dark #buscador {
-      background: #2f251e;
-      color: #f6e2d0;
-      border-color: #7c614b;
-    }
+        .info-section h3 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #4f6f8f;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-    /* ===== ESPACIOS PUBLICITARIOS ===== */
-    .ad-container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 1rem 0;
+            color: #1e2f3f;
+        }
 
-    .ad-space {
-      background: linear-gradient(145deg, #f0e2d4, #e2cfbb);
-      padding: 2rem;
-      text-align: center;
-      border-radius: 70px;
-      border: 3px dashed #b27a50;
-      color: #4b311b;
-      font-weight: 700;
-      font-size: 1.3rem;
-      letter-spacing: 0.5px;
-      box-shadow: inset 0 4px 12px #0000001a;
-    }
+        .info-icon {
+            font-size: 1.4rem;
+            min-width: 30px;
+            text-align: center;
+        }
 
-    body.dark .ad-space {
-      background: #2d251f;
-      color: #ebcfb3;
-      border-color: #bb8b62;
-    }
+        .info-row strong {
+            font-weight: 600;
+            margin-right: 4px;
+        }
 
-    /* ===== GRID DE RECETAS (tarjetas con imagen placeholder real) ===== */
-    .grid-recetas {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2.5rem;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 2rem 2rem 3.5rem;
-    }
+        .closed-status {
+            background: #fbedeb;
+            color: #b13e2d;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            border: 1px solid #f5c6bb;
+        }
 
-    .card {
-      background: white;
-      border-radius: 40px;
-      overflow: hidden;
-      box-shadow: 0 25px 40px -18px #994d2690;
-      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #fadbc6;
-    }
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 1rem 0;
+        }
 
-    .card:hover {
-      transform: translateY(-10px) scale(1.01);
-      box-shadow: 0 40px 50px -18px #ab4d1e;
-    }
+        .category-tag {
+            background: white;
+            border-radius: 30px;
+            padding: 0.3rem 1.1rem;
+            border: 1px solid #cbd5e1;
+            font-size: 0.9rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
 
-    /* IMAGEN: aquí colocas tus fotos reales manualmente */
-    .card-img {
-      width: 100%;
-      height: 230px;
-      background-color: #e0c2a8;  /* color de respaldo mientras pones tu imagen */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-      padding: 1.2rem;
-      font-size: 3.5rem;
-      color: white;
-      text-shadow: 2px 2px 6px black;
-      border-bottom: 5px solid #b7622c;
-      /* las imágenes se asignan inline con style, tú solo cambias el url */
-    }
+        .fans-count {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0f2b45;
+            line-height: 1.2;
+        }
 
-    .card-content {
-      padding: 2rem 2rem 2.2rem;
-      flex: 1;
-    }
+        .fans-label {
+            color: #5b6f88;
+        }
 
-    .card-titulo {
-      font-size: 2.1rem;
-      font-weight: 700;
-      color: #8B1E1E;
-      margin-bottom: 0.3rem;
-      line-height: 1.2;
-    }
+        /* columna derecha (publicación) */
+        .post-card {
+            background: white;
+            border-radius: 24px;
+            border: 1px solid #eef2f7;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px -12px rgba(0,32,64,0.2);
+        }
 
-    body.dark .card-titulo {
-      color: #f3ba86;
-    }
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+        }
 
-    .card-categoria {
-      display: inline-block;
-      background: #fae3d1;
-      padding: 0.4rem 1.5rem;
-      border-radius: 50px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #6b3f1f;
-      margin: 0.8rem 0 1rem;
-    }
+        .small-avatar {
+            width: 48px;
+            height: 48px;
+            background: #172f44;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
 
-    .card-meta {
-      display: flex;
-      gap: 1.8rem;
-      margin-bottom: 1.2rem;
-      color: #6b4f38;
-      font-size: 1rem;
-      font-weight: 500;
-    }
+        .post-author h4 {
+            font-size: 1.1rem;
+            color: #152b40;
+        }
 
-    .card-meta i {
-      color: #b85a24;
-      width: 22px;
-    }
+        .post-time {
+            color: #6f7d95;
+            font-size: 0.85rem;
+        }
 
-    .btn-receta {
-      background: #8B1E1E;
-      color: white;
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 8px 16px #8b1e1e80;
-      margin-top: 0.8rem;
-    }
+        .post-content p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin: 1rem 0 1.5rem 0;
+            color: #1e2f3f;
+        }
 
-    .btn-receta:hover {
-      background: #ac3131;
-      transform: scale(1.02);
-    }
+        .post-stats {
+            display: flex;
+            gap: 20px;
+            border-top: 1px solid #e6ecf5;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            color: #5a6f89;
+            font-weight: 500;
+        }
 
-    .detalle {
-      display: none;
-      margin-top: 2rem;
-      border-top: 3px dashed #d4a277;
-      padding-top: 1.8rem;
-    }
+        .video-placeholder {
+            background: #0e1f31;
+            width: 100%;
+            border-radius: 24px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            gap: 10px;
+            margin: 1.5rem 0 1rem 0;
+            background-image: radial-gradient(circle at 30% 30%, #2d4b6e, #0b1b2c);
+            border: 1px solid #264a6b;
+        }
 
-    .detalle h4 {
-      color: #8B1E1E;
-      font-size: 1.5rem;
-      margin: 1.2rem 0 0.6rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .play-icon {
+            font-size: 3rem;
+            opacity: 0.9;
+        }
 
-    body.dark .detalle h4 {
-      color: #f0b27a;
-    }
+        .error-msg {
+            background: #f8d7da;
+            color: #a13a46;
+            padding: 0.6rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 1px solid #f5b1b9;
+            display: inline-block;
+        }
 
-    .detalle ul, .detalle ol {
-      margin-left: 1.8rem;
-      line-height: 1.9;
-    }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 1.2rem 0;
+        }
 
-    .consejo {
-      background: #fff2e7;
-      padding: 1.2rem 1.8rem;
-      border-radius: 40px;
-      margin-top: 1.5rem;
-      border-left: 8px solid #b7622c;
-      font-style: italic;
-      font-size: 1.1rem;
-    }
+        .gallery-item {
+            background: #bdd3e8;
+            height: 90px;
+            border-radius: 16px;
+            background: linear-gradient(130deg, #acc9e5, #dbe9fa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1c3f5c;
+            font-weight: 600;
+            font-size: 2rem;
+            border: 1px solid white;
+        }
 
-    body.dark .consejo {
-      background: #2b241d;
-      border-left-color: #ce8f5a;
-    }
+        /* footer */
+        .footer-note {
+            background: #f0f4fc;
+            padding: 1rem 2rem;
+            text-align: center;
+            color: #4e6580;
+            border-top: 1px solid #dce3ef;
+            font-size: 0.9rem;
+        }
 
-    /* Sin resultados */
-    .no-resultados {
-      grid-column: 1/-1;
-      background: #fcefe3;
-      border: 5px dashed #8B1E1E;
-      border-radius: 90px;
-      padding: 5rem 2rem;
-      text-align: center;
-      font-size: 2.2rem;
-      color: #4e2e16;
-    }
-
-    footer {
-      background: #241d17;
-      color: #f4dfce;
-      text-align: center;
-      padding: 2.5rem;
-      font-size: 1.2rem;
-      border-top: 6px solid #b4622e;
-      margin-top: 3rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 700px) {
-      h1 { font-size: 2.5rem; }
-      .modo-boton { top: 1rem; right: 1rem; padding: 0.5rem 1.2rem; }
-    }
-  </style>
+        @media (max-width: 700px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            .profile-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .avatar-large {
+                width: 90px;
+                height: 90px;
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="web-card">
+        <!-- cabecera al estilo red social -->
+        <div class="cover-photo"></div>
 
-<header>
-  <div class="header-contenido">
-    <button class="modo-boton" id="darkBtn"><i class="fas fa-moon"></i> <span>Modo Oscuro</span></button>
-    <h1>🇻🇪 Comida Venezolana</h1>
-    <div class="subtitulo">
-      <i class="fas fa-eye"></i> vista desde un caraqueño <i class="fas fa-utensils"></i>
-    </div>
-    <div class="buscador-wrapper">
-      <input type="text" id="buscador" placeholder="🔍 Buscar receta, categoría o ingrediente...">
-    </div>
-  </div>
-</header>
-
-<!-- Espacio publicitario superior -->
-<div class="ad-container">
-  <div class="ad-space">
-    <i class="fas fa-ad"></i>  ESPACIO GOOGLE ADSENSE / PUBLICIDAD  <i class="fas fa-ad"></i>
-  </div>
-</div>
-
-<!-- Grid de recetas -->
-<div class="grid-recetas" id="contenedor"></div>
-
-<!-- Espacio publicitario inferior -->
-<div class="ad-container">
-  <div class="ad-space">
-    <i class="fas fa-tag"></i>  ENLACES DE AFILIADO / PRODUCTOS RECOMENDADOS  <i class="fas fa-shopping-cart"></i>
-  </div>
-</div>
-
-<footer>
-  © 2026 Comida Venezolana Vista Desde un Caraqueño · Proyecto listo para monetización
-</footer>
-
-<script>
-  (function() {
-    // ---------- RECETAS CON CANTIDADES E IMÁGENES (tú reemplazarás las URL manualmente) ----------
-    const recetas = [
-      // Cada objeto incluye imagenUrl: coloca ahí la ruta de tu foto real.
-      // Por defecto pongo un color sólido (data:image) para que se vea un bonito placeholder mientras.
-      { 
-        titulo: "Asado Negro Caraqueño", 
-        categoria: "Carnes", 
-        tiempo: "2h 30min", 
-        porciones: "6", 
-        dificultad: "Media",
-        imagenUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format", // foto real de carne (unsplash)
-        ingredientes: ["1 kg muchacho redondo", "2 cdas azúcar", "1 cebolla grande", "3 dientes ajo", "1 taza vino tinto", "2 tazas caldo de res", "sal y pimienta"],
-        preparacion: ["Sellar la carne en olla caliente.", "Caramelizar el azúcar hasta oscuro.", "Agregar cebolla, ajo y sofreír.", "Verter vino y caldo, cocinar tapado 2h.", "Dejar reposar y cortar en rebanadas."],
-        consejo: "El caramelo debe quedar oscuro pero no quemado para evitar amargor."
-      },
-      { 
-        titulo: "Pabellón Criollo", 
-        categoria: "Plato Principal", 
-        tiempo: "1h 15min", 
-        porciones: "4", 
-        dificultad: "Media",
-        imagenUrl: "https://images.unsplash.com/photo-1598866592490-b8f1b5497f09?w=600&auto=format", // bandeja de comida
-        ingredientes: ["400 g carne mechada", "2 tazas arroz blanco", "2 tazas caraotas negras", "2 plátanos maduros", "aceite"],
-        preparacion: ["Preparar arroz blanco.", "Cocinar caraotas con aliños.", "Freír tajadas de plátano.", "Servir todos los componentes juntos."],
-        consejo: "El equilibrio entre dulce (tajadas) y salado es la clave."
-      },
-      { 
-        titulo: "Arepa Reina Pepiada", 
-        categoria: "Arepas", 
-        tiempo: "35min", 
-        porciones: "4", 
-        dificultad: "Fácil",
-        imagenUrl: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=600&auto=format", // arepa
-        ingredientes: ["4 arepas asadas", "1 pechuga de pollo cocida", "1 aguacate", "3 cdas mayonesa", "sal"],
-        preparacion: ["Desmechar el pollo finamente.", "Triturar aguacate y mezclar con pollo y mayonesa.", "Rellenar las arepas calientes."],
-        consejo: "Servir inmediatamente para evitar oxidación del aguacate."
-      },
-      { 
-        titulo: "Hallaca Tradicional", 
-        categoria: "Navidad", 
-        tiempo: "6h", 
-        porciones: "25", 
-        dificultad: "Alta",
-        imagenUrl: "https://images.unsplash.com/photo-1627308595171-d1b5d6d7b9e1?w=600&auto=format", // tamal
-        ingredientes: ["1 kg harina de maíz", "caldo de gallina", "500 g guiso de res/cerdo", "aceitunas", "alcaparras", "pasas", "hojas de plátano"],
-        preparacion: ["Preparar masa con caldo.", "Cocinar guiso espeso.", "Armar hallacas con los ingredientes.", "Hervir 45 minutos."],
-        consejo: "El toque dulce de las pasas debe equilibrar el salado."
-      },
-      { 
-        titulo: "Tequenos", 
-        categoria: "Pasapalos", 
-        tiempo: "40min", 
-        porciones: "20", 
-        dificultad: "Media",
-        imagenUrl: "https://images.unsplash.com/photo-1617839629672-6aee7644e534?w=600&auto=format", // tequeños
-        ingredientes: ["250 g queso blanco firme", "1 paquete masa de trigo", "aceite para freír"],
-        preparacion: ["Cortar queso en bastones.", "Envolver cada bastón con tiras de masa.", "Freír en aceite caliente hasta dorar."],
-        consejo: "El aceite debe estar a 170°C para que no se abran."
-      },
-      { 
-        titulo: "Quesillo Venezolano", 
-        categoria: "Postres", 
-        tiempo: "1h", 
-        porciones: "8", 
-        dificultad: "Media",
-        imagenUrl: "https://images.unsplash.com/photo-1615971797736-623f5d49c77d?w=600&auto=format", // flan
-        ingredientes: ["1 lata leche condensada", "1 taza leche líquida", "4 huevos", "1 taza azúcar (para caramelo)"],
-        preparacion: ["Preparar caramelo con azúcar.", "Licuar leches con huevos.", "Verter en molde caramelizado y hornear a baño María."],
-        consejo: "Reposar en nevera mínimo 4 horas antes de desmoldar."
-      },
-      { 
-        titulo: "Sancocho de Gallina", 
-        categoria: "Sopas", 
-        tiempo: "2h 15min", 
-        porciones: "6", 
-        dificultad: "Media",
-        imagenUrl: "https://images.unsplash.com/photo-1547928576-822741b9f8b2?w=600&auto=format", // sopa
-        ingredientes: ["1 gallina troceada", "2 yucas", "2 plátanos verdes", "2 mazorcas", "cilantro"],
-        preparacion: ["Hervir gallina con agua y sal.", "Agregar vegetales en orden.", "Servir con cilantro fresco."],
-        consejo: "Espumar durante cocción para caldo claro."
-      },
-      { 
-        titulo: "Cachapa de Maíz", 
-        categoria: "Desayunos", 
-        tiempo: "25min", 
-        porciones: "4", 
-        dificultad: "Fácil",
-        imagenUrl: "https://images.unsplash.com/photo-1618304283054-eb6553e76dbd?w=600&auto=format", // cachapa
-        ingredientes: ["2 tazas maíz tierno molido", "1 cda azúcar", "pizca de sal", "queso de mano"],
-        preparacion: ["Licuar maíz con azúcar y sal.", "Cocinar en budare y rellenar con queso."],
-        consejo: "No hacerla muy delgada para que quede suave."
-      }
-    ];
-
-    // Para tener más recetas visualmente, duplicamos algunas (tú luego agregas más)
-    const recetasExtendidas = [...recetas];
-    // Añadir algunas repeticiones con títulos diferentes para llenar grid
-    recetasExtendidas.push({ 
-      titulo: "Golfeados", categoria: "Panadería", tiempo: "2h", porciones: "12", dificultad: "Media",
-      imagenUrl: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=600&auto=format",
-      ingredientes: ["500 g harina", "10 g levadura", "150 g papelón", "100 g queso blanco"],
-      preparacion: ["Amasar y fermentar.", "Rellenar con papelón.", "Hornear y cubrir con queso."],
-      consejo: "Servir tibios, recién horneados."
-    });
-    recetasExtendidas.push({ 
-      titulo: "Chicha Criolla", categoria: "Bebidas", tiempo: "30min", porciones: "6", dificultad: "Fácil",
-      imagenUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&auto=format",
-      ingredientes: ["1 taza arroz", "1 litro leche", "azúcar al gusto", "canela"],
-      preparacion: ["Cocinar arroz con agua y canela.", "Licuar con leche.", "Servir frío espolvoreado con canela."],
-      consejo: "Reposar en nevera potencia el sabor."
-    });
-
-    // Referencias DOM
-    const contenedor = document.getElementById('contenedor');
-    const buscador = document.getElementById('buscador');
-    const darkBtn = document.getElementById('darkBtn');
-
-    // ---------- MODO OSCURO ----------
-    function toggleDark() {
-      document.body.classList.toggle('dark');
-      const isDark = document.body.classList.contains('dark');
-      localStorage.setItem('modo-oscuro-caraqueno', isDark ? 'dark' : 'light');
-      darkBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i> Modo Claro' : '<i class="fas fa-moon"></i> Modo Oscuro';
-    }
-    darkBtn.addEventListener('click', toggleDark);
-
-    // Comprobar localStorage
-    if (localStorage.getItem('modo-oscuro-caraqueno') === 'dark') {
-      document.body.classList.add('dark');
-      darkBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-    }
-
-    // ---------- RENDER TARJETAS ----------
-    function renderRecetas(lista) {
-      contenedor.innerHTML = '';
-      if (lista.length === 0) {
-        contenedor.innerHTML = '<div class="no-resultados"><i class="fas fa-search"></i>  No hay recetas con esos términos</div>';
-        return;
-      }
-      lista.forEach((receta, idx) => {
-        const card = document.createElement('div');
-        card.className = 'card';
-
-        // Imagen: tú puedes reemplazar la URL manualmente en el array. 
-        // Si la url está vacía o no carga, se verá el color de fondo.
-        const estiloImagen = `background-image: url('${receta.imagenUrl}'); background-color: #c9a885;`; // fallback color
-
-        card.innerHTML = `
-          <div class="card-img" style="${estiloImagen} background-size: cover; background-position: center;">
-            <!-- pequeño emoji decorativo, opcional -->
-            <span style="font-size:2.5rem; opacity:0.9;">🍽️</span>
-          </div>
-          <div class="card-content">
-            <h2 class="card-titulo">${receta.titulo}</h2>
-            <div class="card-categoria"><i class="fas fa-tag"></i> ${receta.categoria}</div>
-            <div class="card-meta">
-              <span><i class="far fa-clock"></i> ${receta.tiempo}</span>
-              <span><i class="fas fa-chart-line"></i> ${receta.dificultad}</span>
-              <span><i class="fas fa-users"></i> ${receta.porciones} porc</span>
+        <!-- perfil y nombre -->
+        <div class="profile-row">
+            <div class="avatar-large">
+                I
             </div>
-            <button class="btn-receta" onclick="toggleDetalle(${idx})"><i class="fas fa-book-open"></i> Ver receta</button>
-            <div class="detalle" id="detalle-${idx}">
-              <h4><i class="fas fa-shopping-basket"></i> Ingredientes (cantidades)</h4>
-              <ul>${receta.ingredientes.map(i => `<li>${i}</li>`).join('')}</ul>
-              <h4><i class="fas fa-utensils"></i> Preparación</h4>
-              <ol>${receta.preparacion.map(p => `<li>${p}</li>`).join('')}</ol>
-              <div class="consejo"><i class="fas fa-lightbulb"></i> ${receta.consejo}</div>
+            <div class="profile-info">
+                <h1>Inno.cl</h1>
+                <div class="follow-badge">
+                    ⚙️ 9,970 seguidores · 6 seguidos
+                </div>
             </div>
-          </div>
-        `;
-        contenedor.appendChild(card);
-      });
-    }
+        </div>
 
-    // Función global toggle detalle
-    window.toggleDetalle = function(id) {
-      const detalle = document.getElementById('detalle-' + id);
-      if (detalle) {
-        detalle.style.display = detalle.style.display === 'block' ? 'none' : 'block';
-      }
-    };
+        <!-- botones de acción -->
+        <div class="action-buttons">
+            <button class="btn btn-primary">➕ Seguir</button>
+            <button class="btn">📞 Contactar</button>
+            <button class="btn">🔔 Notificaciones</button>
+        </div>
 
-    // Filtro
-    function filtrar() {
-      const texto = buscador.value.toLowerCase().trim();
-      const filtradas = recetasExtendidas.filter(r =>
-        r.titulo.toLowerCase().includes(texto) ||
-        r.categoria.toLowerCase().includes(texto) ||
-        r.ingredientes.some(i => i.toLowerCase().includes(texto))
-      );
-      renderRecetas(filtradas);
-    }
-    buscador.addEventListener('keyup', filtrar);
-    buscador.addEventListener('search', filtrar);
+        <!-- pestañas de navegación -->
+        <div class="menu-tabs">
+            <span class="menu-tab active">Publicaciones</span>
+            <span class="menu-tab">Información</span>
+            <span class="menu-tab">Reels</span>
+            <span class="menu-tab">Fotos</span>
+            <span class="menu-tab">Tienda</span>
+        </div>
 
-    // Render inicial
-    renderRecetas(recetasExtendidas);
-  })();
-</script>
+        <!-- cuadrícula principal: info + post -->
+        <div class="main-grid">
+            <!-- columna lateral izquierda (información extraída) -->
+            <aside class="info-card">
+                <div class="info-section">
+                    <h3>📍 Información</h3>
+                    <div class="info-row">
+                        <span class="info-icon">🏬</span>
+                        <span><strong>Categoría:</strong> Tienda de máquinas, herramientas, insumos y repuestos para celulares y tablets.</span>
+                    </div>
+                    <div class="category-tags">
+                        <span class="category-tag">🔧 Herramientas</span>
+                        <span class="category-tag">📱 Repuestos</span>
+                        <span class="category-tag">⚙️ Insumos</span>
+                        <span class="category-tag">📟 Tablets</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-icon">📍</span>
+                        <span><strong>Dirección:</strong> calle san antonio 744, Santiago, Chile</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-icon">⏰</span>
+                        <span><strong>Horario:</strong> <span class="closed-status">🔴 Actualmente cerrado</span></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-icon">🌐</span>
+                        <span><strong>Sitio web:</strong> <a href="#" style="text-decoration: none; color: #1d4e89;">innochile.cl</a> (enlace de referencia)</span>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3>❤️ Comunidad</h3>
+                    <div class="fans-count">9.970 <span class="fans-label">personas siguen esto</span></div>
+                    <div style="margin-top: 12px; background: #dbe4f0; border-radius: 30px; padding: 0.3rem 1rem; width: fit-content;">✔️ 6 perfiles seguidos</div>
+                </div>
+
+                <div class="info-section">
+                    <h3>📸 Fotos recientes</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">🛠️</div>
+                        <div class="gallery-item">📲</div>
+                        <div class="gallery-item">🔩</div>
+                    </div>
+                    <p style="color: #2b4b73; margin-top: 10px; font-weight: 500;">Ver todas las fotos →</p>
+                </div>
+            </aside>
+
+            <!-- columna principal: publicación destacada del muro -->
+            <main class="post-card">
+                <div class="post-header">
+                    <div class="small-avatar">I</div>
+                    <div class="post-author">
+                        <h4>Inno.cl</h4>
+                        <span class="post-time">hace 13 horas · 🌎 Santiago, Chile</span>
+                    </div>
+                </div>
+
+                <div class="post-content">
+                    <p>
+                        <strong>Si reparas celulares, sabes que la precisión lo es todo…</strong><br>
+                        En Inno.cl tenemos las herramientas y repuestos que necesitas para llevar tus reparaciones al siguiente nivel. 🔧📱
+                    </p>
+                    <!-- el video no pudo cargarse según facebook, representación visual -->
+                    <div class="video-placeholder">
+                        <span class="play-icon">▶️</span>
+                        <span>Video no disponible momentáneamente</span>
+                    </div>
+                    <span class="error-msg">⚠️ Lo sentimos, ocurrió un error al reproducir este video.</span>
+
+                    <!-- interacciones simuladas (basadas en "1 like") -->
+                    <div class="post-stats">
+                        <span>❤️ 1 Me gusta</span>
+                        <span>💬 0 comentarios</span>
+                        <span>🔁 0 veces compartido</span>
+                    </div>
+                </div>
+
+                <!-- más contenido de la página: otra sección sutil con reseña de la tienda -->
+                <div style="margin-top: 2rem; background: #eef3fb; padding: 1.2rem; border-radius: 20px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <span style="background: #1d4e89; color: white; border-radius: 50px; padding: 0.2rem 0.9rem;">🏆</span>
+                        <span style="font-weight: 700;">Tienda de máquinas y herramientas de precisión</span>
+                    </div>
+                    <p style="color: #2b3f59;">Especialistas en repuestos para celulares y tablets. Visítanos en calle san antonio 744, Santiago. ¡Atención profesional!</p>
+                </div>
+            </main>
+        </div>
+
+        <!-- pie con enlace de atribución / información de contacto adicional -->
+        <div class="footer-note">
+            ⚡ Inno.cl ·  Herramientas ·  Reparación de precisión ·  <a href="#" style="color: #1e3a5f;">innochile.cl</a> ·  Adaptado desde información pública de Facebook.
+        </div>
+    </div>
 </body>
 </html>
