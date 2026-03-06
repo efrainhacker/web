@@ -1,494 +1,478 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inno.cl | Herramientas de Precisión para Reparación</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Casa de la Impresión | Etiquetas y adhesivos personalizados para emprendedores</title>
+  <meta name="description" content="Más de 5.000 emprendedores confían en nosotros. Fabricamos cierres para bolsas, etiquetas y adhesivos personalizados con envío gratis a todo Chile.">
+  <meta name="keywords" content="etiquetas personalizadas, adhesivos, cierre bolsas, impresión para emprendedores, packaging personalizado, Chile">
+  <meta name="author" content="Casa de la Impresión">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://casadelaimpresion.cl">
 
-        body {
-            background-color: #f5f7fa;
-            display: flex;
-            justify-content: center;
-            padding: 2rem 1rem;
-        }
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://casadelaimpresion.cl">
+  <meta property="og:title" content="Casa de la Impresión - Personalización que impulsa tu negocio">
+  <meta property="og:description" content="Cierres para bolsas, etiquetas y adhesivos 100% personalizables. Calidad premium para tu emprendimiento.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1589578527966-fdac0f44566c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
 
-        .web-card {
-            max-width: 1100px;
-            width: 100%;
-            background: white;
-            border-radius: 28px;
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://casadelaimpresion.cl">
+  <meta name="twitter:title" content="Casa de la Impresión">
+  <meta name="twitter:description" content="Cierres para bolsas, etiquetas y adhesivos personalizados para emprendedores.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1589578527966-fdac0f44566c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
 
-        /* portada estilo facebook */
-        .cover-photo {
-            height: 200px;
-            background: linear-gradient(145deg, #1e2a3a, #2c3e50);
-            position: relative;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="white" d="M20 30 L25 20 L35 18 L30 28 L32 38 L22 35 Z M70 60 L78 55 L85 65 L75 68 L68 75 L62 66 Z" /></svg>');
-            background-size: 80px;
-        }
-
-        /* perfil */
-        .profile-row {
-            display: flex;
-            align-items: flex-end;
-            padding: 0 2rem;
-            margin-top: -50px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .avatar-large {
-            width: 120px;
-            height: 120px;
-            background: #0d1b2a;
-            border-radius: 50%;
-            border: 5px solid white;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 3rem;
-            color: #4a9eff;
-            background: linear-gradient(145deg, #14212e, #1e2f3f);
-        }
-
-        .profile-info {
-            flex: 1;
-            padding-bottom: 0.5rem;
-        }
-
-        .profile-info h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: #1e293b;
-            letter-spacing: -0.5px;
-        }
-
-        .follow-badge {
-            background: #e6f0ff;
-            color: #1e4f8a;
-            padding: 0.4rem 1rem;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-top: 6px;
-            border: 1px solid #bcd3ff;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            margin: 1rem 2rem 0.5rem 2rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.7rem 1.6rem;
-            border-radius: 40px;
-            font-weight: 600;
-            border: none;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: 0.2s;
-            background: white;
-            border: 1px solid #cfd9e6;
-            color: #1e293b;
-        }
-
-        .btn-primary {
-            background: #1e3c72;
-            color: white;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0,60,130,0.2);
-        }
-
-        .btn-primary:hover {
-            background: #132b4f;
-        }
-
-        /* barra de menú */
-        .menu-tabs {
-            display: flex;
-            border-bottom: 1px solid #dde3ed;
-            padding: 0 2rem;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .menu-tab {
-            padding: 0.8rem 0.2rem;
-            font-weight: 600;
-            color: #4b5b73;
-            border-bottom: 3px solid transparent;
-            cursor: default;
-        }
-
-        .menu-tab.active {
-            color: #1d4e89;
-            border-bottom: 3px solid #1d4e89;
-        }
-
-        /* contenido principal de dos columnas */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 20px;
-            padding: 2rem;
-        }
-
-        /* columna izquierda (info) */
-        .info-card {
-            background: #f8fafd;
-            border-radius: 24px;
-            padding: 1.6rem;
-            border: 1px solid #e8ecf3;
-        }
-
-        .info-section {
-            margin-bottom: 2rem;
-        }
-
-        .info-section h3 {
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #4f6f8f;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .info-row {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin: 1rem 0;
-            color: #1e2f3f;
-        }
-
-        .info-icon {
-            font-size: 1.4rem;
-            min-width: 30px;
-            text-align: center;
-        }
-
-        .info-row strong {
-            font-weight: 600;
-            margin-right: 4px;
-        }
-
-        .closed-status {
-            background: #fbedeb;
-            color: #b13e2d;
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-block;
-            border: 1px solid #f5c6bb;
-        }
-
-        .category-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 1rem 0;
-        }
-
-        .category-tag {
-            background: white;
-            border-radius: 30px;
-            padding: 0.3rem 1.1rem;
-            border: 1px solid #cbd5e1;
-            font-size: 0.9rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-
-        .fans-count {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #0f2b45;
-            line-height: 1.2;
-        }
-
-        .fans-label {
-            color: #5b6f88;
-        }
-
-        /* columna derecha (publicación) */
-        .post-card {
-            background: white;
-            border-radius: 24px;
-            border: 1px solid #eef2f7;
-            padding: 1.5rem;
-            box-shadow: 0 8px 20px -12px rgba(0,32,64,0.2);
-        }
-
-        .post-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 1.2rem;
-        }
-
-        .small-avatar {
-            width: 48px;
-            height: 48px;
-            background: #172f44;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.4rem;
-        }
-
-        .post-author h4 {
-            font-size: 1.1rem;
-            color: #152b40;
-        }
-
-        .post-time {
-            color: #6f7d95;
-            font-size: 0.85rem;
-        }
-
-        .post-content p {
-            font-size: 1.2rem;
-            line-height: 1.5;
-            margin: 1rem 0 1.5rem 0;
-            color: #1e2f3f;
-        }
-
-        .post-stats {
-            display: flex;
-            gap: 20px;
-            border-top: 1px solid #e6ecf5;
-            padding-top: 1rem;
-            margin-top: 1rem;
-            color: #5a6f89;
-            font-weight: 500;
-        }
-
-        .video-placeholder {
-            background: #0e1f31;
-            width: 100%;
-            border-radius: 24px;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1rem;
-            gap: 10px;
-            margin: 1.5rem 0 1rem 0;
-            background-image: radial-gradient(circle at 30% 30%, #2d4b6e, #0b1b2c);
-            border: 1px solid #264a6b;
-        }
-
-        .play-icon {
-            font-size: 3rem;
-            opacity: 0.9;
-        }
-
-        .error-msg {
-            background: #f8d7da;
-            color: #a13a46;
-            padding: 0.6rem 1rem;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            border: 1px solid #f5b1b9;
-            display: inline-block;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 1.2rem 0;
-        }
-
-        .gallery-item {
-            background: #bdd3e8;
-            height: 90px;
-            border-radius: 16px;
-            background: linear-gradient(130deg, #acc9e5, #dbe9fa);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1c3f5c;
-            font-weight: 600;
-            font-size: 2rem;
-            border: 1px solid white;
-        }
-
-        /* footer */
-        .footer-note {
-            background: #f0f4fc;
-            padding: 1rem 2rem;
-            text-align: center;
-            color: #4e6580;
-            border-top: 1px solid #dce3ef;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 700px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-            .profile-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .avatar-large {
-                width: 90px;
-                height: 90px;
-                font-size: 2.2rem;
-            }
-        }
-    </style>
+  <!-- Tailwind + Fuentes -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', system-ui, sans-serif; }
+    html { scroll-behavior: smooth; }
+    .gsap-fade { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+    .gsap-fade.visible { opacity: 1; transform: translateY(0); }
+    .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 50; box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4); transition: transform 0.3s; }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .nav-link::after { content: ''; display: block; width: 0; height: 2px; background: #f97316; transition: width 0.3s; }
+    .nav-link:hover::after { width: 100%; }
+    .badge-orange { background: linear-gradient(145deg, #f97316, #ea580c); }
+    .product-card { transition: transform 0.3s, box-shadow 0.3s; }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+  </style>
 </head>
-<body>
-    <div class="web-card">
-        <!-- cabecera al estilo red social -->
-        <div class="cover-photo"></div>
+<body class="bg-white text-gray-800 antialiased">
 
-        <!-- perfil y nombre -->
-        <div class="profile-row">
-            <div class="avatar-large">
-                I
-            </div>
-            <div class="profile-info">
-                <h1>Inno.cl</h1>
-                <div class="follow-badge">
-                    ⚙️ 9,970 seguidores · 6 seguidos
-                </div>
-            </div>
+  <!-- WhatsApp Flotante -->
+  <a href="https://wa.me/56912345678?text=Hola%20Casa%20de%20la%20Impresi%C3%B3n,%20quiero%20cotizar%20productos%20personalizados" target="_blank" class="whatsapp-float bg-green-500 text-white p-4 rounded-full shadow-lg flex items-center justify-center" aria-label="WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 2.01.57 3.97 1.67 5.67L2.08 22l4.64-1.52c1.66.9 3.53 1.4 5.32 1.4 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.2 14.46c-.25.71-1.23 1.3-2.01 1.37-.53.05-1.19.1-3.45-.73-2.88-1.05-4.73-3.6-4.88-3.77-.15-.17-1.16-1.54-1.16-2.94s.72-2.08 1.01-2.37c.24-.24.53-.3.7-.3h.47c.16 0 .41-.07.64.5.25.63.83 2.17.9 2.33.07.16.12.35.02.56-.1.21-.15.35-.29.54-.14.19-.29.42-.13.66.16.24.7 1.16 1.51 1.88 1.04.92 1.9 1.21 2.2 1.34.29.13.46.11.63-.07.17-.18.73-.85.93-1.14.2-.29.4-.24.66-.15.26.09 1.64.78 1.93.92.29.14.48.21.55.33.07.12.07.69-.18 1.4z"/></svg>
+  </a>
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-40 border-b border-gray-200/50 shadow-sm">
+    <div class="container mx-auto px-5 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold text-gray-800 tracking-tight">casa<span class="text-orange-600">impresión</span></a>
+      <div class="hidden md:flex space-x-8 text-sm font-medium">
+        <a href="#hero" class="nav-link text-gray-700 hover:text-orange-600 transition">Inicio</a>
+        <a href="#servicios" class="nav-link text-gray-700 hover:text-orange-600">Servicios</a>
+        <a href="#productos" class="nav-link text-gray-700 hover:text-orange-600">Productos</a>
+        <a href="#nosotros" class="nav-link text-gray-700 hover:text-orange-600">Nosotros</a>
+        <a href="#contacto" class="nav-link text-gray-700 hover:text-orange-600">Contacto</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-1 text-sm bg-orange-50 text-orange-700 px-4 py-2 rounded-full font-medium">
+          <span class="font-bold">+5,000</span> emprendedores
         </div>
-
-        <!-- botones de acción -->
-        <div class="action-buttons">
-            <button class="btn btn-primary">➕ Seguir</button>
-            <button class="btn">📞 Contactar</button>
-            <button class="btn">🔔 Notificaciones</button>
-        </div>
-
-        <!-- pestañas de navegación -->
-        <div class="menu-tabs">
-            <span class="menu-tab active">Publicaciones</span>
-            <span class="menu-tab">Información</span>
-            <span class="menu-tab">Reels</span>
-            <span class="menu-tab">Fotos</span>
-            <span class="menu-tab">Tienda</span>
-        </div>
-
-        <!-- cuadrícula principal: info + post -->
-        <div class="main-grid">
-            <!-- columna lateral izquierda (información extraída) -->
-            <aside class="info-card">
-                <div class="info-section">
-                    <h3>📍 Información</h3>
-                    <div class="info-row">
-                        <span class="info-icon">🏬</span>
-                        <span><strong>Categoría:</strong> Tienda de máquinas, herramientas, insumos y repuestos para celulares y tablets.</span>
-                    </div>
-                    <div class="category-tags">
-                        <span class="category-tag">🔧 Herramientas</span>
-                        <span class="category-tag">📱 Repuestos</span>
-                        <span class="category-tag">⚙️ Insumos</span>
-                        <span class="category-tag">📟 Tablets</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-icon">📍</span>
-                        <span><strong>Dirección:</strong> calle san antonio 744, Santiago, Chile</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-icon">⏰</span>
-                        <span><strong>Horario:</strong> <span class="closed-status">🔴 Actualmente cerrado</span></span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-icon">🌐</span>
-                        <span><strong>Sitio web:</strong> <a href="#" style="text-decoration: none; color: #1d4e89;">innochile.cl</a> (enlace de referencia)</span>
-                    </div>
-                </div>
-
-                <div class="info-section">
-                    <h3>❤️ Comunidad</h3>
-                    <div class="fans-count">9.970 <span class="fans-label">personas siguen esto</span></div>
-                    <div style="margin-top: 12px; background: #dbe4f0; border-radius: 30px; padding: 0.3rem 1rem; width: fit-content;">✔️ 6 perfiles seguidos</div>
-                </div>
-
-                <div class="info-section">
-                    <h3>📸 Fotos recientes</h3>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">🛠️</div>
-                        <div class="gallery-item">📲</div>
-                        <div class="gallery-item">🔩</div>
-                    </div>
-                    <p style="color: #2b4b73; margin-top: 10px; font-weight: 500;">Ver todas las fotos →</p>
-                </div>
-            </aside>
-
-            <!-- columna principal: publicación destacada del muro -->
-            <main class="post-card">
-                <div class="post-header">
-                    <div class="small-avatar">I</div>
-                    <div class="post-author">
-                        <h4>Inno.cl</h4>
-                        <span class="post-time">hace 13 horas · 🌎 Santiago, Chile</span>
-                    </div>
-                </div>
-
-                <div class="post-content">
-                    <p>
-                        <strong>Si reparas celulares, sabes que la precisión lo es todo…</strong><br>
-                        En Inno.cl tenemos las herramientas y repuestos que necesitas para llevar tus reparaciones al siguiente nivel. 🔧📱
-                    </p>
-                    <!-- el video no pudo cargarse según facebook, representación visual -->
-                    <div class="video-placeholder">
-                        <span class="play-icon">▶️</span>
-                        <span>Video no disponible momentáneamente</span>
-                    </div>
-                    <span class="error-msg">⚠️ Lo sentimos, ocurrió un error al reproducir este video.</span>
-
-                    <!-- interacciones simuladas (basadas en "1 like") -->
-                    <div class="post-stats">
-                        <span>❤️ 1 Me gusta</span>
-                        <span>💬 0 comentarios</span>
-                        <span>🔁 0 veces compartido</span>
-                    </div>
-                </div>
-
-                <!-- más contenido de la página: otra sección sutil con reseña de la tienda -->
-                <div style="margin-top: 2rem; background: #eef3fb; padding: 1.2rem; border-radius: 20px;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <span style="background: #1d4e89; color: white; border-radius: 50px; padding: 0.2rem 0.9rem;">🏆</span>
-                        <span style="font-weight: 700;">Tienda de máquinas y herramientas de precisión</span>
-                    </div>
-                    <p style="color: #2b3f59;">Especialistas en repuestos para celulares y tablets. Visítanos en calle san antonio 744, Santiago. ¡Atención profesional!</p>
-                </div>
-            </main>
-        </div>
-
-        <!-- pie con enlace de atribución / información de contacto adicional -->
-        <div class="footer-note">
-            ⚡ Inno.cl ·  Herramientas ·  Reparación de precisión ·  <a href="#" style="color: #1e3a5f;">innochile.cl</a> ·  Adaptado desde información pública de Facebook.
-        </div>
+        <button class="md:hidden p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
     </div>
+    <!-- mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 py-2 px-5 flex flex-col space-y-3 text-base">
+      <a href="#hero" class="py-1" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Inicio</a>
+      <a href="#servicios" class="py-1" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Servicios</a>
+      <a href="#productos" class="py-1" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Productos</a>
+      <a href="#nosotros" class="py-1" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Nosotros</a>
+      <a href="#contacto" class="py-1" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contacto</a>
+    </div>
+  </nav>
+  <div class="h-16"></div>
+
+  <!-- HERO -->
+  <section id="hero" class="relative bg-gradient-to-br from-orange-50 to-amber-50 pt-16 pb-20 md:pt-24 overflow-hidden">
+    <div class="container mx-auto px-5 relative z-10">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="gsap-fade">
+          <!-- badges flotantes -->
+          <div class="flex flex-wrap gap-3 mb-6">
+            <span class="bg-white/70 backdrop-blur-sm text-orange-700 text-sm font-semibold px-4 py-2 rounded-full shadow-sm flex items-center gap-1">🚚 Envíos gratis +$45.000</span>
+            <span class="bg-white/70 backdrop-blur-sm text-orange-700 text-sm font-semibold px-4 py-2 rounded-full shadow-sm flex items-center gap-1">⭐ Garantía de calidad</span>
+            <span class="bg-white/70 backdrop-blur-sm text-orange-700 text-sm font-semibold px-4 py-2 rounded-full shadow-sm flex items-center gap-1">❤️ +5.000 clientes</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight mb-6">
+            El <span class="text-orange-600">packaging</span> que hace crecer tu negocio
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-lg">Cierres adhesivos 4x10 cm, etiquetas y stickers 100% personalizados. Fabricación en 3 días hábiles con muestra digital previa.</p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#productos" class="bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition shadow-lg hover:shadow-xl flex items-center gap-2">Comprar ahora <span>→</span></a>
+            <a href="#como-funciona" class="bg-white border border-gray-300 text-gray-800 px-8 py-4 rounded-full font-semibold hover:border-orange-400 hover:text-orange-600 transition shadow-sm">Cómo funciona</a>
+          </div>
+        </div>
+        <div class="relative gsap-fade">
+          <div class="relative z-10 bg-white/40 backdrop-blur-sm rounded-3xl p-4 shadow-2xl border border-white/50">
+            <img src="https://images.unsplash.com/photo-1589578527966-fdac0f44566c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cierre bolsas adhesivas personalizadas" class="rounded-2xl w-full">
+            <div class="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl p-4 flex gap-3 items-center">
+              <div class="bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full">OFF</div>
+              <div><span class="text-2xl font-bold text-gray-900">$10.000</span> <span class="text-gray-400 line-through text-sm">$10.000</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFIANZA (storytelling rápido) -->
+  <section class="py-12 bg-white border-y border-gray-100">
+    <div class="container mx-auto px-5">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+        <div class="gsap-fade"><span class="text-orange-600 text-3xl font-bold">+5k</span><p class="text-sm text-gray-500">emprendedores</p></div>
+        <div class="gsap-fade"><span class="text-orange-600 text-3xl font-bold">🚚</span><p class="text-sm text-gray-500">Envío gratis +$45k</p></div>
+        <div class="gsap-fade"><span class="text-orange-600 text-3xl font-bold">⭐</span><p class="text-sm text-gray-500">Garantía total</p></div>
+        <div class="gsap-fade"><span class="text-orange-600 text-3xl font-bold">3d</span><p class="text-sm text-gray-500">fabricación</p></div>
+        <div class="gsap-fade"><span class="text-orange-600 text-3xl font-bold">🎨</span><p class="text-sm text-gray-500">Muestra digital</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-5">
+      <div class="text-center max-w-2xl mx-auto mb-16 gsap-fade">
+        <span class="text-orange-600 font-semibold">LO QUE HACEMOS</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-3">Soluciones impresas para tu marca</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-md transition gsap-fade">
+          <div class="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-6 text-3xl">🛍️</div>
+          <h3 class="text-xl font-bold mb-3">Cierres adhesivos</h3>
+          <p class="text-gray-500">Bolsas autoadhesivas 4x10 cm totalmente personalizadas con tu diseño. Ideales para emprendimientos de alimentos, cosmética y más.</p>
+        </div>
+        <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-md transition gsap-fade">
+          <div class="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-6 text-3xl">🏷️</div>
+          <h3 class="text-xl font-bold mb-3">Etiquetas y stickers</h3>
+          <p class="text-gray-500">Desde etiquetas para productos hasta stickers decorativos. Diferentes formatos, acabados y materiales.</p>
+        </div>
+        <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-md transition gsap-fade">
+          <div class="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-6 text-3xl">📦</div>
+          <h3 class="text-xl font-bold mb-3">Pendones y más</h3>
+          <p class="text-gray-500">Comunica tu marca con pendones de alta calidad. Ideal para ferias, locales y eventos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS (Portafolio) -->
+  <section id="productos" class="py-20 bg-white">
+    <div class="container mx-auto px-5">
+      <div class="flex flex-wrap justify-between items-end mb-12">
+        <div class="gsap-fade">
+          <span class="text-orange-600 font-semibold">PRODUCTO DESTACADO</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-2">Cierre bolsas 4x10 cm</h2>
+        </div>
+        <a href="#" class="text-orange-600 font-medium hover:underline gsap-fade">Ver todo →</a>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="product-card bg-white border border-gray-100 rounded-3xl p-6 shadow-md gsap-fade">
+          <div class="grid md:grid-cols-2 gap-6">
+            <img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bolsas adhesivas personalizadas" class="rounded-2xl w-full">
+            <div>
+              <span class="bg-orange-600 text-white text-xs font-bold px-3 py-1.5 rounded-full inline-block mb-3">OFF</span>
+              <h3 class="font-bold text-2xl mb-2">Cierre bolsas 4x10 cm</h3>
+              <p class="text-gray-500 text-sm mb-3">Personalizado con tu diseño. Fabricación en 3 días hábiles.</p>
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-3xl font-bold text-gray-900">$10.000</span>
+                <span class="text-gray-400 line-through text-lg">$10.000</span>
+              </div>
+              <div class="space-y-2 text-sm">
+                <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-600 rounded-full"></span>Muestra digital antes de fabricar</p>
+                <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-600 rounded-full"></span>Acabado brillante o mate</p>
+                <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-600 rounded-full"></span>Envío a todo Chile</p>
+              </div>
+              <button class="w-full bg-orange-600 text-white py-3 rounded-xl font-semibold hover:bg-orange-700 transition mt-5">Añadir al carrito</button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 rounded-3xl p-6 gsap-fade">
+          <h4 class="font-bold text-lg mb-4">¿NO TIENES DISEÑO?</h4>
+          <p class="text-gray-600 mb-4">Puedes realizar uno con nuestras plantillas de CANVAS y luego descargarlo como PDF para impresión.</p>
+          <a href="#" class="inline-block bg-white border border-gray-300 text-gray-800 px-5 py-3 rounded-xl font-medium hover:border-orange-400 hover:text-orange-600 transition">📁 Descargar plantillas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA MULTIMEDIA -->
+  <section id="galeria" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-5">
+      <div class="text-center max-w-2xl mx-auto mb-12 gsap-fade">
+        <span class="text-orange-600 font-semibold">INSPIRACIÓN</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2">Productos que enamoran</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 gsap-fade">
+        <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-auto object-cover aspect-square">
+        <img src="https://images.unsplash.com/photo-1622556498246-755f44ca76f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-auto object-cover aspect-square">
+        <img src="https://images.unsplash.com/photo-1589578527966-fdac0f44566c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-auto object-cover aspect-square">
+        <img src="https://images.unsplash.com/photo-1603272751102-5bfc75b6f4ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-auto object-cover aspect-square">
+        <img src="https://images.unsplash.com/photo-1622217948424-82c737d2c22c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-auto object-cover aspect-square">
+        <img src="https://images.unsplash.com/photo-1606483966886-4f0c63d14e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-auto object-cover aspect-square">
+        <img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-auto object-cover aspect-square">
+        <img src="https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-auto object-cover aspect-square">
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS (sección) -->
+  <section id="videos" class="py-20 bg-white">
+    <div class="container mx-auto px-5">
+      <div class="text-center max-w-2xl mx-auto mb-12 gsap-fade">
+        <span class="text-orange-600 font-semibold">APRENDE CON NOSOTROS</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2">Cómo personalizar tus productos</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8 gsap-fade">
+        <div class="aspect-video rounded-2xl overflow-hidden shadow-xl">
+          <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Tutorial personalización" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="aspect-video rounded-2xl overflow-hidden shadow-xl">
+          <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Detalles de impresión" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE NOSOTROS + CLIENTES -->
+  <section id="nosotros" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-5">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="gsap-fade">
+          <span class="text-orange-600 font-semibold">NUESTRA HISTORIA</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-6">Nacimos para impulsar emprendedores</h2>
+          <p class="text-gray-600 text-lg mb-6">Hace 5 años comenzamos con un sueño: ayudar a pequeños negocios a tener un packaging profesional sin mínimos enormes ni precios prohibitivos. Hoy somos la imprenta de confianza para más de 5.000 emprendedores en Chile.</p>
+          <p class="text-gray-600 mb-8">Creemos en el poder del detalle: una etiqueta bien hecha puede convertir un producto común en una experiencia de marca.</p>
+          <div class="flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1556157382-97eda2f9e2bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-16 h-16 rounded-full border-2 border-white shadow-md">
+            <div><strong class="block">Equipo Casa Impresión</strong><span class="text-sm text-gray-500">+5.000 clientes felices</span></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-6 gsap-fade">
+          <div class="bg-white p-6 rounded-2xl shadow-sm"><span class="text-4xl font-bold text-orange-600">5k+</span><p class="text-gray-500">clientes</p></div>
+          <div class="bg-white p-6 rounded-2xl shadow-sm"><span class="text-4xl font-bold text-orange-600">3d</span><p class="text-gray-500">fabricación</p></div>
+          <div class="bg-white p-6 rounded-2xl shadow-sm"><span class="text-4xl font-bold text-orange-600">100%</span><p class="text-gray-500">garantía</p></div>
+          <div class="bg-white p-6 rounded-2xl shadow-sm"><span class="text-4xl font-bold text-orange-600">4.8★</span><p class="text-gray-500">opiniones</p></div>
+        </div>
+      </div>
+
+      <!-- Clientes (logos) -->
+      <div class="mt-20">
+        <h3 class="text-center text-gray-400 text-sm font-semibold tracking-wider mb-8">CONFÍAN EN NOSOTROS</h3>
+        <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale">
+          <span class="text-2xl font-bold text-gray-400">emprende</span>
+          <span class="text-2xl font-bold text-gray-400">fosis</span>
+          <span class="text-2xl font-bold text-gray-400">prodem</span>
+          <span class="text-2xl font-bold text-gray-400">sercotec</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-5">
+      <div class="text-center max-w-2xl mx-auto mb-16 gsap-fade">
+        <span class="text-orange-600 font-semibold">TESTIMONIOS</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2">Lo que dicen nuestros clientes</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-gray-50 p-6 rounded-2xl shadow-sm gsap-fade">
+          <div class="flex text-orange-500 mb-3">★★★★★</div>
+          <p class="text-gray-700 mb-4">"Los cierres adhesivos quedaron perfectos, con mi logo y colores exactos. Además llegaron súper rápido. 10/10"</p>
+          <span class="font-semibold">— María José</span>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-2xl shadow-sm gsap-fade">
+          <div class="flex text-orange-500 mb-3">★★★★★</div>
+          <p class="text-gray-700 mb-4">"No sabía cómo diseñar y me ayudaron con plantillas de Canva. Mi packaging ahora parece de marca grande."</p>
+          <span class="font-semibold">— Carlos L.</span>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-2xl shadow-sm gsap-fade">
+          <div class="flex text-orange-500 mb-3">★★★★★</div>
+          <p class="text-gray-700 mb-4">"La muestra digital me salvó, corrigí un detalle antes de imprimir. Profesionales y cercanos."</p>
+          <span class="font-semibold">— Valentina R.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-5">
+      <div class="text-center max-w-2xl mx-auto mb-16 gsap-fade">
+        <span class="text-orange-600 font-semibold">BLOG</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2">Consejos para emprendedores</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <article class="gsap-fade">
+          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-48 object-cover mb-4">
+          <span class="text-xs text-orange-600 font-semibold">PACKAGING</span>
+          <h3 class="font-bold text-xl my-2">5 ideas para usar cierres adhesivos en tu negocio</h3>
+          <p class="text-gray-500 mb-3">Desde bolsitas de té hasta cosmética, descubre cómo darle un plus a tus productos.</p>
+          <a href="#" class="text-orange-600 font-medium inline-flex items-center gap-1">Leer más →</a>
+        </article>
+        <article class="gsap-fade">
+          <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-48 object-cover mb-4">
+          <span class="text-xs text-orange-600 font-semibold">DISEÑO</span>
+          <h3 class="font-bold text-xl my-2">Cómo crear tu propia etiqueta en Canva (paso a paso)</h3>
+          <p class="text-gray-500 mb-3">Usa nuestras plantillas gratuitas y crea un diseño profesional en minutos.</p>
+          <a href="#" class="text-orange-600 font-medium inline-flex items-center gap-1">Leer más →</a>
+        </article>
+        <article class="gsap-fade">
+          <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl w-full h-48 object-cover mb-4">
+          <span class="text-xs text-orange-600 font-semibold">EMPRENDIMIENTO</span>
+          <h3 class="font-bold text-xl my-2">Tips para elegir el mejor packaging para tu producto</h3>
+          <p class="text-gray-500 mb-3">Material, tamaño y diseño: todo lo que debes considerar.</p>
+          <a href="#" class="text-orange-600 font-medium inline-flex items-center gap-1">Leer más →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREGUNTAS FRECUENTES (extra) -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-5 max-w-4xl">
+      <div class="text-center mb-12 gsap-fade">
+        <h2 class="text-3xl md:text-4xl font-bold">Preguntas Frecuentes</h2>
+      </div>
+      <div class="space-y-4">
+        <details class="bg-gray-50 p-6 rounded-2xl gsap-fade">
+          <summary class="font-semibold text-lg cursor-pointer">¿Qué tipo de productos fabrican?</summary>
+          <p class="mt-3 text-gray-600">Fabricamos etiquetas, adhesivos, cierres para bolsas y pendones personalizados. Nos especializamos en soluciones para emprendedores y pequeñas empresas.</p>
+        </details>
+        <details class="bg-gray-50 p-6 rounded-2xl gsap-fade">
+          <summary class="font-semibold text-lg cursor-pointer">¿Cuáles son los tiempos de entrega?</summary>
+          <p class="mt-3 text-gray-600">La producción toma entre 3 y 5 días hábiles, más el tiempo de envío según tu ubicación.</p>
+        </details>
+        <details class="bg-gray-50 p-6 rounded-2xl gsap-fade">
+          <summary class="font-semibold text-lg cursor-pointer">¿Puedo ver una muestra antes de imprimir?</summary>
+          <p class="mt-3 text-gray-600">¡Sí! Enviamos una muestra digital para que apruebes el diseño antes de la fabricación.</p>
+        </details>
+        <details class="bg-gray-50 p-6 rounded-2xl gsap-fade">
+          <summary class="font-semibold text-lg cursor-pointer">¿Qué hago si mi pedido llega dañado?</summary>
+          <p class="mt-3 text-gray-600">Contáctanos de inmediato y te repondremos el pedido sin costo adicional. Tenemos garantía total.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO + MAPA -->
+  <section id="contacto" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-5">
+      <div class="grid lg:grid-cols-2 gap-16">
+        <div class="gsap-fade">
+          <span class="text-orange-600 font-semibold">CONTACTO</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-6">¿Listo para impulsar tu marca?</h2>
+          <p class="text-gray-600 text-lg mb-8">Escríbenos, te asesoramos en todo el proceso.</p>
+          <div class="space-y-4 mb-8">
+            <div class="flex items-center gap-4"><span class="bg-white p-3 rounded-full shadow-sm">📍</span> <span>Av. Libertador Bernardo O'Higgins 1234, Santiago, Chile</span></div>
+            <div class="flex items-center gap-4"><span class="bg-white p-3 rounded-full shadow-sm">📞</span> <span>+56 9 1234 5678</span></div>
+            <div class="flex items-center gap-4"><span class="bg-white p-3 rounded-full shadow-sm">✉️</span> <span>hola@casadelaimpresion.cl</span></div>
+          </div>
+          <div class="h-64 w-full rounded-2xl overflow-hidden shadow-lg">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.624048645341!2d-70.64888568438228!3d-33.43755600368027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c5a0c5b2c5b7%3A0xc5b2c5b2c5b2c5b2!2sSantiago%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses!2scl!4v1630000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="bg-white p-8 rounded-3xl shadow-lg gsap-fade">
+          <h3 class="text-2xl font-bold mb-6">Envíanos un mensaje</h3>
+          <form class="space-y-5">
+            <input type="text" placeholder="Nombre completo" class="w-full border border-gray-200 rounded-xl p-4 focus:ring-2 focus:ring-orange-200 outline-none">
+            <input type="email" placeholder="Correo electrónico" class="w-full border border-gray-200 rounded-xl p-4 focus:ring-2 focus:ring-orange-200 outline-none">
+            <input type="text" placeholder="Teléfono (opcional)" class="w-full border border-gray-200 rounded-xl p-4 focus:ring-2 focus:ring-orange-200 outline-none">
+            <textarea rows="4" placeholder="Cuéntanos qué necesitas" class="w-full border border-gray-200 rounded-xl p-4 focus:ring-2 focus:ring-orange-200 outline-none"></textarea>
+            <button class="w-full bg-orange-600 text-white py-4 rounded-xl font-semibold hover:bg-orange-700 transition shadow-lg">Enviar mensaje</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="container mx-auto px-5">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <span class="text-2xl font-bold text-white">casa<span class="text-orange-500">impresión</span></span>
+          <p class="mt-4 text-sm">Packaging personalizado que hace crecer tu negocio. +5.000 emprendedores ya confían.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Productos</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-white transition">Cierres adhesivos</a></li>
+            <li><a href="#" class="hover:text-white transition">Etiquetas</a></li>
+            <li><a href="#" class="hover:text-white transition">Stickers</a></li>
+            <li><a href="#" class="hover:text-white transition">Pendones</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Ayuda</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-white transition">Preguntas frecuentes</a></li>
+            <li><a href="#" class="hover:text-white transition">Tiempos de envío</a></li>
+            <li><a href="#" class="hover:text-white transition">Garantía</a></li>
+            <li><a href="#" class="hover:text-white transition">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Síguenos</h4>
+          <div class="flex gap-4">
+            <a href="#" class="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition">📘</a>
+            <a href="#" class="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition">📸</a>
+            <a href="#" class="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition">🎵</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-sm text-center md:text-left">
+        <p>© 2025 Casa de la Impresión. Todos los derechos reservados. Hecho para emprendedores chilenos.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP y animaciones -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    (function() {
+      gsap.registerPlugin(ScrollTrigger);
+      const fadeElements = document.querySelectorAll('.gsap-fade');
+      fadeElements.forEach(el => {
+        gsap.fromTo(el, 
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none none",
+              once: true
+            }
+          }
+        );
+      });
+    })();
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Casa de la Impresión",
+    "image": "https://images.unsplash.com/photo-1589578527966-fdac0f44566c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Libertador Bernardo O'Higgins 1234",
+      "addressLocality": "Santiago",
+      "addressCountry": "CL"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -33.4376,
+      "longitude": -70.6489
+    },
+    "url": "https://casadelaimpresion.cl",
+    "telephone": "+56912345678",
+    "priceRange": "$",
+    "description": "Venta de etiquetas, adhesivos y cierres personalizados para emprendedores."
+  }
+  </script>
 </body>
 </html>
