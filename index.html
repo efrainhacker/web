@@ -1,256 +1,731 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kshai Design</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Kshai Design | Grabado y Corte Láser</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fef7ef;
+      color: #2c1b12;
+      scroll-behavior: smooth;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:#f4efe8;
-  color:#3b2416;
-}
+    /* Top bar */
+    .top-bar {
+      background: #2c1b12;
+      color: #f7e9da;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
 
-/* TOP */
-.topbar{
-  background:#2a1a10;
-  color:#fff;
-  display:flex;
-  justify-content:space-around;
-  padding:10px;
-  font-size:14px;
-}
+    .top-bar span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-/* NAV */
-nav{
-  display:flex;
-  justify-content:space-between;
-  padding:20px;
-  background:#fff;
-}
+    /* Nav */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      background: white;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+      flex-wrap: wrap;
+    }
 
-/* HERO */
-.hero{
-  padding:40px;
-  text-align:center;
-}
+    .logo h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #3e2a1f, #b47c48);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .logo p {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #b47c48;
+      letter-spacing: 1px;
+    }
+    .nav-contact {
+      background: #f0e3d4;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #2c1b12;
+    }
 
-.price{
-  background:#3b2416;
-  color:#fff;
-  display:inline-block;
-  padding:15px 30px;
-  border-radius:30px;
-  margin-top:20px;
-}
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 50px 20px 40px;
+      background: linear-gradient(145deg, #fff4ea 0%, #faead9 100%);
+    }
+    .hero h2 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #2c1b12;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #5c3e28;
+    }
+    .hero .badge-quality {
+      margin: 20px auto 0;
+      background: #e5d5c0;
+      display: inline-block;
+      padding: 8px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .price-badge {
+      background: #2c1b12;
+      color: #ffefcf;
+      display: inline-block;
+      padding: 14px 35px;
+      border-radius: 60px;
+      margin-top: 28px;
+      font-weight: 800;
+      font-size: 1.7rem;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    }
+    .price-badge span {
+      font-size: 1rem;
+      font-weight: 500;
+    }
 
-/* CARRUSEL */
-.carousel{
-  position:relative;
-  overflow:hidden;
-  padding:20px;
-}
+    /* Section container */
+    .section {
+      padding: 50px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 70px;
+      height: 4px;
+      background: #b47c48;
+      margin: 12px auto 0;
+      border-radius: 4px;
+    }
 
-.track{
-  display:flex;
-  transition:.4s;
-}
+    /* Que podemos hacer grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+    .service-card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px 12px;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+      transition: all 0.25s ease;
+      border: 1px solid #f0e2d4;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+      border-color: #dbbc9b;
+    }
+    .service-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #d6a15a;
+      margin-bottom: 8px;
+    }
+    .service-card h4 {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
 
-.track img{
-  width:220px;
-  margin:10px;
-  border-radius:10px;
-}
+    /* alta precision banner */
+    .precision-banner {
+      background: #e9ddcf;
+      border-radius: 38px;
+      padding: 38px 28px;
+      margin: 20px 0 20px;
+      text-align: center;
+    }
+    .precision-banner h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .precision-banner p {
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-.btn-nav{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:#3b2416;
-  color:#fff;
-  border:none;
-  padding:10px;
-  cursor:pointer;
-}
+    /* CARROUSEL */
+    .carousel-section {
+      background: #fffaf4;
+      border-radius: 40px;
+      padding: 20px 10px;
+      margin: 20px 0;
+    }
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      gap: 16px;
+      padding: 8px 0;
+    }
+    .carousel-slide {
+      min-width: 220px;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      text-align: center;
+      padding: 12px;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 14px;
+      background: #e9dccc;
+    }
+    .carousel-slide p {
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #2c1b12;
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 60px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      z-index: 3;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+    .carousel-btn.left { left: 8px; }
+    .carousel-btn.right { right: 8px; }
+    .carousel-btn:hover { background: #b47c48; }
 
-.left{left:10px;}
-.right{right:10px;}
+    /* upload + link */
+    .upload-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .upload-card {
+      flex: 1;
+      background: white;
+      border-radius: 28px;
+      padding: 28px 24px;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.04);
+      border: 1px solid #eedfcb;
+    }
+    .upload-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .input-field {
+      width: 100%;
+      padding: 14px 16px;
+      margin: 12px 0;
+      border-radius: 50px;
+      border: 1px solid #d9c7b2;
+      font-family: inherit;
+      background: #fffcf9;
+    }
+    .btn-primary {
+      background: #2c1b12;
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 8px;
+    }
+    .btn-primary:hover {
+      background: #b47c48;
+      transform: scale(0.97);
+    }
+    .preview-area {
+      margin-top: 20px;
+      text-align: center;
+      background: #f8f0e7;
+      border-radius: 20px;
+      padding: 20px;
+      min-height: 160px;
+    }
+    .preview-area img {
+      max-width: 100%;
+      max-height: 160px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
-/* UPLOAD */
-.upload{
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-  padding:40px;
-}
+    /* PRODUCTOS DESTACADOS - con imagen cuadro */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+      margin-top: 20px;
+    }
+    .product-item {
+      background: white;
+      border-radius: 28px;
+      padding: 20px 16px 24px;
+      text-align: center;
+      transition: all 0.25s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      border: 1px solid #eedbcb;
+    }
+    .product-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 30px rgba(0,0,0,0.08);
+    }
+    /* CUADRO PARA LA FOTO (imagen de producto) */
+    .product-img-frame {
+      width: 100%;
+      height: 180px;
+      background: #f4e9de;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+    .product-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.2s;
+    }
+    .product-item h4 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 10px 0 6px;
+    }
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #b47c48;
+      margin: 10px 0;
+    }
+    .product-price small {
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+    .whatsapp-small {
+      background: #25D366;
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+      border: none;
+      margin-top: 6px;
+    }
+    .whatsapp-small:hover {
+      background: #128C7E;
+    }
 
-.box{
-  flex:1;
-  background:#fff;
-  padding:20px;
-  border-radius:10px;
-  text-align:center;
-}
+    /* diseñador */
+    .designer-note {
+      text-align: center;
+      margin-top: 40px;
+      font-style: italic;
+      font-weight: 500;
+      background: #e9ddd0;
+      padding: 14px;
+      border-radius: 60px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-input{
-  width:100%;
-  padding:10px;
-  margin:10px 0;
-}
+    footer {
+      background: #2c1b12;
+      color: #f6e5d4;
+      text-align: center;
+      padding: 32px 20px;
+      margin-top: 20px;
+    }
+    .footer-wa {
+      background: #25D366;
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-weight: bold;
+      margin-top: 15px;
+      cursor: pointer;
+    }
 
-button{
-  background:#3b2416;
-  color:#fff;
-  border:none;
-  padding:10px 20px;
-  border-radius:5px;
-  cursor:pointer;
-}
-
-.preview img{
-  max-width:200px;
-}
-
-/* PRODUCTOS */
-.products{
-  padding:40px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:20px;
-}
-
-.card{
-  background:#fff;
-  padding:10px;
-  border-radius:10px;
-  text-align:center;
-}
-
-/* FOOTER */
-footer{
-  background:#2a1a10;
-  color:#fff;
-  text-align:center;
-  padding:20px;
-}
-</style>
+    @media (max-width: 760px) {
+      .hero h2 { font-size: 1.5rem; }
+      .price-badge { font-size: 1.3rem; padding: 10px 24px; }
+      .section-title { font-size: 1.6rem; }
+      .carousel-slide { min-width: 170px; }
+      .product-img-frame { height: 150px; }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="topbar">
-  <span>Atención personalizada</span>
-  <span>Envíos a todo Chile</span>
-  <span>+56949510888</span>
+<div class="top-bar">
+  <span>✨ Atención personalizada</span>
+  <span>📦 Envíos a todo Chile</span>
+  <span>📞 +56949510888</span>
 </div>
 
-<nav>
-  <h2>Kshai Design</h2>
-  <span>Grabado Láser</span>
+<nav class="navbar">
+  <div class="logo">
+    <h1>KSHAI DESIGN</h1>
+    <p>✧ grabado & corte de precisión ✧</p>
+  </div>
+  <div class="nav-contact">
+    🔥 Calidad + Precisión
+  </div>
 </nav>
 
 <section class="hero">
-  <h1>Personalizamos tus ideas con Grabado y Corte Láser</h1>
-  <p>Madera, MDF y más</p>
-  <div class="price">Desde $500</div>
+  <h2>⚡ Personalizamos tus ideas con <span style="color:#b47c48;">GRABADO Y CORTE LÁSER</span></h2>
+  <p>Madera · MDF · Acrílico · y más</p>
+  <div class="badge-quality">🎯 Calidad, precisión y detalles que marcan la diferencia</div>
+  <div class="price-badge">DESDE $500 <span>💰 precios accesibles</span></div>
 </section>
 
-<!-- CARRUSEL -->
-<section class="carousel">
-  <button class="btn-nav left" onclick="move(-1)">◀</button>
-  <div class="track" id="track">
-    <img src="https://via.placeholder.com/200">
-    <img src="https://via.placeholder.com/200">
-    <img src="https://via.placeholder.com/200">
-    <img src="https://via.placeholder.com/200">
+<!-- ¿QUÉ PODEMOS HACER? -->
+<div class="section">
+  <div class="section-title">🛠️ ¿QUÉ PODEMOS HACER?</div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-num">1</div><h4>NOMBRES PERSONALIZADOS</h4></div>
+    <div class="service-card"><div class="service-num">2</div><h4>LETREROS Y LOGOS</h4></div>
+    <div class="service-card"><div class="service-num">3</div><h4>TALLERES GRABADOS</h4></div>
+    <div class="service-card"><div class="service-num">4</div><h4>CUADROS Y DECORACIÓN</h4></div>
+    <div class="service-card"><div class="service-num">5</div><h4>RECUERDOS Y REGALOS</h4></div>
+    <div class="service-card"><div class="service-num">6</div><h4>CORTE DE PIEZAS A MEDIDA</h4></div>
+    <div class="service-card"><div class="service-num">7</div><h4>✨ ¡Mucho más!</h4></div>
   </div>
-  <button class="btn-nav right" onclick="move(1)">▶</button>
-</section>
+</div>
 
-<!-- SUBIR -->
-<section class="upload">
+<!-- ALTA PRECISIÓN -->
+<div class="section">
+  <div class="precision-banner">
+    <h3>⚙️ ALTA PRECISIÓN EN CORTE Y GRABADO LÁSER</h3>
+    <p>Acabados limpios y profesionales · Diseños 100% personalizados · Ideal para regalos, emprendimientos, decoración y más.</p>
+  </div>
+</div>
 
-  <div class="box">
-    <h3>Sube tu imagen</h3>
-    <input type="file" id="file">
+<!-- CARRUSEL DE MUESTRAS -->
+<div class="section carousel-section">
+  <div class="section-title" style="margin-bottom: 20px;">✨ Inspiración láser ✨</div>
+  <div class="carousel-container">
+    <button class="carousel-btn left" id="carouselLeft">❮</button>
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Llavero+Grabado" alt="llavero"><p>🔑 Llavero personalizado</p></div>
+      <div class="carousel-slide"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Letrero+Decorativo" alt="letrero"><p>🏠 Letrero decorativo</p></div>
+      <div class="carousel-slide"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Porta+Retrato+Musical" alt="portaretrato"><p>🎵 Porta retrato musical</p></div>
+      <div class="carousel-slide"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Posavasos+Grabados" alt="posavasos"><p>🍷 Posavasos grabados</p></div>
+      <div class="carousel-slide"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Caja+Personalizada" alt="caja"><p>📦 Caja personalizada</p></div>
+    </div>
+    <button class="carousel-btn right" id="carouselRight">❯</button>
+  </div>
+</div>
+
+<!-- SUBIR IMAGEN O LINK CON VISTA PREVIA + WHATSAPP -->
+<div class="section">
+  <div class="section-title">📸 SUBE TU IMAGEN O DISEÑO</div>
+  <div class="upload-row">
+    <div class="upload-card">
+      <h3>📁 Subir archivo</h3>
+      <input type="file" id="imageFileInput" accept="image/*" class="input-field">
+      <button class="btn-primary" id="previewFileBtn">👁️ Vista previa (archivo)</button>
+    </div>
+    <div class="upload-card">
+      <h3>🔗 Comparte el enlace de tu imagen</h3>
+      <input type="text" id="imageUrlInput" class="input-field" placeholder="https://ejemplo.com/mi-diseno.jpg">
+      <button class="btn-primary" id="previewUrlBtn">🌐 Vista previa (URL)</button>
+      <div class="preview-area" id="globalPreview">
+        <span style="color:#b98f67;">⬅️ Sube o pega un enlace para ver tu diseño aquí</span>
+      </div>
+      <button class="btn-primary" id="sendWhatsappBtn" style="background:#25D366; margin-top: 18px;">📲 Enviar por WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTOS DESTACADOS CON CUADRO PARA FOTO (URL DEMO REEMPLAZABLE) -->
+<div class="section">
+  <div class="section-title">🏆 PRODUCTOS DESTACADOS</div>
+  <div class="products-grid">
+    <!-- Producto 1: Llavero personalizado -->
+    <div class="product-item">
+      <div class="product-img-frame">
+        <!-- **** URL DEMO: CAMBIA ESTA URL POR LA IMAGEN REAL DE TU PRODUCTO **** -->
+        <img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Llavero+Demo" alt="Llavero personalizado" class="product-img">
+      </div>
+      <h4>🔑 Llavero personalizado</h4>
+      <div class="product-price">$500 <small>desde</small></div>
+      <button class="whatsapp-small" data-product="Llavero personalizado - desde $500">Consultar por WA</button>
+    </div>
+    <!-- Producto 2: Letrero decorativo -->
+    <div class="product-item">
+      <div class="product-img-frame">
+        <!-- **** URL DEMO: CAMBIA ESTA URL POR LA IMAGEN REAL DE TU PRODUCTO **** -->
+        <img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Letrero+Demo" alt="Letrero decorativo" class="product-img">
+      </div>
+      <h4>📜 Letrero decorativo</h4>
+      <div class="product-price">$1.000 <small>desde</small></div>
+      <button class="whatsapp-small" data-product="Letrero decorativo - desde $1.000">Consultar por WA</button>
+    </div>
+    <!-- Producto 3: Porta retrato musical -->
+    <div class="product-item">
+      <div class="product-img-frame">
+        <!-- **** URL DEMO: CAMBIA ESTA URL POR LA IMAGEN REAL DE TU PRODUCTO **** -->
+        <img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=PortaRetrato+Demo" alt="Porta retrato musical" class="product-img">
+      </div>
+      <h4>🎶 Porta retrato musical</h4>
+      <div class="product-price">$1.500 <small>desde</small></div>
+      <button class="whatsapp-small" data-product="Porta retrato musical - desde $1.500">Consultar por WA</button>
+    </div>
+    <!-- Producto 4: Posavasos grabados -->
+    <div class="product-item">
+      <div class="product-img-frame">
+        <!-- **** URL DEMO: CAMBIA ESTA URL POR LA IMAGEN REAL DE TU PRODUCTO **** -->
+        <img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Posavasos+Demo" alt="Posavasos grabados" class="product-img">
+      </div>
+      <h4>🍷 Posavasos grabados</h4>
+      <div class="product-price">$600 <small>desde</small></div>
+      <button class="whatsapp-small" data-product="Posavasos grabados - desde $600">Consultar por WA</button>
+    </div>
+    <!-- Producto 5: Caja personalizada -->
+    <div class="product-item">
+      <div class="product-img-frame">
+        <!-- **** URL DEMO: CAMBIA ESTA URL POR LA IMAGEN REAL DE TU PRODUCTO **** -->
+        <img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Caja+Demo" alt="Caja personalizada" class="product-img">
+      </div>
+      <h4>📦 Caja personalizada</h4>
+      <div class="product-price">$2.000 <small>desde</small></div>
+      <button class="whatsapp-small" data-product="Caja personalizada - desde $2.000">Consultar por WA</button>
+    </div>
   </div>
 
-  <div class="box">
-    <h3>Pega link de imagen</h3>
-    <input type="text" id="url" placeholder="https://...">
-    <button onclick="preview()">Vista previa</button>
-
-    <div class="preview" id="preview"></div>
-
-    <button onclick="send()">Enviar por WhatsApp</button>
+  <!-- Diseñado por Kshai Design (reemplazo total) -->
+  <div class="designer-note">
+    🎨 Diseñado por: <strong>Kshai Design</strong> · Creatividad y precisión en cada detalle
   </div>
+</div>
 
-</section>
-
-<!-- PRODUCTOS -->
-<section class="products">
-  <h2>Productos destacados</h2>
-  <div class="grid">
-    <div class="card">Llavero</div>
-    <div class="card">Cuadro</div>
-    <div class="card">Letrero</div>
+<!-- INFO ADICIONAL -->
+<div class="section" style="text-align: center; padding-top: 0;">
+  <div style="background:#fff3ea; border-radius: 36px; padding: 28px;">
+    <h3>💎 ¿Necesitas corte de piezas a medida?</h3>
+    <p>Consultá por números grandes, diseños exclusivos, souvenirs, y más. Entregamos calidad impecable.</p>
+    <button class="btn-primary" id="contactGeneral" style="background:#b47c48;">📞 Escríbenos Ahora</button>
   </div>
-</section>
+</div>
 
 <footer>
-  <p>© Kshai Design - WhatsApp +56949510888</p>
+  <p>© Kshai Design — Grabado y corte láser de alta precisión</p>
+  <p>✉️ +56949510888 · WhatsApp directo</p>
+  <div class="footer-wa" id="footerWhatsappBtn">💬 ¡Haz tu pedido hoy por WhatsApp!</div>
 </footer>
 
 <script>
-let pos=0;
+  // ========== CONFIGURACIÓN URL DEMO (para productos) ==========
+  // Las imágenes de productos ya tienen URLs demo de placehold.co.
+  // Para cambiarlas localiza los <img> dentro de .product-img-frame y reemplaza el atributo 'src'.
+  // También puedes modificar la constante global si prefieres usar JS, pero las imágenes ya son editables manualmente.
+  // Se ha dejado un comentario en cada imagen para facilitar el reemplazo.
+  
+  // ------- CARROUSEL (control manual) ------- 
+  const track = document.getElementById('carouselTrack');
+  const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+  const slideWidth = 220 + 16; // ancho + gap (min-width 220px + gap 16px)
+  let currentIndex = 0;
+  const visibleSlides = () => Math.floor(track.parentElement.clientWidth / slideWidth) || 1;
+  const maxIndex = () => Math.max(0, slides.length - visibleSlides());
 
-function move(dir){
-  pos+=dir*220;
-  document.getElementById("track").style.transform =
-    `translateX(-${pos}px)`;
-}
+  function updateCarousel() {
+    const maxIdx = maxIndex();
+    currentIndex = Math.min(maxIdx, Math.max(0, currentIndex));
+    const offset = currentIndex * slideWidth;
+    track.style.transform = `translateX(-${offset}px)`;
+  }
 
-// PREVIEW
-function preview(){
-  const file=document.getElementById("file").files[0];
-  const url=document.getElementById("url").value;
-  const preview=document.getElementById("preview");
+  document.getElementById('carouselLeft').addEventListener('click', () => {
+    currentIndex = Math.max(0, currentIndex - 1);
+    updateCarousel();
+  });
+  document.getElementById('carouselRight').addEventListener('click', () => {
+    const maxIdx = maxIndex();
+    currentIndex = Math.min(maxIdx, currentIndex + 1);
+    updateCarousel();
+  });
+  window.addEventListener('resize', () => updateCarousel());
+  setTimeout(() => updateCarousel(), 100);
 
-  preview.innerHTML="";
+  // -------- PREVIEW GLOBAL (archivo o URL) --------
+  const previewDiv = document.getElementById('globalPreview');
+  let currentImageData = null;      // puede ser url string o dataURL
+  let currentSource = null;         // 'file' o 'url'
 
-  if(file){
-    const reader=new FileReader();
-    reader.onload=e=>{
-      preview.innerHTML=`<img src="${e.target.result}">`;
+  // preview desde archivo
+  document.getElementById('previewFileBtn').addEventListener('click', () => {
+    const fileInput = document.getElementById('imageFileInput');
+    const file = fileInput.files[0];
+    if (!file) {
+      previewDiv.innerHTML = '<span style="color:#b98f67;">⚠️ Selecciona un archivo de imagen primero.</span>';
+      currentImageData = null;
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imgUrl = e.target.result;
+      previewDiv.innerHTML = `<img src="${imgUrl}" alt="preview diseño">`;
+      currentImageData = imgUrl;
+      currentSource = 'file';
     };
     reader.readAsDataURL(file);
-  }else if(url){
-    preview.innerHTML=`<img src="${url}">`;
+  });
+
+  // preview desde URL
+  document.getElementById('previewUrlBtn').addEventListener('click', () => {
+    const urlInput = document.getElementById('imageUrlInput');
+    let rawUrl = urlInput.value.trim();
+    if (!rawUrl) {
+      previewDiv.innerHTML = '<span style="color:#b98f67;">🔗 Ingresa una URL válida.</span>';
+      currentImageData = null;
+      return;
+    }
+    previewDiv.innerHTML = `<div style="padding:20px;">⏳ Cargando vista previa...</div>`;
+    const testImg = new Image();
+    testImg.onload = () => {
+      previewDiv.innerHTML = `<img src="${rawUrl}" alt="vista previa url">`;
+      currentImageData = rawUrl;
+      currentSource = 'url';
+    };
+    testImg.onerror = () => {
+      previewDiv.innerHTML = '<span style="color:#b98f67;">❌ No se pudo cargar la imagen. Revisa el enlace.</span>';
+      currentImageData = null;
+    };
+    testImg.src = rawUrl;
+  });
+
+  // -------- FUNCIÓN ENVIAR WHATSAPP (con diseño/imagen) --------
+  function sendWhatsAppMessage(customProduct = null) {
+    let message = "🪵 *Kshai Design* - Cotización personalizada 🎯%0A";
+    if (customProduct) {
+      message += `📌 Producto: ${customProduct}%0A`;
+    } else {
+      message += `📐 *Diseño personalizado*%0A`;
+    }
+    
+    if (currentImageData) {
+      if (currentSource === 'url') {
+        message += `🎨 *Enlace de diseño:* ${currentImageData}%0A`;
+      } else if (currentSource === 'file') {
+        message += `🖼️ *Imagen cargada:* (el diseño fue previsualizado, adjuntar captura si es necesario)%0A`;
+      }
+    } else {
+      const urlField = document.getElementById('imageUrlInput').value.trim();
+      const fileField = document.getElementById('imageFileInput').files[0];
+      if (urlField) {
+        message += `🔗 *Link entregado:* ${urlField}%0A`;
+      } else if (fileField) {
+        message += `📎 *Archivo listo:* (subido desde el formulario, consulta por favor)%0A`;
+      } else {
+        message += `✨ *Diseño a definir* - se puede enviar imagen durante la conversación.%0A`;
+      }
+    }
+    message += `%0A💬 *Quiero más información sobre precios, tiempos y envíos.* ¡Gracias!`;
+    const phone = "56949510888";
+    window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
   }
-}
 
-// WHATSAPP
-function send(){
-  const url=document.getElementById("url").value;
+  // botón enviar whatsapp desde sección carga
+  document.getElementById('sendWhatsappBtn').addEventListener('click', () => {
+    sendWhatsAppMessage(null);
+  });
 
-  let message="Hola! quiero cotizar un diseño: ";
+  // botones de productos destacados (cada botón envía producto)
+  const waButtons = document.querySelectorAll('.whatsapp-small');
+  waButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const productText = btn.getAttribute('data-product');
+      sendWhatsAppMessage(productText);
+    });
+  });
 
-  if(url){
-    message+=url;
-  }else{
-    message+="(adjunto imagen desde la web)";
-  }
+  // botón de contacto general (footer y extra)
+  document.getElementById('contactGeneral')?.addEventListener('click', () => {
+    sendWhatsAppMessage(null);
+  });
+  document.getElementById('footerWhatsappBtn')?.addEventListener('click', () => {
+    sendWhatsAppMessage(null);
+  });
 
-  window.open(`https://wa.me/56949510888?text=${encodeURIComponent(message)}`);
-}
+  // atajo para preview con Enter en campo URL
+  const urlInputField = document.getElementById('imageUrlInput');
+  urlInputField.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      document.getElementById('previewUrlBtn').click();
+    }
+  });
+  
+  console.log("Kshai Design - Página con cuadros para imágenes de productos (demo URLs reemplazables)");
 </script>
-
 </body>
 </html>
