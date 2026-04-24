@@ -1,107 +1,256 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Video Splitter YouTube</title>
-  <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.6/dist/ffmpeg.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kshai Design</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#f4efe8;
+  color:#3b2416;
+}
+
+/* TOP */
+.topbar{
+  background:#2a1a10;
+  color:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:10px;
+  font-size:14px;
+}
+
+/* NAV */
+nav{
+  display:flex;
+  justify-content:space-between;
+  padding:20px;
+  background:#fff;
+}
+
+/* HERO */
+.hero{
+  padding:40px;
+  text-align:center;
+}
+
+.price{
+  background:#3b2416;
+  color:#fff;
+  display:inline-block;
+  padding:15px 30px;
+  border-radius:30px;
+  margin-top:20px;
+}
+
+/* CARRUSEL */
+.carousel{
+  position:relative;
+  overflow:hidden;
+  padding:20px;
+}
+
+.track{
+  display:flex;
+  transition:.4s;
+}
+
+.track img{
+  width:220px;
+  margin:10px;
+  border-radius:10px;
+}
+
+.btn-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:#3b2416;
+  color:#fff;
+  border:none;
+  padding:10px;
+  cursor:pointer;
+}
+
+.left{left:10px;}
+.right{right:10px;}
+
+/* UPLOAD */
+.upload{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  padding:40px;
+}
+
+.box{
+  flex:1;
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+}
+
+button{
+  background:#3b2416;
+  color:#fff;
+  border:none;
+  padding:10px 20px;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.preview img{
+  max-width:200px;
+}
+
+/* PRODUCTOS */
+.products{
+  padding:40px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#fff;
+  padding:10px;
+  border-radius:10px;
+  text-align:center;
+}
+
+/* FOOTER */
+footer{
+  background:#2a1a10;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+}
+</style>
 </head>
+
 <body>
-  <h2>Dividir y Convertir Videos de YouTube</h2>
-  <input id="ytUrl" type="text" placeholder="Pega el link de YouTube" size="60">
-  <br><br>
-  <label>Orientación:</label>
-  <select id="orientation">
-    <option value="horizontal">Horizontal (1920x1080)</option>
-    <option value="vertical">Vertical (1080x1920)</option>
-  </select>
-  <br><br>
-  <button onclick="procesar()">Procesar Video</button>
-  <div id="log"></div>
-  <div id="result"></div>
 
-  <script>
-    const { createFFmpeg, fetchFile } = FFmpeg;
-    const ffmpeg = createFFmpeg({ log: true });
+<div class="topbar">
+  <span>Atención personalizada</span>
+  <span>Envíos a todo Chile</span>
+  <span>+56949510888</span>
+</div>
 
-    async function procesar() {
-      const log = (msg) => document.getElementById("log").innerHTML += msg + "<br>";
-      document.getElementById("log").innerHTML = "";
-      document.getElementById("result").innerHTML = "";
+<nav>
+  <h2>Kshai Design</h2>
+  <span>Grabado Láser</span>
+</nav>
 
-      const url = document.getElementById("ytUrl").value;
-      const orientation = document.getElementById("orientation").value;
+<section class="hero">
+  <h1>Personalizamos tus ideas con Grabado y Corte Láser</h1>
+  <p>Madera, MDF y más</p>
+  <div class="price">Desde $500</div>
+</section>
 
-      if (!url) return alert("Por favor pega un link de YouTube");
+<!-- CARRUSEL -->
+<section class="carousel">
+  <button class="btn-nav left" onclick="move(-1)">◀</button>
+  <div class="track" id="track">
+    <img src="https://via.placeholder.com/200">
+    <img src="https://via.placeholder.com/200">
+    <img src="https://via.placeholder.com/200">
+    <img src="https://via.placeholder.com/200">
+  </div>
+  <button class="btn-nav right" onclick="move(1)">▶</button>
+</section>
 
-      log("Descargando video...");
+<!-- SUBIR -->
+<section class="upload">
 
-      // Usamos API de piped.video para obtener mp4 sin CORS
-      const apiUrl = `https://pipedapi.kavin.rocks/streams/${extractId(url)}`;
-      const res = await fetch(apiUrl);
-      const data = await res.json();
-      const fileUrl = data.videoStreams.find(v => v.quality === "720p")?.url || data.videoStreams[0].url;
+  <div class="box">
+    <h3>Sube tu imagen</h3>
+    <input type="file" id="file">
+  </div>
 
-      const response = await fetch(fileUrl);
-      const buffer = await response.arrayBuffer();
+  <div class="box">
+    <h3>Pega link de imagen</h3>
+    <input type="text" id="url" placeholder="https://...">
+    <button onclick="preview()">Vista previa</button>
 
-      if (!ffmpeg.isLoaded()) {
-        log("Cargando FFmpeg...");
-        await ffmpeg.load();
-      }
+    <div class="preview" id="preview"></div>
 
-      ffmpeg.FS("writeFile", "input.mp4", new Uint8Array(buffer));
+    <button onclick="send()">Enviar por WhatsApp</button>
+  </div>
 
-      log("Procesando...");
+</section>
 
-      // Elegir filtro según orientación
-      let vfFilter = "";
-      if (orientation === "horizontal") {
-        vfFilter = "scale=-1:1080,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:black";
-      } else {
-        vfFilter = "scale=1080:-1,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:black";
-      }
+<!-- PRODUCTOS -->
+<section class="products">
+  <h2>Productos destacados</h2>
+  <div class="grid">
+    <div class="card">Llavero</div>
+    <div class="card">Cuadro</div>
+    <div class="card">Letrero</div>
+  </div>
+</section>
 
-      // Dividir en clips de 2 minutos
-      await ffmpeg.run(
-        "-i", "input.mp4",
-        "-vf", vfFilter,
-        "-c:v", "libx264",
-        "-map", "0",
-        "-f", "segment",
-        "-segment_time", "120",
-        "-reset_timestamps", "1",
-        "out%03d.mp4"
-      );
+<footer>
+  <p>© Kshai Design - WhatsApp +56949510888</p>
+</footer>
 
-      log("Generando enlaces...");
+<script>
+let pos=0;
 
-      let i = 0;
-      while (true) {
-        try {
-          const name = `out${String(i).padStart(3, "0")}.mp4`;
-          const data = ffmpeg.FS("readFile", name);
-          const blob = new Blob([data.buffer], { type: "video/mp4" });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = name;
-          a.innerText = `Descargar ${name}`;
-          document.getElementById("result").appendChild(a);
-          document.getElementById("result").appendChild(document.createElement("br"));
-          i++;
-        } catch (e) {
-          break;
-        }
-      }
+function move(dir){
+  pos+=dir*220;
+  document.getElementById("track").style.transform =
+    `translateX(-${pos}px)`;
+}
 
-      log("✅ Listo");
-    }
+// PREVIEW
+function preview(){
+  const file=document.getElementById("file").files[0];
+  const url=document.getElementById("url").value;
+  const preview=document.getElementById("preview");
 
-    function extractId(url) {
-      const reg = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/;
-      const match = url.match(reg);
-      return match ? match[1] : url;
-    }
-  </script>
+  preview.innerHTML="";
+
+  if(file){
+    const reader=new FileReader();
+    reader.onload=e=>{
+      preview.innerHTML=`<img src="${e.target.result}">`;
+    };
+    reader.readAsDataURL(file);
+  }else if(url){
+    preview.innerHTML=`<img src="${url}">`;
+  }
+}
+
+// WHATSAPP
+function send(){
+  const url=document.getElementById("url").value;
+
+  let message="Hola! quiero cotizar un diseño: ";
+
+  if(url){
+    message+=url;
+  }else{
+    message+="(adjunto imagen desde la web)";
+  }
+
+  window.open(`https://wa.me/56949510888?text=${encodeURIComponent(message)}`);
+}
+</script>
+
 </body>
 </html>
