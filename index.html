@@ -7,379 +7,69 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #fef7ef;
-      color: #2c1b12;
-      scroll-behavior: smooth;
-    }
-    .top-bar {
-      background: #2c1b12;
-      color: #f7e9da;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      padding: 10px 20px;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 5%;
-      background: white;
-      flex-wrap: wrap;
-    }
-    .logo h1 {
-      font-size: 1.7rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #3e2a1f, #b47c48);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    .logo p {
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #b47c48;
-    }
-    .nav-contact {
-      background: #f0e3d4;
-      padding: 8px 18px;
-      border-radius: 40px;
-      font-weight: 600;
-      display: flex;
-      gap: 15px;
-    }
-    .hero {
-      text-align: center;
-      padding: 50px 20px 40px;
-      background: linear-gradient(145deg, #fff4ea, #faead9);
-    }
-    .hero h2 {
-      font-size: 2.1rem;
-      font-weight: 800;
-    }
-    .price-badge {
-      background: #2c1b12;
-      color: #ffefcf;
-      display: inline-block;
-      padding: 14px 35px;
-      border-radius: 60px;
-      margin-top: 28px;
-      font-weight: 800;
-      font-size: 1.7rem;
-    }
-    .section {
-      padding: 50px 5%;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .section-title {
-      font-size: 1.9rem;
-      font-weight: 700;
-      margin-bottom: 32px;
-      text-align: center;
-    }
-    .section-title:after {
-      content: '';
-      display: block;
-      width: 70px;
-      height: 4px;
-      background: #b47c48;
-      margin: 12px auto 0;
-      border-radius: 4px;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 24px;
-    }
-    .service-card {
-      background: white;
-      border-radius: 24px;
-      padding: 24px 12px;
-      text-align: center;
-      border: 1px solid #f0e2d4;
-    }
-    .service-num {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #d6a15a;
-    }
-    .precision-banner {
-      background: #e9ddcf;
-      border-radius: 38px;
-      padding: 38px 28px;
-      text-align: center;
-    }
-    .carousel-container {
-      position: relative;
-      overflow: hidden;
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.4s;
-      gap: 16px;
-    }
-    .carousel-slide {
-      min-width: 220px;
-      background: white;
-      border-radius: 20px;
-      padding: 12px;
-      text-align: center;
-      position: relative;
-    }
-    .carousel-slide img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 14px;
-    }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #2c1b12;
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 60px;
-      cursor: pointer;
-      font-size: 1.5rem;
-    }
-    .upload-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-    }
-    .upload-card {
-      flex: 1;
-      background: white;
-      border-radius: 28px;
-      padding: 28px 24px;
-      border: 1px solid #eedfcb;
-    }
-    .input-field {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 50px;
-      border: 1px solid #d9c7b2;
-      margin: 12px 0;
-    }
-    .btn-primary {
-      background: #2c1b12;
-      color: white;
-      border: none;
-      padding: 10px 22px;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .btn-primary:hover {
-      background: #b47c48;
-    }
-    .preview-area {
-      margin-top: 20px;
-      background: #f8f0e7;
-      border-radius: 20px;
-      padding: 20px;
-      min-height: 160px;
-      text-align: center;
-    }
-    .preview-area img {
-      max-width: 100%;
-      max-height: 160px;
-      border-radius: 16px;
-    }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 32px;
-    }
-    .product-item {
-      background: white;
-      border-radius: 28px;
-      padding: 20px 16px 24px;
-      text-align: center;
-      border: 1px solid #eedbcb;
-      position: relative;
-    }
-    .product-img-frame {
-      width: 100%;
-      height: 180px;
-      background: #f4e9de;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 18px;
-      position: relative;
-    }
-    .product-img-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .product-price {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #b47c48;
-    }
-    .whatsapp-small {
-      background: #25D366;
-      padding: 8px 18px;
-      border-radius: 40px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-    }
-    .pinterest-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 28px;
-      margin-top: 20px;
-    }
-    .pinterest-card {
-      background: white;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      transition: transform 0.2s;
-      position: relative;
-    }
-    .pinterest-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-    .pinterest-card .caption {
-      padding: 12px;
-      text-align: center;
-      font-weight: 600;
-      background: #fff9f2;
-      color: #5a3e28;
-    }
-    .pinterest-badge {
-      display: inline-block;
-      background: #e60023;
-      color: white;
-      padding: 4px 12px;
-      border-radius: 50px;
-      font-size: 0.7rem;
-      margin-bottom: 10px;
-    }
-    footer {
-      background: #2c1b12;
-      color: #f6e5d4;
-      text-align: center;
-      padding: 32px 20px;
-    }
-    .footer-wa {
-      background: #25D366;
-      display: inline-block;
-      padding: 12px 28px;
-      border-radius: 50px;
-      cursor: pointer;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fef7ef; color: #2c1b12; scroll-behavior: smooth; }
+    .top-bar { background: #2c1b12; color: #f7e9da; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; padding: 10px 20px; font-size: 0.85rem; font-weight: 500; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: white; flex-wrap: wrap; }
+    .logo { display: flex; align-items: center; gap: 12px; position: relative; }
+    .logo-img { width: 50px; height: 50px; object-fit: contain; border-radius: 12px; }
+    .logo-text h1 { font-size: 1.7rem; font-weight: 800; background: linear-gradient(135deg, #3e2a1f, #b47c48); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .logo-text p { font-size: 0.7rem; font-weight: 500; color: #b47c48; }
+    .nav-contact { background: #f0e3d4; padding: 8px 18px; border-radius: 40px; font-weight: 600; display: flex; gap: 15px; align-items: center; position: relative; }
+    .hero { text-align: center; padding: 50px 20px 40px; background: linear-gradient(145deg, #fff4ea, #faead9); }
+    .hero h2 { font-size: 2.1rem; font-weight: 800; }
+    .price-badge { background: #2c1b12; color: #ffefcf; display: inline-block; padding: 14px 35px; border-radius: 60px; margin-top: 28px; font-weight: 800; font-size: 1.7rem; }
+    .section { padding: 50px 5%; max-width: 1400px; margin: 0 auto; }
+    .section-title { font-size: 1.9rem; font-weight: 700; margin-bottom: 32px; text-align: center; position: relative; }
+    .section-title:after { content: ''; display: block; width: 70px; height: 4px; background: #b47c48; margin: 12px auto 0; border-radius: 4px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 24px; }
+    .service-card { background: white; border-radius: 24px; padding: 24px 12px; text-align: center; border: 1px solid #f0e2d4; }
+    .service-num { font-size: 2rem; font-weight: 800; color: #d6a15a; }
+    .precision-banner { background: #e9ddcf; border-radius: 38px; padding: 38px 28px; text-align: center; }
+    .carousel-container { position: relative; overflow: hidden; }
+    .carousel-track { display: flex; transition: transform 0.4s; gap: 16px; }
+    .carousel-slide { min-width: 220px; background: white; border-radius: 20px; padding: 12px; text-align: center; position: relative; cursor: pointer; }
+    .carousel-slide img { width: 100%; height: 180px; object-fit: cover; border-radius: 14px; pointer-events: none; }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: #2c1b12; color: white; border: none; width: 40px; height: 40px; border-radius: 60px; cursor: pointer; font-size: 1.5rem; z-index: 2; }
+    .upload-row { display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 40px; }
+    .upload-card { flex: 1; background: white; border-radius: 28px; padding: 28px 24px; border: 1px solid #eedfcb; }
+    .input-field, .form-input { width: 100%; padding: 14px 16px; border-radius: 50px; border: 1px solid #d9c7b2; margin: 8px 0; font-family: inherit; }
+    .btn-primary { background: #2c1b12; color: white; border: none; padding: 10px 22px; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .btn-primary:hover { background: #b47c48; }
+    .preview-area { margin-top: 20px; background: #f8f0e7; border-radius: 20px; padding: 20px; min-height: 160px; text-align: center; }
+    .preview-area img { max-width: 100%; max-height: 160px; border-radius: 16px; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-top: 20px; }
+    .product-item { background: white; border-radius: 28px; padding: 20px 16px 24px; text-align: center; border: 1px solid #eedbcb; position: relative; }
+    .product-img-frame { width: 100%; height: 180px; background: #f4e9de; border-radius: 20px; overflow: hidden; margin-bottom: 18px; position: relative; }
+    .product-img-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .product-price { font-size: 1.5rem; font-weight: 800; color: #b47c48; }
+    .whatsapp-small { background: #25D366; padding: 8px 18px; border-radius: 40px; color: white; font-weight: 600; cursor: pointer; border: none; margin-top: 8px; }
+    .pinterest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; margin-top: 20px; }
+    .pinterest-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.08); transition: transform 0.2s; position: relative; }
+    .pinterest-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .pinterest-card .caption { padding: 12px; text-align: center; font-weight: 600; background: #fff9f2; color: #5a3e28; }
+    .pinterest-badge { display: inline-block; background: #e60023; color: white; padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; margin-bottom: 10px; }
+    footer { background: #2c1b12; color: #f6e5d4; text-align: center; padding: 32px 20px; }
+    .footer-wa { background: #25D366; display: inline-block; padding: 12px 28px; border-radius: 50px; cursor: pointer; }
+    /* Modal imagen */
+    .image-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 3000; visibility: hidden; opacity: 0; transition: 0.2s; }
+    .image-modal.active { visibility: visible; opacity: 1; }
+    .image-modal img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 12px; }
+    .close-modal-img { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
     /* Modo edición */
-    .edit-overlay {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      border-radius: 30px;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      z-index: 10;
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .edit-overlay:hover {
-      background: #b47c48;
-    }
-    .admin-bar {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #2c1b12;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 40px;
-      display: flex;
-      gap: 15px;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      font-size: 0.9rem;
-    }
-    .admin-bar button {
-      background: #b47c48;
-      border: none;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 30px;
-      cursor: pointer;
-    }
-    .login-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      visibility: hidden;
-      opacity: 0;
-      transition: 0.2s;
-    }
-    .login-modal.active {
-      visibility: visible;
-      opacity: 1;
-    }
-    .login-card {
-      background: white;
-      padding: 30px;
-      border-radius: 30px;
-      text-align: center;
-      max-width: 320px;
-      width: 90%;
-      position: relative;
-    }
-    .close-modal {
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #888;
-    }
-    .login-card input {
-      width: 100%;
-      margin: 12px 0;
-      padding: 12px;
-      border-radius: 50px;
-      border: 1px solid #ccc;
-    }
-    @media (max-width: 760px) {
-      .hero h2 { font-size: 1.5rem; }
-      .carousel-slide { min-width: 170px; }
-    }
+    .edit-overlay { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); color: white; border-radius: 30px; padding: 4px 8px; font-size: 0.7rem; cursor: pointer; z-index: 10; backdrop-filter: blur(4px); display: flex; align-items: center; gap: 5px; }
+    .edit-overlay:hover { background: #b47c48; }
+    .admin-bar { position: fixed; bottom: 20px; right: 20px; background: #2c1b12; color: white; padding: 12px 20px; border-radius: 40px; display: flex; gap: 15px; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-size: 0.9rem; }
+    .admin-bar button { background: #b47c48; border: none; color: white; padding: 6px 12px; border-radius: 30px; cursor: pointer; }
+    .login-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 2000; visibility: hidden; opacity: 0; transition: 0.2s; }
+    .login-modal.active { visibility: visible; opacity: 1; }
+    .login-card { background: white; padding: 30px; border-radius: 30px; text-align: center; max-width: 320px; width: 90%; position: relative; }
+    .close-modal { position: absolute; top: 12px; right: 18px; font-size: 24px; cursor: pointer; }
+    .login-card input { width: 100%; margin: 12px 0; padding: 12px; border-radius: 50px; border: 1px solid #ccc; }
+    .contact-form { margin-top: 30px; background: #fff9f2; border-radius: 28px; padding: 24px; border: 1px solid #eedbcb; }
+    .contact-form h3 { margin-bottom: 16px; font-size: 1.4rem; }
+    .form-group { margin-bottom: 15px; }
+    @media (max-width: 760px) { .hero h2 { font-size: 1.5rem; } .carousel-slide { min-width: 170px; } }
   </style>
 </head>
 <body>
@@ -389,10 +79,17 @@
   <span>📦 Envíos a todo Chile</span>
   <span>📞 +56949510888</span>
 </div>
+
 <nav class="navbar">
-  <div class="logo"><h1>KSHAI DESIGN</h1><p>✧ grabado & corte de precisión ✧</p></div>
-  <div class="nav-contact">
-    <span>🔥 Calidad + Precisión</span>
+  <div class="logo" id="logoContainer">
+    <img class="logo-img" src="https://placehold.co/100x100/b47c48/white?text=KS" alt="Logo Kshai" id="logoImg">
+    <div class="logo-text" id="logoText">
+      <h1 id="brandName">KSHAI DESIGN</h1>
+      <p id="brandSub">✧ grabado & corte de precisión ✧</p>
+    </div>
+  </div>
+  <div class="nav-contact" id="navContact">
+    <span id="navContactText">🔥 Calidad + Precisión</span>
     <button id="adminLoginBtnNav" style="background: none; border: none; cursor: pointer; font-size:1rem;">🔐 Admin</button>
   </div>
 </nav>
@@ -454,12 +151,24 @@
   <div style="text-align:center; margin-top:24px;"><span class="pinterest-badge">📌 Imágenes referenciales estilo Pinterest</span></div>
 </div>
 
-<!-- SUBIR IMAGEN O LINK + WHATSAPP -->
+<!-- SECCIÓN SUBIR IMAGEN Y FORMULARIO DE CONTACTO -->
 <div class="section">
   <div class="section-title">📸 SUBE TU IMAGEN O DISEÑO</div>
   <div class="upload-row">
     <div class="upload-card"><h3>📁 Subir archivo</h3><input type="file" id="imageFileInput" accept="image/*" class="input-field"><button class="btn-primary" id="previewFileBtn">👁️ Vista previa</button></div>
     <div class="upload-card"><h3>🔗 Comparte el enlace de tu imagen</h3><input type="text" id="imageUrlInput" class="input-field" placeholder="https://ejemplo.com/diseño.jpg"><button class="btn-primary" id="previewUrlBtn">🌐 Vista previa</button><div class="preview-area" id="globalPreview">⬅️ Vista previa de tu diseño</div><button class="btn-primary" id="sendWhatsappBtn" style="background:#25D366;">📲 Enviar por WhatsApp</button></div>
+  </div>
+
+  <!-- FORMULARIO DE CONTACTO (correo oculto: kshaidesign@gmail.com) -->
+  <div class="contact-form">
+    <h3>📧 Solicita más información o cotización</h3>
+    <form id="contactForm">
+      <div class="form-group"><input type="text" id="contactName" class="form-input" placeholder="Tu nombre *" required></div>
+      <div class="form-group"><input type="tel" id="contactPhone" class="form-input" placeholder="Teléfono *" required></div>
+      <div class="form-group"><textarea id="contactMessage" class="form-input" rows="3" placeholder="Cuéntanos tu idea o requerimiento..." style="border-radius:24px;" required></textarea></div>
+      <button type="submit" class="btn-primary" style="background:#b47c48;">📩 Enviar consulta por correo</button>
+    </form>
+    <p style="font-size:0.75rem; color:#8b694a; margin-top:12px;">Tus datos serán enviados directamente a nuestro equipo. (Correo oculto)</p>
   </div>
 </div>
 
@@ -467,11 +176,11 @@
 <div class="section">
   <div class="section-title">🏆 PRODUCTOS DESTACADOS</div>
   <div class="products-grid" id="productsGrid">
-    <div class="product-item" data-img-id="prod0"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Llavero+Demo"></div><h4>🔑 Llavero</h4><div class="product-price">$500</div><button class="whatsapp-small" data-product="Llavero personalizado - $500">Consultar</button></div>
-    <div class="product-item" data-img-id="prod1"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Letrero+Demo"></div><h4>📜 Letrero</h4><div class="product-price">$1.000</div><button class="whatsapp-small" data-product="Letrero decorativo - $1.000">Consultar</button></div>
-    <div class="product-item" data-img-id="prod2"><div class="product-img-frame"><img src="https://private-user-images.githubusercontent.com/104705077/583091537-94747ba4-7ccd-4f25-a266-824b57d7d5cf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzY5OTgzNTksIm5iZiI6MTc3Njk5ODA1OSwicGF0aCI6Ii8xMDQ3MDUwNzcvNTgzMDkxNTM3LTk0NzQ3YmE0LTdjY2QtNGYyNS1hMjY2LTgyNGI1N2Q3ZDVjZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDI0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDI0OVQwMjI5MDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04OTc5ODU3YjQ4MTY2ZGJmMGM3ZjMxYzY0MmU5YmM1YWIzNTA5YzgyMDM0NzI3MDAyODc5YzNmNzRlMjA2OWUwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.6VqJab_7A2PQZzBkUXvnhcqRzO2RANFdFCcr_xU-LlY" alt="Porta retrato"></div><h4>🎶 Porta retrato musical</h4><div class="product-price">$1.500</div><button class="whatsapp-small" data-product="Porta retrato musical - $1.500">Consultar</button></div>
-    <div class="product-item" data-img-id="prod3"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Posavasos+Demo"></div><h4>🍷 Posavasos</h4><div class="product-price">$600</div><button class="whatsapp-small" data-product="Posavasos grabados - $600">Consultar</button></div>
-    <div class="product-item" data-img-id="prod4"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Caja+Demo"></div><h4>📦 Caja personalizada</h4><div class="product-price">$2.000</div><button class="whatsapp-small" data-product="Caja personalizada - $2.000">Consultar</button></div>
+    <div class="product-item" data-img-id="prod0"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Llavero+Demo"></div><h4>🔑 Llavero</h4><div class="product-price">$500</div><button class="whatsapp-small" data-product="Llavero personalizado - $500">Consultar por WA</button></div>
+    <div class="product-item" data-img-id="prod1"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Letrero+Demo"></div><h4>📜 Letrero</h4><div class="product-price">$1.000</div><button class="whatsapp-small" data-product="Letrero decorativo - $1.000">Consultar por WA</button></div>
+    <div class="product-item" data-img-id="prod2"><div class="product-img-frame"><img src="https://private-user-images.githubusercontent.com/104705077/583091537-94747ba4-7ccd-4f25-a266-824b57d7d5cf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzY5OTgzNTksIm5iZiI6MTc3Njk5ODA1OSwicGF0aCI6Ii8xMDQ3MDUwNzcvNTgzMDkxNTM3LTk0NzQ3YmE0LTdjY2QtNGYyNS1hMjY2LTgyNGI1N2Q3ZDVjZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDI0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDI0OVQwMjI5MDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04OTc5ODU3YjQ4MTY2ZGJmMGM3ZjMxYzY0MmU5YmM1YWIzNTA5YzgyMDM0NzI3MDAyODc5YzNmNzRlMjA2OWUwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.6VqJab_7A2PQZzBkUXvnhcqRzO2RANFdFCcr_xU-LlY" alt="Porta retrato"></div><h4>🎶 Porta retrato musical</h4><div class="product-price">$1.500</div><button class="whatsapp-small" data-product="Porta retrato musical - $1.500">Consultar por WA</button></div>
+    <div class="product-item" data-img-id="prod3"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Posavasos+Demo"></div><h4>🍷 Posavasos</h4><div class="product-price">$600</div><button class="whatsapp-small" data-product="Posavasos grabados - $600">Consultar por WA</button></div>
+    <div class="product-item" data-img-id="prod4"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Caja+Demo"></div><h4>📦 Caja personalizada</h4><div class="product-price">$2.000</div><button class="whatsapp-small" data-product="Caja personalizada - $2.000">Consultar por WA</button></div>
   </div>
   <div class="designer-note" style="text-align:center; margin-top:40px;">🎨 Diseñado por: <strong>Kshai Design</strong> · Creatividad y precisión</div>
 </div>
@@ -489,32 +198,30 @@
   </div>
 </footer>
 
-<!-- MODAL LOGIN (sin credenciales visibles) -->
+<!-- Modal imagen completa -->
+<div id="imageModal" class="image-modal">
+  <span class="close-modal-img">&times;</span>
+  <img id="modalImg" src="" alt="Vista ampliada">
+</div>
+
+<!-- Modal login -->
 <div id="loginModal" class="login-modal">
-  <div class="login-card">
-    <span class="close-modal" id="closeModalBtn">&times;</span>
-    <h2>🔐 Acceso editor</h2>
-    <input type="text" id="loginUser" placeholder="Usuario">
-    <input type="password" id="loginPass" placeholder="Contraseña">
-    <button id="doLogin" class="btn-primary">Iniciar sesión</button>
-  </div>
+  <div class="login-card"><span class="close-modal" id="closeModalBtn">&times;</span><h2>🔐 Acceso editor</h2><input type="text" id="loginUser" placeholder="Usuario"><input type="password" id="loginPass" placeholder="Contraseña"><button id="doLogin" class="btn-primary">Iniciar sesión</button></div>
 </div>
 
 <script>
-  // ---------- AUTENTICACIÓN ----------
+  // -------------------- AUTENTICACIÓN --------------------
   let authenticated = false;
   const loginModal = document.getElementById('loginModal');
   const openModalBtns = [document.getElementById('adminLoginBtnNav'), document.getElementById('adminLoginBtnFooter')];
   const closeModalBtn = document.getElementById('closeModalBtn');
-
   function showModal() { loginModal.classList.add('active'); }
   function hideModal() { loginModal.classList.remove('active'); }
   openModalBtns.forEach(btn => btn && btn.addEventListener('click', showModal));
   closeModalBtn.addEventListener('click', hideModal);
   window.addEventListener('click', (e) => { if (e.target === loginModal) hideModal(); });
 
-  const doLogin = document.getElementById('doLogin');
-  doLogin.onclick = () => {
+  document.getElementById('doLogin').onclick = () => {
     const user = document.getElementById('loginUser').value;
     const pass = document.getElementById('loginPass').value;
     if (user === 'kshaidesign' && pass === 'Valeria2020') {
@@ -522,168 +229,106 @@
       localStorage.setItem('kshai_auth', 'true');
       hideModal();
       enableEditMode();
-    } else {
-      alert('Credenciales incorrectas');
-    }
+    } else { alert('Credenciales incorrectas'); }
   };
+  if (localStorage.getItem('kshai_auth') === 'true') { authenticated = true; enableEditMode(); }
 
-  // Verificar si ya está autenticado
-  if (localStorage.getItem('kshai_auth') === 'true') {
-    authenticated = true;
-    enableEditMode();
-  }
-
+  // -------------------- MODO EDICIÓN (Logo, textos e imágenes) --------------------
   function enableEditMode() {
     if (document.querySelector('.admin-bar')) return;
     const adminBar = document.createElement('div');
     adminBar.className = 'admin-bar';
-    adminBar.innerHTML = `<span>✏️ Modo edición activo</span><button id="resetImagesBtn">Restaurar imágenes originales</button><button id="logoutBtn">Cerrar sesión</button>`;
+    adminBar.innerHTML = `<span>✏️ Modo edición activo</span><button id="resetImagesBtn">Restaurar originales</button><button id="logoutBtn">Cerrar sesión</button>`;
     document.body.appendChild(adminBar);
-    document.getElementById('logoutBtn').onclick = () => {
-      localStorage.removeItem('kshai_auth');
-      location.reload();
-    };
-    document.getElementById('resetImagesBtn').onclick = () => {
-      if (confirm('¿Restaurar todas las imágenes a los valores por defecto?')) {
-        localStorage.removeItem('kshai_images');
-        location.reload();
-      }
-    };
+    document.getElementById('logoutBtn').onclick = () => { localStorage.removeItem('kshai_auth'); location.reload(); };
+    document.getElementById('resetImagesBtn').onclick = () => { if(confirm('¿Restaurar todo?')){ localStorage.removeItem('kshai_images'); localStorage.removeItem('kshai_logo'); localStorage.removeItem('kshai_brand'); localStorage.removeItem('kshai_navtext'); location.reload(); } };
 
     function addEditOverlay(container, imgElement, storageKey) {
       if (container.querySelector('.edit-overlay')) return;
-      const editDiv = document.createElement('div');
-      editDiv.className = 'edit-overlay';
-      editDiv.innerHTML = '<i class="fas fa-pencil-alt"></i> Editar';
-      editDiv.onclick = (e) => {
-        e.stopPropagation();
-        const newUrl = prompt('Ingrese la nueva URL de la imagen (enlace directo):', imgElement.src);
-        if (newUrl && newUrl.trim()) {
-          imgElement.src = newUrl;
-          let stored = JSON.parse(localStorage.getItem('kshai_images') || '{}');
-          stored[storageKey] = newUrl;
-          localStorage.setItem('kshai_images', JSON.stringify(stored));
-        } else {
-          const fileInput = document.createElement('input');
-          fileInput.type = 'file';
-          fileInput.accept = 'image/*';
-          fileInput.onchange = (ev) => {
-            const file = ev.target.files[0];
-            if (file) {
-              const reader = new FileReader();
-              reader.onload = (e2) => {
-                imgElement.src = e2.target.result;
-                let stored = JSON.parse(localStorage.getItem('kshai_images') || '{}');
-                stored[storageKey] = e2.target.result;
-                localStorage.setItem('kshai_images', JSON.stringify(stored));
-              };
-              reader.readAsDataURL(file);
-            }
-          };
-          fileInput.click();
-        }
-      };
-      container.style.position = 'relative';
-      container.appendChild(editDiv);
+      const editDiv = document.createElement('div'); editDiv.className = 'edit-overlay'; editDiv.innerHTML = '<i class="fas fa-pencil-alt"></i>'; editDiv.style.cursor = 'pointer';
+      editDiv.onclick = (e) => { e.stopPropagation(); const newUrl = prompt('Nueva URL de imagen (o deja vacío para subir archivo):', imgElement.src); if(newUrl && newUrl.trim()){ imgElement.src = newUrl; let stored = JSON.parse(localStorage.getItem('kshai_images')||'{}'); stored[storageKey] = newUrl; localStorage.setItem('kshai_images', JSON.stringify(stored)); } else { const input = document.createElement('input'); input.type='file'; input.accept='image/*'; input.onchange=(ev)=>{ const f=ev.target.files[0]; if(f){ const rd=new FileReader(); rd.onload=e2=>{ imgElement.src=e2.target.result; let stored=JSON.parse(localStorage.getItem('kshai_images')||'{}'); stored[storageKey]=e2.target.result; localStorage.setItem('kshai_images',JSON.stringify(stored)); }; rd.readAsDataURL(f); } }; input.click(); } };
+      container.style.position = 'relative'; container.appendChild(editDiv);
     }
-
-    // Productos
-    document.querySelectorAll('.product-item').forEach((item, idx) => {
-      const frame = item.querySelector('.product-img-frame');
-      const img = frame.querySelector('img');
-      if (img) addEditOverlay(frame, img, `prod_${idx}`);
-    });
-    // Carrusel
-    document.querySelectorAll('.carousel-slide').forEach((slide, idx) => {
-      const img = slide.querySelector('img');
-      if (img) addEditOverlay(slide, img, `carousel_${idx}`);
-    });
-    // Pinterest
-    document.querySelectorAll('.pinterest-card').forEach((card, idx) => {
-      const img = card.querySelector('img');
-      if (img) addEditOverlay(card, img, `pin_${idx}`);
-    });
+    // Editar logo (imagen)
+    const logoImg = document.getElementById('logoImg');
+    const logoContainer = document.getElementById('logoContainer');
+    addEditOverlay(logoContainer, logoImg, 'logo_image');
+    // Editar textos del logo y navbar
+    const brandName = document.getElementById('brandName');
+    const brandSub = document.getElementById('brandSub');
+    const navText = document.getElementById('navContactText');
+    function makeTextEditable(element, storageKey) {
+      element.style.cursor = 'pointer';
+      element.title = 'Haz clic para editar texto';
+      element.addEventListener('click', (e) => { e.stopPropagation(); const newText = prompt('Editar texto:', element.innerText); if(newText && newText.trim()){ element.innerText = newText; localStorage.setItem(storageKey, newText); } });
+      const saved = localStorage.getItem(storageKey); if(saved) element.innerText = saved;
+    }
+    makeTextEditable(brandName, 'brand_name');
+    makeTextEditable(brandSub, 'brand_sub');
+    makeTextEditable(navText, 'nav_contact_text');
+    // Editar imágenes de productos, carrusel, pinterest
+    document.querySelectorAll('.product-item').forEach((item, idx) => { const frame = item.querySelector('.product-img-frame'); const img = frame.querySelector('img'); if(img) addEditOverlay(frame, img, `prod_${idx}`); });
+    document.querySelectorAll('.carousel-slide').forEach((slide, idx) => { const img = slide.querySelector('img'); if(img) addEditOverlay(slide, img, `carousel_${idx}`); });
+    document.querySelectorAll('.pinterest-card').forEach((card, idx) => { const img = card.querySelector('img'); if(img) addEditOverlay(card, img, `pin_${idx}`); });
   }
 
   // Cargar imágenes guardadas
   function loadStoredImages() {
     const stored = JSON.parse(localStorage.getItem('kshai_images') || '{}');
-    document.querySelectorAll('.product-item').forEach((item, idx) => {
-      const key = `prod_${idx}`;
-      if (stored[key]) {
-        const img = item.querySelector('.product-img-frame img');
-        if (img) img.src = stored[key];
-      }
-    });
-    document.querySelectorAll('.carousel-slide').forEach((slide, idx) => {
-      const key = `carousel_${idx}`;
-      if (stored[key]) {
-        const img = slide.querySelector('img');
-        if (img) img.src = stored[key];
-      }
-    });
-    document.querySelectorAll('.pinterest-card').forEach((card, idx) => {
-      const key = `pin_${idx}`;
-      if (stored[key]) {
-        const img = card.querySelector('img');
-        if (img) img.src = stored[key];
-      }
-    });
+    document.querySelectorAll('.product-item').forEach((item, idx) => { const key=`prod_${idx}`; if(stored[key]){ const img=item.querySelector('.product-img-frame img'); if(img) img.src=stored[key]; } });
+    document.querySelectorAll('.carousel-slide').forEach((slide, idx) => { const key=`carousel_${idx}`; if(stored[key]){ const img=slide.querySelector('img'); if(img) img.src=stored[key]; } });
+    document.querySelectorAll('.pinterest-card').forEach((card, idx) => { const key=`pin_${idx}`; if(stored[key]){ const img=card.querySelector('img'); if(img) img.src=stored[key]; } });
+    const logoStored = localStorage.getItem('kshai_images') ? JSON.parse(localStorage.getItem('kshai_images')).logo_image : null;
+    if(logoStored) document.getElementById('logoImg').src = logoStored;
+    const brandNameStored = localStorage.getItem('brand_name'); if(brandNameStored) document.getElementById('brandName').innerText = brandNameStored;
+    const brandSubStored = localStorage.getItem('brand_sub'); if(brandSubStored) document.getElementById('brandSub').innerText = brandSubStored;
+    const navTextStored = localStorage.getItem('nav_contact_text'); if(navTextStored) document.getElementById('navContactText').innerText = navTextStored;
   }
   loadStoredImages();
 
-  // Carrusel
+  // -------------------- MODAL IMÁGENES DEL CARRUSEL --------------------
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImg');
+  const closeModalImg = document.querySelector('.close-modal-img');
+  function openImageModal(src) { modalImg.src = src; modal.classList.add('active'); }
+  function closeImageModal() { modal.classList.remove('active'); }
+  closeModalImg.addEventListener('click', closeImageModal);
+  modal.addEventListener('click', (e) => { if(e.target === modal) closeImageModal(); });
+  // Agregar evento click a cada imagen del carrusel
+  document.querySelectorAll('.carousel-slide img').forEach(img => { img.style.cursor = 'pointer'; img.addEventListener('click', (e) => { e.stopPropagation(); openImageModal(img.src); }); });
+
+  // -------------------- FORMULARIO DE CORREO (oculto kshaidesign@gmail.com) --------------------
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById('contactName').value.trim();
+    const telefono = document.getElementById('contactPhone').value.trim();
+    const mensaje = document.getElementById('contactMessage').value.trim();
+    if(!nombre || !telefono || !mensaje) { alert('Por favor completa todos los campos.'); return; }
+    const destino = 'kshaidesign@gmail.com';
+    const asunto = `Consulta desde web - ${nombre}`;
+    const cuerpo = `Nombre: ${nombre}%0ATeléfono: ${telefono}%0AMensaje: ${mensaje}%0A%0AEnviado desde Kshai Design.`;
+    window.location.href = `mailto:${destino}?subject=${encodeURIComponent(asunto)}&body=${cuerpo}`;
+    alert('Se abrirá tu cliente de correo para enviar la consulta. ¡Gracias!');
+    document.getElementById('contactForm').reset();
+  });
+
+  // -------------------- CARRUSEL --------------------
   const track = document.getElementById('carouselTrack');
   const slidesC = Array.from(document.querySelectorAll('.carousel-slide'));
   const slideWidth = 220 + 16;
   let currentIndex = 0;
-  function updateCarousel() {
-    const visible = Math.floor(track.parentElement.clientWidth / slideWidth) || 1;
-    const max = Math.max(0, slidesC.length - visible);
-    currentIndex = Math.min(max, Math.max(0, currentIndex));
-    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-  }
+  function updateCarousel() { const visible = Math.floor(track.parentElement.clientWidth / slideWidth) || 1; const max = Math.max(0, slidesC.length - visible); currentIndex = Math.min(max, Math.max(0, currentIndex)); track.style.transform = `translateX(-${currentIndex * slideWidth}px)`; }
   document.getElementById('carouselLeft').onclick = () => { currentIndex--; updateCarousel(); };
   document.getElementById('carouselRight').onclick = () => { currentIndex++; updateCarousel(); };
   window.addEventListener('resize', updateCarousel);
   setTimeout(updateCarousel, 100);
 
-  // Preview y WhatsApp
+  // -------------------- PREVIEW Y WHATSAPP --------------------
   const previewDiv = document.getElementById('globalPreview');
   let currentImageData = null, currentSource = null;
-  document.getElementById('previewFileBtn').onclick = () => {
-    const file = document.getElementById('imageFileInput').files[0];
-    if (!file) { previewDiv.innerHTML = '<span>⚠️ Selecciona un archivo</span>'; return; }
-    const reader = new FileReader();
-    reader.onload = e => { previewDiv.innerHTML = `<img src="${e.target.result}">`; currentImageData = e.target.result; currentSource = 'file'; };
-    reader.readAsDataURL(file);
-  };
-  document.getElementById('previewUrlBtn').onclick = () => {
-    let url = document.getElementById('imageUrlInput').value.trim();
-    if (!url) { previewDiv.innerHTML = '<span>🔗 Ingresa URL</span>'; return; }
-    previewDiv.innerHTML = '<span>Cargando...</span>';
-    const img = new Image();
-    img.onload = () => { previewDiv.innerHTML = `<img src="${url}">`; currentImageData = url; currentSource = 'url'; };
-    img.onerror = () => previewDiv.innerHTML = '<span>❌ Error al cargar imagen</span>';
-    img.src = url;
-  };
-  function sendWA(product = null) {
-    let msg = "🪵 *Kshai Design* - Cotización%0A";
-    if (product) msg += `📌 Producto: ${product}%0A`;
-    else msg += `📐 Diseño personalizado%0A`;
-    if (currentImageData) {
-      if (currentSource === 'url') msg += `🎨 Enlace diseño: ${currentImageData}%0A`;
-      else msg += `🖼️ Imagen previsualizada (adjuntar si es necesario)%0A`;
-    } else {
-      const url = document.getElementById('imageUrlInput').value.trim();
-      const file = document.getElementById('imageFileInput').files[0];
-      if (url) msg += `🔗 Link: ${url}%0A`;
-      else if (file) msg += `📎 Archivo listo%0A`;
-      else msg += `✨ Diseño a definir%0A`;
-    }
-    msg += `%0A💬 Más info por favor. ¡Gracias!`;
-    window.open(`https://wa.me/56949510888?text=${msg}`, '_blank');
-  }
+  document.getElementById('previewFileBtn').onclick = () => { const file = document.getElementById('imageFileInput').files[0]; if(!file){ previewDiv.innerHTML='<span>⚠️ Selecciona un archivo</span>'; return; } const reader = new FileReader(); reader.onload = e => { previewDiv.innerHTML=`<img src="${e.target.result}">`; currentImageData=e.target.result; currentSource='file'; }; reader.readAsDataURL(file); };
+  document.getElementById('previewUrlBtn').onclick = () => { let url = document.getElementById('imageUrlInput').value.trim(); if(!url){ previewDiv.innerHTML='<span>🔗 Ingresa URL</span>'; return; } previewDiv.innerHTML='<span>Cargando...</span>'; const img = new Image(); img.onload = () => { previewDiv.innerHTML=`<img src="${url}">`; currentImageData=url; currentSource='url'; }; img.onerror = () => previewDiv.innerHTML='<span>❌ Error al cargar imagen</span>'; img.src=url; };
+  function sendWA(product=null){ let msg = "🪵 *Kshai Design* - Cotización%0A"; if(product) msg+=`📌 Producto: ${product}%0A`; else msg+=`📐 Diseño personalizado%0A`; if(currentImageData){ if(currentSource==='url') msg+=`🎨 Enlace diseño: ${currentImageData}%0A`; else msg+=`🖼️ Imagen previsualizada (adjuntar)%0A`; } else { const url=document.getElementById('imageUrlInput').value.trim(); const file=document.getElementById('imageFileInput').files[0]; if(url) msg+=`🔗 Link: ${url}%0A`; else if(file) msg+=`📎 Archivo listo%0A`; else msg+=`✨ Diseño a definir%0A`; } msg+=`%0A💬 Más info por favor. ¡Gracias!`; window.open(`https://wa.me/56949510888?text=${msg}`, '_blank'); }
   document.getElementById('sendWhatsappBtn').onclick = () => sendWA();
   document.querySelectorAll('.whatsapp-small').forEach(btn => btn.onclick = () => sendWA(btn.getAttribute('data-product')));
   document.getElementById('contactGeneral').onclick = () => sendWA();
