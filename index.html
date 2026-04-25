@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Kshai Design | Grabado y Corte Láser</title>
+  <title>Kshai Design | Editor Total</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s, color 0.2s, border-color 0.2s; }
     body { font-family: 'Poppins', sans-serif; background: #fef7ef; color: #2c1b12; scroll-behavior: smooth; padding-bottom: 70px; }
-    /* Temas */
     body.night-mode { background: #121212; color: #e0e0e0; }
     body.night-mode .navbar, body.night-mode .service-card, body.night-mode .product-item,
     body.night-mode .upload-card, body.night-mode .pinterest-card, body.night-mode .contact-form,
@@ -23,8 +22,6 @@
       background: rgba(0,0,0,0.4) !important; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.3);
     }
     @keyframes psychedelicBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    
-    /* Botones de tema - esquina inferior izquierda, no tapan */
     .theme-buttons { position: fixed; bottom: 20px; left: 20px; z-index: 1000; display: flex; gap: 8px; background: rgba(0,0,0,0.5); padding: 6px 12px; border-radius: 50px; backdrop-filter: blur(5px); }
     .theme-btn { background: #2c1b12; color: white; border: none; border-radius: 40px; padding: 5px 12px; font-size: 0.75rem; cursor: pointer; font-weight: bold; }
     .top-bar { background: #2c1b12; color: #f7e9da; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; padding: 10px 20px; font-size: 0.85rem; font-weight: 500; }
@@ -71,7 +68,6 @@
     .social-icons a { color: inherit; font-size: 28px; transition: 0.2s; }
     .youtube-video { margin: 40px auto; max-width: 800px; text-align: center; clear: both; }
     iframe { width: 100%; height: 400px; border-radius: 20px; }
-    /* Modales y edición */
     .edit-overlay { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); color: white; border-radius: 30px; padding: 4px 8px; font-size: 0.7rem; cursor: pointer; z-index: 20; backdrop-filter: blur(4px); }
     .admin-bar { position: fixed; bottom: 20px; right: 20px; background: #2c1b12; color: white; padding: 12px 20px; border-radius: 40px; display: flex; gap: 15px; z-index: 1000; font-size: 0.8rem; }
     .image-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 3000; visibility: hidden; opacity: 0; transition: 0.2s; }
@@ -93,35 +89,20 @@
   <button class="theme-btn" id="psychModeBtn">🌈 Psicodélico</button>
   <button class="theme-btn" id="normalModeBtn">☀️ Normal</button>
 </div>
-<div class="top-bar">
-  <span>✨ Atención personalizada</span><span>📦 Envíos a todo Chile</span><span>📞 +56949510888</span>
-</div>
+<div class="top-bar"><span>✨ Atención personalizada</span><span>📦 Envíos a todo Chile</span><span>📞 +56949510888</span></div>
 <nav class="navbar">
-  <div class="logo" id="logoContainer">
-    <img class="logo-img" src="https://placehold.co/100x100/b47c48/white?text=KS" alt="Logo" id="logoImg">
-    <div class="logo-text"><h1 id="siteTitle">KSHAI DESIGN</h1><p id="siteSub">✧ grabado & corte de precisión ✧</p></div>
-  </div>
+  <div class="logo" id="logoContainer"><img class="logo-img" src="https://placehold.co/100x100/b47c48/white?text=KS" alt="Logo" id="logoImg"><div class="logo-text"><h1 id="siteTitle">KSHAI DESIGN</h1><p id="siteSub">✧ grabado & corte de precisión ✧</p></div></div>
   <div class="nav-contact"><span id="navContactText">🔥 Calidad + Precisión</span><button id="adminLoginBtn" class="btn-primary" style="background:#b47c48; margin-left:10px;">🔐 Admin</button></div>
 </nav>
-
-<!-- Navegación de páginas -->
 <div id="pageNavContainer" class="page-nav"></div>
 <div id="pageContent"></div>
-
-<!-- Contenedor para videos de YouTube adicionales (al final) -->
 <div id="globalYouTubeContainer" class="section" style="padding-top: 0;"></div>
-
-<footer>
-  <div id="socialLinksContainer" class="social-icons"></div>
-  <p>© Kshai Design — Grabado y corte láser de alta precisión</p>
-  <p>✉️ +56949510888 · WhatsApp directo</p>
-</footer>
-
+<footer><div id="socialLinksContainer" class="social-icons"></div><p>© Kshai Design — Grabado y corte láser de alta precisión</p><p>✉️ +56949510888 · WhatsApp directo</p></footer>
 <div id="imageModal" class="image-modal"><span class="close-modal-img">&times;</span><img id="modalImg"></div>
 <div id="loginModal" class="login-modal"><div class="login-card"><span id="closeLogin" style="float:right;cursor:pointer;">&times;</span><h2>🔐 Acceso editor</h2><input type="text" id="loginUser" placeholder="Usuario"><input type="password" id="loginPass" placeholder="Contraseña"><button id="doLogin" class="btn-primary">Iniciar sesión</button></div></div>
 
 <script>
-  // ======================== ESTRUCTURA ORIGINAL (HOME) ========================
+  // ---------- ESTRUCTURA PREDETERMINADA ----------
   const DEFAULT_HOME = {
     id: "home",
     name: "Inicio",
@@ -162,7 +143,7 @@
   let currentPageId = "home";
   let authenticated = false;
   let socialLinks = { facebook: "", instagram: "", tiktok: "", whatsapp: "https://wa.me/56949510888" };
-  let globalYouTubeVideos = []; // Array de objetos { title, url }
+  let globalYouTubeVideos = [];
 
   function saveAll() {
     localStorage.setItem('kshai_pages', JSON.stringify(pages));
@@ -172,10 +153,12 @@
     localStorage.setItem('kshai_site_sub', document.getElementById('siteSub').innerText);
     localStorage.setItem('kshai_logo', document.getElementById('logoImg').src);
     localStorage.setItem('kshai_navtext', document.getElementById('navContactText').innerText);
+    console.log("✅ Cambios guardados en localStorage");
   }
+
   function loadAll() {
-    const stored = localStorage.getItem('kshai_pages');
-    if(stored) pages = JSON.parse(stored);
+    const storedPages = localStorage.getItem('kshai_pages');
+    if(storedPages) pages = JSON.parse(storedPages);
     else pages = [JSON.parse(JSON.stringify(DEFAULT_HOME))];
     const social = localStorage.getItem('kshai_social');
     if(social) socialLinks = JSON.parse(social);
@@ -193,9 +176,10 @@
     if(!pages.find(p=>p.id==='home')) pages.unshift(JSON.parse(JSON.stringify(DEFAULT_HOME)));
     if(!pages.find(p=>p.id===currentPageId)) currentPageId = pages[0].id;
   }
+
   loadAll();
 
-  // Renderizar página actual + videos finales
+  // ---------- RENDER ----------
   function renderPage() {
     const page = pages.find(p => p.id === currentPageId);
     if(!page) return;
@@ -217,7 +201,7 @@
         section.items.forEach((item, i) => { html += `<div class="carousel-slide" data-slide-idx="${i}"><img src="${item.img}" alt="slide"><p>${item.caption}</p></div>`; });
         html += `</div><button class="carousel-btn right" data-carousel-right>❯</button></div>`;
         sectionDiv.innerHTML = html;
-        setTimeout(() => { initCarousel(sectionDiv, section); }, 10);
+        setTimeout(() => initCarousel(sectionDiv, section), 10);
       } else if(section.type === 'pinterest'){
         let html = `<div class="section-title">${section.title}</div><div class="pinterest-grid">`;
         section.items.forEach(item => { html += `<div class="pinterest-card"><img src="${item.img}" alt="pin"><div class="caption">${item.caption}</div></div>`; });
@@ -235,7 +219,6 @@
       }
       container.appendChild(sectionDiv);
     });
-    // Renderizar videos globales (al final)
     renderGlobalYouTube();
     attachGlobalEvents();
     if(authenticated) enableInlineEditing();
@@ -246,20 +229,21 @@
     youtubeContainer.innerHTML = '';
     globalYouTubeVideos.forEach((video, idx) => {
       const videoDiv = document.createElement('div'); videoDiv.className = 'youtube-video'; videoDiv.setAttribute('data-video-idx', idx);
-      videoDiv.innerHTML = `<h3 contenteditable="${authenticated}">${video.title}</h3><iframe src="${video.url}" frameborder="0" allowfullscreen></iframe>`;
+      videoDiv.innerHTML = `<h3 class="youtube-title">${video.title}</h3><iframe src="${video.url}" frameborder="0" allowfullscreen></iframe>`;
       if(authenticated){
         const delBtn = document.createElement('div'); delBtn.className = 'edit-overlay'; delBtn.innerHTML = '<i class="fas fa-trash-alt"></i>'; delBtn.style.left = '8px'; delBtn.style.right = 'auto';
         delBtn.onclick = (e) => { e.stopPropagation(); if(confirm('Eliminar este video?')){ globalYouTubeVideos.splice(idx,1); saveAll(); renderGlobalYouTube(); } };
         videoDiv.appendChild(delBtn);
-        const editTitle = videoDiv.querySelector('h3');
-        editTitle.addEventListener('blur', () => { globalYouTubeVideos[idx].title = editTitle.innerText; saveAll(); });
+        const titleH3 = videoDiv.querySelector('.youtube-title');
+        titleH3.setAttribute('contenteditable', 'true'); titleH3.style.cursor = 'text';
+        titleH3.addEventListener('blur', () => { globalYouTubeVideos[idx].title = titleH3.innerText; saveAll(); });
       }
       youtubeContainer.appendChild(videoDiv);
     });
     if(authenticated){
-      const addVideoBtn = document.createElement('div'); addVideoBtn.style.textAlign = 'center'; addVideoBtn.style.margin = '20px';
-      addVideoBtn.innerHTML = '<button id="addGlobalVideoBtn" class="btn-primary" style="background:#25D366;">➕ Agregar video YouTube (final)</button>';
-      youtubeContainer.appendChild(addVideoBtn);
+      const addBtnDiv = document.createElement('div'); addBtnDiv.style.textAlign = 'center'; addBtnDiv.style.margin = '20px';
+      addBtnDiv.innerHTML = '<button id="addGlobalVideoBtn" class="btn-primary" style="background:#25D366;">➕ Agregar video YouTube (final)</button>';
+      youtubeContainer.appendChild(addBtnDiv);
       document.getElementById('addGlobalVideoBtn')?.addEventListener('click', () => {
         const url = prompt('URL de YouTube (embed):', 'https://www.youtube.com/embed/dQw4w9WgXcQ');
         if(url){
@@ -306,20 +290,23 @@
   }
   function zoomHandler(e) { document.getElementById('modalImg').src = this.src; document.getElementById('imageModal').classList.add('active'); }
 
-  // Edición inline (admin)
+  // ---------- EDICIÓN INLINE (CON GUARDADO) ----------
   function enableInlineEditing() {
+    // Textos editables
     document.querySelectorAll('.hero-title, .hero-sub, .price-badge, .section-title, .service-card h4, .precision-banner h3, .precision-banner p, .product-price, .prod-title, .pinterest-card .caption, .contact-form h3').forEach(el => {
+      if(el.hasAttribute('contenteditable')) return;
       el.setAttribute('contenteditable', 'true'); el.style.cursor = 'text';
-      el.addEventListener('blur', () => { saveTextChanges(el); });
+      el.addEventListener('blur', () => saveTextChanges(el));
     });
+    // Imágenes editables
     document.querySelectorAll('.product-img-frame img, .carousel-slide img, .pinterest-card img, .logo-img').forEach(img => {
       if(img.parentElement && !img.parentElement.querySelector('.edit-img-overlay')){
-        const btn = document.createElement('div'); btn.className = 'edit-overlay'; btn.innerHTML = '<i class="fas fa-pencil-alt"></i>'; btn.style.top='8px'; btn.style.right='8px';
+        const btn = document.createElement('div'); btn.className = 'edit-overlay edit-img-overlay'; btn.innerHTML = '<i class="fas fa-pencil-alt"></i>';
         btn.onclick = (e) => { e.stopPropagation(); const newUrl = prompt('Nueva URL de imagen:', img.src); if(newUrl) img.src = newUrl; else { const input=document.createElement('input'); input.type='file'; input.accept='image/*'; input.onchange=ev=>{ const f=ev.target.files[0]; if(f){ const rd=new FileReader(); rd.onload=e2=>{ img.src=e2.target.result; saveAll(); }; rd.readAsDataURL(f); } }; input.click(); } saveAll(); };
         img.parentElement.style.position = 'relative'; img.parentElement.appendChild(btn);
       }
     });
-    // Botones para agregar slides al carrusel
+    // Botón para agregar slides al carrusel
     const carouselSection = document.querySelector('.carousel-container')?.parentElement;
     if(carouselSection && !carouselSection.querySelector('.carousel-admin')){
       const adminDiv = document.createElement('div'); adminDiv.className = 'carousel-admin'; adminDiv.style.textAlign='center'; adminDiv.style.marginTop='15px';
@@ -336,13 +323,15 @@
       };
     }
   }
+
   function saveTextChanges(el) {
-    const page = pages.find(p=>p.id === currentPageId);
+    const page = pages.find(p => p.id === currentPageId);
     if(!page) return;
     const sectionDiv = el.closest('.section');
-    const idx = sectionDiv?.getAttribute('data-section-idx');
-    if(idx !== undefined){
-      const section = page.content.sections[parseInt(idx)];
+    if(sectionDiv && sectionDiv.hasAttribute('data-section-idx')){
+      const idx = parseInt(sectionDiv.getAttribute('data-section-idx'));
+      const section = page.content.sections[idx];
+      if(!section) return;
       if(section.type === 'hero'){
         if(el.classList.contains('hero-title')) section.title = el.innerText;
         else if(el.classList.contains('hero-sub')) section.subtitle = el.innerText;
@@ -350,8 +339,8 @@
       } else if(section.type === 'services'){
         if(el.classList.contains('section-title')) section.title = el.innerText;
         else if(el.parentElement?.classList.contains('service-card')){
-          const i = Array.from(el.parentElement.parentElement.children).indexOf(el.parentElement);
-          if(i!==-1) section.items[i] = el.innerText;
+          const cardIndex = Array.from(el.parentElement.parentElement.children).indexOf(el.parentElement);
+          if(cardIndex !== -1) section.items[cardIndex] = el.innerText;
         }
       } else if(section.type === 'precision'){
         if(el.tagName === 'H3') section.text = el.innerText + '\n' + section.text.split('\n').slice(1).join('\n');
@@ -368,20 +357,19 @@
         else if(el.classList.contains('caption')){
           const card = el.closest('.pinterest-card');
           const idx2 = Array.from(card.parentElement.children).indexOf(card);
-          if(idx2!==-1) section.items[idx2].caption = el.innerText;
+          if(idx2 !== -1) section.items[idx2].caption = el.innerText;
         }
       } else if(section.type === 'contact_form'){
-        if(el.classList.contains('section-title') || el.tagName==='H3') section.title = el.innerText;
+        if(el.classList.contains('section-title') || el.tagName === 'H3') section.title = el.innerText;
       }
       saveAll();
     } else {
-      if(el.id === 'siteTitle') saveAll();
-      else if(el.id === 'siteSub') saveAll();
-      else if(el.id === 'navContactText') saveAll();
+      // Elementos globales del navbar/logo
+      if(el.id === 'siteTitle' || el.id === 'siteSub' || el.id === 'navContactText') saveAll();
     }
   }
 
-  // Navegación y páginas
+  // ---------- PÁGINAS Y NAVEGACIÓN ----------
   function renderPageNav() {
     const container = document.getElementById('pageNavContainer');
     container.innerHTML = '';
@@ -428,6 +416,7 @@
     }
     renderSocialIcons();
   }
+
   function renderSocialIcons() {
     const container = document.getElementById('socialLinksContainer');
     container.innerHTML = '';
@@ -437,12 +426,12 @@
     if(socialLinks.whatsapp) container.innerHTML += `<a href="${socialLinks.whatsapp}" target="_blank"><i class="fab fa-whatsapp"></i></a>`;
   }
 
-  // Temas
+  // ---------- TEMAS ----------
   document.getElementById('nightModeBtn').onclick = () => { document.body.classList.remove('psychedelic-mode'); document.body.classList.add('night-mode'); };
   document.getElementById('psychModeBtn').onclick = () => { document.body.classList.remove('night-mode'); document.body.classList.add('psychedelic-mode'); };
   document.getElementById('normalModeBtn').onclick = () => { document.body.classList.remove('night-mode','psychedelic-mode'); };
 
-  // Login
+  // ---------- LOGIN Y MODO ADMIN ----------
   const loginModal = document.getElementById('loginModal');
   document.getElementById('adminLoginBtn').onclick = () => loginModal.classList.add('active');
   document.getElementById('closeLogin').onclick = () => loginModal.classList.remove('active');
@@ -454,15 +443,18 @@
     } else alert('Credenciales incorrectas');
   };
   if(localStorage.getItem('kshai_auth') === 'true') { authenticated = true; enableAdminMode(); }
+
   function enableAdminMode() {
+    if(document.querySelector('.admin-bar')) return;
     const bar = document.createElement('div'); bar.className = 'admin-bar';
     bar.innerHTML = `<span>✏️ Modo edición total</span><button id="resetAllBtn">Restaurar todo</button><button id="logoutBtn">Cerrar sesión</button>`;
     document.body.appendChild(bar);
-    document.getElementById('logoutBtn').onclick = () => { localStorage.clear(); location.reload(); };
+    document.getElementById('logoutBtn').onclick = () => { localStorage.removeItem('kshai_auth'); saveAll(); location.reload(); };
     document.getElementById('resetAllBtn').onclick = () => { if(confirm('Restaurar datos por defecto?')){ localStorage.clear(); location.reload(); } };
     renderPageNav(); renderPage();
   }
-  // Inicial
+
+  // Inicializar
   renderPageNav();
   renderPage();
   document.querySelector('.close-modal-img').onclick = () => document.getElementById('imageModal').classList.remove('active');
