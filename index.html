@@ -5,21 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Kshai Design | Grabado y Corte Láser</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Poppins', sans-serif;
       background: #fef7ef;
       color: #2c1b12;
       scroll-behavior: smooth;
     }
-
-    /* Top bar */
     .top-bar {
       background: #2c1b12;
       color: #f7e9da;
@@ -30,30 +28,18 @@
       padding: 10px 20px;
       font-size: 0.85rem;
       font-weight: 500;
-      letter-spacing: 0.3px;
     }
-
-    .top-bar span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* Nav */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px 5%;
       background: white;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.03);
       flex-wrap: wrap;
     }
-
     .logo h1 {
       font-size: 1.7rem;
       font-weight: 800;
-      letter-spacing: -0.5px;
       background: linear-gradient(135deg, #3e2a1f, #b47c48);
       background-clip: text;
       -webkit-background-clip: text;
@@ -63,42 +49,23 @@
       font-size: 0.7rem;
       font-weight: 500;
       color: #b47c48;
-      letter-spacing: 1px;
     }
     .nav-contact {
       background: #f0e3d4;
       padding: 8px 18px;
       border-radius: 40px;
       font-weight: 600;
-      font-size: 0.9rem;
-      color: #2c1b12;
+      display: flex;
+      gap: 15px;
     }
-
-    /* Hero */
     .hero {
       text-align: center;
       padding: 50px 20px 40px;
-      background: linear-gradient(145deg, #fff4ea 0%, #faead9 100%);
+      background: linear-gradient(145deg, #fff4ea, #faead9);
     }
     .hero h2 {
       font-size: 2.1rem;
       font-weight: 800;
-      margin-bottom: 12px;
-      color: #2c1b12;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #5c3e28;
-    }
-    .hero .badge-quality {
-      margin: 20px auto 0;
-      background: #e5d5c0;
-      display: inline-block;
-      padding: 8px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.9rem;
     }
     .price-badge {
       background: #2c1b12;
@@ -109,14 +76,7 @@
       margin-top: 28px;
       font-weight: 800;
       font-size: 1.7rem;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
     }
-    .price-badge span {
-      font-size: 1rem;
-      font-weight: 500;
-    }
-
-    /* Section container */
     .section {
       padding: 50px 5%;
       max-width: 1400px;
@@ -127,9 +87,6 @@
       font-weight: 700;
       margin-bottom: 32px;
       text-align: center;
-      position: relative;
-      display: inline-block;
-      width: 100%;
     }
     .section-title:after {
       content: '';
@@ -140,94 +97,51 @@
       margin: 12px auto 0;
       border-radius: 4px;
     }
-
-    /* Que podemos hacer grid */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 24px;
-      margin-top: 20px;
     }
     .service-card {
       background: white;
       border-radius: 24px;
       padding: 24px 12px;
       text-align: center;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.03);
-      transition: all 0.25s ease;
       border: 1px solid #f0e2d4;
-    }
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
-      border-color: #dbbc9b;
     }
     .service-num {
       font-size: 2rem;
       font-weight: 800;
       color: #d6a15a;
-      margin-bottom: 8px;
     }
-    .service-card h4 {
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    /* alta precision banner */
     .precision-banner {
       background: #e9ddcf;
       border-radius: 38px;
       padding: 38px 28px;
-      margin: 20px 0 20px;
       text-align: center;
-    }
-    .precision-banner h3 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-    .precision-banner p {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    /* CARROUSEL */
-    .carousel-section {
-      background: #fffaf4;
-      border-radius: 40px;
-      padding: 20px 10px;
-      margin: 20px 0;
     }
     .carousel-container {
       position: relative;
       overflow: hidden;
-      border-radius: 24px;
     }
     .carousel-track {
       display: flex;
-      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      transition: transform 0.4s;
       gap: 16px;
-      padding: 8px 0;
     }
     .carousel-slide {
       min-width: 220px;
       background: white;
       border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      text-align: center;
       padding: 12px;
+      text-align: center;
+      position: relative;
     }
     .carousel-slide img {
       width: 100%;
       height: 180px;
       object-fit: cover;
       border-radius: 14px;
-      background: #e9dccc;
-    }
-    .carousel-slide p {
-      margin-top: 10px;
-      font-weight: 600;
     }
     .carousel-btn {
       position: absolute;
@@ -241,45 +155,25 @@
       border-radius: 60px;
       cursor: pointer;
       font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
-      z-index: 3;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
     }
-    .carousel-btn.left { left: 8px; }
-    .carousel-btn.right { right: 8px; }
-    .carousel-btn:hover { background: #b47c48; }
-
-    /* upload + link */
     .upload-row {
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
-      margin: 40px 0;
     }
     .upload-card {
       flex: 1;
       background: white;
       border-radius: 28px;
       padding: 28px 24px;
-      box-shadow: 0 12px 26px rgba(0,0,0,0.04);
       border: 1px solid #eedfcb;
-    }
-    .upload-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      font-weight: 700;
     }
     .input-field {
       width: 100%;
       padding: 14px 16px;
-      margin: 12px 0;
       border-radius: 50px;
       border: 1px solid #d9c7b2;
-      font-family: inherit;
-      background: #fffcf9;
+      margin: 12px 0;
     }
     .btn-primary {
       background: #2c1b12;
@@ -290,134 +184,201 @@
       font-weight: 600;
       cursor: pointer;
       transition: 0.2s;
-      margin-top: 8px;
     }
     .btn-primary:hover {
       background: #b47c48;
-      transform: scale(0.97);
     }
     .preview-area {
       margin-top: 20px;
-      text-align: center;
       background: #f8f0e7;
       border-radius: 20px;
       padding: 20px;
       min-height: 160px;
+      text-align: center;
     }
     .preview-area img {
       max-width: 100%;
       max-height: 160px;
       border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-
-    /* PRODUCTOS DESTACADOS - con imagen cuadro */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 32px;
-      margin-top: 20px;
     }
     .product-item {
       background: white;
       border-radius: 28px;
       padding: 20px 16px 24px;
       text-align: center;
-      transition: all 0.25s;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
       border: 1px solid #eedbcb;
+      position: relative;
     }
-    .product-item:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 30px rgba(0,0,0,0.08);
-    }
-    /* CUADRO PARA LA FOTO (imagen de producto) */
     .product-img-frame {
       width: 100%;
       height: 180px;
       background: #f4e9de;
       border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
       overflow: hidden;
+      margin-bottom: 18px;
+      position: relative;
     }
     .product-img-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: 0.2s;
-    }
-    .product-item h4 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin: 10px 0 6px;
     }
     .product-price {
       font-size: 1.5rem;
       font-weight: 800;
       color: #b47c48;
-      margin: 10px 0;
-    }
-    .product-price small {
-      font-size: 0.8rem;
-      font-weight: 400;
     }
     .whatsapp-small {
       background: #25D366;
-      display: inline-block;
       padding: 8px 18px;
       border-radius: 40px;
       color: white;
       font-weight: 600;
-      font-size: 0.8rem;
       cursor: pointer;
-      transition: 0.2s;
       border: none;
-      margin-top: 6px;
     }
-    .whatsapp-small:hover {
-      background: #128C7E;
+    .pinterest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      margin-top: 20px;
     }
-
-    /* diseñador */
-    .designer-note {
+    .pinterest-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+      position: relative;
+    }
+    .pinterest-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .pinterest-card .caption {
+      padding: 12px;
       text-align: center;
-      margin-top: 40px;
-      font-style: italic;
-      font-weight: 500;
-      background: #e9ddd0;
-      padding: 14px;
-      border-radius: 60px;
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
+      font-weight: 600;
+      background: #fff9f2;
+      color: #5a3e28;
     }
-
+    .pinterest-badge {
+      display: inline-block;
+      background: #e60023;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      margin-bottom: 10px;
+    }
     footer {
       background: #2c1b12;
       color: #f6e5d4;
       text-align: center;
       padding: 32px 20px;
-      margin-top: 20px;
     }
     .footer-wa {
       background: #25D366;
       display: inline-block;
       padding: 12px 28px;
       border-radius: 50px;
-      font-weight: bold;
-      margin-top: 15px;
       cursor: pointer;
     }
-
+    /* Modo edición */
+    .edit-overlay {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border-radius: 30px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      z-index: 10;
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .edit-overlay:hover {
+      background: #b47c48;
+    }
+    .admin-bar {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #2c1b12;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 40px;
+      display: flex;
+      gap: 15px;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-size: 0.9rem;
+    }
+    .admin-bar button {
+      background: #b47c48;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+    }
+    .login-modal.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .login-card {
+      background: white;
+      padding: 30px;
+      border-radius: 30px;
+      text-align: center;
+      max-width: 320px;
+      width: 90%;
+      position: relative;
+    }
+    .close-modal {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #888;
+    }
+    .login-card input {
+      width: 100%;
+      margin: 12px 0;
+      padding: 12px;
+      border-radius: 50px;
+      border: 1px solid #ccc;
+    }
     @media (max-width: 760px) {
       .hero h2 { font-size: 1.5rem; }
-      .price-badge { font-size: 1.3rem; padding: 10px 24px; }
-      .section-title { font-size: 1.6rem; }
       .carousel-slide { min-width: 170px; }
-      .product-img-frame { height: 150px; }
     }
   </style>
 </head>
@@ -428,21 +389,17 @@
   <span>📦 Envíos a todo Chile</span>
   <span>📞 +56949510888</span>
 </div>
-
 <nav class="navbar">
-  <div class="logo">
-    <h1>KSHAI DESIGN</h1>
-    <p>✧ grabado & corte de precisión ✧</p>
-  </div>
+  <div class="logo"><h1>KSHAI DESIGN</h1><p>✧ grabado & corte de precisión ✧</p></div>
   <div class="nav-contact">
-    🔥 Calidad + Precisión
+    <span>🔥 Calidad + Precisión</span>
+    <button id="adminLoginBtnNav" style="background: none; border: none; cursor: pointer; font-size:1rem;">🔐 Admin</button>
   </div>
 </nav>
 
 <section class="hero">
   <h2>⚡ Personalizamos tus ideas con <span style="color:#b47c48;">GRABADO Y CORTE LÁSER</span></h2>
   <p>Madera · MDF · Acrílico · y más</p>
-  <div class="badge-quality">🎯 Calidad, precisión y detalles que marcan la diferencia</div>
   <div class="price-badge">DESDE $500 <span>💰 precios accesibles</span></div>
 </section>
 
@@ -460,7 +417,6 @@
   </div>
 </div>
 
-<!-- ALTA PRECISIÓN -->
 <div class="section">
   <div class="precision-banner">
     <h3>⚙️ ALTA PRECISIÓN EN CORTE Y GRABADO LÁSER</h3>
@@ -468,262 +424,270 @@
   </div>
 </div>
 
-<!-- CARRUSEL DE MUESTRAS -->
-<div class="section carousel-section">
-  <div class="section-title" style="margin-bottom: 20px;">✨ Inspiración láser ✨</div>
+<!-- CARRUSEL -->
+<div class="section carousel-section" style="background:#fffaf4; border-radius:40px; padding:20px;">
+  <div class="section-title" style="margin-bottom:20px;">✨ Inspiración láser ✨</div>
   <div class="carousel-container">
     <button class="carousel-btn left" id="carouselLeft">❮</button>
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Llavero+Grabado" alt="llavero"><p>🔑 Llavero personalizado</p></div>
-      <div class="carousel-slide"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Letrero+Decorativo" alt="letrero"><p>🏠 Letrero decorativo</p></div>
-      <div class="carousel-slide"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Porta+Retrato+Musical" alt="portaretrato"><p>🎵 Porta retrato musical</p></div>
-      <div class="carousel-slide"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Posavasos+Grabados" alt="posavasos"><p>🍷 Posavasos grabados</p></div>
-      <div class="carousel-slide"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Caja+Personalizada" alt="caja"><p>📦 Caja personalizada</p></div>
+      <div class="carousel-slide" data-img-id="carousel0"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Llavero+Grabado" alt="llavero"><p>🔑 Llavero</p></div>
+      <div class="carousel-slide" data-img-id="carousel1"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Letrero+Decorativo" alt="letrero"><p>🏠 Letrero</p></div>
+      <div class="carousel-slide" data-img-id="carousel2"><img src="https://private-user-images.githubusercontent.com/104705077/583091537-94747ba4-7ccd-4f25-a266-824b57d7d5cf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzY5OTgzNTksIm5iZiI6MTc3Njk5ODA1OSwicGF0aCI6Ii8xMDQ3MDUwNzcvNTgzMDkxNTM3LTk0NzQ3YmE0LTdjY2QtNGYyNS1hMjY2LTgyNGI1N2Q3ZDVjZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDI0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDI0OVQwMjI5MDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04OTc5ODU3YjQ4MTY2ZGJmMGM3ZjMxYzY0MmU5YmM1YWIzNTA5YzgyMDM0NzI3MDAyODc5YzNmNzRlMjA2OWUwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.6VqJab_7A2PQZzBkUXvnhcqRzO2RANFdFCcr_xU-LlY" alt="portaretrato"><p>🎵 Porta retrato musical</p></div>
+      <div class="carousel-slide" data-img-id="carousel3"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Posavasos+Grabados" alt="posavasos"><p>🍷 Posavasos</p></div>
+      <div class="carousel-slide" data-img-id="carousel4"><img src="https://placehold.co/400x300/e0cfbc/5a3e28?text=Caja+Personalizada" alt="caja"><p>📦 Caja</p></div>
     </div>
     <button class="carousel-btn right" id="carouselRight">❯</button>
   </div>
 </div>
 
-<!-- SUBIR IMAGEN O LINK CON VISTA PREVIA + WHATSAPP -->
+<!-- REFERENCIAS PINTEREST -->
+<div class="section">
+  <div class="section-title">📌 REFERENCIAS DE PINTEREST - INSPIRACIÓN</div>
+  <div class="pinterest-grid" id="pinterestGrid">
+    <div class="pinterest-card" data-img-id="pin0"><img src="https://placehold.co/400x300/f5e6d3/5a3e28?text=Nombres+grabados+en+madera" alt="Nombres personalizados"><div class="caption">📛 Nombres personalizados</div></div>
+    <div class="pinterest-card" data-img-id="pin1"><img src="https://placehold.co/400x300/f5e6d3/5a3e28?text=Letreros+y+frases+laser" alt="Letreros"><div class="caption">🏷️ Letreros y frases</div></div>
+    <div class="pinterest-card" data-img-id="pin2"><img src="https://placehold.co/400x300/f5e6d3/5a3e28?text=Posavasos+con+diseños" alt="Posavasos"><div class="caption">🍷 Posavasos artísticos</div></div>
+    <div class="pinterest-card" data-img-id="pin3"><img src="https://placehold.co/400x300/f5e6d3/5a3e28?text=Cajas+de+regalo+grabadas" alt="Cajas"><div class="caption">🎁 Cajas y estuches</div></div>
+    <div class="pinterest-card" data-img-id="pin4"><img src="https://placehold.co/400x300/f5e6d3/5a3e28?text=Cuadros+y+decoracion+laser" alt="Cuadros"><div class="caption">🖼️ Cuadros grabados</div></div>
+    <div class="pinterest-card" data-img-id="pin5"><img src="https://placehold.co/400x300/f5e6d3/5a3e28?text=Logos+y+marcas+grabadas" alt="Logos"><div class="caption">🏢 Logos y marcas</div></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;"><span class="pinterest-badge">📌 Imágenes referenciales estilo Pinterest</span></div>
+</div>
+
+<!-- SUBIR IMAGEN O LINK + WHATSAPP -->
 <div class="section">
   <div class="section-title">📸 SUBE TU IMAGEN O DISEÑO</div>
   <div class="upload-row">
-    <div class="upload-card">
-      <h3>📁 Subir archivo</h3>
-      <input type="file" id="imageFileInput" accept="image/*" class="input-field">
-      <button class="btn-primary" id="previewFileBtn">👁️ Vista previa (archivo)</button>
-    </div>
-    <div class="upload-card">
-      <h3>🔗 Comparte el enlace de tu imagen</h3>
-      <input type="text" id="imageUrlInput" class="input-field" placeholder="https://ejemplo.com/mi-diseno.jpg">
-      <button class="btn-primary" id="previewUrlBtn">🌐 Vista previa (URL)</button>
-      <div class="preview-area" id="globalPreview">
-        <span style="color:#b98f67;">⬅️ Sube o pega un enlace para ver tu diseño aquí</span>
-      </div>
-      <button class="btn-primary" id="sendWhatsappBtn" style="background:#25D366; margin-top: 18px;">📲 Enviar por WhatsApp</button>
-    </div>
+    <div class="upload-card"><h3>📁 Subir archivo</h3><input type="file" id="imageFileInput" accept="image/*" class="input-field"><button class="btn-primary" id="previewFileBtn">👁️ Vista previa</button></div>
+    <div class="upload-card"><h3>🔗 Comparte el enlace de tu imagen</h3><input type="text" id="imageUrlInput" class="input-field" placeholder="https://ejemplo.com/diseño.jpg"><button class="btn-primary" id="previewUrlBtn">🌐 Vista previa</button><div class="preview-area" id="globalPreview">⬅️ Vista previa de tu diseño</div><button class="btn-primary" id="sendWhatsappBtn" style="background:#25D366;">📲 Enviar por WhatsApp</button></div>
   </div>
 </div>
 
-<!-- PRODUCTOS DESTACADOS CON CUADRO PARA FOTO (URL DEMO REEMPLAZABLE) -->
+<!-- PRODUCTOS DESTACADOS -->
 <div class="section">
   <div class="section-title">🏆 PRODUCTOS DESTACADOS</div>
-  <div class="products-grid">
-    <!-- Producto 1: Llavero personalizado -->
-    <div class="product-item">
-      <div class="product-img-frame">
-        <!-- **** URL DEMO: CAMBIA ESTA URL POR LA IMAGEN REAL DE TU PRODUCTO **** -->
-        <img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Llavero+Demo" alt="Llavero personalizado" class="product-img">
-      </div>
-      <h4>🔑 Llavero personalizado</h4>
-      <div class="product-price">$500 <small>desde</small></div>
-      <button class="whatsapp-small" data-product="Llavero personalizado - desde $500">Consultar por WA</button>
-    </div>
-    <!-- Producto 2: Letrero decorativo -->
-    <div class="product-item">
-      <div class="product-img-frame">
-        <!-- **** URL DEMO: CAMBIA ESTA URL POR LA IMAGEN REAL DE TU PRODUCTO **** -->
-        <img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Letrero+Demo" alt="Letrero decorativo" class="product-img">
-      </div>
-      <h4>📜 Letrero decorativo</h4>
-      <div class="product-price">$1.000 <small>desde</small></div>
-      <button class="whatsapp-small" data-product="Letrero decorativo - desde $1.000">Consultar por WA</button>
-    </div>
-    <!-- Producto 3: Porta retrato musical (IMAGEN REAL ACTUALIZADA) -->
-    <div class="product-item">
-      <div class="product-img-frame">
-        <!-- IMAGEN REAL DEL PORTA RETRATO MUSICAL - reemplazada según enlace proporcionado -->
-        <img src="https://private-user-images.githubusercontent.com/104705077/583091537-94747ba4-7ccd-4f25-a266-824b57d7d5cf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzY5OTgzNTksIm5iZiI6MTc3Njk5ODA1OSwicGF0aCI6Ii8xMDQ3MDUwNzcvNTgzMDkxNTM3LTk0NzQ3YmE0LTdjY2QtNGYyNS1hMjY2LTgyNGI1N2Q3ZDVjZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDI0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQyNFQwMjM0MTlaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mMmI4MzY3ZWIzZjM1MDU5ZTM1MzZhN2MyZDY2OWZiMGQwZmJjZjI3MGFiOTVlMjczNjMzOGVlNjkxYjQ1OWJiJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.PmYnfTJzehI97SX83uFVubJ_0_kbA1IqOhcLv6LAyDM" alt="Porta retrato musical" class="product-img">
-      </div>
-      <h4>🎶 Porta retrato musical</h4>
-      <div class="product-price">$1.500 <small>desde</small></div>
-      <button class="whatsapp-small" data-product="Porta retrato musical - desde $1.500">Consultar por WA</button>
-    </div>
-    <!-- Producto 4: Posavasos grabados -->
-    <div class="product-item">
-      <div class="product-img-frame">
-        <!-- **** URL DEMO: CAMBIA ESTA URL POR LA IMAGEN REAL DE TU PRODUCTO **** -->
-        <img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Posavasos+Demo" alt="Posavasos grabados" class="product-img">
-      </div>
-      <h4>🍷 Posavasos grabados</h4>
-      <div class="product-price">$600 <small>desde</small></div>
-      <button class="whatsapp-small" data-product="Posavasos grabados - desde $600">Consultar por WA</button>
-    </div>
-    <!-- Producto 5: Caja personalizada -->
-    <div class="product-item">
-      <div class="product-img-frame">
-        <!-- **** URL DEMO: CAMBIA ESTA URL POR LA IMAGEN REAL DE TU PRODUCTO **** -->
-        <img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Caja+Demo" alt="Caja personalizada" class="product-img">
-      </div>
-      <h4>📦 Caja personalizada</h4>
-      <div class="product-price">$2.000 <small>desde</small></div>
-      <button class="whatsapp-small" data-product="Caja personalizada - desde $2.000">Consultar por WA</button>
-    </div>
+  <div class="products-grid" id="productsGrid">
+    <div class="product-item" data-img-id="prod0"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Llavero+Demo"></div><h4>🔑 Llavero</h4><div class="product-price">$500</div><button class="whatsapp-small" data-product="Llavero personalizado - $500">Consultar</button></div>
+    <div class="product-item" data-img-id="prod1"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Letrero+Demo"></div><h4>📜 Letrero</h4><div class="product-price">$1.000</div><button class="whatsapp-small" data-product="Letrero decorativo - $1.000">Consultar</button></div>
+    <div class="product-item" data-img-id="prod2"><div class="product-img-frame"><img src="https://private-user-images.githubusercontent.com/104705077/583091537-94747ba4-7ccd-4f25-a266-824b57d7d5cf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzY5OTgzNTksIm5iZiI6MTc3Njk5ODA1OSwicGF0aCI6Ii8xMDQ3MDUwNzcvNTgzMDkxNTM3LTk0NzQ3YmE0LTdjY2QtNGYyNS1hMjY2LTgyNGI1N2Q3ZDVjZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDI0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDI0OVQwMjI5MDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04OTc5ODU3YjQ4MTY2ZGJmMGM3ZjMxYzY0MmU5YmM1YWIzNTA5YzgyMDM0NzI3MDAyODc5YzNmNzRlMjA2OWUwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.6VqJab_7A2PQZzBkUXvnhcqRzO2RANFdFCcr_xU-LlY" alt="Porta retrato"></div><h4>🎶 Porta retrato musical</h4><div class="product-price">$1.500</div><button class="whatsapp-small" data-product="Porta retrato musical - $1.500">Consultar</button></div>
+    <div class="product-item" data-img-id="prod3"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Posavasos+Demo"></div><h4>🍷 Posavasos</h4><div class="product-price">$600</div><button class="whatsapp-small" data-product="Posavasos grabados - $600">Consultar</button></div>
+    <div class="product-item" data-img-id="prod4"><div class="product-img-frame"><img src="https://placehold.co/400x300/f0e2d6/5a3e28?text=Caja+Demo"></div><h4>📦 Caja personalizada</h4><div class="product-price">$2.000</div><button class="whatsapp-small" data-product="Caja personalizada - $2.000">Consultar</button></div>
   </div>
-
-  <!-- Diseñado por Kshai Design -->
-  <div class="designer-note">
-    🎨 Diseñado por: <strong>Kshai Design</strong> · Creatividad y precisión en cada detalle
-  </div>
+  <div class="designer-note" style="text-align:center; margin-top:40px;">🎨 Diseñado por: <strong>Kshai Design</strong> · Creatividad y precisión</div>
 </div>
 
-<!-- INFO ADICIONAL -->
-<div class="section" style="text-align: center; padding-top: 0;">
-  <div style="background:#fff3ea; border-radius: 36px; padding: 28px;">
-    <h3>💎 ¿Necesitas corte de piezas a medida?</h3>
-    <p>Consultá por números grandes, diseños exclusivos, souvenirs, y más. Entregamos calidad impecable.</p>
-    <button class="btn-primary" id="contactGeneral" style="background:#b47c48;">📞 Escríbenos Ahora</button>
-  </div>
+<div class="section" style="text-align:center;">
+  <div style="background:#fff3ea; border-radius:36px; padding:28px;"><h3>💎 ¿Necesitas corte de piezas a medida?</h3><button class="btn-primary" id="contactGeneral" style="background:#b47c48;">📞 Escríbenos Ahora</button></div>
 </div>
 
 <footer>
   <p>© Kshai Design — Grabado y corte láser de alta precisión</p>
   <p>✉️ +56949510888 · WhatsApp directo</p>
-  <div class="footer-wa" id="footerWhatsappBtn">💬 ¡Haz tu pedido hoy por WhatsApp!</div>
+  <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+    <div class="footer-wa" id="footerWhatsappBtn">💬 ¡Haz tu pedido hoy!</div>
+    <button id="adminLoginBtnFooter" style="background:#b47c48; border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer;">🔐 Administrar imágenes</button>
+  </div>
 </footer>
 
+<!-- MODAL LOGIN (sin credenciales visibles) -->
+<div id="loginModal" class="login-modal">
+  <div class="login-card">
+    <span class="close-modal" id="closeModalBtn">&times;</span>
+    <h2>🔐 Acceso editor</h2>
+    <input type="text" id="loginUser" placeholder="Usuario">
+    <input type="password" id="loginPass" placeholder="Contraseña">
+    <button id="doLogin" class="btn-primary">Iniciar sesión</button>
+  </div>
+</div>
+
 <script>
-  // ========== CONFIGURACIÓN URL DEMO (para productos) ==========
-  // Las imágenes que no se han actualizado mantienen placeholders.
-  // La imagen del porta retrato musical ya fue reemplazada por la URL real.
-  
-  // ------- CARROUSEL (control manual) ------- 
-  const track = document.getElementById('carouselTrack');
-  const slides = Array.from(document.querySelectorAll('.carousel-slide'));
-  const slideWidth = 220 + 16; // ancho + gap (min-width 220px + gap 16px)
-  let currentIndex = 0;
-  const visibleSlides = () => Math.floor(track.parentElement.clientWidth / slideWidth) || 1;
-  const maxIndex = () => Math.max(0, slides.length - visibleSlides());
+  // ---------- AUTENTICACIÓN ----------
+  let authenticated = false;
+  const loginModal = document.getElementById('loginModal');
+  const openModalBtns = [document.getElementById('adminLoginBtnNav'), document.getElementById('adminLoginBtnFooter')];
+  const closeModalBtn = document.getElementById('closeModalBtn');
 
-  function updateCarousel() {
-    const maxIdx = maxIndex();
-    currentIndex = Math.min(maxIdx, Math.max(0, currentIndex));
-    const offset = currentIndex * slideWidth;
-    track.style.transform = `translateX(-${offset}px)`;
+  function showModal() { loginModal.classList.add('active'); }
+  function hideModal() { loginModal.classList.remove('active'); }
+  openModalBtns.forEach(btn => btn && btn.addEventListener('click', showModal));
+  closeModalBtn.addEventListener('click', hideModal);
+  window.addEventListener('click', (e) => { if (e.target === loginModal) hideModal(); });
+
+  const doLogin = document.getElementById('doLogin');
+  doLogin.onclick = () => {
+    const user = document.getElementById('loginUser').value;
+    const pass = document.getElementById('loginPass').value;
+    if (user === 'kshaidesign' && pass === 'Valeria2020') {
+      authenticated = true;
+      localStorage.setItem('kshai_auth', 'true');
+      hideModal();
+      enableEditMode();
+    } else {
+      alert('Credenciales incorrectas');
+    }
+  };
+
+  // Verificar si ya está autenticado
+  if (localStorage.getItem('kshai_auth') === 'true') {
+    authenticated = true;
+    enableEditMode();
   }
 
-  document.getElementById('carouselLeft').addEventListener('click', () => {
-    currentIndex = Math.max(0, currentIndex - 1);
-    updateCarousel();
-  });
-  document.getElementById('carouselRight').addEventListener('click', () => {
-    const maxIdx = maxIndex();
-    currentIndex = Math.min(maxIdx, currentIndex + 1);
-    updateCarousel();
-  });
-  window.addEventListener('resize', () => updateCarousel());
-  setTimeout(() => updateCarousel(), 100);
-
-  // -------- PREVIEW GLOBAL (archivo o URL) --------
-  const previewDiv = document.getElementById('globalPreview');
-  let currentImageData = null;      // puede ser url string o dataURL
-  let currentSource = null;         // 'file' o 'url'
-
-  // preview desde archivo
-  document.getElementById('previewFileBtn').addEventListener('click', () => {
-    const fileInput = document.getElementById('imageFileInput');
-    const file = fileInput.files[0];
-    if (!file) {
-      previewDiv.innerHTML = '<span style="color:#b98f67;">⚠️ Selecciona un archivo de imagen primero.</span>';
-      currentImageData = null;
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const imgUrl = e.target.result;
-      previewDiv.innerHTML = `<img src="${imgUrl}" alt="preview diseño">`;
-      currentImageData = imgUrl;
-      currentSource = 'file';
+  function enableEditMode() {
+    if (document.querySelector('.admin-bar')) return;
+    const adminBar = document.createElement('div');
+    adminBar.className = 'admin-bar';
+    adminBar.innerHTML = `<span>✏️ Modo edición activo</span><button id="resetImagesBtn">Restaurar imágenes originales</button><button id="logoutBtn">Cerrar sesión</button>`;
+    document.body.appendChild(adminBar);
+    document.getElementById('logoutBtn').onclick = () => {
+      localStorage.removeItem('kshai_auth');
+      location.reload();
     };
-    reader.readAsDataURL(file);
-  });
-
-  // preview desde URL
-  document.getElementById('previewUrlBtn').addEventListener('click', () => {
-    const urlInput = document.getElementById('imageUrlInput');
-    let rawUrl = urlInput.value.trim();
-    if (!rawUrl) {
-      previewDiv.innerHTML = '<span style="color:#b98f67;">🔗 Ingresa una URL válida.</span>';
-      currentImageData = null;
-      return;
-    }
-    previewDiv.innerHTML = `<div style="padding:20px;">⏳ Cargando vista previa...</div>`;
-    const testImg = new Image();
-    testImg.onload = () => {
-      previewDiv.innerHTML = `<img src="${rawUrl}" alt="vista previa url">`;
-      currentImageData = rawUrl;
-      currentSource = 'url';
-    };
-    testImg.onerror = () => {
-      previewDiv.innerHTML = '<span style="color:#b98f67;">❌ No se pudo cargar la imagen. Revisa el enlace.</span>';
-      currentImageData = null;
-    };
-    testImg.src = rawUrl;
-  });
-
-  // -------- FUNCIÓN ENVIAR WHATSAPP (con diseño/imagen) --------
-  function sendWhatsAppMessage(customProduct = null) {
-    let message = "🪵 *Kshai Design* - Cotización personalizada 🎯%0A";
-    if (customProduct) {
-      message += `📌 Producto: ${customProduct}%0A`;
-    } else {
-      message += `📐 *Diseño personalizado*%0A`;
-    }
-    
-    if (currentImageData) {
-      if (currentSource === 'url') {
-        message += `🎨 *Enlace de diseño:* ${currentImageData}%0A`;
-      } else if (currentSource === 'file') {
-        message += `🖼️ *Imagen cargada:* (el diseño fue previsualizado, adjuntar captura si es necesario)%0A`;
+    document.getElementById('resetImagesBtn').onclick = () => {
+      if (confirm('¿Restaurar todas las imágenes a los valores por defecto?')) {
+        localStorage.removeItem('kshai_images');
+        location.reload();
       }
-    } else {
-      const urlField = document.getElementById('imageUrlInput').value.trim();
-      const fileField = document.getElementById('imageFileInput').files[0];
-      if (urlField) {
-        message += `🔗 *Link entregado:* ${urlField}%0A`;
-      } else if (fileField) {
-        message += `📎 *Archivo listo:* (subido desde el formulario, consulta por favor)%0A`;
-      } else {
-        message += `✨ *Diseño a definir* - se puede enviar imagen durante la conversación.%0A`;
-      }
+    };
+
+    function addEditOverlay(container, imgElement, storageKey) {
+      if (container.querySelector('.edit-overlay')) return;
+      const editDiv = document.createElement('div');
+      editDiv.className = 'edit-overlay';
+      editDiv.innerHTML = '<i class="fas fa-pencil-alt"></i> Editar';
+      editDiv.onclick = (e) => {
+        e.stopPropagation();
+        const newUrl = prompt('Ingrese la nueva URL de la imagen (enlace directo):', imgElement.src);
+        if (newUrl && newUrl.trim()) {
+          imgElement.src = newUrl;
+          let stored = JSON.parse(localStorage.getItem('kshai_images') || '{}');
+          stored[storageKey] = newUrl;
+          localStorage.setItem('kshai_images', JSON.stringify(stored));
+        } else {
+          const fileInput = document.createElement('input');
+          fileInput.type = 'file';
+          fileInput.accept = 'image/*';
+          fileInput.onchange = (ev) => {
+            const file = ev.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (e2) => {
+                imgElement.src = e2.target.result;
+                let stored = JSON.parse(localStorage.getItem('kshai_images') || '{}');
+                stored[storageKey] = e2.target.result;
+                localStorage.setItem('kshai_images', JSON.stringify(stored));
+              };
+              reader.readAsDataURL(file);
+            }
+          };
+          fileInput.click();
+        }
+      };
+      container.style.position = 'relative';
+      container.appendChild(editDiv);
     }
-    message += `%0A💬 *Quiero más información sobre precios, tiempos y envíos.* ¡Gracias!`;
-    const phone = "56949510888";
-    window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
-  }
 
-  // botón enviar whatsapp desde sección carga
-  document.getElementById('sendWhatsappBtn').addEventListener('click', () => {
-    sendWhatsAppMessage(null);
-  });
-
-  // botones de productos destacados (cada botón envía producto)
-  const waButtons = document.querySelectorAll('.whatsapp-small');
-  waButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const productText = btn.getAttribute('data-product');
-      sendWhatsAppMessage(productText);
+    // Productos
+    document.querySelectorAll('.product-item').forEach((item, idx) => {
+      const frame = item.querySelector('.product-img-frame');
+      const img = frame.querySelector('img');
+      if (img) addEditOverlay(frame, img, `prod_${idx}`);
     });
-  });
+    // Carrusel
+    document.querySelectorAll('.carousel-slide').forEach((slide, idx) => {
+      const img = slide.querySelector('img');
+      if (img) addEditOverlay(slide, img, `carousel_${idx}`);
+    });
+    // Pinterest
+    document.querySelectorAll('.pinterest-card').forEach((card, idx) => {
+      const img = card.querySelector('img');
+      if (img) addEditOverlay(card, img, `pin_${idx}`);
+    });
+  }
 
-  // botón de contacto general (footer y extra)
-  document.getElementById('contactGeneral')?.addEventListener('click', () => {
-    sendWhatsAppMessage(null);
-  });
-  document.getElementById('footerWhatsappBtn')?.addEventListener('click', () => {
-    sendWhatsAppMessage(null);
-  });
+  // Cargar imágenes guardadas
+  function loadStoredImages() {
+    const stored = JSON.parse(localStorage.getItem('kshai_images') || '{}');
+    document.querySelectorAll('.product-item').forEach((item, idx) => {
+      const key = `prod_${idx}`;
+      if (stored[key]) {
+        const img = item.querySelector('.product-img-frame img');
+        if (img) img.src = stored[key];
+      }
+    });
+    document.querySelectorAll('.carousel-slide').forEach((slide, idx) => {
+      const key = `carousel_${idx}`;
+      if (stored[key]) {
+        const img = slide.querySelector('img');
+        if (img) img.src = stored[key];
+      }
+    });
+    document.querySelectorAll('.pinterest-card').forEach((card, idx) => {
+      const key = `pin_${idx}`;
+      if (stored[key]) {
+        const img = card.querySelector('img');
+        if (img) img.src = stored[key];
+      }
+    });
+  }
+  loadStoredImages();
 
-  // atajo para preview con Enter en campo URL
-  const urlInputField = document.getElementById('imageUrlInput');
-  urlInputField.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      document.getElementById('previewUrlBtn').click();
+  // Carrusel
+  const track = document.getElementById('carouselTrack');
+  const slidesC = Array.from(document.querySelectorAll('.carousel-slide'));
+  const slideWidth = 220 + 16;
+  let currentIndex = 0;
+  function updateCarousel() {
+    const visible = Math.floor(track.parentElement.clientWidth / slideWidth) || 1;
+    const max = Math.max(0, slidesC.length - visible);
+    currentIndex = Math.min(max, Math.max(0, currentIndex));
+    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+  }
+  document.getElementById('carouselLeft').onclick = () => { currentIndex--; updateCarousel(); };
+  document.getElementById('carouselRight').onclick = () => { currentIndex++; updateCarousel(); };
+  window.addEventListener('resize', updateCarousel);
+  setTimeout(updateCarousel, 100);
+
+  // Preview y WhatsApp
+  const previewDiv = document.getElementById('globalPreview');
+  let currentImageData = null, currentSource = null;
+  document.getElementById('previewFileBtn').onclick = () => {
+    const file = document.getElementById('imageFileInput').files[0];
+    if (!file) { previewDiv.innerHTML = '<span>⚠️ Selecciona un archivo</span>'; return; }
+    const reader = new FileReader();
+    reader.onload = e => { previewDiv.innerHTML = `<img src="${e.target.result}">`; currentImageData = e.target.result; currentSource = 'file'; };
+    reader.readAsDataURL(file);
+  };
+  document.getElementById('previewUrlBtn').onclick = () => {
+    let url = document.getElementById('imageUrlInput').value.trim();
+    if (!url) { previewDiv.innerHTML = '<span>🔗 Ingresa URL</span>'; return; }
+    previewDiv.innerHTML = '<span>Cargando...</span>';
+    const img = new Image();
+    img.onload = () => { previewDiv.innerHTML = `<img src="${url}">`; currentImageData = url; currentSource = 'url'; };
+    img.onerror = () => previewDiv.innerHTML = '<span>❌ Error al cargar imagen</span>';
+    img.src = url;
+  };
+  function sendWA(product = null) {
+    let msg = "🪵 *Kshai Design* - Cotización%0A";
+    if (product) msg += `📌 Producto: ${product}%0A`;
+    else msg += `📐 Diseño personalizado%0A`;
+    if (currentImageData) {
+      if (currentSource === 'url') msg += `🎨 Enlace diseño: ${currentImageData}%0A`;
+      else msg += `🖼️ Imagen previsualizada (adjuntar si es necesario)%0A`;
+    } else {
+      const url = document.getElementById('imageUrlInput').value.trim();
+      const file = document.getElementById('imageFileInput').files[0];
+      if (url) msg += `🔗 Link: ${url}%0A`;
+      else if (file) msg += `📎 Archivo listo%0A`;
+      else msg += `✨ Diseño a definir%0A`;
     }
-  });
-  
-  console.log("Kshai Design - Producto Porta retrato musical con imagen real actualizada");
+    msg += `%0A💬 Más info por favor. ¡Gracias!`;
+    window.open(`https://wa.me/56949510888?text=${msg}`, '_blank');
+  }
+  document.getElementById('sendWhatsappBtn').onclick = () => sendWA();
+  document.querySelectorAll('.whatsapp-small').forEach(btn => btn.onclick = () => sendWA(btn.getAttribute('data-product')));
+  document.getElementById('contactGeneral').onclick = () => sendWA();
+  document.getElementById('footerWhatsappBtn').onclick = () => sendWA();
 </script>
 </body>
 </html>
