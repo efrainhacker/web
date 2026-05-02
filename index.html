@@ -1,464 +1,227 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Kshai Design | Editor Total</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s, color 0.2s, border-color 0.2s; }
-    body { font-family: 'Poppins', sans-serif; background: #fef7ef; color: #2c1b12; scroll-behavior: smooth; padding-bottom: 70px; }
-    body.night-mode { background: #121212; color: #e0e0e0; }
-    body.night-mode .navbar, body.night-mode .service-card, body.night-mode .product-item,
-    body.night-mode .upload-card, body.night-mode .pinterest-card, body.night-mode .contact-form,
-    body.night-mode .precision-banner, body.night-mode .carousel-slide {
-      background: #1e1e1e; color: #ddd; border-color: #333;
-    }
-    body.psychedelic-mode { background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffcc, #ffcc00); background-size: 400% 400%; animation: psychedelicBG 6s ease infinite; color: #fff; text-shadow: 0 0 2px black; }
-    body.psychedelic-mode .navbar, body.psychedelic-mode .service-card, body.psychedelic-mode .product-item,
-    body.psychedelic-mode .upload-card, body.psychedelic-mode .pinterest-card, body.psychedelic-mode .contact-form,
-    body.psychedelic-mode .precision-banner, body.psychedelic-mode .carousel-slide {
-      background: rgba(0,0,0,0.4) !important; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.3);
-    }
-    @keyframes psychedelicBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    .theme-buttons { position: fixed; bottom: 20px; left: 20px; z-index: 1000; display: flex; gap: 8px; background: rgba(0,0,0,0.5); padding: 6px 12px; border-radius: 50px; backdrop-filter: blur(5px); }
-    .theme-btn { background: #2c1b12; color: white; border: none; border-radius: 40px; padding: 5px 12px; font-size: 0.75rem; cursor: pointer; font-weight: bold; }
-    .top-bar { background: #2c1b12; color: #f7e9da; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; padding: 10px 20px; font-size: 0.85rem; font-weight: 500; }
-    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: white; flex-wrap: wrap; }
-    .logo { display: flex; align-items: center; gap: 12px; position: relative; }
-    .logo-img { width: 50px; height: 50px; object-fit: contain; border-radius: 12px; cursor: pointer; }
-    .logo-text h1 { font-size: 1.7rem; font-weight: 800; background: linear-gradient(135deg, #3e2a1f, #b47c48); background-clip: text; -webkit-background-clip: text; color: transparent; cursor: pointer; }
-    .logo-text p { font-size: 0.7rem; font-weight: 500; color: #b47c48; cursor: pointer; }
-    .nav-contact { background: #f0e3d4; padding: 8px 18px; border-radius: 40px; font-weight: 600; display: flex; gap: 15px; align-items: center; }
-    .hero { text-align: center; padding: 50px 20px 40px; background: linear-gradient(145deg, #fff4ea, #faead9); }
-    .hero h2 { font-size: 2.1rem; font-weight: 800; }
-    .price-badge { background: #2c1b12; color: #ffefcf; display: inline-block; padding: 14px 35px; border-radius: 60px; margin-top: 28px; font-weight: 800; font-size: 1.7rem; }
-    .section { padding: 50px 5%; max-width: 1400px; margin: 0 auto; }
-    .section-title { font-size: 1.9rem; font-weight: 700; margin-bottom: 32px; text-align: center; }
-    .section-title:after { content: ''; display: block; width: 70px; height: 4px; background: #b47c48; margin: 12px auto 0; border-radius: 4px; }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 24px; }
-    .service-card { background: white; border-radius: 24px; padding: 24px 12px; text-align: center; border: 1px solid #f0e2d4; }
-    .service-num { font-size: 2rem; font-weight: 800; color: #d6a15a; }
-    .precision-banner { background: #e9ddcf; border-radius: 38px; padding: 38px 28px; text-align: center; }
-    .carousel-container { position: relative; overflow: hidden; margin: 20px 0; }
-    .carousel-track { display: flex; transition: transform 0.4s; gap: 16px; }
-    .carousel-slide { min-width: 220px; background: white; border-radius: 20px; padding: 12px; text-align: center; position: relative; cursor: pointer; }
-    .carousel-slide img { width: 100%; height: 180px; object-fit: cover; border-radius: 14px; cursor: pointer; }
-    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: #2c1b12; color: white; border: none; width: 40px; height: 40px; border-radius: 60px; cursor: pointer; font-size: 1.5rem; z-index: 2; }
-    .upload-row { display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 40px; }
-    .upload-card { flex: 1; background: white; border-radius: 28px; padding: 28px 24px; border: 1px solid #eedfcb; }
-    .input-field, .form-input { width: 100%; padding: 14px 16px; border-radius: 50px; border: 1px solid #d9c7b2; margin: 8px 0; font-family: inherit; }
-    .btn-primary { background: #2c1b12; color: white; border: none; padding: 10px 22px; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.2s; }
-    .btn-primary:hover { background: #b47c48; }
-    .preview-area { margin-top: 20px; background: #f8f0e7; border-radius: 20px; padding: 20px; min-height: 160px; text-align: center; }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-top: 20px; }
-    .product-item { background: white; border-radius: 28px; padding: 20px 16px 24px; text-align: center; border: 1px solid #eedbcb; position: relative; }
-    .product-img-frame { width: 100%; height: 180px; background: #f4e9de; border-radius: 20px; overflow: hidden; margin-bottom: 18px; position: relative; cursor: pointer; }
-    .product-img-frame img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
-    .product-price { font-size: 1.5rem; font-weight: 800; color: #b47c48; margin: 10px 0; cursor: pointer; }
-    .whatsapp-small { background: #25D366; padding: 8px 18px; border-radius: 40px; color: white; font-weight: 600; cursor: pointer; border: none; margin-top: 8px; }
-    .pinterest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; margin-top: 20px; }
-    .pinterest-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.08); position: relative; cursor: pointer; }
-    .pinterest-card img { width: 100%; height: 220px; object-fit: cover; cursor: pointer; }
-    .pinterest-card .caption { padding: 12px; text-align: center; font-weight: 600; background: #fff9f2; }
-    .contact-form { margin-top: 30px; background: #fff9f2; border-radius: 28px; padding: 24px; border: 1px solid #eedbcb; }
-    footer { background: #2c1b12; color: #f6e5d4; text-align: center; padding: 32px 20px; margin-top: 40px; }
-    .social-icons { display: flex; gap: 20px; justify-content: center; margin: 20px 0; }
-    .social-icons a { color: inherit; font-size: 28px; transition: 0.2s; }
-    .youtube-video { margin: 40px auto; max-width: 800px; text-align: center; clear: both; }
-    iframe { width: 100%; height: 400px; border-radius: 20px; }
-    .edit-overlay { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); color: white; border-radius: 30px; padding: 4px 8px; font-size: 0.7rem; cursor: pointer; z-index: 20; backdrop-filter: blur(4px); }
-    .admin-bar { position: fixed; bottom: 20px; right: 20px; background: #2c1b12; color: white; padding: 12px 20px; border-radius: 40px; display: flex; gap: 15px; z-index: 1000; font-size: 0.8rem; }
-    .image-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 3000; visibility: hidden; opacity: 0; transition: 0.2s; }
-    .image-modal.active { visibility: visible; opacity: 1; }
-    .image-modal img { max-width: 90%; max-height: 90%; border-radius: 12px; }
-    .close-modal-img { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; cursor: pointer; }
-    .login-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 2000; visibility: hidden; opacity: 0; }
-    .login-modal.active { visibility: visible; opacity: 1; }
-    .login-card { background: white; padding: 30px; border-radius: 30px; max-width: 320px; width: 90%; position: relative; }
-    .page-nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 20px 0; }
-    .page-btn { background: #b47c48; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; font-size: 0.85rem; }
-    .add-page-btn { background: #25D366; }
-    @media (max-width: 760px) { .carousel-slide { min-width: 170px; } iframe { height: 220px; } .theme-buttons { bottom: 10px; left: 10px; } .admin-bar { bottom: 10px; right: 10px; padding: 8px 12px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotización Web</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    margin:0;
+    padding:20px;
+}
+.container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+.logo{
+    text-align:center;
+}
+.logo img{
+    max-width:250px;
+}
+h1{
+    text-align:center;
+}
+.section{
+    margin-top:25px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+table, th, td{
+    border:1px solid #ddd;
+}
+th{
+    background:black;
+    color:white;
+}
+td, th{
+    padding:10px;
+    text-align:center;
+}
+ul{
+    padding-left:20px;
+}
+.badge{
+    background:black;
+    color:white;
+    padding:5px 10px;
+    border-radius:5px;
+    font-size:12px;
+}
+.note{
+    background:#fff3cd;
+    padding:10px;
+    border-left:5px solid #ffc107;
+    margin-top:10px;
+}
+.highlight{
+    font-size:18px;
+    font-weight:bold;
+}
+.footer{
+    margin-top:20px;
+    font-size:14px;
+    color:#555;
+}
+</style>
 </head>
+
 <body>
-<div class="theme-buttons">
-  <button class="theme-btn" id="nightModeBtn">🌙 Noche</button>
-  <button class="theme-btn" id="psychModeBtn">🌈 Psicodélico</button>
-  <button class="theme-btn" id="normalModeBtn">☀️ Normal</button>
+<div class="container">
+
+<div class="logo">
+    <img src="logo.png" alt="Logo">
 </div>
-<div class="top-bar"><span>✨ Atención personalizada</span><span>📦 Envíos a todo Chile</span><span>📞 +56949510888</span></div>
-<nav class="navbar">
-  <div class="logo" id="logoContainer"><img class="logo-img" src="https://placehold.co/100x100/b47c48/white?text=KS" alt="Logo" id="logoImg"><div class="logo-text"><h1 id="siteTitle">KSHAI DESIGN</h1><p id="siteSub">✧ grabado & corte de precisión ✧</p></div></div>
-  <div class="nav-contact"><span id="navContactText">🔥 Calidad + Precisión</span><button id="adminLoginBtn" class="btn-primary" style="background:#b47c48; margin-left:10px;">🔐 Admin</button></div>
-</nav>
-<div id="pageNavContainer" class="page-nav"></div>
-<div id="pageContent"></div>
-<div id="globalYouTubeContainer" class="section" style="padding-top: 0;"></div>
-<footer><div id="socialLinksContainer" class="social-icons"></div><p>© Kshai Design — Grabado y corte láser de alta precisión</p><p>✉️ +56949510888 · WhatsApp directo</p></footer>
-<div id="imageModal" class="image-modal"><span class="close-modal-img">&times;</span><img id="modalImg"></div>
-<div id="loginModal" class="login-modal"><div class="login-card"><span id="closeLogin" style="float:right;cursor:pointer;">&times;</span><h2>🔐 Acceso editor</h2><input type="text" id="loginUser" placeholder="Usuario"><input type="password" id="loginPass" placeholder="Contraseña"><button id="doLogin" class="btn-primary">Iniciar sesión</button></div></div>
 
-<script>
-  // ---------- ESTRUCTURA PREDETERMINADA ----------
-  const DEFAULT_HOME = {
-    id: "home",
-    name: "Inicio",
-    content: {
-      sections: [
-        { type: "hero", title: "⚡ Personalizamos tus ideas con GRABADO Y CORTE LÁSER", subtitle: "Madera · MDF · Acrílico · y más", price: "DESDE $500" },
-        { type: "services", title: "🛠️ ¿QUÉ PODEMOS HACER?", items: ["NOMBRES PERSONALIZADOS","LETREROS Y LOGOS","TALLERES GRABADOS","CUADROS Y DECORACIÓN","RECUERDOS Y REGALOS","CORTE DE PIEZAS A MEDIDA","✨ ¡Mucho más!"] },
-        { type: "precision", text: "⚙️ ALTA PRECISIÓN EN CORTE Y GRABADO LÁSER\nAcabados limpios y profesionales · Diseños 100% personalizados · Ideal para regalos, emprendimientos, decoración y más." },
-        { type: "carousel", items: [
-            { img: "https://placehold.co/400x300/e0cfbc/5a3e28?text=Llavero+Grabado", caption: "🔑 Llavero" },
-            { img: "https://placehold.co/400x300/e0cfbc/5a3e28?text=Letrero+Decorativo", caption: "🏠 Letrero" },
-            { img: "https://private-user-images.githubusercontent.com/104705077/583091537-94747ba4-7ccd-4f25-a266-824b57d7d5cf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzY5OTgzNTksIm5iZiI6MTc3Njk5ODA1OSwicGF0aCI6Ii8xMDQ3MDUwNzcvNTgzMDkxNTM3LTk0NzQ3YmE0LTdjY2QtNGYyNS1hMjY2LTgyNGI1N2Q3ZDVjZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDI0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDI0OVQwMjI5MDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04OTc5ODU3YjQ4MTY2ZGJmMGM3ZjMxYzY0MmU5YmM1YWIzNTA5YzgyMDM0NzI3MDAyODc5YzNmNzRlMjA2OWUwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.6VqJab_7A2PQZzBkUXvnhcqRzO2RANFdFCcr_xU-LlY", caption: "🎵 Porta retrato musical" },
-            { img: "https://placehold.co/400x300/e0cfbc/5a3e28?text=Posavasos+Grabados", caption: "🍷 Posavasos" },
-            { img: "https://placehold.co/400x300/e0cfbc/5a3e28?text=Caja+Personalizada", caption: "📦 Caja" }
-          ] },
-        { type: "pinterest", title: "📌 REFERENCIAS DE PINTEREST - INSPIRACIÓN", items: [
-            { img: "https://placehold.co/400x300/f5e6d3/5a3e28?text=Nombres+grabados+en+madera", caption: "📛 Nombres personalizados" },
-            { img: "https://placehold.co/400x300/f5e6d3/5a3e28?text=Letreros+y+frases+laser", caption: "🏷️ Letreros y frases" },
-            { img: "https://placehold.co/400x300/f5e6d3/5a3e28?text=Posavasos+con+diseños", caption: "🍷 Posavasos artísticos" },
-            { img: "https://placehold.co/400x300/f5e6d3/5a3e28?text=Cajas+de+regalo+grabadas", caption: "🎁 Cajas y estuches" },
-            { img: "https://placehold.co/400x300/f5e6d3/5a3e28?text=Cuadros+y+decoracion+laser", caption: "🖼️ Cuadros grabados" },
-            { img: "https://placehold.co/400x300/f5e6d3/5a3e28?text=Logos+y+marcas+grabadas", caption: "🏢 Logos y marcas" }
-          ] },
-        { type: "upload_section", title: "📸 SUBE TU IMAGEN O DISEÑO" },
-        { type: "products", title: "🏆 PRODUCTOS DESTACADOS", items: [
-            { img: "https://placehold.co/400x300/f0e2d6/5a3e28?text=Llavero+Demo", title: "🔑 Llavero", price: "$500", wa: "Llavero personalizado - $500" },
-            { img: "https://placehold.co/400x300/f0e2d6/5a3e28?text=Letrero+Demo", title: "📜 Letrero", price: "$1.000", wa: "Letrero decorativo - $1.000" },
-            { img: "https://private-user-images.githubusercontent.com/104705077/583091537-94747ba4-7ccd-4f25-a266-824b57d7d5cf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzY5OTgzNTksIm5iZiI6MTc3Njk5ODA1OSwicGF0aCI6Ii8xMDQ3MDUwNzcvNTgzMDkxNTM3LTk0NzQ3YmE0LTdjY2QtNGYyNS1hMjY2LTgyNGI1N2Q3ZDVjZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDI0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDI0OVQwMjI5MDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04OTc5ODU3YjQ4MTY2ZGJmMGM3ZjMxYzY0MmU5YmM1YWIzNTA5YzgyMDM0NzI3MDAyODc5YzNmNzRlMjA2OWUwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.6VqJab_7A2PQZzBkUXvnhcqRzO2RANFdFCcr_xU-LlY", title: "🎶 Porta retrato musical", price: "$1.500", wa: "Porta retrato musical - $1.500" },
-            { img: "https://placehold.co/400x300/f0e2d6/5a3e28?text=Posavasos+Demo", title: "🍷 Posavasos", price: "$600", wa: "Posavasos grabados - $600" },
-            { img: "https://placehold.co/400x300/f0e2d6/5a3e28?text=Caja+Demo", title: "📦 Caja personalizada", price: "$2.000", wa: "Caja personalizada - $2.000" }
-          ] },
-        { type: "contact_form", title: "📧 Solicita más información o cotización" }
-      ]
-    }
-  };
+<h1>💻 COTIZACIÓN DESARROLLO PÁGINA WEB</h1>
 
-  let pages = [];
-  let currentPageId = "home";
-  let authenticated = false;
-  let socialLinks = { facebook: "", instagram: "", tiktok: "", whatsapp: "https://wa.me/56949510888" };
-  let globalYouTubeVideos = [];
+<p><strong>Cliente:</strong> ____________________</p>
+<p><strong>Fecha:</strong> ____________________</p>
 
-  function saveAll() {
-    localStorage.setItem('kshai_pages', JSON.stringify(pages));
-    localStorage.setItem('kshai_social', JSON.stringify(socialLinks));
-    localStorage.setItem('kshai_youtube', JSON.stringify(globalYouTubeVideos));
-    localStorage.setItem('kshai_site_title', document.getElementById('siteTitle').innerText);
-    localStorage.setItem('kshai_site_sub', document.getElementById('siteSub').innerText);
-    localStorage.setItem('kshai_logo', document.getElementById('logoImg').src);
-    localStorage.setItem('kshai_navtext', document.getElementById('navContactText').innerText);
-    console.log("✅ Cambios guardados en localStorage");
-  }
+<div class="section">
+<h2>🧾 1. Desarrollo Web</h2>
+<ul>
+<li>Diseño y configuración de tienda online</li>
+<li>Carga inicial de productos</li>
+<li>Integración de pagos y envíos</li>
+<li>Optimización para dispositivos móviles</li>
+</ul>
 
-  function loadAll() {
-    const storedPages = localStorage.getItem('kshai_pages');
-    if(storedPages) pages = JSON.parse(storedPages);
-    else pages = [JSON.parse(JSON.stringify(DEFAULT_HOME))];
-    const social = localStorage.getItem('kshai_social');
-    if(social) socialLinks = JSON.parse(social);
-    const youtube = localStorage.getItem('kshai_youtube');
-    if(youtube) globalYouTubeVideos = JSON.parse(youtube);
-    else globalYouTubeVideos = [];
-    const title = localStorage.getItem('kshai_site_title');
-    if(title) document.getElementById('siteTitle').innerText = title;
-    const sub = localStorage.getItem('kshai_site_sub');
-    if(sub) document.getElementById('siteSub').innerText = sub;
-    const logo = localStorage.getItem('kshai_logo');
-    if(logo) document.getElementById('logoImg').src = logo;
-    const navtext = localStorage.getItem('kshai_navtext');
-    if(navtext) document.getElementById('navContactText').innerText = navtext;
-    if(!pages.find(p=>p.id==='home')) pages.unshift(JSON.parse(JSON.stringify(DEFAULT_HOME)));
-    if(!pages.find(p=>p.id===currentPageId)) currentPageId = pages[0].id;
-  }
+<p class="highlight">💰 Valor desarrollo: $185.000 CLP</p>
+</div>
 
-  loadAll();
+<div class="section">
+<h2>📦 2. Planes Mensuales</h2>
+<p>(Basado en Jumpseller + servicio)</p>
 
-  // ---------- RENDER ----------
-  function renderPage() {
-    const page = pages.find(p => p.id === currentPageId);
-    if(!page) return;
-    const container = document.getElementById('pageContent');
-    container.innerHTML = '';
-    page.content.sections.forEach((section, idx) => {
-      const sectionDiv = document.createElement('div'); sectionDiv.className = 'section'; sectionDiv.setAttribute('data-section-idx', idx);
-      if(section.type === 'hero'){
-        sectionDiv.innerHTML = `<div class="hero"><h2 class="hero-title">${section.title}</h2><p class="hero-sub">${section.subtitle}</p><div class="price-badge">${section.price}</div></div>`;
-      } else if(section.type === 'services'){
-        let html = `<div class="section-title">${section.title}</div><div class="services-grid">`;
-        section.items.forEach(item => { html += `<div class="service-card"><div class="service-num">●</div><h4>${item}</h4></div>`; });
-        html += `</div>`; sectionDiv.innerHTML = html;
-      } else if(section.type === 'precision'){
-        const lines = section.text.split('\n');
-        sectionDiv.innerHTML = `<div class="precision-banner"><h3>${lines[0]}</h3><p>${lines.slice(1).join(' ')}</p></div>`;
-      } else if(section.type === 'carousel'){
-        let html = `<div class="carousel-container"><button class="carousel-btn left" data-carousel-left>❮</button><div class="carousel-track" data-carousel-track>`;
-        section.items.forEach((item, i) => { html += `<div class="carousel-slide" data-slide-idx="${i}"><img src="${item.img}" alt="slide"><p>${item.caption}</p></div>`; });
-        html += `</div><button class="carousel-btn right" data-carousel-right>❯</button></div>`;
-        sectionDiv.innerHTML = html;
-        setTimeout(() => initCarousel(sectionDiv, section), 10);
-      } else if(section.type === 'pinterest'){
-        let html = `<div class="section-title">${section.title}</div><div class="pinterest-grid">`;
-        section.items.forEach(item => { html += `<div class="pinterest-card"><img src="${item.img}" alt="pin"><div class="caption">${item.caption}</div></div>`; });
-        html += `</div>`; sectionDiv.innerHTML = html;
-      } else if(section.type === 'upload_section'){
-        sectionDiv.innerHTML = `<div class="section-title">${section.title}</div><div class="upload-row"><div class="upload-card"><h3>📁 Subir archivo</h3><input type="file" id="imageFileInput" class="input-field"><button class="btn-primary" id="previewFileBtn">👁️ Vista previa</button></div><div class="upload-card"><h3>🔗 Comparte el enlace</h3><input type="text" id="imageUrlInput" class="input-field" placeholder="https://..."><button class="btn-primary" id="previewUrlBtn">🌐 Vista previa</button><div id="globalPreview" class="preview-area">⬅️ Vista previa</div><button id="sendWhatsappBtn" class="btn-primary" style="background:#25D366;">📲 Enviar por WhatsApp</button></div></div>`;
-      } else if(section.type === 'products'){
-        let html = `<div class="section-title">${section.title}</div><div class="products-grid">`;
-        section.items.forEach((prod, pidx) => { html += `<div class="product-item" data-prod-idx="${pidx}"><div class="product-img-frame"><img src="${prod.img}"></div><h4 class="prod-title">${prod.title}</h4><div class="product-price">${prod.price}</div><button class="whatsapp-small" data-wa="${prod.wa}">Consultar por WA</button></div>`; });
-        html += `</div>`; sectionDiv.innerHTML = html;
-      } else if(section.type === 'contact_form'){
-        sectionDiv.innerHTML = `<div class="contact-form"><h3>${section.title}</h3><form id="contactForm"><div class="form-group"><input type="text" id="contactName" class="form-input" placeholder="Tu nombre *" required></div><div class="form-group"><input type="tel" id="contactPhone" class="form-input" placeholder="Teléfono *" required></div><div class="form-group"><textarea id="contactMessage" class="form-input" rows="3" placeholder="Cuéntanos tu idea..." required></textarea></div><button type="submit" class="btn-primary" style="background:#b47c48;">📩 Enviar consulta por correo</button></form><p style="font-size:0.75rem; margin-top:12px;">Tus datos serán enviados directamente a nuestro equipo.</p></div>`;
-      } else if(section.type === 'youtube'){
-        sectionDiv.innerHTML = `<div class="youtube-video"><h3>${section.title}</h3><iframe src="${section.url}" frameborder="0" allowfullscreen></iframe></div>`;
-      }
-      container.appendChild(sectionDiv);
-    });
-    renderGlobalYouTube();
-    attachGlobalEvents();
-    if(authenticated) enableInlineEditing();
-  }
+<div class="note">
+⚠️ Todos los precios mensuales corresponden a contratación con <strong>plan anual</strong>.
+</div>
 
-  function renderGlobalYouTube() {
-    const youtubeContainer = document.getElementById('globalYouTubeContainer');
-    youtubeContainer.innerHTML = '';
-    globalYouTubeVideos.forEach((video, idx) => {
-      const videoDiv = document.createElement('div'); videoDiv.className = 'youtube-video'; videoDiv.setAttribute('data-video-idx', idx);
-      videoDiv.innerHTML = `<h3 class="youtube-title">${video.title}</h3><iframe src="${video.url}" frameborder="0" allowfullscreen></iframe>`;
-      if(authenticated){
-        const delBtn = document.createElement('div'); delBtn.className = 'edit-overlay'; delBtn.innerHTML = '<i class="fas fa-trash-alt"></i>'; delBtn.style.left = '8px'; delBtn.style.right = 'auto';
-        delBtn.onclick = (e) => { e.stopPropagation(); if(confirm('Eliminar este video?')){ globalYouTubeVideos.splice(idx,1); saveAll(); renderGlobalYouTube(); } };
-        videoDiv.appendChild(delBtn);
-        const titleH3 = videoDiv.querySelector('.youtube-title');
-        titleH3.setAttribute('contenteditable', 'true'); titleH3.style.cursor = 'text';
-        titleH3.addEventListener('blur', () => { globalYouTubeVideos[idx].title = titleH3.innerText; saveAll(); });
-      }
-      youtubeContainer.appendChild(videoDiv);
-    });
-    if(authenticated){
-      const addBtnDiv = document.createElement('div'); addBtnDiv.style.textAlign = 'center'; addBtnDiv.style.margin = '20px';
-      addBtnDiv.innerHTML = '<button id="addGlobalVideoBtn" class="btn-primary" style="background:#25D366;">➕ Agregar video YouTube (final)</button>';
-      youtubeContainer.appendChild(addBtnDiv);
-      document.getElementById('addGlobalVideoBtn')?.addEventListener('click', () => {
-        const url = prompt('URL de YouTube (embed):', 'https://www.youtube.com/embed/dQw4w9WgXcQ');
-        if(url){
-          const title = prompt('Título del video:', 'Video destacado');
-          globalYouTubeVideos.push({ title: title || 'Video', url: url });
-          saveAll();
-          renderGlobalYouTube();
-        }
-      });
-    }
-  }
+<table>
+<tr>
+<th>Plan</th>
+<th>Base</th>
+<th>+ Servicio</th>
+<th>Total</th>
+</tr>
+<tr>
+<td>PLUS <span class="badge">Más Popular</span></td>
+<td>$14.400</td>
+<td>$15.000</td>
+<td><strong>$29.400</strong></td>
+</tr>
+<tr>
+<td>PRO</td>
+<td>$28.800</td>
+<td>$15.000</td>
+<td><strong>$43.800</strong></td>
+</tr>
+<tr>
+<td>PREMIUM</td>
+<td>$57.600</td>
+<td>$15.000</td>
+<td><strong>$72.600</strong></td>
+</tr>
+<tr>
+<td>ADVANCED</td>
+<td>$172.800</td>
+<td>$15.000</td>
+<td><strong>$187.800</strong></td>
+</tr>
+</table>
+</div>
 
-  function initCarousel(container, section) {
-    const track = container.querySelector('[data-carousel-track]');
-    const slides = track.querySelectorAll('.carousel-slide');
-    const slideWidth = 220 + 16;
-    let currentIdx = 0;
-    const update = () => {
-      const visible = Math.floor(track.parentElement.clientWidth / slideWidth) || 1;
-      const max = Math.max(0, slides.length - visible);
-      currentIdx = Math.min(max, Math.max(0, currentIdx));
-      track.style.transform = `translateX(-${currentIdx * slideWidth}px)`;
-    };
-    container.querySelector('[data-carousel-left]').onclick = () => { currentIdx--; update(); };
-    container.querySelector('[data-carousel-right]').onclick = () => { currentIdx++; update(); };
-    window.addEventListener('resize', update);
-    setTimeout(update, 100);
-  }
+<div class="section">
+<h2>🎯 Beneficios incluidos</h2>
+<ul>
+<li>0% cargos de transacción</li>
+<li>Diseño con IA</li>
+<li>Productos ilimitados</li>
+<li>Editor visual</li>
+<li>Instagram, Facebook, WhatsApp</li>
+<li>Google Commerce + Ads</li>
+<li>Automatizaciones marketing</li>
+<li>Reservas y suscripciones</li>
+<li>Dominio gratis 1 año</li>
+<li>Productos digitales</li>
+<li>Descripciones con IA</li>
+<li>Mercado Libre</li>
+</ul>
+</div>
 
-  function attachGlobalEvents() {
-    document.querySelectorAll('img').forEach(img => {
-      img.removeEventListener('click', zoomHandler);
-      img.addEventListener('click', zoomHandler);
-    });
-    const previewFile = document.getElementById('previewFileBtn');
-    if(previewFile) previewFile.onclick = () => { const file = document.getElementById('imageFileInput').files[0]; if(file){ const reader = new FileReader(); reader.onload = e => { document.getElementById('globalPreview').innerHTML = `<img src="${e.target.result}">`; window.currentImageData = e.target.result; window.currentSource='file'; }; reader.readAsDataURL(file); } };
-    const previewUrl = document.getElementById('previewUrlBtn');
-    if(previewUrl) previewUrl.onclick = () => { let url = document.getElementById('imageUrlInput').value; if(url){ const div = document.getElementById('globalPreview'); div.innerHTML='Cargando...'; const img=new Image(); img.onload=()=>{ div.innerHTML=`<img src="${url}">`; window.currentImageData=url; window.currentSource='url'; }; img.onerror=()=>div.innerHTML='Error'; img.src=url; } };
-    const sendWA = document.getElementById('sendWhatsappBtn');
-    if(sendWA) sendWA.onclick = () => { let msg = "🪵 *Kshai Design* - Cotización%0A"; if(window.currentImageData){ if(window.currentSource==='url') msg+=`🎨 Enlace diseño: ${window.currentImageData}%0A`; else msg+=`🖼️ Imagen previsualizada%0A`; } else msg+=`✨ Diseño a definir%0A`; msg+=`%0A💬 Más info por favor.`; window.open(`https://wa.me/56949510888?text=${msg}`, '_blank'); };
-    document.querySelectorAll('.whatsapp-small').forEach(btn => btn.onclick = () => { let msg = `🪵 *Kshai Design* - Producto: ${btn.getAttribute('data-wa')}%0A¡Quiero más info!`; window.open(`https://wa.me/56949510888?text=${msg}`, '_blank'); });
-    const contactForm = document.getElementById('contactForm');
-    if(contactForm) contactForm.onsubmit = (e) => { e.preventDefault(); const nom=document.getElementById('contactName').value, tel=document.getElementById('contactPhone').value, msg=document.getElementById('contactMessage').value; if(nom&&tel&&msg){ window.location.href=`mailto:kshaidesign@gmail.com?subject=Consulta desde web - ${nom}&body=Nombre: ${nom}%0ATeléfono: ${tel}%0AMensaje: ${msg}`; alert('Correo abierto. ¡Gracias!'); } else alert('Complete todos los campos'); };
-  }
-  function zoomHandler(e) { document.getElementById('modalImg').src = this.src; document.getElementById('imageModal').classList.add('active'); }
+<div class="section">
+<h2>⚙️ Funciones avanzadas</h2>
 
-  // ---------- EDICIÓN INLINE (CON GUARDADO) ----------
-  function enableInlineEditing() {
-    // Textos editables
-    document.querySelectorAll('.hero-title, .hero-sub, .price-badge, .section-title, .service-card h4, .precision-banner h3, .precision-banner p, .product-price, .prod-title, .pinterest-card .caption, .contact-form h3').forEach(el => {
-      if(el.hasAttribute('contenteditable')) return;
-      el.setAttribute('contenteditable', 'true'); el.style.cursor = 'text';
-      el.addEventListener('blur', () => saveTextChanges(el));
-    });
-    // Imágenes editables
-    document.querySelectorAll('.product-img-frame img, .carousel-slide img, .pinterest-card img, .logo-img').forEach(img => {
-      if(img.parentElement && !img.parentElement.querySelector('.edit-img-overlay')){
-        const btn = document.createElement('div'); btn.className = 'edit-overlay edit-img-overlay'; btn.innerHTML = '<i class="fas fa-pencil-alt"></i>';
-        btn.onclick = (e) => { e.stopPropagation(); const newUrl = prompt('Nueva URL de imagen:', img.src); if(newUrl) img.src = newUrl; else { const input=document.createElement('input'); input.type='file'; input.accept='image/*'; input.onchange=ev=>{ const f=ev.target.files[0]; if(f){ const rd=new FileReader(); rd.onload=e2=>{ img.src=e2.target.result; saveAll(); }; rd.readAsDataURL(f); } }; input.click(); } saveAll(); };
-        img.parentElement.style.position = 'relative'; img.parentElement.appendChild(btn);
-      }
-    });
-    // Botón para agregar slides al carrusel
-    const carouselSection = document.querySelector('.carousel-container')?.parentElement;
-    if(carouselSection && !carouselSection.querySelector('.carousel-admin')){
-      const adminDiv = document.createElement('div'); adminDiv.className = 'carousel-admin'; adminDiv.style.textAlign='center'; adminDiv.style.marginTop='15px';
-      adminDiv.innerHTML = `<button class="btn-primary" id="addCarouselSlide">➕ Agregar slide al carrusel</button>`;
-      carouselSection.appendChild(adminDiv);
-      document.getElementById('addCarouselSlide').onclick = () => {
-        const page = pages.find(p=>p.id === currentPageId);
-        const carouselSec = page.content.sections.find(s => s.type === 'carousel');
-        if(carouselSec){
-          const newUrl = prompt('URL de la imagen (o cancelar para subir archivo):');
-          if(newUrl) carouselSec.items.push({ img: newUrl, caption: 'Nuevo diseño' });
-          saveAll(); renderPage();
-        }
-      };
-    }
-  }
+<table>
+<tr>
+<th>Función</th>
+<th>PLUS</th>
+<th>PRO</th>
+<th>PREMIUM</th>
+<th>ADVANCED</th>
+</tr>
+<tr><td>Recuperar carrito</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Promociones</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Registro clientes</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Reseñas</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>POS</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Stock</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Favoritos</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Filtros</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+<tr><td>Admins</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+<tr><td>Búsqueda</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+<tr><td>Informes</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td></tr>
+</table>
+</div>
 
-  function saveTextChanges(el) {
-    const page = pages.find(p => p.id === currentPageId);
-    if(!page) return;
-    const sectionDiv = el.closest('.section');
-    if(sectionDiv && sectionDiv.hasAttribute('data-section-idx')){
-      const idx = parseInt(sectionDiv.getAttribute('data-section-idx'));
-      const section = page.content.sections[idx];
-      if(!section) return;
-      if(section.type === 'hero'){
-        if(el.classList.contains('hero-title')) section.title = el.innerText;
-        else if(el.classList.contains('hero-sub')) section.subtitle = el.innerText;
-        else if(el.classList.contains('price-badge')) section.price = el.innerText;
-      } else if(section.type === 'services'){
-        if(el.classList.contains('section-title')) section.title = el.innerText;
-        else if(el.parentElement?.classList.contains('service-card')){
-          const cardIndex = Array.from(el.parentElement.parentElement.children).indexOf(el.parentElement);
-          if(cardIndex !== -1) section.items[cardIndex] = el.innerText;
-        }
-      } else if(section.type === 'precision'){
-        if(el.tagName === 'H3') section.text = el.innerText + '\n' + section.text.split('\n').slice(1).join('\n');
-        else if(el.tagName === 'P') section.text = section.text.split('\n')[0] + '\n' + el.innerText;
-      } else if(section.type === 'products'){
-        const prodDiv = el.closest('.product-item');
-        if(prodDiv){
-          const pidx = prodDiv.getAttribute('data-prod-idx');
-          if(el.classList.contains('prod-title')) section.items[pidx].title = el.innerText;
-          if(el.classList.contains('product-price')) section.items[pidx].price = el.innerText;
-        } else if(el.classList.contains('section-title')) section.title = el.innerText;
-      } else if(section.type === 'pinterest'){
-        if(el.classList.contains('section-title')) section.title = el.innerText;
-        else if(el.classList.contains('caption')){
-          const card = el.closest('.pinterest-card');
-          const idx2 = Array.from(card.parentElement.children).indexOf(card);
-          if(idx2 !== -1) section.items[idx2].caption = el.innerText;
-        }
-      } else if(section.type === 'contact_form'){
-        if(el.classList.contains('section-title') || el.tagName === 'H3') section.title = el.innerText;
-      }
-      saveAll();
-    } else {
-      // Elementos globales del navbar/logo
-      if(el.id === 'siteTitle' || el.id === 'siteSub' || el.id === 'navContactText') saveAll();
-    }
-  }
+<div class="section">
+<h2>🌍 Capacidades</h2>
 
-  // ---------- PÁGINAS Y NAVEGACIÓN ----------
-  function renderPageNav() {
-    const container = document.getElementById('pageNavContainer');
-    container.innerHTML = '';
-    pages.forEach(page => {
-      const btn = document.createElement('button'); btn.innerText = page.name; btn.className = 'page-btn';
-      btn.onclick = () => { currentPageId = page.id; renderPage(); renderPageNav(); };
-      if(currentPageId === page.id) btn.style.background = '#2c1b12';
-      container.appendChild(btn);
-    });
-    if(authenticated){
-      const addBtn = document.createElement('button'); addBtn.innerText = '+ Nueva página'; addBtn.className = 'page-btn add-page-btn';
-      addBtn.onclick = () => { const name = prompt('Nombre de la nueva página:'); if(name){ const newId = 'page_'+Date.now(); const newPage = { id:newId, name:name, content:{ sections: [] } }; pages.push(newPage); saveAll(); renderPageNav(); } };
-      container.appendChild(addBtn);
-      pages.forEach((page, idx) => {
-        const editBtn = document.createElement('button'); editBtn.innerText = '✏️'; editBtn.className = 'page-btn';
-        editBtn.onclick = () => { const newName = prompt('Editar nombre:', page.name); if(newName){ page.name = newName; saveAll(); renderPageNav(); } };
-        container.appendChild(editBtn);
-        const delBtn = document.createElement('button'); delBtn.innerText = '🗑️'; delBtn.className = 'page-btn';
-        delBtn.onclick = () => { if(confirm('Eliminar página?')){ pages.splice(idx,1); if(pages.length===0) pages.push(JSON.parse(JSON.stringify(DEFAULT_HOME))); if(currentPageId===page.id) currentPageId=pages[0].id; saveAll(); renderPageNav(); renderPage(); } };
-        container.appendChild(delBtn);
-      });
-      const addSectionBtn = document.createElement('button'); addSectionBtn.innerText = '+ Agregar sección'; addSectionBtn.className = 'page-btn'; addSectionBtn.style.background = '#25D366';
-      addSectionBtn.onclick = () => {
-        const type = prompt('Tipo de sección: hero, services, precision, carousel, pinterest, upload_section, products, contact_form, youtube', 'hero');
-        if(!type) return;
-        const page = pages.find(p=>p.id === currentPageId);
-        let newSec = { type: type };
-        if(type === 'hero') newSec = { type:'hero', title:'Nuevo título', subtitle:'Subtítulo', price:'DESDE $0' };
-        if(type === 'services') newSec = { type:'services', title:'Servicios', items:['Item 1','Item 2'] };
-        if(type === 'precision') newSec = { type:'precision', text:'Título\\nDescripción larga.' };
-        if(type === 'carousel') newSec = { type:'carousel', items:[] };
-        if(type === 'pinterest') newSec = { type:'pinterest', title:'Inspiración', items:[] };
-        if(type === 'upload_section') newSec = { type:'upload_section', title:'📸 SUBE TU IMAGEN' };
-        if(type === 'products') newSec = { type:'products', title:'Productos', items:[] };
-        if(type === 'contact_form') newSec = { type:'contact_form', title:'📧 Formulario de contacto' };
-        if(type === 'youtube') newSec = { type:'youtube', title:'Video', url:'https://www.youtube.com/embed/dQw4w9WgXcQ' };
-        page.content.sections.push(newSec);
-        saveAll(); renderPage();
-      };
-      container.appendChild(addSectionBtn);
-      const socialBtn = document.createElement('button'); socialBtn.innerText = '📱 Redes Sociales'; socialBtn.className = 'page-btn';
-      socialBtn.onclick = () => { socialLinks.facebook = prompt('Facebook URL:', socialLinks.facebook)||''; socialLinks.instagram = prompt('Instagram URL:', socialLinks.instagram)||''; socialLinks.tiktok = prompt('TikTok URL:', socialLinks.tiktok)||''; socialLinks.whatsapp = prompt('WhatsApp URL:', socialLinks.whatsapp)||''; saveAll(); renderSocialIcons(); };
-      container.appendChild(socialBtn);
-    }
-    renderSocialIcons();
-  }
+<table>
+<tr>
+<th>Característica</th>
+<th>PLUS</th>
+<th>PRO</th>
+<th>PREMIUM</th>
+<th>ADVANCED</th>
+</tr>
+<tr><td>Idiomas</td><td>2</td><td>4</td><td>8</td><td>Ilimitado</td></tr>
+<tr><td>Stock</td><td>1</td><td>1</td><td>4</td><td>10</td></tr>
+<tr><td>Soporte</td><td>Estándar</td><td>Medio</td><td>Medio</td><td>Alto</td></tr>
+</table>
+</div>
 
-  function renderSocialIcons() {
-    const container = document.getElementById('socialLinksContainer');
-    container.innerHTML = '';
-    if(socialLinks.facebook) container.innerHTML += `<a href="${socialLinks.facebook}" target="_blank"><i class="fab fa-facebook"></i></a>`;
-    if(socialLinks.instagram) container.innerHTML += `<a href="${socialLinks.instagram}" target="_blank"><i class="fab fa-instagram"></i></a>`;
-    if(socialLinks.tiktok) container.innerHTML += `<a href="${socialLinks.tiktok}" target="_blank"><i class="fab fa-tiktok"></i></a>`;
-    if(socialLinks.whatsapp) container.innerHTML += `<a href="${socialLinks.whatsapp}" target="_blank"><i class="fab fa-whatsapp"></i></a>`;
-  }
+<div class="section">
+<h2>📌 Incluye servicio</h2>
+<ul>
+<li>Soporte técnico</li>
+<li>Mantención web</li>
+<li>Asistencia</li>
+</ul>
+</div>
 
-  // ---------- TEMAS ----------
-  document.getElementById('nightModeBtn').onclick = () => { document.body.classList.remove('psychedelic-mode'); document.body.classList.add('night-mode'); };
-  document.getElementById('psychModeBtn').onclick = () => { document.body.classList.remove('night-mode'); document.body.classList.add('psychedelic-mode'); };
-  document.getElementById('normalModeBtn').onclick = () => { document.body.classList.remove('night-mode','psychedelic-mode'); };
+<div class="section">
+<h2>✅ Resumen</h2>
+<p class="highlight">Pago inicial: $185.000 CLP</p>
+<p class="highlight">Mensual desde: $29.400 CLP</p>
+</div>
 
-  // ---------- LOGIN Y MODO ADMIN ----------
-  const loginModal = document.getElementById('loginModal');
-  document.getElementById('adminLoginBtn').onclick = () => loginModal.classList.add('active');
-  document.getElementById('closeLogin').onclick = () => loginModal.classList.remove('active');
-  document.getElementById('doLogin').onclick = () => {
-    const user = document.getElementById('loginUser').value, pass = document.getElementById('loginPass').value;
-    if(user === 'kshaidesign' && pass === 'Valeria2020'){
-      authenticated = true; localStorage.setItem('kshai_auth', 'true'); loginModal.classList.remove('active');
-      enableAdminMode();
-    } else alert('Credenciales incorrectas');
-  };
-  if(localStorage.getItem('kshai_auth') === 'true') { authenticated = true; enableAdminMode(); }
+<div class="footer">
+<p>⚠️ No incluye comisiones externas (Webpay, MercadoPago)</p>
+<p>Dominio gratis solo el primer año</p>
+<p>Valores sujetos a cambios</p>
+</div>
 
-  function enableAdminMode() {
-    if(document.querySelector('.admin-bar')) return;
-    const bar = document.createElement('div'); bar.className = 'admin-bar';
-    bar.innerHTML = `<span>✏️ Modo edición total</span><button id="resetAllBtn">Restaurar todo</button><button id="logoutBtn">Cerrar sesión</button>`;
-    document.body.appendChild(bar);
-    document.getElementById('logoutBtn').onclick = () => { localStorage.removeItem('kshai_auth'); saveAll(); location.reload(); };
-    document.getElementById('resetAllBtn').onclick = () => { if(confirm('Restaurar datos por defecto?')){ localStorage.clear(); location.reload(); } };
-    renderPageNav(); renderPage();
-  }
-
-  // Inicializar
-  renderPageNav();
-  renderPage();
-  document.querySelector('.close-modal-img').onclick = () => document.getElementById('imageModal').classList.remove('active');
-  document.getElementById('imageModal').onclick = (e) => { if(e.target === document.getElementById('imageModal')) document.getElementById('imageModal').classList.remove('active'); };
-</script>
+</div>
 </body>
 </html>
