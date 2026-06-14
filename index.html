@@ -1,506 +1,719 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Cotización Web | Tienda Online Profesional</title>
-<!-- Font Awesome 6 (iconos comerciales y modernos) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!-- Google Fonts: Inter + fallback -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #eef2f7 0%, #d9e2ec 100%);
-    padding: 30px 20px;
-  }
-
-  /* contenedor principal estilo premium */
-  .container {
-    max-width: 1300px;
-    margin: 0 auto;
-    background: #ffffff;
-    border-radius: 2rem;
-    box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    transition: all 0.2s ease;
-  }
-
-  /* inner padding */
-  .content-padding {
-    padding: 2rem 2rem 2rem 2rem;
-  }
-
-  /* header premium con logo y título */
-  .header-premium {
-    background: linear-gradient(135deg, #0B2B3B 0%, #1A4A5F 100%);
-    padding: 2rem 2rem 1.5rem 2rem;
-    text-align: center;
-    color: white;
-    border-bottom: 4px solid #FFB347;
-  }
-
-  .logo {
-    background: white;
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 60px;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  .logo img {
-    max-width: 220px;
-    height: auto;
-    display: block;
-  }
-  .header-premium h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0.75rem 0 0.5rem;
-    letter-spacing: -0.3px;
-  }
-  .header-premium h1 i {
-    color: #FFB347;
-    margin-right: 8px;
-  }
-  .client-info {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin-top: 0.8rem;
-    font-weight: 500;
-    background: rgba(255,255,255,0.12);
-    display: inline-flex;
-    padding: 0.5rem 1.5rem;
-    border-radius: 60px;
-    backdrop-filter: blur(2px);
-  }
-  .client-info span {
-    margin: 0 0.5rem;
-  }
-  .client-info i {
-    margin-right: 8px;
-    color: #FFB347;
-  }
-
-  /* Secciones con tarjetas */
-  .section-card {
-    background: #ffffff;
-    margin-bottom: 2rem;
-    border-radius: 1.5rem;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s;
-    border: 1px solid #edf2f7;
-    overflow: hidden;
-  }
-  .section-card:hover {
-    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
-  }
-  .section-title {
-    background: #F8FAFE;
-    padding: 1rem 1.5rem;
-    border-bottom: 2px solid #e2e8f0;
-  }
-  .section-title h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #0F2C39;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-  .section-title h2 i {
-    color: #FF8C42;
-    font-size: 1.6rem;
-  }
-  .section-content {
-    padding: 1.5rem;
-  }
-
-  /* Listas modernas con grid comercial */
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 0.8rem;
-    list-style: none;
-  }
-  .benefits-grid li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.95rem;
-    background: #F9FBFD;
-    padding: 8px 12px;
-    border-radius: 40px;
-    border: 1px solid #eef2f8;
-  }
-  .benefits-grid li i {
-    color: #2c7a4d;
-    font-size: 1.1rem;
-    width: 1.5rem;
-  }
-  .simple-list {
-    list-style: none;
-    padding-left: 0;
-  }
-  .simple-list li {
-    margin-bottom: 0.6rem;
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-  }
-  .simple-list li i {
-    color: #FF8C42;
-    width: 1.3rem;
-    font-size: 1rem;
-    margin-top: 0.2rem;
-  }
-
-  /* Tablas responsivas */
-  .table-wrapper {
-    overflow-x: auto;
-    margin: 1rem 0 0.5rem;
-    border-radius: 1rem;
-    border: 1px solid #e9edf2;
-  }
-  .commercial-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85rem;
-    min-width: 500px;
-  }
-  .commercial-table th {
-    background: #1E2F3A;
-    color: white;
-    font-weight: 600;
-    padding: 12px 8px;
-    font-size: 0.85rem;
-    text-align: center;
-    border: 1px solid #2c4453;
-  }
-  .commercial-table td {
-    padding: 10px 8px;
-    text-align: center;
-    border: 1px solid #e4e9f0;
-    background-color: #ffffff;
-  }
-  .commercial-table tr:hover td {
-    background-color: #FEF9F0;
-  }
-  .badge-popular {
-    background: linear-gradient(135deg, #FFB347, #FF8C00);
-    color: white;
-    font-weight: 700;
-    padding: 4px 8px;
-    border-radius: 40px;
-    font-size: 0.7rem;
-    display: inline-block;
-    margin-left: 6px;
-    letter-spacing: 0.3px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  }
-  .highlight-price {
-    font-weight: 800;
-    color: #1E6F5C;
-    font-size: 1.1rem;
-  }
-  .note-warning {
-    background: #FFFAEC;
-    border-left: 5px solid #FFB347;
-    padding: 12px 16px;
-    border-radius: 14px;
-    margin: 1rem 0;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .price-big {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #0F2C39;
-  }
-  .resumen-box {
-    background: #F0F7FA;
-    padding: 1rem 1.8rem;
-    border-radius: 1.2rem;
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-  }
-  .resumen-item {
-    text-align: center;
-  }
-  .btn-comercial {
-    background: #FF8C42;
-    color: white;
-    border: none;
-    padding: 12px 28px;
-    font-weight: 700;
-    border-radius: 60px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-top: 0.5rem;
-    text-decoration: none;
-  }
-  .btn-comercial:hover {
-    background: #e5741e;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px -5px rgba(255,140,66,0.4);
-  }
-  .footer-note {
-    margin-top: 2rem;
-    background: #F1F5F9;
-    border-radius: 1rem;
-    padding: 1.2rem;
-    font-size: 0.8rem;
-    color: #2c3e50;
-    text-align: center;
-    border-top: 1px solid #dce5ef;
-  }
-  @media (max-width: 760px) {
-    .content-padding {
-      padding: 1.2rem;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Excel PRO · Importar / Exportar CSV | Múltiples productos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .header-premium h1 {
-      font-size: 1.4rem;
+
+    body {
+      background: #0a0c15;
+      font-family: 'Inter', system-ui, sans-serif;
+      padding: 2rem 1.5rem;
+      color: #eef2ff;
     }
-    .section-title h2 {
-      font-size: 1.2rem;
+
+    .dashboard {
+      max-width: 1500px;
+      margin: 0 auto;
     }
-    .benefits-grid {
-      grid-template-columns: 1fr 1fr;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 1rem;
     }
-    .client-info {
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #c084fc, #60a5fa);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      background: #1e293b;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 600;
       font-size: 0.85rem;
-      gap: 0.8rem;
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+      box-shadow: 0 2px 6px rgba(59,130,246,0.3);
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      border: 1px solid #334155;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: #1e293b;
+      border-color: #5b6e8c;
+    }
+
+    .btn-success {
+      background: #16a34a;
+    }
+    .btn-success:hover {
+      background: #15803d;
+    }
+
+    .search-box {
+      background: #111827;
+      border: 1px solid #2d3a4e;
+      border-radius: 48px;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 220px;
+    }
+
+    .search-box input {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 0.9rem;
+      outline: none;
+      width: 100%;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 24px;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      min-width: 950px;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 14px 16px;
+      background: #111827;
+      color: #9ca3af;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid #2d3a4e;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .data-table th:hover {
+      background: #1a2538;
+      color: #e2e8f0;
+    }
+
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #1e293b;
+      vertical-align: middle;
+      background-color: #0f172a;
+    }
+
+    .editable-cell {
+      background: #0f172a;
+      transition: background 0.1s;
+      cursor: text;
+      border-radius: 8px;
+      padding: 6px 8px;
+      margin: -6px -8px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .editable-cell[contenteditable="true"] {
+      background: #1e2a3e;
+      outline: 1px solid #3b82f6;
+      box-shadow: 0 0 0 2px rgba(59,130,246,0.3);
+    }
+
+    .editable-cell:focus {
+      outline: none;
+      background: #1e2a3e;
+      box-shadow: 0 0 0 2px #3b82f6;
+    }
+
+    .estado-select {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 6px 10px;
+      border-radius: 20px;
+      color: white;
+      font-weight: 500;
+      font-size: 0.8rem;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .fecha-input {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 6px 10px;
+      border-radius: 16px;
+      color: white;
+      font-size: 0.8rem;
+      font-family: monospace;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
       flex-wrap: wrap;
     }
-    .resumen-box {
-      flex-direction: column;
-      gap: 0.8rem;
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.1s;
+      padding: 4px 8px;
+      border-radius: 30px;
+      color: #94a3b8;
     }
-    .commercial-table th, .commercial-table td {
-      padding: 8px 4px;
-      font-size: 0.75rem;
+
+    .icon-btn:hover {
+      background: #1e293b;
+      transform: scale(1.05);
     }
-  }
-  @media (max-width: 480px) {
-    .benefits-grid {
-      grid-template-columns: 1fr;
+
+    .delete-btn {
+      color: #f87171;
     }
-    .logo img {
-      max-width: 160px;
+    .delete-btn:hover {
+      background: #7f1a1a;
+      color: white;
     }
-  }
-  .inline-badge {
-    background: #eef2ff;
-    color: #1e4a76;
-    border-radius: 20px;
-    padding: 2px 8px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    margin-left: 5px;
-  }
-  .fa-check-circle, .fa-circle-check {
-    color: #2b7a4b;
-  }
-  hr {
-    margin: 10px 0;
-  }
-</style>
+    .duplicate-btn {
+      color: #4ade80;
+    }
+    .duplicate-btn:hover {
+      background: #14532d;
+      color: white;
+    }
+
+    .empty-row {
+      text-align: center;
+      padding: 40px !important;
+      color: #6b7280;
+      font-style: italic;
+    }
+
+    footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #4b5563;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-  <!-- Header más comercial -->
-  <div class="header-premium">
-    <div class="logo">
-      <img src="https://private-user-images.githubusercontent.com/104705077/583704001-2ae9b7a4-7df3-41a2-86a4-c1167e08dc3b.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Nzc3NjMwMDIsIm5iZiI6MTc3Nzc2MjcwMiwicGF0aCI6Ii8xMDQ3MDUwNzcvNTgzNzA0MDAxLTJhZTliN2E0LTdkZjMtNDFhMi04NmE0LWMxMTY3ZTA4ZGMzYi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNTAyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDUwMlQyMjU4MjJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT03ZDJjZTI3ZTFmMGM3ZWZkMDBmNDIxMDQ4NWFjOWRiMjhlYjJmMDRkMWRjOTU3YTNlNDcxYWY5ZTQ4Y2ExMjUxJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.y6EclJnXhXvni6bfiTJZRaqUNSNq_CsjSbjjOrSKGDE" alt="Logo Empresa">
-    </div>
-    <h1><i class="fas fa-code"></i> COTIZACIÓN DESARROLLO PÁGINA WEB</h1>
-    <div class="client-info">
-      <span><i class="fas fa-user-check"></i> Cliente: Norley</span>
-      <span><i class="fas fa-calendar-alt"></i> Fecha: 02/05/2026</span>
-    </div>
-  </div>
-
-  <div class="content-padding">
-    <!-- Desarrollo Web -->
-    <div class="section-card">
-      <div class="section-title">
-        <h2><i class="fas fa-laptop-code"></i> 1. Desarrollo Web</h2>
+<div class="dashboard">
+  <div class="header">
+    <h1>📊 EXCEL VENTAS · Múltiples productos por cliente</h1>
+    <div class="toolbar">
+      <div class="search-box">
+        🔍 <input type="text" id="filterInput" placeholder="Filtrar cliente / producto...">
       </div>
-      <div class="section-content">
-        <ul class="simple-list">
-          <li><i class="fas fa-check-circle"></i> Diseño y configuración de tienda online</li>
-          <li><i class="fas fa-check-circle"></i> Carga inicial de productos</li>
-          <li><i class="fas fa-check-circle"></i> Integración de pagos y envíos</li>
-          <li><i class="fas fa-check-circle"></i> Optimización para dispositivos móviles</li>
-        </ul>
-        <div class="note-warning" style="margin-top: 1rem;">
-          <i class="fas fa-tag fa-lg"></i> <strong>💰 Valor desarrollo único:</strong> <span class="highlight-price">$185.000 CLP</span> (pago único, sin recurrencia)
-        </div>
-      </div>
-    </div>
-
-    <!-- Planes Mensuales -->
-    <div class="section-card">
-      <div class="section-title">
-        <h2><i class="fas fa-chart-line"></i> 2. Planes Mensuales</h2>
-      </div>
-      <div class="section-content">
-        <p style="margin-bottom: 0.5rem;"><i class="fas fa-store"></i> <strong>Plataforma Jumpseller + servicio de gestión</strong></p>
-        <div class="note-warning">
-          <i class="fas fa-exclamation-triangle"></i> ⚠️ Todos los precios mensuales corresponden a contratación con <strong>plan anual</strong>.
-        </div>
-        <div class="table-wrapper">
-          <table class="commercial-table">
-            <thead>
-              <tr><th>Plan</th><th>Base</th><th>+ Servicio</th><th>Total</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>PLUS <span class="badge-popular">Más Popular</span></td><td>$14.400</td><td>$15.000</td><td class="highlight-price"><strong>$29.400</strong></td></tr>
-              <tr><td>PRO</td><td>$28.800</td><td>$15.000</td><td class="highlight-price"><strong>$43.800</strong></td></tr>
-              <tr><td>PREMIUM</td><td>$57.600</td><td>$15.000</td><td class="highlight-price"><strong>$72.600</strong></td></tr>
-              <tr><td>ADVANCED</td><td>$172.800</td><td>$15.000</td><td class="highlight-price"><strong>$187.800</strong></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Beneficios incluidos (grid comercial) -->
-    <div class="section-card">
-      <div class="section-title">
-        <h2><i class="fas fa-gem"></i> Beneficios incluidos</h2>
-      </div>
-      <div class="section-content">
-        <ul class="benefits-grid">
-          <li><i class="fas fa-percent"></i> 0% cargos de transacción</li>
-          <li><i class="fas fa-robot"></i> Diseño con IA</li>
-          <li><i class="fas fa-boxes"></i> Productos ilimitados</li>
-          <li><i class="fas fa-pen-fancy"></i> Editor visual</li>
-          <li><i class="fab fa-instagram"></i> Instagram, Facebook, WhatsApp</li>
-          <li><i class="fab fa-google"></i> Google Commerce + Ads</li>
-          <li><i class="fas fa-chart-simple"></i> Automatizaciones marketing</li>
-          <li><i class="fas fa-calendar-check"></i> Reservas y suscripciones</li>
-          <li><i class="fas fa-globe"></i> Dominio gratis 1 año</li>
-          <li><i class="fas fa-file-alt"></i> Productos digitales</li>
-          <li><i class="fas fa-magic"></i> Descripciones con IA</li>
-          <li><i class="fab fa-mercadolibre"></i> Mercado Libre</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Funciones avanzadas (tabla) -->
-    <div class="section-card">
-      <div class="section-title">
-        <h2><i class="fas fa-microchip"></i> Funciones avanzadas</h2>
-      </div>
-      <div class="section-content">
-        <div class="table-wrapper">
-          <table class="commercial-table">
-            <thead><tr><th>Función</th><th>PLUS</th><th>PRO</th><th>PREMIUM</th><th>ADVANCED</th></tr></thead>
-            <tbody>
-              <tr><td>Recuperar carrito</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
-              <tr><td>Promociones</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
-              <tr><td>Registro clientes</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
-              <tr><td>Reseñas</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
-              <tr><td>POS</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
-              <tr><td>Stock</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
-              <tr><td>Favoritos</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
-              <tr><td>Filtros</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
-              <tr><td>Admins</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
-              <tr><td>Búsqueda</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
-              <tr><td>Informes</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Capacidades -->
-    <div class="section-card">
-      <div class="section-title">
-        <h2><i class="fas fa-chart-simple"></i> Capacidades por plan</h2>
-      </div>
-      <div class="section-content">
-        <div class="table-wrapper">
-          <table class="commercial-table">
-            <thead><tr><th>Característica</th><th>PLUS</th><th>PRO</th><th>PREMIUM</th><th>ADVANCED</th></tr></thead>
-            <tbody>
-              <tr><td>Idiomas</td><td>2</td><td>4</td><td>8</td><td>Ilimitado</td></tr>
-              <tr><td>Stock (ubicaciones)</td><td>1</td><td>1</td><td>4</td><td>10</td></tr>
-              <tr><td>Soporte</td><td>Estándar</td><td>Medio</td><td>Medio</td><td>Alto</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Incluye servicio -->
-    <div class="section-card">
-      <div class="section-title">
-        <h2><i class="fas fa-headset"></i> Incluye servicio mensual</h2>
-      </div>
-      <div class="section-content">
-        <ul class="simple-list">
-          <li><i class="fas fa-life-ring"></i> Soporte técnico dedicado</li>
-          <li><i class="fas fa-sync-alt"></i> Mantención web (actualizaciones y seguridad)</li>
-          <li><i class="fas fa-comments"></i> Asistencia continua</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- RESUMEN FINAL + CTA comercial -->
-    <div class="section-card">
-      <div class="section-title">
-        <h2><i class="fas fa-file-invoice-dollar"></i> Resumen de inversión</h2>
-      </div>
-      <div class="section-content">
-        <div class="resumen-box">
-          <div class="resumen-item">
-            <i class="fas fa-rocket" style="font-size: 2rem; color:#FF8C42;"></i>
-            <h3>Pago inicial</h3>
-            <p class="price-big">$185.000 CLP</p>
-            <small>desarrollo + configuración</small>
-          </div>
-          <div class="resumen-item">
-            <i class="fas fa-calendar-week" style="font-size: 2rem; color:#FF8C42;"></i>
-            <h3>Mensual desde</h3>
-            <p class="price-big">$29.400 CLP</p>
-            <small>Plan PLUS + servicio incluido</small>
-          </div>
-        </div>
-        <div style="text-align: center; margin-top: 1.2rem;">
-          <a href="#" class="btn-comercial"><i class="fab fa-whatsapp"></i> Solicitar cotización personalizada</a>
-          <p style="font-size: 0.75rem; margin-top: 12px;"><i class="fas fa-shield-alt"></i> Asesoría sin compromiso · Respuesta en 24h</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer con condiciones comerciales -->
-    <div class="footer-note">
-      <p><i class="fas fa-credit-card"></i> ⚠️ No incluye comisiones externas (Webpay, MercadoPago / Mercado Pago).</p>
-      <p><i class="fas fa-globe"></i> Dominio gratis solo el primer año (renovación normal aplica después).</p>
-      <p><i class="fas fa-chart-line"></i> Valores sujetos a cambios por políticas de plataforma, siempre se informará con antelación.</p>
-      <p style="margin-top: 6px;"><i class="fas fa-check-circle"></i> Cotización válida por 15 días.</p>
+      <button class="btn btn-primary" id="addRowBtn">➕ Nueva fila</button>
+      <button class="btn btn-outline" id="importCsvBtn">📂 Importar CSV</button>
+      <button class="btn btn-outline" id="exportCsvBtn">📎 Exportar CSV</button>
+      <button class="btn btn-outline" id="resetDemoBtn">⟳ Reiniciar demo</button>
     </div>
   </div>
+
+  <div class="table-wrapper">
+    <table class="data-table" id="ventasTable">
+      <thead>
+        <tr>
+          <th data-sort="cliente">👤 Cliente</th>
+          <th data-sort="producto">📦 Producto</th>
+          <th data-sort="cantidad">🔢 Cantidad</th>
+          <th data-sort="estado">💰 Estado pago</th>
+          <th data-sort="fecha">📅 Fecha y hora</th>
+          <th style="width: 100px">⚡ Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+  <footer>✨ Haz clic en cualquier celda para editar. Fecha con selector visual. Botón <span style="color:#4ade80;">➕</span> duplica fila para mismo cliente. ¡Importa tus propios CSV!</footer>
 </div>
+
+<script>
+  // ---------- MODELO DE DATOS ----------
+  let ventas = [];
+
+  // Formatear fecha para guardar en objeto
+  function crearFilaDemo(cliente, producto, cantidad, estado, fechaISO, fechaLegible) {
+    return { cliente, producto, cantidad, estado, fecha: fechaISO, fechaLegible };
+  }
+
+  function crearDemoData() {
+    const ahora = new Date();
+    const fechaISO = ahora.toISOString().slice(0, 16);
+    const fechaLegible = ahora.toLocaleString('es-ES', { hour12: false });
+    ventas = [
+      crearFilaDemo("Pancho", "Galletas", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Vicente", "Galletas", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Ariel", "Galletas", 2, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Matis", "Galletas", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Lían", "bonobon grande", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Magno", "Galletas", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Brian", "Galletas", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Pipe", "Galletas", 2, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Rominous", "Galletas", 2, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Niko", "Galletas", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Rodrigo", "Llavero", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Ariel", "Galletas", 3, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Magno", "Galletas", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Rodrigo", "Llavero", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Ariel", "Galletas", 3, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Magno", "Galletas", 1, "Debe", fechaISO, fechaLegible),
+      crearFilaDemo("Lían", "Bonobon", 2, "Pagado", fechaISO, fechaLegible)
+    ];
+  }
+
+  function loadInitialData() {
+    const stored = localStorage.getItem('excelVentasMultiple');
+    if (stored) {
+      ventas = JSON.parse(stored);
+      if (ventas.length === 0) crearDemoData();
+    } else {
+      crearDemoData();
+    }
+    // Asegurar formato
+    ventas.forEach(v => {
+      if (!v.fechaLegible && v.fecha) {
+        const d = new Date(v.fecha);
+        v.fechaLegible = isNaN(d.getTime()) ? v.fecha : d.toLocaleString('es-ES', { hour12: false });
+      } else if (!v.fechaLegible) {
+        const ahora = new Date();
+        v.fecha = ahora.toISOString().slice(0, 16);
+        v.fechaLegible = ahora.toLocaleString('es-ES', { hour12: false });
+      }
+    });
+    saveToLocalStorage();
+    renderTable();
+  }
+
+  function saveToLocalStorage() {
+    localStorage.setItem('excelVentasMultiple', JSON.stringify(ventas));
+  }
+
+  function updateFechaLegible(row) {
+    if (row.fecha) {
+      const fechaDate = new Date(row.fecha);
+      if (!isNaN(fechaDate.getTime())) {
+        row.fechaLegible = fechaDate.toLocaleString('es-ES', { hour12: false });
+      } else {
+        row.fechaLegible = row.fecha;
+      }
+    } else {
+      row.fechaLegible = "";
+    }
+  }
+
+  // Filtro y orden
+  let currentFilter = '';
+  let currentSort = { column: 'fecha', direction: 'desc' };
+
+  function renderTable() {
+    const tbody = document.getElementById('tableBody');
+    if (!tbody) return;
+
+    let filtered = ventas.filter(v => 
+      v.cliente.toLowerCase().includes(currentFilter.toLowerCase()) || 
+      v.producto.toLowerCase().includes(currentFilter.toLowerCase())
+    );
+
+    filtered.sort((a, b) => {
+      let valA = a[currentSort.column];
+      let valB = b[currentSort.column];
+      if (currentSort.column === 'cantidad') {
+        valA = Number(valA);
+        valB = Number(valB);
+      }
+      if (currentSort.column === 'fecha') {
+        valA = a.fecha || '';
+        valB = b.fecha || '';
+      }
+      if (typeof valA === 'string') {
+        return currentSort.direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+      }
+      return currentSort.direction === 'asc' ? valA - valB : valB - valA;
+    });
+
+    tbody.innerHTML = '';
+    if (filtered.length === 0) {
+      const emptyRow = document.createElement('tr');
+      emptyRow.innerHTML = `<td colspan="6" class="empty-row">✨ Sin datos. Importa CSV o usa "+ Nueva fila" ✨</td>`;
+      tbody.appendChild(emptyRow);
+      return;
+    }
+
+    filtered.forEach((item) => {
+      const row = document.createElement('tr');
+      
+      // Cliente
+      const clienteCell = document.createElement('td');
+      const clienteSpan = createEditableSpan(item.cliente, (newVal) => { item.cliente = newVal; saveAndRender(); });
+      clienteCell.appendChild(clienteSpan);
+      
+      // Producto
+      const prodCell = document.createElement('td');
+      const prodSpan = createEditableSpan(item.producto, (newVal) => { item.producto = newVal; saveAndRender(); });
+      prodCell.appendChild(prodSpan);
+      
+      // Cantidad
+      const cantCell = document.createElement('td');
+      const cantSpan = createEditableSpan(item.cantidad.toString(), (newVal) => {
+        let num = parseInt(newVal);
+        if (isNaN(num)) num = 0;
+        item.cantidad = Math.max(0, num);
+        saveAndRender();
+      }, 'number');
+      cantCell.appendChild(cantSpan);
+      
+      // Estado
+      const estadoCell = document.createElement('td');
+      const selectEstado = document.createElement('select');
+      selectEstado.className = 'estado-select';
+      ['Pagado', 'Debe'].forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt;
+        option.textContent = opt === 'Pagado' ? '✅ Pagado' : '⏳ Debe';
+        if (item.estado === opt) option.selected = true;
+        selectEstado.appendChild(option);
+      });
+      selectEstado.addEventListener('change', (e) => { item.estado = e.target.value; saveAndRender(); });
+      estadoCell.appendChild(selectEstado);
+      
+      // Fecha (datetime-local)
+      const fechaCell = document.createElement('td');
+      const fechaInput = document.createElement('input');
+      fechaInput.type = 'datetime-local';
+      fechaInput.className = 'fecha-input';
+      fechaInput.value = item.fecha || new Date().toISOString().slice(0, 16);
+      fechaInput.addEventListener('change', (e) => {
+        item.fecha = e.target.value;
+        updateFechaLegible(item);
+        saveAndRender();
+      });
+      fechaCell.appendChild(fechaInput);
+      
+      // Acciones: duplicar (mismo cliente/fecha) y eliminar
+      const accionCell = document.createElement('td');
+      const btnWrapper = document.createElement('div');
+      btnWrapper.className = 'action-buttons';
+      
+      const duplicateBtn = document.createElement('button');
+      duplicateBtn.innerHTML = '➕';
+      duplicateBtn.className = 'icon-btn duplicate-btn';
+      duplicateBtn.title = 'Agregar otro producto para este cliente (misma fecha)';
+      duplicateBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const newRow = {
+          cliente: item.cliente,
+          producto: "Nuevo producto",
+          cantidad: 1,
+          estado: "Debe",
+          fecha: item.fecha,
+          fechaLegible: item.fechaLegible
+        };
+        ventas.push(newRow);
+        saveAndRender();
+        setTimeout(() => {
+          const tbodyEl = document.getElementById('tableBody');
+          if (tbodyEl.lastChild) tbodyEl.lastChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 50);
+      });
+      
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerHTML = '🗑️';
+      deleteBtn.className = 'icon-btn delete-btn';
+      deleteBtn.title = 'Eliminar fila';
+      deleteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const realIndex = ventas.findIndex(v => v === item);
+        if (realIndex !== -1) {
+          ventas.splice(realIndex, 1);
+          saveAndRender();
+        }
+      });
+      
+      btnWrapper.appendChild(duplicateBtn);
+      btnWrapper.appendChild(deleteBtn);
+      accionCell.appendChild(btnWrapper);
+      
+      row.appendChild(clienteCell);
+      row.appendChild(prodCell);
+      row.appendChild(cantCell);
+      row.appendChild(estadoCell);
+      row.appendChild(fechaCell);
+      row.appendChild(accionCell);
+      tbody.appendChild(row);
+    });
+  }
+
+  function createEditableSpan(initialValue, onUpdate, type = 'text') {
+    const span = document.createElement('span');
+    span.className = 'editable-cell';
+    span.contentEditable = 'true';
+    span.textContent = initialValue !== undefined && initialValue !== null ? initialValue : '';
+    if (type === 'number') span.setAttribute('inputmode', 'numeric');
+    span.addEventListener('blur', () => {
+      let newValue = span.textContent.trim();
+      if (type === 'number') {
+        let num = parseInt(newValue);
+        if (isNaN(num)) num = 0;
+        newValue = num.toString();
+        span.textContent = newValue;
+      }
+      if (newValue !== initialValue) onUpdate(newValue);
+    });
+    span.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); span.blur(); } });
+    return span;
+  }
+
+  function saveAndRender() {
+    saveToLocalStorage();
+    renderTable();
+  }
+
+  function addNewRow() {
+    const ahora = new Date();
+    const fechaISO = ahora.toISOString().slice(0, 16);
+    const fechaLegible = ahora.toLocaleString('es-ES', { hour12: false });
+    ventas.push({
+      cliente: "Nuevo cliente",
+      producto: "Nuevo producto",
+      cantidad: 1,
+      estado: "Debe",
+      fecha: fechaISO,
+      fechaLegible: fechaLegible
+    });
+    saveAndRender();
+    setTimeout(() => {
+      const tbody = document.getElementById('tableBody');
+      if (tbody.lastChild) tbody.lastChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
+  }
+
+  // ---------- IMPORTAR CSV ----------
+  function importCSV(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target.result;
+      const lines = text.split(/\r?\n/);
+      if (lines.length === 0) return;
+      const headers = lines[0].split(',').map(h => h.replace(/^\uFEFF/, '').trim().toLowerCase());
+      // mapeo flexible: buscamos columnas necesarias
+      const idxCliente = headers.findIndex(h => h.includes('cliente'));
+      const idxProducto = headers.findIndex(h => h.includes('producto'));
+      const idxCantidad = headers.findIndex(h => h.includes('cantidad'));
+      const idxEstado = headers.findIndex(h => h.includes('estado') || h.includes('pago'));
+      const idxFecha = headers.findIndex(h => h.includes('fecha'));
+      
+      if (idxCliente === -1 || idxProducto === -1 || idxCantidad === -1) {
+        alert("Formato inválido. Se requieren columnas: Cliente, Producto, Cantidad. (Estado y Fecha opcionales)");
+        return;
+      }
+      
+      const nuevasFilas = [];
+      for (let i = 1; i < lines.length; i++) {
+        if (!lines[i].trim()) continue;
+        // parse básico (soporta comillas)
+        let cols = [];
+        let inQuote = false;
+        let current = '';
+        for (let ch of lines[i]) {
+          if (ch === '"') inQuote = !inQuote;
+          else if (ch === ',' && !inQuote) {
+            cols.push(current.trim());
+            current = '';
+          } else {
+            current += ch;
+          }
+        }
+        cols.push(current.trim());
+        if (cols.length < 3) continue;
+        
+        const cliente = cols[idxCliente]?.replace(/^"|"$/g, '') || '';
+        const producto = cols[idxProducto]?.replace(/^"|"$/g, '') || '';
+        let cantidad = parseInt(cols[idxCantidad]);
+        if (isNaN(cantidad)) cantidad = 1;
+        let estado = (idxEstado !== -1 && cols[idxEstado]) ? (cols[idxEstado].includes('Pagado') ? 'Pagado' : 'Debe') : 'Debe';
+        let fechaStr = (idxFecha !== -1 && cols[idxFecha]) ? cols[idxFecha].replace(/^"|"$/g, '') : '';
+        
+        let fechaISO = null;
+        let fechaLegible = null;
+        if (fechaStr) {
+          let parsedDate = new Date(fechaStr);
+          if (!isNaN(parsedDate.getTime())) {
+            fechaISO = parsedDate.toISOString().slice(0, 16);
+            fechaLegible = parsedDate.toLocaleString('es-ES', { hour12: false });
+          } else {
+            const ahora = new Date();
+            fechaISO = ahora.toISOString().slice(0, 16);
+            fechaLegible = ahora.toLocaleString('es-ES', { hour12: false });
+          }
+        } else {
+          const ahora = new Date();
+          fechaISO = ahora.toISOString().slice(0, 16);
+          fechaLegible = ahora.toLocaleString('es-ES', { hour12: false });
+        }
+        
+        nuevasFilas.push({
+          cliente: cliente || "Desconocido",
+          producto: producto || "Producto",
+          cantidad: cantidad,
+          estado: estado,
+          fecha: fechaISO,
+          fechaLegible: fechaLegible
+        });
+      }
+      
+      if (nuevasFilas.length === 0) {
+        alert("No se encontraron filas válidas en el CSV.");
+        return;
+      }
+      
+      ventas.push(...nuevasFilas);
+      saveAndRender();
+      alert(`✅ Se importaron ${nuevasFilas.length} filas correctamente.`);
+    };
+    reader.onerror = () => alert("Error al leer el archivo.");
+    reader.readAsText(file, "UTF-8");
+  }
+
+  function triggerImport() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.csv';
+    input.onchange = (e) => {
+      if (e.target.files && e.target.files[0]) {
+        importCSV(e.target.files[0]);
+      }
+    };
+    input.click();
+  }
+
+  function exportToCSV() {
+    if (ventas.length === 0) {
+      alert("No hay datos para exportar");
+      return;
+    }
+    const headers = ["Cliente", "Producto", "Cantidad", "EstadoPago", "Fecha"];
+    const rows = ventas.map(v => {
+      let fechaMostrar = v.fechaLegible || (v.fecha ? new Date(v.fecha).toLocaleString('es-ES') : '');
+      return [
+        `"${v.cliente.replace(/"/g, '""')}"`,
+        `"${v.producto.replace(/"/g, '""')}"`,
+        v.cantidad,
+        `"${v.estado}"`,
+        `"${fechaMostrar}"`
+      ];
+    });
+    const csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+    const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.setAttribute("download", "ventas_exportadas.csv");
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function resetToDemo() {
+    if (confirm("⚠️ Esto reemplazará todos los datos actuales por el demo inicial. ¿Continuar?")) {
+      crearDemoData();
+      saveAndRender();
+      document.getElementById('filterInput').value = '';
+      currentFilter = '';
+      currentSort = { column: 'fecha', direction: 'desc' };
+      renderTable();
+    }
+  }
+
+  function setupSorting() {
+    const ths = document.querySelectorAll('#ventasTable th[data-sort]');
+    ths.forEach(th => {
+      th.addEventListener('click', () => {
+        const column = th.getAttribute('data-sort');
+        if (currentSort.column === column) {
+          currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+          currentSort.column = column;
+          currentSort.direction = 'asc';
+        }
+        renderTable();
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadInitialData();
+    setupSorting();
+    document.getElementById('filterInput').addEventListener('input', (e) => {
+      currentFilter = e.target.value;
+      renderTable();
+    });
+    document.getElementById('addRowBtn').addEventListener('click', addNewRow);
+    document.getElementById('importCsvBtn').addEventListener('click', triggerImport);
+    document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
+    document.getElementById('resetDemoBtn').addEventListener('click', resetToDemo);
+  });
+</script>
 </body>
 </html>
