@@ -3,28 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Fichas de Clientes · Ventas con Ticker y Estado de Pago</title>
+  <title>Gestión · Clientes + Inventario + Ventas | Total Tickets + Importar CSV</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: #0a0c15;
       font-family: 'Inter', system-ui, sans-serif;
       padding: 1.5rem;
       color: #eef2ff;
     }
-
-    .app-container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    /* header */
+    .app-container { max-width: 1400px; margin: 0 auto; }
     .header {
       display: flex;
       justify-content: space-between;
@@ -35,7 +24,6 @@
       border-bottom: 1px solid #1e293b;
       padding-bottom: 1rem;
     }
-
     h1 {
       font-size: 1.8rem;
       font-weight: 700;
@@ -47,7 +35,6 @@
       align-items: center;
       gap: 8px;
     }
-
     .btn {
       background: #1e293b;
       border: none;
@@ -62,83 +49,55 @@
       align-items: center;
       gap: 8px;
     }
-
-    .btn-primary {
-      background: #3b82f6;
-      color: white;
-    }
+    .btn-primary { background: #3b82f6; color: white; }
     .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
-
-    .btn-success {
-      background: #16a34a;
-    }
+    .btn-success { background: #16a34a; }
     .btn-success:hover { background: #15803d; }
-
-    .btn-outline {
-      border: 1px solid #334155;
-      background: transparent;
-    }
+    .btn-outline { border: 1px solid #334155; background: transparent; }
     .btn-outline:hover { background: #1e293b; }
-
-    .btn-sm {
-      padding: 5px 12px;
-      font-size: 0.75rem;
-    }
-
-    /* dos columnas: lista de clientes + ficha */
-    .dashboard {
-      display: flex;
-      gap: 1.8rem;
-      flex-wrap: wrap;
-    }
-
+    .btn-warning { background: #eab308; color: #0f172a; }
+    .btn-warning:hover { background: #ca8a04; }
+    .btn-sm { padding: 5px 12px; font-size: 0.75rem; }
+    .dashboard { display: flex; gap: 1.8rem; flex-wrap: wrap; }
     .clientes-sidebar {
       flex: 1.2;
-      min-width: 260px;
+      min-width: 280px;
       background: #0f172a;
       border-radius: 28px;
       padding: 1.2rem;
       border: 1px solid #1e293b;
       height: fit-content;
     }
-
-    .clientes-sidebar h2 {
-      font-size: 1.3rem;
+    .clientes-sidebar h2 { font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .inventory-shortcut { margin-top: 1.5rem; border-top: 1px solid #1e293b; padding-top: 1rem; }
+    .csv-section { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #334155; }
+    .resumen-section {
+      background: #111827;
+      border-radius: 20px;
+      padding: 0.8rem;
       margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      border: 1px solid #334155;
     }
-
+    .resumen-section h3 { font-size: 1rem; margin-bottom: 8px; color: #c084fc; }
+    .resumen-stats { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
+    .stat-card { background: #0f172a; padding: 6px 12px; border-radius: 20px; text-align: center; flex: 1; }
+    .stat-value { font-size: 1.3rem; font-weight: bold; color: #60a5fa; }
+    .stat-label { font-size: 0.7rem; color: #94a3b8; }
     .cliente-card {
       background: #111827;
       border-radius: 20px;
       padding: 12px 16px;
       margin-bottom: 10px;
       cursor: pointer;
-      transition: 0.1s;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border: 1px solid #1f2a3e;
     }
     .cliente-card:hover { background: #1e293b; transform: scale(0.99); }
-    .cliente-card.active {
-      background: #1e2a3e;
-      border-left: 4px solid #3b82f6;
-    }
-    .cliente-nombre-side {
-      font-weight: 600;
-    }
-    .delete-cliente {
-      background: none;
-      border: none;
-      color: #f87171;
-      cursor: pointer;
-      font-size: 1.1rem;
-    }
-
-    /* ficha del cliente */
+    .cliente-card.active { background: #1e2a3e; border-left: 4px solid #3b82f6; }
+    .cliente-nombre-side { font-weight: 600; }
+    .delete-cliente { background: none; border: none; color: #f87171; cursor: pointer; font-size: 1.1rem; }
     .ficha-container {
       flex: 3;
       min-width: 320px;
@@ -147,7 +106,6 @@
       border: 1px solid #1e293b;
       padding: 1.5rem;
     }
-
     .ficha-header {
       display: flex;
       justify-content: space-between;
@@ -157,106 +115,25 @@
       border-bottom: 1px solid #334155;
       padding-bottom: 1rem;
     }
-    .ficha-titulo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .editar-cliente-input {
-      background: #1e293b;
-      border: 1px solid #3b82f6;
-      padding: 6px 12px;
-      border-radius: 30px;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    /* compras */
-    .compra-item {
-      background: #111827;
-      border-radius: 24px;
-      padding: 1rem;
-      margin-bottom: 1.2rem;
-      border-left: 4px solid #3b82f6;
-    }
-    .compra-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-    .compra-fecha {
-      font-weight: 600;
-      color: #94a3b8;
-    }
-    .estado-badge {
-      padding: 4px 12px;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      font-weight: bold;
-    }
+    .ficha-titulo { font-size: 1.8rem; font-weight: 700; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .editar-cliente-input { background: #1e293b; border: 1px solid #3b82f6; padding: 6px 12px; border-radius: 30px; color: white; font-size: 1.2rem; font-weight: bold; }
+    .compra-item { background: #111827; border-radius: 24px; padding: 1rem; margin-bottom: 1.2rem; border-left: 4px solid #3b82f6; }
+    .compra-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 12px; }
+    .compra-fecha { font-weight: 600; color: #94a3b8; }
+    .estado-badge { padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; font-weight: bold; }
     .pagado { background: #15803d; color: white; }
     .debe { background: #b91c1c; color: white; }
-    .productos-lista {
-      margin: 12px 0;
-      padding-left: 12px;
-    }
-    .producto-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 5px 0;
-      border-bottom: 1px dashed #2d3a4e;
-    }
-    .total-compra {
-      text-align: right;
-      font-weight: 700;
-      margin-top: 10px;
-      padding-top: 8px;
-      border-top: 1px solid #2d3a4e;
-    }
-    .acciones-compra {
-      display: flex;
-      gap: 12px;
-      margin-top: 14px;
-      flex-wrap: wrap;
-    }
-
-    /* formulario nueva compra */
-    .nueva-compra {
-      background: #1a2538;
-      border-radius: 24px;
-      padding: 1rem;
-      margin-top: 1.5rem;
-    }
-    .producto-input-group {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-      align-items: center;
-    }
-    .producto-input-group input {
-      background: #0f172a;
-      border: 1px solid #334155;
-      padding: 8px 12px;
-      border-radius: 20px;
-      color: white;
-      flex: 1;
-    }
-    .agregar-producto-btn {
-      background: #3b82f6;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 30px;
-      cursor: pointer;
-      color: white;
-    }
-
-    /* modal ticket */
+    .productos-lista { margin: 12px 0; padding-left: 12px; }
+    .producto-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dashed #2d3a4e; }
+    .total-compra { text-align: right; font-weight: 700; margin-top: 10px; padding-top: 8px; border-top: 1px solid #2d3a4e; }
+    .acciones-compra { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+    .nueva-compra { background: #1a2538; border-radius: 24px; padding: 1rem; margin-top: 1.5rem; }
+    .item-row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+    .item-row select, .item-row input { background: #0f172a; border: 1px solid #334155; padding: 8px 12px; border-radius: 20px; color: white; }
+    .prod-nombre { flex: 2; min-width: 120px; }
+    .prod-cantidad { width: 90px; }
+    .prod-precio { width: 110px; }
+    .inventory-select { flex: 2; min-width: 140px; }
     .modal {
       display: none;
       position: fixed;
@@ -271,9 +148,11 @@
       background: #0f172a;
       border-radius: 32px;
       padding: 1.8rem;
-      max-width: 500px;
+      max-width: 700px;
       width: 90%;
       border: 1px solid #3b82f6;
+      max-height: 85vh;
+      overflow-y: auto;
     }
     .ticket-text {
       background: #111827;
@@ -285,26 +164,73 @@
       max-height: 400px;
       overflow: auto;
     }
-    @media (max-width: 800px) {
-      .dashboard { flex-direction: column; }
+    .producto-inv-row {
+      background: #111827;
+      padding: 10px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .file-input { display: none; }
+    .import-label { cursor: pointer; }
+    @media (max-width: 800px) { .dashboard { flex-direction: column; } }
   </style>
 </head>
 <body>
 <div class="app-container">
   <div class="header">
-    <h1>📋 Fichas de Clientes · Ventas + Ticker</h1>
-    <button class="btn btn-primary" id="nuevoClienteGlobalBtn">➕ Nuevo Cliente</button>
+    <h1>📦 Gestión · Clientes + Inventario + Ventas</h1>
+    <div class="btn-group">
+      <button class="btn btn-warning" id="abrirInventarioBtn">📦 Editar Inventario</button>
+      <button class="btn btn-primary" id="nuevoClienteGlobalBtn">➕ Nuevo Cliente</button>
+    </div>
   </div>
 
   <div class="dashboard">
-    <!-- Lista de clientes -->
     <div class="clientes-sidebar">
       <h2>👥 Clientes</h2>
       <div id="listaClientes"></div>
+      
+      <!-- Resumen de Tickets / Ventas globales -->
+      <div class="resumen-section">
+        <h3>🎫 TOTAL TICKETS</h3>
+        <div class="resumen-stats" id="resumenStats">
+          <div class="stat-card"><div class="stat-value" id="totalComprasCount">0</div><div class="stat-label">Ventas</div></div>
+          <div class="stat-card"><div class="stat-value" id="totalFacturado">$0</div><div class="stat-label">Facturado</div></div>
+          <div class="stat-card"><div class="stat-value" id="totalPagado">$0</div><div class="stat-label">Pagado</div></div>
+          <div class="stat-card"><div class="stat-value" id="totalDebe">$0</div><div class="stat-label">Pendiente</div></div>
+        </div>
+      </div>
+
+      <div class="inventory-shortcut">
+        <button class="btn btn-outline btn-sm" id="invShortcutBtn" style="width:100%">📋 Administrar productos</button>
+      </div>
+
+      <div class="csv-section">
+        <p style="font-size:0.8rem; margin-bottom:8px; color:#94a3b8;">⬇️ EXPORTAR DATOS</p>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <button class="btn btn-sm btn-outline" id="exportClientesBtn">👥 Clientes.csv</button>
+          <button class="btn btn-sm btn-outline" id="exportInventarioBtn">📦 Inventario.csv</button>
+          <button class="btn btn-sm btn-outline" id="exportComprasBtn">🛒 Ventas.csv</button>
+          <button class="btn btn-sm btn-success" id="exportAllBtn">📀 Todos los CSV</button>
+        </div>
+        <p style="font-size:0.8rem; margin:12px 0 6px 0; color:#94a3b8;">⬆️ IMPORTAR DATOS (CSV)</p>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label class="btn btn-sm btn-outline import-label" for="importClientesFile">📂 Importar Clientes.csv</label>
+          <input type="file" id="importClientesFile" accept=".csv" class="file-input">
+          <label class="btn btn-sm btn-outline import-label" for="importInventarioFile">📂 Importar Inventario.csv</label>
+          <input type="file" id="importInventarioFile" accept=".csv" class="file-input">
+          <label class="btn btn-sm btn-outline import-label" for="importComprasFile">📂 Importar Ventas.csv</label>
+          <input type="file" id="importComprasFile" accept=".csv" class="file-input">
+        </div>
+      </div>
     </div>
 
-    <!-- Ficha activa -->
     <div class="ficha-container" id="fichaContainer">
       <div class="ficha-header">
         <div class="ficha-titulo">
@@ -312,12 +238,39 @@
           <span id="clienteNombreDisplay">Selecciona un cliente</span>
         </div>
         <div>
-          <button class="btn btn-outline btn-sm" id="editarClienteBtn" style="display: none;">✏️ Editar</button>
+          <button class="btn btn-outline btn-sm" id="editarClienteBtn" style="display: none;">✏️ Editar nombre</button>
         </div>
       </div>
       <div id="fichaContenido">
         <div style="text-align: center; padding: 3rem;">👈 Haz clic en un cliente para ver su ficha</div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL INVENTARIO -->
+<div id="inventarioModal" class="modal">
+  <div class="modal-content">
+    <h3 style="margin-bottom: 1rem;">📦 Gestión de Inventario</h3>
+    <div id="listaInventario"></div>
+    <div style="margin-top: 20px;">
+      <button class="btn btn-primary" id="agregarProductoBtn">➕ Nuevo producto</button>
+      <button class="btn btn-outline" id="cerrarInventarioBtn">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL producto -->
+<div id="productoFormModal" class="modal">
+  <div class="modal-content" style="max-width: 450px;">
+    <h3 id="productoFormTitulo">Nuevo producto</h3>
+    <input type="hidden" id="editProductoId">
+    <div style="margin: 15px 0;"><label>Nombre</label><input type="text" id="prodNombreInput" style="width:100%; background:#1e293b; border-radius:20px; padding:8px; color:white;"></div>
+    <div style="margin: 15px 0;"><label>Precio (CLP)</label><input type="number" id="prodPrecioInput" step="any" style="width:100%; background:#1e293b; border-radius:20px; padding:8px; color:white;"></div>
+    <div style="margin: 15px 0;"><label>Stock</label><input type="number" id="prodStockInput" value="0" style="width:100%; background:#1e293b; border-radius:20px; padding:8px; color:white;"></div>
+    <div style="display: flex; gap: 10px; justify-content: flex-end;">
+      <button class="btn btn-primary" id="guardarProductoBtn">Guardar</button>
+      <button class="btn btn-outline" id="cancelarProductoBtn">Cancelar</button>
     </div>
   </div>
 </div>
@@ -336,313 +289,269 @@
 </div>
 
 <script>
-  // ---------- ESTRUCTURA DE DATOS ----------
-  let clientes = [];      // { id, nombre }
-  let compras = [];       // { id, clienteId, fecha (ISO date string YYYY-MM-DD), items: [{producto, cantidad, precio}], estado, fechaPago (opcional) }
-  let nextClienteId = 1;
-  let nextCompraId = 1;
-
-  // Cargar o inicializar demo
-  function loadData() {
-    const storedClientes = localStorage.getItem('clientesFichas');
-    const storedCompras = localStorage.getItem('comprasFichas');
-    if (storedClientes && storedCompras) {
-      clientes = JSON.parse(storedClientes);
-      compras = JSON.parse(storedCompras);
-      nextClienteId = Math.max(0, ...clientes.map(c => c.id), 0) + 1;
-      nextCompraId = Math.max(0, ...compras.map(c => c.id), 0) + 1;
-    } else {
-      // demo basado en clientes anteriores
-      const names = ["Pancho", "Vicente", "Ariel", "Matis", "Lían", "Magno", "Brian", "Pipe", "Rominous", "Niko", "Rodrigo"];
-      clientes = names.map((n, idx) => ({ id: idx + 1, nombre: n }));
-      nextClienteId = clientes.length + 1;
-      const hoy = new Date().toISOString().slice(0,10);
-      const ayer = new Date(Date.now() - 86400000).toISOString().slice(0,10);
-      compras = [
-        { id: 1, clienteId: 1, fecha: hoy, items: [{producto:"Galletas", cantidad:1, precio:1200}], estado:"Debe", fechaPago: null },
-        { id: 2, clienteId: 2, fecha: hoy, items: [{producto:"Galletas", cantidad:1, precio:1200}], estado:"Debe", fechaPago: null },
-        { id: 3, clienteId: 3, fecha: hoy, items: [{producto:"Galletas", cantidad:2, precio:1200}], estado:"Debe", fechaPago: null },
-        { id: 4, clienteId: 4, fecha: ayer, items: [{producto:"Bonobon grande", cantidad:1, precio:2500}], estado:"Pagado", fechaPago: ayer },
-        { id: 5, clienteId: 5, fecha: hoy, items: [{producto:"Llavero", cantidad:1, precio:800}], estado:"Debe", fechaPago: null },
-        { id: 6, clienteId: 11, fecha: hoy, items: [{producto:"Llavero", cantidad:1, precio:800}], estado:"Debe", fechaPago: null },
-        { id: 7, clienteId: 3, fecha: ayer, items: [{producto:"Bonobon", cantidad:3, precio:1800}], estado:"Pagado", fechaPago: ayer },
-      ];
-      nextCompraId = compras.length + 1;
-    }
-    guardarDatos();
-  }
-
-  function guardarDatos() {
-    localStorage.setItem('clientesFichas', JSON.stringify(clientes));
-    localStorage.setItem('comprasFichas', JSON.stringify(compras));
-  }
-
-  // UI: renderizar lista de clientes
+  // ======================== DATOS VACÍOS INICIAL ==================
+  let clientes = [];
+  let compras = [];
+  let inventario = [];
+  let nextClienteId = 1, nextCompraId = 1, nextProductoId = 1;
   let clienteActivoId = null;
 
+  // Persistencia
+  function guardarTodo() {
+    localStorage.setItem('clientesFichas', JSON.stringify(clientes));
+    localStorage.setItem('comprasFichas', JSON.stringify(compras));
+    localStorage.setItem('inventarioApp', JSON.stringify(inventario));
+    localStorage.setItem('nextIds', JSON.stringify({ nextClienteId, nextCompraId, nextProductoId }));
+    actualizarResumenGlobal();
+  }
+
+  function cargarDatos() {
+    clientes = JSON.parse(localStorage.getItem('clientesFichas') || '[]');
+    compras = JSON.parse(localStorage.getItem('comprasFichas') || '[]');
+    inventario = JSON.parse(localStorage.getItem('inventarioApp') || '[]');
+    const ids = JSON.parse(localStorage.getItem('nextIds') || '{}');
+    nextClienteId = ids.nextClienteId || (clientes.length ? Math.max(...clientes.map(c=>c.id),0)+1 : 1);
+    nextCompraId = ids.nextCompraId || (compras.length ? Math.max(...compras.map(c=>c.id),0)+1 : 1);
+    nextProductoId = ids.nextProductoId || (inventario.length ? Math.max(...inventario.map(p=>p.id),0)+1 : 1);
+  }
+
+  // Resumen global: total tickets (cantidad), facturado total, pagado, pendiente
+  function actualizarResumenGlobal() {
+    let totalFacturado = 0, totalPagado = 0;
+    compras.forEach(comp => {
+      const total = comp.items.reduce((sum, i) => sum + (i.cantidad * i.precio), 0);
+      totalFacturado += total;
+      if(comp.estado === 'Pagado') totalPagado += total;
+    });
+    document.getElementById('totalComprasCount').innerText = compras.length;
+    document.getElementById('totalFacturado').innerText = '$' + totalFacturado.toFixed(2);
+    document.getElementById('totalPagado').innerText = '$' + totalPagado.toFixed(2);
+    document.getElementById('totalDebe').innerText = '$' + (totalFacturado - totalPagado).toFixed(2);
+  }
+
+  // Helper CSV
+  function parseCSV(texto) {
+    // Simple parser que respeta comillas
+    const filas = [];
+    const regex = /(?:,|\n|^)(?:"([^"]*(?:""[^"]*)*)"|([^",\n]*))/g;
+    let fila = [];
+    let match;
+    while ((match = regex.exec(texto)) !== null) {
+      if (match[0].startsWith(',')) continue;
+      fila.push(match[1] !== undefined ? match[1].replace(/""/g, '"') : match[2]);
+      if (match[0].endsWith('\n')) { filas.push(fila); fila = []; }
+    }
+    if (fila.length) filas.push(fila);
+    return filas;
+  }
+
+  function importarClientesDesdeCSV(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const contenido = e.target.result;
+      const filas = parseCSV(contenido);
+      if(filas.length < 2) return alert('Archivo vacío o sin datos');
+      const encabezados = filas[0];
+      const idxId = encabezados.findIndex(h => h.toLowerCase() === 'id');
+      const idxNombre = encabezados.findIndex(h => h.toLowerCase() === 'nombre');
+      if(idxNombre === -1) return alert('Formato inválido: se requiere columna "Nombre"');
+      const nuevosClientes = [];
+      let maxId = 0;
+      for(let i=1; i<filas.length; i++) {
+        const fila = filas[i];
+        const nombre = fila[idxNombre]?.trim();
+        if(nombre) {
+          let id = (idxId !== -1 && fila[idxId]) ? parseInt(fila[idxId]) : 0;
+          if(isNaN(id)) id = 0;
+          nuevosClientes.push({ id, nombre });
+          if(id > maxId) maxId = id;
+        }
+      }
+      if(nuevosClientes.length === 0) return alert('No se encontraron clientes válidos');
+      if(confirm(`¿Reemplazar los ${clientes.length} clientes actuales por ${nuevosClientes.length} nuevos?`)) {
+        clientes = nuevosClientes;
+        nextClienteId = maxId + 1;
+        // Limpiar compras asociadas? opcional, mejor mantener consistencia manual
+        if(confirm('¿Deseas también eliminar todas las compras existentes para evitar inconsistencias? (Recomendado)')) {
+          compras = [];
+          nextCompraId = 1;
+        }
+        guardarTodo();
+        renderListaClientes();
+        if(clientes.length) seleccionarCliente(clientes[0].id);
+        else { clienteActivoId = null; document.getElementById('clienteNombreDisplay').innerText = 'Selecciona un cliente'; document.getElementById('fichaContenido').innerHTML = '<div style="text-align:center;padding:3rem;">👈 Sin clientes</div>'; }
+        alert('Clientes importados correctamente');
+      }
+    };
+    reader.readAsText(file, 'UTF-8');
+  }
+
+  function importarInventarioDesdeCSV(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const filas = parseCSV(e.target.result);
+      if(filas.length < 2) return alert('Archivo sin datos');
+      const enc = filas[0];
+      const idxId = enc.findIndex(h => h.toLowerCase() === 'id');
+      const idxNom = enc.findIndex(h => h.toLowerCase() === 'nombre');
+      const idxPrecio = enc.findIndex(h => h.toLowerCase() === 'precio');
+      const idxStock = enc.findIndex(h => h.toLowerCase() === 'stock');
+      if(idxNom === -1 || idxPrecio === -1) return alert('Formato inválido: se requiere Nombre y Precio');
+      const nuevos = [];
+      let maxId = 0;
+      for(let i=1; i<filas.length; i++) {
+        const f = filas[i];
+        const nombre = f[idxNom]?.trim();
+        const precio = parseFloat(f[idxPrecio]);
+        if(nombre && !isNaN(precio)) {
+          let id = (idxId !== -1 && f[idxId]) ? parseInt(f[idxId]) : 0;
+          if(isNaN(id)) id = 0;
+          const stock = (idxStock !== -1) ? parseInt(f[idxStock]) || 0 : 0;
+          nuevos.push({ id, nombre, precio, stock });
+          if(id > maxId) maxId = id;
+        }
+      }
+      if(!nuevos.length) return alert('No hay productos válidos');
+      if(confirm(`Reemplazar inventario (${inventario.length} productos) por ${nuevos.length}?`)) {
+        inventario = nuevos;
+        nextProductoId = maxId + 1;
+        guardarTodo();
+        renderInventarioModal();
+        actualizarSelectsInventario();
+        alert('Inventario importado');
+      }
+    };
+    reader.readAsText(file, 'UTF-8');
+  }
+
+  function importarComprasDesdeCSV(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const filas = parseCSV(e.target.result);
+      if(filas.length < 2) return alert('Archivo sin datos');
+      const enc = filas[0];
+      const idxId = enc.findIndex(h => h.toLowerCase() === 'id');
+      const idxClienteId = enc.findIndex(h => h.toLowerCase() === 'clienteid');
+      const idxFecha = enc.findIndex(h => h.toLowerCase() === 'fecha');
+      const idxEstado = enc.findIndex(h => h.toLowerCase() === 'estado');
+      const idxItems = enc.findIndex(h => h.toLowerCase() === 'items');
+      if(idxClienteId === -1 || idxFecha === -1 || idxItems === -1) return alert('Formato inválido: se requiere ClienteID, Fecha, Items (JSON)');
+      const nuevasCompras = [];
+      let maxId = 0;
+      for(let i=1; i<filas.length; i++) {
+        const f = filas[i];
+        const clienteId = parseInt(f[idxClienteId]);
+        const fecha = f[idxFecha];
+        let items = [];
+        try {
+          items = JSON.parse(f[idxItems]);
+          if(!Array.isArray(items)) items = [];
+        } catch(e) { items = []; }
+        if(!isNaN(clienteId) && fecha && items.length) {
+          let id = (idxId !== -1 && f[idxId]) ? parseInt(f[idxId]) : 0;
+          if(isNaN(id)) id = 0;
+          const estado = (idxEstado !== -1 && f[idxEstado] === 'Pagado') ? 'Pagado' : 'Debe';
+          const fechaPago = (idxEstado !== -1 && f[idxEstado] === 'Pagado') ? fecha : null;
+          nuevasCompras.push({ id, clienteId, fecha, items, estado, fechaPago });
+          if(id > maxId) maxId = id;
+        }
+      }
+      if(!nuevasCompras.length) return alert('No se encontraron compras válidas');
+      if(confirm(`Reemplazar ${compras.length} compras por ${nuevasCompras.length}?`)) {
+        compras = nuevasCompras;
+        nextCompraId = maxId + 1;
+        guardarTodo();
+        if(clienteActivoId) renderFichaCliente(clienteActivoId);
+        alert('Compras importadas');
+      }
+    };
+    reader.readAsText(file, 'UTF-8');
+  }
+
+  // Render cliente list
   function renderListaClientes() {
     const container = document.getElementById('listaClientes');
     container.innerHTML = '';
+    if(!clientes.length) container.innerHTML = '<div style="text-align:center; color:#64748b; padding:1rem;">📭 Sin clientes</div>';
     clientes.forEach(cli => {
       const div = document.createElement('div');
       div.className = `cliente-card ${clienteActivoId === cli.id ? 'active' : ''}`;
-      div.innerHTML = `
-        <span class="cliente-nombre-side">${escapeHtml(cli.nombre)}</span>
-        <button class="delete-cliente" data-id="${cli.id}">🗑️</button>
-      `;
-      div.addEventListener('click', (e) => {
-        if (e.target.classList.contains('delete-cliente')) return;
-        seleccionarCliente(cli.id);
-      });
-      const deleteBtn = div.querySelector('.delete-cliente');
-      deleteBtn.addEventListener('click', (e) => {
+      div.innerHTML = `<span class="cliente-nombre-side">${escapeHtml(cli.nombre)}</span>
+                       <button class="delete-cliente" data-id="${cli.id}">🗑️</button>`;
+      div.addEventListener('click', (e) => { if (!e.target.classList.contains('delete-cliente')) seleccionarCliente(cli.id); });
+      div.querySelector('.delete-cliente').addEventListener('click', (e) => {
         e.stopPropagation();
-        if (confirm(`¿Eliminar cliente "${cli.nombre}" y todas sus compras?`)) {
+        if(confirm(`Eliminar cliente y sus compras?`)) {
           clientes = clientes.filter(c => c.id !== cli.id);
           compras = compras.filter(c => c.clienteId !== cli.id);
-          if (clienteActivoId === cli.id) {
-            clienteActivoId = null;
-            document.getElementById('clienteNombreDisplay').innerText = 'Selecciona un cliente';
-            document.getElementById('fichaContenido').innerHTML = '<div style="text-align:center;padding:3rem;">👈 Selecciona un cliente</div>';
-          }
-          guardarDatos();
+          if(clienteActivoId === cli.id) { clienteActivoId = null; document.getElementById('clienteNombreDisplay').innerText = 'Selecciona cliente'; document.getElementById('fichaContenido').innerHTML = '<div style="text-align:center;padding:3rem;">👈 Selecciona</div>'; }
+          guardarTodo();
           renderListaClientes();
-          if (clienteActivoId) renderFichaCliente(clienteActivoId);
+          if(clienteActivoId) renderFichaCliente(clienteActivoId);
+          else document.getElementById('editarClienteBtn').style.display = 'none';
         }
       });
       container.appendChild(div);
     });
   }
 
-  function seleccionarCliente(id) {
-    clienteActivoId = id;
-    renderListaClientes();
-    renderFichaCliente(id);
-  }
+  function seleccionarCliente(id) { clienteActivoId = id; renderListaClientes(); renderFichaCliente(id); document.getElementById('editarClienteBtn').style.display = 'inline-flex'; }
+  function actualizarSelectsInventario() { document.querySelectorAll('.inventory-select').forEach(select => { const val = select.value; const opts = '<option value="custom">✏️ Personalizado</option>' + inventario.map(p => `<option value="${p.id}" data-precio="${p.precio}">${escapeHtml(p.nombre)} - $${p.precio}</option>`).join(''); select.innerHTML = opts; if(val && inventario.some(p=>p.id==val)) select.value=val; else select.value='custom'; }); }
+  function crearItemRow(prod='', precio=0, cant=1) { /* igual que antes, simplificado */ const div = document.createElement('div'); div.className='item-row'; const opts = '<option value="custom">✏️ Personalizado</option>'+inventario.map(p=>`<option value="${p.id}" data-precio="${p.precio}">${escapeHtml(p.nombre)} - $${p.precio}</option>`).join(''); div.innerHTML = `<select class="inventory-select" style="flex:2;">${opts}</select><input type="text" class="prod-nombre" placeholder="Producto" value="${escapeHtml(prod)}" style="flex:2;"><input type="number" class="prod-cantidad" value="${cant}" style="width:90px;"><input type="number" class="prod-precio" value="${precio}" step="any" style="width:110px;"><button class="btn-outline btn-sm eliminar-item">🗑️</button>`; div.querySelector('.inventory-select').addEventListener('change',function(){if(this.value!=='custom'){const p=inventario.find(p=>p.id==this.value); if(p){div.querySelector('.prod-nombre').value=p.nombre; div.querySelector('.prod-precio').value=p.precio;}}}); div.querySelector('.eliminar-item').addEventListener('click',()=>div.remove()); return div; }
+  function inicializarItemsVacios() { const cont = document.getElementById('itemsContainer'); if(cont){ cont.innerHTML=''; cont.appendChild(crearItemRow('',0,1)); } const btn = document.getElementById('agregarItemBtn'); if(btn) btn.onclick = () => document.getElementById('itemsContainer').appendChild(crearItemRow('',0,1)); }
 
   function renderFichaCliente(clienteId) {
-    const cliente = clientes.find(c => c.id === clienteId);
-    if (!cliente) return;
-    document.getElementById('clienteNombreDisplay').innerHTML = `${escapeHtml(cliente.nombre)} <span style="font-size:0.8rem;">🆔 #${cliente.id}</span>`;
-    const container = document.getElementById('fichaContenido');
-    
-    // filtrar compras del cliente ordenadas por fecha descendente
-    let comprasCliente = compras.filter(c => c.clienteId === clienteId).sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
-    
-    let html = `<div style="margin-bottom: 20px;"><button class="btn btn-primary btn-sm" id="btnAgregarCompra">➕ Agregar compra</button></div>`;
-    
-    if (comprasCliente.length === 0) html += `<div style="text-align:center;padding:2rem;">✨ No hay compras registradas</div>`;
-    else {
-      comprasCliente.forEach(comp => {
-        const total = comp.items.reduce((sum, item) => sum + (item.cantidad * item.precio), 0);
-        const estadoClass = comp.estado === 'Pagado' ? 'pagado' : 'debe';
-        const estadoTexto = comp.estado === 'Pagado' ? '✅ PAGADO' : '⏳ DEBE';
-        html += `
-          <div class="compra-item" data-compra-id="${comp.id}">
-            <div class="compra-header">
-              <span class="compra-fecha">📅 ${comp.fecha}</span>
-              <span class="estado-badge ${estadoClass}">${estadoTexto}</span>
-            </div>
-            <div class="productos-lista">
-              ${comp.items.map(item => `<div class="producto-row"><span>${escapeHtml(item.producto)} x${item.cantidad}</span><span>$${item.precio} c/u → $${(item.cantidad * item.precio).toFixed(2)}</span></div>`).join('')}
-            </div>
-            <div class="total-compra">💰 TOTAL: $${total.toFixed(2)}</div>
-            <div class="acciones-compra">
-              ${comp.estado === 'Debe' ? `<button class="btn btn-success btn-sm marcar-pagado" data-id="${comp.id}">💵 Marcar como Pagado</button>` : `<button class="btn btn-outline btn-sm desmarcar-pagado" data-id="${comp.id}">🔄 Volver a Debe</button>`}
-              <button class="btn btn-outline btn-sm ver-ticket" data-id="${comp.id}">🧾 Ver Ticket</button>
-              <button class="btn delete-compra btn-sm" data-id="${comp.id}">🗑️ Eliminar</button>
-            </div>
-          </div>
-        `;
-      });
-    }
-    
-    // Formulario nueva compra (inicialmente oculto)
-    html += `<div id="formNuevaCompra" style="display:none;" class="nueva-compra">
-              <h4>📝 Nueva compra</h4>
-              <label>📅 Fecha: <input type="date" id="fechaCompra" value="${new Date().toISOString().slice(0,10)}" style="background:#1e293b; border-radius:20px; padding:6px; color:white;"></label>
-              <div id="itemsContainer" style="margin:12px 0;"></div>
-              <button class="btn btn-sm" id="agregarItemBtn">➕ Añadir producto</button>
-              <div style="margin-top:15px;">
-                <button class="btn btn-primary" id="guardarCompraBtn">💾 Guardar compra</button>
-                <button class="btn btn-outline" id="cancelarCompraBtn">Cancelar</button>
-              </div>
-            </div>`;
-    
-    container.innerHTML = html;
-    
-    // Eventos dinámicos
-    document.getElementById('btnAgregarCompra')?.addEventListener('click', () => {
-      const form = document.getElementById('formNuevaCompra');
-      if (form) form.style.display = 'block';
-      inicializarItemsVacios();
-    });
-    document.getElementById('cancelarCompraBtn')?.addEventListener('click', () => {
-      document.getElementById('formNuevaCompra').style.display = 'none';
-    });
-    
-    // botones de acciones de compras existentes
-    document.querySelectorAll('.marcar-pagado').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = parseInt(btn.dataset.id);
-        marcarPagoCompra(id, true);
-      });
-    });
-    document.querySelectorAll('.desmarcar-pagado').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = parseInt(btn.dataset.id);
-        marcarPagoCompra(id, false);
-      });
-    });
-    document.querySelectorAll('.delete-compra').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = parseInt(btn.dataset.id);
-        if (confirm('¿Eliminar esta compra?')) {
-          compras = compras.filter(c => c.id !== id);
-          guardarDatos();
-          renderFichaCliente(clienteId);
-        }
-      });
-    });
-    document.querySelectorAll('.ver-ticket').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = parseInt(btn.dataset.id);
-        mostrarTicket(id);
-      });
-    });
-    
-    // guardar nueva compra
-    document.getElementById('guardarCompraBtn')?.addEventListener('click', () => {
-      const fecha = document.getElementById('fechaCompra').value;
-      if (!fecha) return alert('Selecciona fecha');
-      const items = [];
-      const rows = document.querySelectorAll('.item-row');
-      rows.forEach(row => {
-        const producto = row.querySelector('.prod-nombre')?.value.trim();
-        const cantidad = parseInt(row.querySelector('.prod-cantidad')?.value);
-        const precio = parseFloat(row.querySelector('.prod-precio')?.value);
-        if (producto && cantidad > 0 && !isNaN(precio)) {
-          items.push({ producto, cantidad, precio });
-        }
-      });
-      if (items.length === 0) return alert('Agrega al menos un producto válido');
-      const nuevaCompra = {
-        id: nextCompraId++,
-        clienteId: cliente.id,
-        fecha: fecha,
-        items: items,
-        estado: 'Debe',
-        fechaPago: null
-      };
-      compras.push(nuevaCompra);
-      guardarDatos();
-      document.getElementById('formNuevaCompra').style.display = 'none';
-      renderFichaCliente(clienteId);
-    });
+    const cli = clientes.find(c=>c.id===clienteId);
+    if(!cli) return;
+    document.getElementById('clienteNombreDisplay').innerHTML = `${escapeHtml(cli.nombre)} <span style="font-size:0.8rem;">#${cli.id}</span>`;
+    const cont = document.getElementById('fichaContenido');
+    let html = `<div><button class="btn btn-primary btn-sm" id="btnAgregarCompra">➕ Agregar compra</button></div>`;
+    const compsCliente = compras.filter(c=>c.clienteId===clienteId).sort((a,b)=>new Date(b.fecha)-new Date(a.fecha));
+    if(!compsCliente.length) html += `<div style="padding:2rem; text-align:center;">✨ Sin compras</div>`;
+    else compsCliente.forEach(c=>{ const total=c.items.reduce((s,i)=>s+i.cantidad*i.precio,0); html+=`<div class="compra-item"><div class="compra-header"><span>📅 ${c.fecha}</span><span class="estado-badge ${c.estado==='Pagado'?'pagado':'debe'}">${c.estado==='Pagado'?'✅ PAGADO':'⏳ DEBE'}</span></div><div class="productos-lista">${c.items.map(i=>`<div class="producto-row"><span>${escapeHtml(i.producto)} x${i.cantidad}</span><span>$${i.precio} c/u → $${(i.cantidad*i.precio).toFixed(2)}</span></div>`).join('')}</div><div class="total-compra">💰 TOTAL: $${total.toFixed(2)}</div><div class="acciones-compra">${c.estado==='Debe'?`<button class="btn btn-success btn-sm marcar-pagado" data-id="${c.id}">💵 Pagar</button>`:`<button class="btn btn-outline btn-sm desmarcar-pagado" data-id="${c.id}">🔄 Debe</button>`}<button class="btn btn-outline btn-sm ver-ticket" data-id="${c.id}">🧾 Ticket</button><button class="btn delete-compra btn-sm" data-id="${c.id}">🗑️</button></div></div>`; });
+    html += `<div id="formNuevaCompra" style="display:none;" class="nueva-compra"><h4>📝 Nueva compra</h4><label>📅 Fecha: <input type="date" id="fechaCompra" value="${new Date().toISOString().slice(0,10)}"></label><div id="itemsContainer"></div><button class="btn btn-sm" id="agregarItemBtn">➕ Producto</button><div style="margin-top:15px;"><button class="btn btn-primary" id="guardarCompraBtn">💾 Guardar</button><button class="btn btn-outline" id="cancelarCompraBtn">Cancelar</button></div></div>`;
+    cont.innerHTML = html;
+    document.getElementById('btnAgregarCompra')?.addEventListener('click',()=>{ document.getElementById('formNuevaCompra').style.display='block'; inicializarItemsVacios(); actualizarSelectsInventario(); });
+    document.getElementById('cancelarCompraBtn')?.addEventListener('click',()=>document.getElementById('formNuevaCompra').style.display='none');
+    document.querySelectorAll('.marcar-pagado').forEach(b=>b.addEventListener('click',()=>marcarPago(parseInt(b.dataset.id),true)));
+    document.querySelectorAll('.desmarcar-pagado').forEach(b=>b.addEventListener('click',()=>marcarPago(parseInt(b.dataset.id),false)));
+    document.querySelectorAll('.delete-compra').forEach(b=>b.addEventListener('click',()=>{ if(confirm('Eliminar compra?')){ compras=compras.filter(c=>c.id!==parseInt(b.dataset.id)); guardarTodo(); renderFichaCliente(clienteId); } }));
+    document.querySelectorAll('.ver-ticket').forEach(b=>b.addEventListener('click',()=>mostrarTicket(parseInt(b.dataset.id))));
+    document.getElementById('guardarCompraBtn')?.addEventListener('click',()=>{ const fecha=document.getElementById('fechaCompra').value; const items=[]; document.querySelectorAll('.item-row').forEach(r=>{ const prod=r.querySelector('.prod-nombre')?.value.trim(); const cant=parseInt(r.querySelector('.prod-cantidad')?.value); const prec=parseFloat(r.querySelector('.prod-precio')?.value); if(prod && cant>0 && !isNaN(prec) && prec>=0) items.push({producto:prod, cantidad:cant, precio:prec}); }); if(!items.length) return alert('Agrega productos'); compras.push({ id:nextCompraId++, clienteId:cli.id, fecha, items, estado:'Debe', fechaPago:null }); guardarTodo(); document.getElementById('formNuevaCompra').style.display='none'; renderFichaCliente(clienteId); });
   }
-  
-  function inicializarItemsVacios() {
-    const container = document.getElementById('itemsContainer');
-    container.innerHTML = '';
-    agregarFilaItem();
-    document.getElementById('agregarItemBtn')?.addEventListener('click', () => agregarFilaItem());
-  }
-  
-  function agregarFilaItem() {
-    const container = document.getElementById('itemsContainer');
-    const div = document.createElement('div');
-    div.className = 'item-row';
-    div.style.display = 'flex';
-    div.style.gap = '8px';
-    div.style.marginBottom = '8px';
-    div.style.flexWrap = 'wrap';
-    div.innerHTML = `
-      <input type="text" placeholder="Producto" class="prod-nombre" style="flex:2; background:#0f172a; border-radius:20px; padding:8px;">
-      <input type="number" placeholder="Cantidad" class="prod-cantidad" value="1" style="flex:1; background:#0f172a; border-radius:20px; padding:8px;">
-      <input type="number" placeholder="Precio" class="prod-precio" value="0" step="any" style="flex:1; background:#0f172a; border-radius:20px; padding:8px;">
-      <button class="btn-outline btn-sm eliminar-item" style="padding:4px 10px;">🗑️</button>
-    `;
-    div.querySelector('.eliminar-item')?.addEventListener('click', () => div.remove());
-    container.appendChild(div);
-  }
-  
-  function marcarPagoCompra(compraId, pagado) {
-    const compra = compras.find(c => c.id === compraId);
-    if (compra) {
-      compra.estado = pagado ? 'Pagado' : 'Debe';
-      compra.fechaPago = pagado ? new Date().toISOString().slice(0,10) : null;
-      guardarDatos();
-      if (clienteActivoId) renderFichaCliente(clienteActivoId);
-    }
-  }
-  
-  function mostrarTicket(compraId) {
-    const compra = compras.find(c => c.id === compraId);
-    if (!compra) return;
-    const cliente = clientes.find(c => c.id === compra.clienteId);
-    const total = compra.items.reduce((s, i) => s + (i.cantidad * i.precio), 0);
-    let lineas = `🧾 TICKET DE COMPRA\n`;
-    lineas += `Cliente: ${cliente.nombre}\n`;
-    lineas += `Fecha: ${compra.fecha}\n`;
-    lineas += `Estado: ${compra.estado === 'Pagado' ? '✅ PAGADO' : '⏳ PENDIENTE DE PAGO'}\n`;
-    if (compra.fechaPago) lineas += `Fecha de pago: ${compra.fechaPago}\n`;
-    lineas += `--------------------------------\n`;
-    compra.items.forEach(item => {
-      lineas += `${item.producto}  x${item.cantidad}   $${item.precio} c/u → $${(item.cantidad*item.precio).toFixed(2)}\n`;
-    });
-    lineas += `--------------------------------\n`;
-    lineas += `💰 TOTAL: $${total.toFixed(2)}\n`;
-    lineas += `¡Gracias por su compra!`;
-    
-    const modal = document.getElementById('ticketModal');
-    const textoDiv = document.getElementById('ticketTexto');
-    textoDiv.innerText = lineas;
-    modal.style.display = 'flex';
-    
-    // guardar compra actual para whatsapp
-    window.currentTicketText = lineas;
-  }
-  
-  // Eventos del modal
-  document.getElementById('copiarTicketBtn')?.addEventListener('click', () => {
-    const texto = document.getElementById('ticketTexto').innerText;
-    navigator.clipboard.writeText(texto);
-    alert('Ticket copiado al portapapeles');
-  });
-  document.getElementById('enviarWhatsappBtn')?.addEventListener('click', () => {
-    const texto = encodeURIComponent(window.currentTicketText || '');
-    window.open(`https://wa.me/?text=${texto}`, '_blank');
-  });
-  document.getElementById('cerrarModalBtn')?.addEventListener('click', () => {
-    document.getElementById('ticketModal').style.display = 'none';
-  });
-  
-  // Nuevo cliente global
-  document.getElementById('nuevoClienteGlobalBtn')?.addEventListener('click', () => {
-    const nombre = prompt('Nombre del nuevo cliente:');
-    if (nombre && nombre.trim()) {
-      const nuevoId = nextClienteId++;
-      clientes.push({ id: nuevoId, nombre: nombre.trim() });
-      guardarDatos();
-      renderListaClientes();
-      seleccionarCliente(nuevoId);
-    }
-  });
-  
-  function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
-    });
-  }
-  
-  // Inicialización
-  loadData();
-  renderListaClientes();
-  if (clientes.length > 0) seleccionarCliente(clientes[0].id);
+  function marcarPago(id,pagado){ const c=compras.find(c=>c.id===id); if(c){ c.estado=pagado?'Pagado':'Debe'; c.fechaPago=pagado?new Date().toISOString().slice(0,10):null; guardarTodo(); if(clienteActivoId) renderFichaCliente(clienteActivoId); } }
+  function mostrarTicket(id){ const c=compras.find(c=>c.id===id); if(!c) return; const cli=clientes.find(cl=>cl.id===c.clienteId); const total=c.items.reduce((s,i)=>s+i.cantidad*i.precio,0); let txt=`🧾 TICKET\nCliente: ${cli?.nombre}\nFecha: ${c.fecha}\nEstado: ${c.estado}\n--------------------------------\n${c.items.map(i=>`${i.producto} x${i.cantidad} → $${(i.cantidad*i.precio).toFixed(2)}`).join('\n')}\n--------------------------------\n💰 TOTAL: $${total.toFixed(2)}`; document.getElementById('ticketTexto').innerText=txt; document.getElementById('ticketModal').style.display='flex'; window.currentTicketText=txt; }
+  function renderInventarioModal(){ const cont=document.getElementById('listaInventario'); cont.innerHTML=inventario.length? '': '<div style="text-align:center;">📦 Sin productos</div>'; inventario.forEach(p=>{ const d=document.createElement('div'); d.className='producto-inv-row'; d.innerHTML=`<div><strong>${escapeHtml(p.nombre)}</strong> | $${p.precio} | Stock: ${p.stock}</div><div><button class="btn-outline btn-sm editar-producto" data-id="${p.id}">✏️</button><button class="delete-cliente btn-sm eliminar-producto" data-id="${p.id}">🗑️</button></div>`; d.querySelector('.editar-producto')?.addEventListener('click',()=>abrirFormProducto(p.id)); d.querySelector('.eliminar-producto')?.addEventListener('click',()=>{ if(confirm('Eliminar producto?')){ inventario=inventario.filter(i=>i.id!==p.id); guardarTodo(); renderInventarioModal(); actualizarSelectsInventario(); } }); cont.appendChild(d); }); }
+  function abrirFormProducto(id=null){ document.getElementById('productoFormTitulo').innerText=id?'Editar':'Nuevo'; const p=id?inventario.find(i=>i.id===id):null; document.getElementById('editProductoId').value=id||''; document.getElementById('prodNombreInput').value=p?.nombre||''; document.getElementById('prodPrecioInput').value=p?.precio||''; document.getElementById('prodStockInput').value=p?.stock||0; document.getElementById('productoFormModal').style.display='flex'; }
+  function guardarProductoForm(){ const nombre=document.getElementById('prodNombreInput').value.trim(); const precio=parseFloat(document.getElementById('prodPrecioInput').value); const stock=parseInt(document.getElementById('prodStockInput').value)||0; const editId=document.getElementById('editProductoId').value; if(!nombre||isNaN(precio)) return alert('Datos inválidos'); if(editId){ const idx=inventario.findIndex(p=>p.id==editId); if(idx!==-1) inventario[idx]={...inventario[idx], nombre, precio, stock}; } else inventario.push({id:nextProductoId++, nombre, precio, stock}); guardarTodo(); document.getElementById('productoFormModal').style.display='none'; renderInventarioModal(); actualizarSelectsInventario(); }
+  function descargarCSV(data, nombre, cols){ if(!data.length) return alert(`Sin datos para ${nombre}`); const lineas=[cols.map(c=>c.label).join(',')]; data.forEach(row=>{ lineas.push(cols.map(c=>{ let v=row[c.key]; if(v===undefined) v=''; if(typeof v==='string') v=v.replace(/"/g,'""'); if(typeof v==='object') v=JSON.stringify(v).replace(/"/g,'""'); return `"${v}"`; }).join(',')); }); const blob=new Blob(["\uFEFF"+lineas.join('\n')],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${nombre}.csv`; a.click(); URL.revokeObjectURL(a.href); }
+  function exportarClientes(){ descargarCSV(clientes,'clientes',[{label:'ID',key:'id'},{label:'Nombre',key:'nombre'}]); }
+  function exportarInventario(){ descargarCSV(inventario,'inventario',[{label:'ID',key:'id'},{label:'Nombre',key:'nombre'},{label:'Precio',key:'precio'},{label:'Stock',key:'stock'}]); }
+  function exportarCompras(){ const exp=compras.map(c=>({id:c.id,clienteId:c.clienteId,fecha:c.fecha,estado:c.estado,items:JSON.stringify(c.items),total:c.items.reduce((s,i)=>s+i.cantidad*i.precio,0).toFixed(2)})); descargarCSV(exp,'compras',[{label:'ID',key:'id'},{label:'ClienteID',key:'clienteId'},{label:'Fecha',key:'fecha'},{label:'Estado',key:'estado'},{label:'Items',key:'items'},{label:'Total',key:'total'}]); }
+  function exportarTodo(){ if(clientes.length) exportarClientes(); if(inventario.length) exportarInventario(); if(compras.length) exportarCompras(); if(!clientes.length && !inventario.length && !compras.length) alert('No hay datos'); else alert('Descargando todos los CSV'); }
+  function escapeHtml(s){ return String(s).replace(/[&<>]/g,function(m){if(m==='&')return'&amp;'; if(m==='<')return'&lt;'; if(m==='>')return'&gt;'; return m;}); }
+
+  // Eventos
+  window.onload=()=>{ cargarDatos(); renderListaClientes(); if(clientes.length) seleccionarCliente(clientes[0].id); else { clienteActivoId=null; document.getElementById('clienteNombreDisplay').innerText='Selecciona un cliente'; document.getElementById('editarClienteBtn').style.display='none'; } actualizarResumenGlobal(); };
+  document.getElementById('nuevoClienteGlobalBtn')?.addEventListener('click',()=>{ const nom=prompt('Nombre:'); if(nom?.trim()){ clientes.push({id:nextClienteId++, nombre:nom.trim()}); guardarTodo(); renderListaClientes(); seleccionarCliente(clientes[clientes.length-1].id); } });
+  document.getElementById('editarClienteBtn')?.addEventListener('click',()=>{ const cli=clientes.find(c=>c.id===clienteActivoId); if(cli){ const neu=prompt('Editar nombre:',cli.nombre); if(neu?.trim()){ cli.nombre=neu.trim(); guardarTodo(); renderListaClientes(); renderFichaCliente(cli.id); } } });
+  document.getElementById('abrirInventarioBtn')?.addEventListener('click',()=>{ renderInventarioModal(); document.getElementById('inventarioModal').style.display='flex'; });
+  document.getElementById('invShortcutBtn')?.addEventListener('click',()=>{ renderInventarioModal(); document.getElementById('inventarioModal').style.display='flex'; });
+  document.getElementById('cerrarInventarioBtn')?.addEventListener('click',()=>document.getElementById('inventarioModal').style.display='none');
+  document.getElementById('agregarProductoBtn')?.addEventListener('click',()=>abrirFormProducto());
+  document.getElementById('guardarProductoBtn')?.addEventListener('click',guardarProductoForm);
+  document.getElementById('cancelarProductoBtn')?.addEventListener('click',()=>document.getElementById('productoFormModal').style.display='none');
+  document.getElementById('exportClientesBtn')?.addEventListener('click',exportarClientes);
+  document.getElementById('exportInventarioBtn')?.addEventListener('click',exportarInventario);
+  document.getElementById('exportComprasBtn')?.addEventListener('click',exportarCompras);
+  document.getElementById('exportAllBtn')?.addEventListener('click',exportarTodo);
+  document.getElementById('copiarTicketBtn')?.addEventListener('click',()=>{ navigator.clipboard.writeText(document.getElementById('ticketTexto').innerText); alert('Copiado'); });
+  document.getElementById('enviarWhatsappBtn')?.addEventListener('click',()=>{ window.open(`https://wa.me/?text=${encodeURIComponent(window.currentTicketText||'')}`,'_blank'); });
+  document.getElementById('cerrarModalBtn')?.addEventListener('click',()=>document.getElementById('ticketModal').style.display='none');
+  document.getElementById('importClientesFile')?.addEventListener('change',e=>{ if(e.target.files.length) importarClientesDesdeCSV(e.target.files[0]); e.target.value=''; });
+  document.getElementById('importInventarioFile')?.addEventListener('change',e=>{ if(e.target.files.length) importarInventarioDesdeCSV(e.target.files[0]); e.target.value=''; });
+  document.getElementById('importComprasFile')?.addEventListener('change',e=>{ if(e.target.files.length) importarComprasDesdeCSV(e.target.files[0]); e.target.value=''; });
+  window.onclick = e => { if(e.target.classList.contains('modal')) e.target.style.display='none'; };
 </script>
 </body>
 </html>
