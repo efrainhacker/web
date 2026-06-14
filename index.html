@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Excel PRO · Importar / Exportar CSV | Múltiples productos</title>
+  <title>Fichas de Clientes · Ventas con Ticker y Estado de Pago</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -15,19 +15,20 @@
     body {
       background: #0a0c15;
       font-family: 'Inter', system-ui, sans-serif;
-      padding: 2rem 1.5rem;
+      padding: 1.5rem;
       color: #eef2ff;
     }
 
-    .dashboard {
-      max-width: 1500px;
+    .app-container {
+      max-width: 1400px;
       margin: 0 auto;
     }
 
+    /* header */
     .header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
       margin-bottom: 2rem;
@@ -36,22 +37,15 @@
     }
 
     h1 {
-      font-size: 1.9rem;
+      font-size: 1.8rem;
       font-weight: 700;
       background: linear-gradient(135deg, #c084fc, #60a5fa);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .toolbar {
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
       align-items: center;
+      gap: 8px;
     }
 
     .btn {
@@ -63,7 +57,7 @@
       font-size: 0.85rem;
       color: #e2e8f0;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -72,648 +66,583 @@
     .btn-primary {
       background: #3b82f6;
       color: white;
-      box-shadow: 0 2px 6px rgba(59,130,246,0.3);
     }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
 
-    .btn-primary:hover {
-      background: #2563eb;
-      transform: translateY(-1px);
+    .btn-success {
+      background: #16a34a;
     }
+    .btn-success:hover { background: #15803d; }
 
     .btn-outline {
       border: 1px solid #334155;
       background: transparent;
     }
+    .btn-outline:hover { background: #1e293b; }
 
-    .btn-outline:hover {
-      background: #1e293b;
-      border-color: #5b6e8c;
+    .btn-sm {
+      padding: 5px 12px;
+      font-size: 0.75rem;
     }
 
-    .btn-success {
-      background: #16a34a;
-    }
-    .btn-success:hover {
-      background: #15803d;
-    }
-
-    .search-box {
-      background: #111827;
-      border: 1px solid #2d3a4e;
-      border-radius: 48px;
-      padding: 8px 16px;
+    /* dos columnas: lista de clientes + ficha */
+    .dashboard {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 220px;
-    }
-
-    .search-box input {
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 0.9rem;
-      outline: none;
-      width: 100%;
-    }
-
-    .table-wrapper {
-      overflow-x: auto;
-      border-radius: 24px;
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
-    }
-
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      min-width: 950px;
-    }
-
-    .data-table th {
-      text-align: left;
-      padding: 14px 16px;
-      background: #111827;
-      color: #9ca3af;
-      font-weight: 600;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      border-bottom: 1px solid #2d3a4e;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .data-table th:hover {
-      background: #1a2538;
-      color: #e2e8f0;
-    }
-
-    .data-table td {
-      padding: 12px 16px;
-      border-bottom: 1px solid #1e293b;
-      vertical-align: middle;
-      background-color: #0f172a;
-    }
-
-    .editable-cell {
-      background: #0f172a;
-      transition: background 0.1s;
-      cursor: text;
-      border-radius: 8px;
-      padding: 6px 8px;
-      margin: -6px -8px;
-      display: inline-block;
-      width: 100%;
-    }
-
-    .editable-cell[contenteditable="true"] {
-      background: #1e2a3e;
-      outline: 1px solid #3b82f6;
-      box-shadow: 0 0 0 2px rgba(59,130,246,0.3);
-    }
-
-    .editable-cell:focus {
-      outline: none;
-      background: #1e2a3e;
-      box-shadow: 0 0 0 2px #3b82f6;
-    }
-
-    .estado-select {
-      background: #1e293b;
-      border: 1px solid #334155;
-      padding: 6px 10px;
-      border-radius: 20px;
-      color: white;
-      font-weight: 500;
-      font-size: 0.8rem;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .fecha-input {
-      background: #1e293b;
-      border: 1px solid #334155;
-      padding: 6px 10px;
-      border-radius: 16px;
-      color: white;
-      font-size: 0.8rem;
-      font-family: monospace;
-      width: 100%;
-      cursor: pointer;
-    }
-
-    .action-buttons {
-      display: flex;
-      gap: 8px;
-      align-items: center;
+      gap: 1.8rem;
       flex-wrap: wrap;
     }
 
-    .icon-btn {
-      background: transparent;
-      border: none;
-      font-size: 1.2rem;
+    .clientes-sidebar {
+      flex: 1.2;
+      min-width: 260px;
+      background: #0f172a;
+      border-radius: 28px;
+      padding: 1.2rem;
+      border: 1px solid #1e293b;
+      height: fit-content;
+    }
+
+    .clientes-sidebar h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cliente-card {
+      background: #111827;
+      border-radius: 20px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
       cursor: pointer;
       transition: 0.1s;
-      padding: 4px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #1f2a3e;
+    }
+    .cliente-card:hover { background: #1e293b; transform: scale(0.99); }
+    .cliente-card.active {
+      background: #1e2a3e;
+      border-left: 4px solid #3b82f6;
+    }
+    .cliente-nombre-side {
+      font-weight: 600;
+    }
+    .delete-cliente {
+      background: none;
+      border: none;
+      color: #f87171;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    /* ficha del cliente */
+    .ficha-container {
+      flex: 3;
+      min-width: 320px;
+      background: #0f172a;
+      border-radius: 28px;
+      border: 1px solid #1e293b;
+      padding: 1.5rem;
+    }
+
+    .ficha-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 1rem;
+    }
+    .ficha-titulo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .editar-cliente-input {
+      background: #1e293b;
+      border: 1px solid #3b82f6;
+      padding: 6px 12px;
       border-radius: 30px;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    /* compras */
+    .compra-item {
+      background: #111827;
+      border-radius: 24px;
+      padding: 1rem;
+      margin-bottom: 1.2rem;
+      border-left: 4px solid #3b82f6;
+    }
+    .compra-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .compra-fecha {
+      font-weight: 600;
       color: #94a3b8;
     }
-
-    .icon-btn:hover {
-      background: #1e293b;
-      transform: scale(1.05);
-    }
-
-    .delete-btn {
-      color: #f87171;
-    }
-    .delete-btn:hover {
-      background: #7f1a1a;
-      color: white;
-    }
-    .duplicate-btn {
-      color: #4ade80;
-    }
-    .duplicate-btn:hover {
-      background: #14532d;
-      color: white;
-    }
-
-    .empty-row {
-      text-align: center;
-      padding: 40px !important;
-      color: #6b7280;
-      font-style: italic;
-    }
-
-    footer {
-      margin-top: 24px;
-      text-align: center;
+    .estado-badge {
+      padding: 4px 12px;
+      border-radius: 40px;
       font-size: 0.7rem;
-      color: #4b5563;
+      font-weight: bold;
+    }
+    .pagado { background: #15803d; color: white; }
+    .debe { background: #b91c1c; color: white; }
+    .productos-lista {
+      margin: 12px 0;
+      padding-left: 12px;
+    }
+    .producto-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px dashed #2d3a4e;
+    }
+    .total-compra {
+      text-align: right;
+      font-weight: 700;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid #2d3a4e;
+    }
+    .acciones-compra {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* formulario nueva compra */
+    .nueva-compra {
+      background: #1a2538;
+      border-radius: 24px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+    }
+    .producto-input-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      align-items: center;
+    }
+    .producto-input-group input {
+      background: #0f172a;
+      border: 1px solid #334155;
+      padding: 8px 12px;
+      border-radius: 20px;
+      color: white;
+      flex: 1;
+    }
+    .agregar-producto-btn {
+      background: #3b82f6;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 30px;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* modal ticket */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #0f172a;
+      border-radius: 32px;
+      padding: 1.8rem;
+      max-width: 500px;
+      width: 90%;
+      border: 1px solid #3b82f6;
+    }
+    .ticket-text {
+      background: #111827;
+      padding: 1rem;
+      border-radius: 20px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      margin: 1rem 0;
+      max-height: 400px;
+      overflow: auto;
+    }
+    @media (max-width: 800px) {
+      .dashboard { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-<div class="dashboard">
+<div class="app-container">
   <div class="header">
-    <h1>📊 EXCEL VENTAS · Múltiples productos por cliente</h1>
-    <div class="toolbar">
-      <div class="search-box">
-        🔍 <input type="text" id="filterInput" placeholder="Filtrar cliente / producto...">
-      </div>
-      <button class="btn btn-primary" id="addRowBtn">➕ Nueva fila</button>
-      <button class="btn btn-outline" id="importCsvBtn">📂 Importar CSV</button>
-      <button class="btn btn-outline" id="exportCsvBtn">📎 Exportar CSV</button>
-      <button class="btn btn-outline" id="resetDemoBtn">⟳ Reiniciar demo</button>
-    </div>
+    <h1>📋 Fichas de Clientes · Ventas + Ticker</h1>
+    <button class="btn btn-primary" id="nuevoClienteGlobalBtn">➕ Nuevo Cliente</button>
   </div>
 
-  <div class="table-wrapper">
-    <table class="data-table" id="ventasTable">
-      <thead>
-        <tr>
-          <th data-sort="cliente">👤 Cliente</th>
-          <th data-sort="producto">📦 Producto</th>
-          <th data-sort="cantidad">🔢 Cantidad</th>
-          <th data-sort="estado">💰 Estado pago</th>
-          <th data-sort="fecha">📅 Fecha y hora</th>
-          <th style="width: 100px">⚡ Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
+  <div class="dashboard">
+    <!-- Lista de clientes -->
+    <div class="clientes-sidebar">
+      <h2>👥 Clientes</h2>
+      <div id="listaClientes"></div>
+    </div>
+
+    <!-- Ficha activa -->
+    <div class="ficha-container" id="fichaContainer">
+      <div class="ficha-header">
+        <div class="ficha-titulo">
+          <span>📄</span>
+          <span id="clienteNombreDisplay">Selecciona un cliente</span>
+        </div>
+        <div>
+          <button class="btn btn-outline btn-sm" id="editarClienteBtn" style="display: none;">✏️ Editar</button>
+        </div>
+      </div>
+      <div id="fichaContenido">
+        <div style="text-align: center; padding: 3rem;">👈 Haz clic en un cliente para ver su ficha</div>
+      </div>
+    </div>
   </div>
-  <footer>✨ Haz clic en cualquier celda para editar. Fecha con selector visual. Botón <span style="color:#4ade80;">➕</span> duplica fila para mismo cliente. ¡Importa tus propios CSV!</footer>
+</div>
+
+<!-- Modal ticket -->
+<div id="ticketModal" class="modal">
+  <div class="modal-content">
+    <h3>🧾 Ticker de compra</h3>
+    <div id="ticketTexto" class="ticket-text"></div>
+    <div style="display: flex; gap: 12px; justify-content: flex-end;">
+      <button class="btn btn-outline" id="copiarTicketBtn">📋 Copiar</button>
+      <button class="btn btn-success" id="enviarWhatsappBtn">📲 Enviar por WhatsApp</button>
+      <button class="btn" id="cerrarModalBtn">Cerrar</button>
+    </div>
+  </div>
 </div>
 
 <script>
-  // ---------- MODELO DE DATOS ----------
-  let ventas = [];
+  // ---------- ESTRUCTURA DE DATOS ----------
+  let clientes = [];      // { id, nombre }
+  let compras = [];       // { id, clienteId, fecha (ISO date string YYYY-MM-DD), items: [{producto, cantidad, precio}], estado, fechaPago (opcional) }
+  let nextClienteId = 1;
+  let nextCompraId = 1;
 
-  // Formatear fecha para guardar en objeto
-  function crearFilaDemo(cliente, producto, cantidad, estado, fechaISO, fechaLegible) {
-    return { cliente, producto, cantidad, estado, fecha: fechaISO, fechaLegible };
-  }
-
-  function crearDemoData() {
-    const ahora = new Date();
-    const fechaISO = ahora.toISOString().slice(0, 16);
-    const fechaLegible = ahora.toLocaleString('es-ES', { hour12: false });
-    ventas = [
-      crearFilaDemo("Pancho", "Galletas", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Vicente", "Galletas", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Ariel", "Galletas", 2, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Matis", "Galletas", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Lían", "bonobon grande", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Magno", "Galletas", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Brian", "Galletas", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Pipe", "Galletas", 2, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Rominous", "Galletas", 2, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Niko", "Galletas", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Rodrigo", "Llavero", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Ariel", "Galletas", 3, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Magno", "Galletas", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Rodrigo", "Llavero", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Ariel", "Galletas", 3, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Magno", "Galletas", 1, "Debe", fechaISO, fechaLegible),
-      crearFilaDemo("Lían", "Bonobon", 2, "Pagado", fechaISO, fechaLegible)
-    ];
-  }
-
-  function loadInitialData() {
-    const stored = localStorage.getItem('excelVentasMultiple');
-    if (stored) {
-      ventas = JSON.parse(stored);
-      if (ventas.length === 0) crearDemoData();
+  // Cargar o inicializar demo
+  function loadData() {
+    const storedClientes = localStorage.getItem('clientesFichas');
+    const storedCompras = localStorage.getItem('comprasFichas');
+    if (storedClientes && storedCompras) {
+      clientes = JSON.parse(storedClientes);
+      compras = JSON.parse(storedCompras);
+      nextClienteId = Math.max(0, ...clientes.map(c => c.id), 0) + 1;
+      nextCompraId = Math.max(0, ...compras.map(c => c.id), 0) + 1;
     } else {
-      crearDemoData();
+      // demo basado en clientes anteriores
+      const names = ["Pancho", "Vicente", "Ariel", "Matis", "Lían", "Magno", "Brian", "Pipe", "Rominous", "Niko", "Rodrigo"];
+      clientes = names.map((n, idx) => ({ id: idx + 1, nombre: n }));
+      nextClienteId = clientes.length + 1;
+      const hoy = new Date().toISOString().slice(0,10);
+      const ayer = new Date(Date.now() - 86400000).toISOString().slice(0,10);
+      compras = [
+        { id: 1, clienteId: 1, fecha: hoy, items: [{producto:"Galletas", cantidad:1, precio:1200}], estado:"Debe", fechaPago: null },
+        { id: 2, clienteId: 2, fecha: hoy, items: [{producto:"Galletas", cantidad:1, precio:1200}], estado:"Debe", fechaPago: null },
+        { id: 3, clienteId: 3, fecha: hoy, items: [{producto:"Galletas", cantidad:2, precio:1200}], estado:"Debe", fechaPago: null },
+        { id: 4, clienteId: 4, fecha: ayer, items: [{producto:"Bonobon grande", cantidad:1, precio:2500}], estado:"Pagado", fechaPago: ayer },
+        { id: 5, clienteId: 5, fecha: hoy, items: [{producto:"Llavero", cantidad:1, precio:800}], estado:"Debe", fechaPago: null },
+        { id: 6, clienteId: 11, fecha: hoy, items: [{producto:"Llavero", cantidad:1, precio:800}], estado:"Debe", fechaPago: null },
+        { id: 7, clienteId: 3, fecha: ayer, items: [{producto:"Bonobon", cantidad:3, precio:1800}], estado:"Pagado", fechaPago: ayer },
+      ];
+      nextCompraId = compras.length + 1;
     }
-    // Asegurar formato
-    ventas.forEach(v => {
-      if (!v.fechaLegible && v.fecha) {
-        const d = new Date(v.fecha);
-        v.fechaLegible = isNaN(d.getTime()) ? v.fecha : d.toLocaleString('es-ES', { hour12: false });
-      } else if (!v.fechaLegible) {
-        const ahora = new Date();
-        v.fecha = ahora.toISOString().slice(0, 16);
-        v.fechaLegible = ahora.toLocaleString('es-ES', { hour12: false });
-      }
-    });
-    saveToLocalStorage();
-    renderTable();
+    guardarDatos();
   }
 
-  function saveToLocalStorage() {
-    localStorage.setItem('excelVentasMultiple', JSON.stringify(ventas));
+  function guardarDatos() {
+    localStorage.setItem('clientesFichas', JSON.stringify(clientes));
+    localStorage.setItem('comprasFichas', JSON.stringify(compras));
   }
 
-  function updateFechaLegible(row) {
-    if (row.fecha) {
-      const fechaDate = new Date(row.fecha);
-      if (!isNaN(fechaDate.getTime())) {
-        row.fechaLegible = fechaDate.toLocaleString('es-ES', { hour12: false });
-      } else {
-        row.fechaLegible = row.fecha;
-      }
-    } else {
-      row.fechaLegible = "";
-    }
-  }
+  // UI: renderizar lista de clientes
+  let clienteActivoId = null;
 
-  // Filtro y orden
-  let currentFilter = '';
-  let currentSort = { column: 'fecha', direction: 'desc' };
-
-  function renderTable() {
-    const tbody = document.getElementById('tableBody');
-    if (!tbody) return;
-
-    let filtered = ventas.filter(v => 
-      v.cliente.toLowerCase().includes(currentFilter.toLowerCase()) || 
-      v.producto.toLowerCase().includes(currentFilter.toLowerCase())
-    );
-
-    filtered.sort((a, b) => {
-      let valA = a[currentSort.column];
-      let valB = b[currentSort.column];
-      if (currentSort.column === 'cantidad') {
-        valA = Number(valA);
-        valB = Number(valB);
-      }
-      if (currentSort.column === 'fecha') {
-        valA = a.fecha || '';
-        valB = b.fecha || '';
-      }
-      if (typeof valA === 'string') {
-        return currentSort.direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
-      }
-      return currentSort.direction === 'asc' ? valA - valB : valB - valA;
-    });
-
-    tbody.innerHTML = '';
-    if (filtered.length === 0) {
-      const emptyRow = document.createElement('tr');
-      emptyRow.innerHTML = `<td colspan="6" class="empty-row">✨ Sin datos. Importa CSV o usa "+ Nueva fila" ✨</td>`;
-      tbody.appendChild(emptyRow);
-      return;
-    }
-
-    filtered.forEach((item) => {
-      const row = document.createElement('tr');
-      
-      // Cliente
-      const clienteCell = document.createElement('td');
-      const clienteSpan = createEditableSpan(item.cliente, (newVal) => { item.cliente = newVal; saveAndRender(); });
-      clienteCell.appendChild(clienteSpan);
-      
-      // Producto
-      const prodCell = document.createElement('td');
-      const prodSpan = createEditableSpan(item.producto, (newVal) => { item.producto = newVal; saveAndRender(); });
-      prodCell.appendChild(prodSpan);
-      
-      // Cantidad
-      const cantCell = document.createElement('td');
-      const cantSpan = createEditableSpan(item.cantidad.toString(), (newVal) => {
-        let num = parseInt(newVal);
-        if (isNaN(num)) num = 0;
-        item.cantidad = Math.max(0, num);
-        saveAndRender();
-      }, 'number');
-      cantCell.appendChild(cantSpan);
-      
-      // Estado
-      const estadoCell = document.createElement('td');
-      const selectEstado = document.createElement('select');
-      selectEstado.className = 'estado-select';
-      ['Pagado', 'Debe'].forEach(opt => {
-        const option = document.createElement('option');
-        option.value = opt;
-        option.textContent = opt === 'Pagado' ? '✅ Pagado' : '⏳ Debe';
-        if (item.estado === opt) option.selected = true;
-        selectEstado.appendChild(option);
+  function renderListaClientes() {
+    const container = document.getElementById('listaClientes');
+    container.innerHTML = '';
+    clientes.forEach(cli => {
+      const div = document.createElement('div');
+      div.className = `cliente-card ${clienteActivoId === cli.id ? 'active' : ''}`;
+      div.innerHTML = `
+        <span class="cliente-nombre-side">${escapeHtml(cli.nombre)}</span>
+        <button class="delete-cliente" data-id="${cli.id}">🗑️</button>
+      `;
+      div.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-cliente')) return;
+        seleccionarCliente(cli.id);
       });
-      selectEstado.addEventListener('change', (e) => { item.estado = e.target.value; saveAndRender(); });
-      estadoCell.appendChild(selectEstado);
-      
-      // Fecha (datetime-local)
-      const fechaCell = document.createElement('td');
-      const fechaInput = document.createElement('input');
-      fechaInput.type = 'datetime-local';
-      fechaInput.className = 'fecha-input';
-      fechaInput.value = item.fecha || new Date().toISOString().slice(0, 16);
-      fechaInput.addEventListener('change', (e) => {
-        item.fecha = e.target.value;
-        updateFechaLegible(item);
-        saveAndRender();
-      });
-      fechaCell.appendChild(fechaInput);
-      
-      // Acciones: duplicar (mismo cliente/fecha) y eliminar
-      const accionCell = document.createElement('td');
-      const btnWrapper = document.createElement('div');
-      btnWrapper.className = 'action-buttons';
-      
-      const duplicateBtn = document.createElement('button');
-      duplicateBtn.innerHTML = '➕';
-      duplicateBtn.className = 'icon-btn duplicate-btn';
-      duplicateBtn.title = 'Agregar otro producto para este cliente (misma fecha)';
-      duplicateBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const newRow = {
-          cliente: item.cliente,
-          producto: "Nuevo producto",
-          cantidad: 1,
-          estado: "Debe",
-          fecha: item.fecha,
-          fechaLegible: item.fechaLegible
-        };
-        ventas.push(newRow);
-        saveAndRender();
-        setTimeout(() => {
-          const tbodyEl = document.getElementById('tableBody');
-          if (tbodyEl.lastChild) tbodyEl.lastChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 50);
-      });
-      
-      const deleteBtn = document.createElement('button');
-      deleteBtn.innerHTML = '🗑️';
-      deleteBtn.className = 'icon-btn delete-btn';
-      deleteBtn.title = 'Eliminar fila';
+      const deleteBtn = div.querySelector('.delete-cliente');
       deleteBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const realIndex = ventas.findIndex(v => v === item);
-        if (realIndex !== -1) {
-          ventas.splice(realIndex, 1);
-          saveAndRender();
+        if (confirm(`¿Eliminar cliente "${cli.nombre}" y todas sus compras?`)) {
+          clientes = clientes.filter(c => c.id !== cli.id);
+          compras = compras.filter(c => c.clienteId !== cli.id);
+          if (clienteActivoId === cli.id) {
+            clienteActivoId = null;
+            document.getElementById('clienteNombreDisplay').innerText = 'Selecciona un cliente';
+            document.getElementById('fichaContenido').innerHTML = '<div style="text-align:center;padding:3rem;">👈 Selecciona un cliente</div>';
+          }
+          guardarDatos();
+          renderListaClientes();
+          if (clienteActivoId) renderFichaCliente(clienteActivoId);
         }
       });
-      
-      btnWrapper.appendChild(duplicateBtn);
-      btnWrapper.appendChild(deleteBtn);
-      accionCell.appendChild(btnWrapper);
-      
-      row.appendChild(clienteCell);
-      row.appendChild(prodCell);
-      row.appendChild(cantCell);
-      row.appendChild(estadoCell);
-      row.appendChild(fechaCell);
-      row.appendChild(accionCell);
-      tbody.appendChild(row);
+      container.appendChild(div);
     });
   }
 
-  function createEditableSpan(initialValue, onUpdate, type = 'text') {
-    const span = document.createElement('span');
-    span.className = 'editable-cell';
-    span.contentEditable = 'true';
-    span.textContent = initialValue !== undefined && initialValue !== null ? initialValue : '';
-    if (type === 'number') span.setAttribute('inputmode', 'numeric');
-    span.addEventListener('blur', () => {
-      let newValue = span.textContent.trim();
-      if (type === 'number') {
-        let num = parseInt(newValue);
-        if (isNaN(num)) num = 0;
-        newValue = num.toString();
-        span.textContent = newValue;
-      }
-      if (newValue !== initialValue) onUpdate(newValue);
-    });
-    span.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); span.blur(); } });
-    return span;
+  function seleccionarCliente(id) {
+    clienteActivoId = id;
+    renderListaClientes();
+    renderFichaCliente(id);
   }
 
-  function saveAndRender() {
-    saveToLocalStorage();
-    renderTable();
-  }
-
-  function addNewRow() {
-    const ahora = new Date();
-    const fechaISO = ahora.toISOString().slice(0, 16);
-    const fechaLegible = ahora.toLocaleString('es-ES', { hour12: false });
-    ventas.push({
-      cliente: "Nuevo cliente",
-      producto: "Nuevo producto",
-      cantidad: 1,
-      estado: "Debe",
-      fecha: fechaISO,
-      fechaLegible: fechaLegible
-    });
-    saveAndRender();
-    setTimeout(() => {
-      const tbody = document.getElementById('tableBody');
-      if (tbody.lastChild) tbody.lastChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 50);
-  }
-
-  // ---------- IMPORTAR CSV ----------
-  function importCSV(file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const text = e.target.result;
-      const lines = text.split(/\r?\n/);
-      if (lines.length === 0) return;
-      const headers = lines[0].split(',').map(h => h.replace(/^\uFEFF/, '').trim().toLowerCase());
-      // mapeo flexible: buscamos columnas necesarias
-      const idxCliente = headers.findIndex(h => h.includes('cliente'));
-      const idxProducto = headers.findIndex(h => h.includes('producto'));
-      const idxCantidad = headers.findIndex(h => h.includes('cantidad'));
-      const idxEstado = headers.findIndex(h => h.includes('estado') || h.includes('pago'));
-      const idxFecha = headers.findIndex(h => h.includes('fecha'));
-      
-      if (idxCliente === -1 || idxProducto === -1 || idxCantidad === -1) {
-        alert("Formato inválido. Se requieren columnas: Cliente, Producto, Cantidad. (Estado y Fecha opcionales)");
-        return;
-      }
-      
-      const nuevasFilas = [];
-      for (let i = 1; i < lines.length; i++) {
-        if (!lines[i].trim()) continue;
-        // parse básico (soporta comillas)
-        let cols = [];
-        let inQuote = false;
-        let current = '';
-        for (let ch of lines[i]) {
-          if (ch === '"') inQuote = !inQuote;
-          else if (ch === ',' && !inQuote) {
-            cols.push(current.trim());
-            current = '';
-          } else {
-            current += ch;
-          }
-        }
-        cols.push(current.trim());
-        if (cols.length < 3) continue;
-        
-        const cliente = cols[idxCliente]?.replace(/^"|"$/g, '') || '';
-        const producto = cols[idxProducto]?.replace(/^"|"$/g, '') || '';
-        let cantidad = parseInt(cols[idxCantidad]);
-        if (isNaN(cantidad)) cantidad = 1;
-        let estado = (idxEstado !== -1 && cols[idxEstado]) ? (cols[idxEstado].includes('Pagado') ? 'Pagado' : 'Debe') : 'Debe';
-        let fechaStr = (idxFecha !== -1 && cols[idxFecha]) ? cols[idxFecha].replace(/^"|"$/g, '') : '';
-        
-        let fechaISO = null;
-        let fechaLegible = null;
-        if (fechaStr) {
-          let parsedDate = new Date(fechaStr);
-          if (!isNaN(parsedDate.getTime())) {
-            fechaISO = parsedDate.toISOString().slice(0, 16);
-            fechaLegible = parsedDate.toLocaleString('es-ES', { hour12: false });
-          } else {
-            const ahora = new Date();
-            fechaISO = ahora.toISOString().slice(0, 16);
-            fechaLegible = ahora.toLocaleString('es-ES', { hour12: false });
-          }
-        } else {
-          const ahora = new Date();
-          fechaISO = ahora.toISOString().slice(0, 16);
-          fechaLegible = ahora.toLocaleString('es-ES', { hour12: false });
-        }
-        
-        nuevasFilas.push({
-          cliente: cliente || "Desconocido",
-          producto: producto || "Producto",
-          cantidad: cantidad,
-          estado: estado,
-          fecha: fechaISO,
-          fechaLegible: fechaLegible
-        });
-      }
-      
-      if (nuevasFilas.length === 0) {
-        alert("No se encontraron filas válidas en el CSV.");
-        return;
-      }
-      
-      ventas.push(...nuevasFilas);
-      saveAndRender();
-      alert(`✅ Se importaron ${nuevasFilas.length} filas correctamente.`);
-    };
-    reader.onerror = () => alert("Error al leer el archivo.");
-    reader.readAsText(file, "UTF-8");
-  }
-
-  function triggerImport() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.csv';
-    input.onchange = (e) => {
-      if (e.target.files && e.target.files[0]) {
-        importCSV(e.target.files[0]);
-      }
-    };
-    input.click();
-  }
-
-  function exportToCSV() {
-    if (ventas.length === 0) {
-      alert("No hay datos para exportar");
-      return;
+  function renderFichaCliente(clienteId) {
+    const cliente = clientes.find(c => c.id === clienteId);
+    if (!cliente) return;
+    document.getElementById('clienteNombreDisplay').innerHTML = `${escapeHtml(cliente.nombre)} <span style="font-size:0.8rem;">🆔 #${cliente.id}</span>`;
+    const container = document.getElementById('fichaContenido');
+    
+    // filtrar compras del cliente ordenadas por fecha descendente
+    let comprasCliente = compras.filter(c => c.clienteId === clienteId).sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
+    
+    let html = `<div style="margin-bottom: 20px;"><button class="btn btn-primary btn-sm" id="btnAgregarCompra">➕ Agregar compra</button></div>`;
+    
+    if (comprasCliente.length === 0) html += `<div style="text-align:center;padding:2rem;">✨ No hay compras registradas</div>`;
+    else {
+      comprasCliente.forEach(comp => {
+        const total = comp.items.reduce((sum, item) => sum + (item.cantidad * item.precio), 0);
+        const estadoClass = comp.estado === 'Pagado' ? 'pagado' : 'debe';
+        const estadoTexto = comp.estado === 'Pagado' ? '✅ PAGADO' : '⏳ DEBE';
+        html += `
+          <div class="compra-item" data-compra-id="${comp.id}">
+            <div class="compra-header">
+              <span class="compra-fecha">📅 ${comp.fecha}</span>
+              <span class="estado-badge ${estadoClass}">${estadoTexto}</span>
+            </div>
+            <div class="productos-lista">
+              ${comp.items.map(item => `<div class="producto-row"><span>${escapeHtml(item.producto)} x${item.cantidad}</span><span>$${item.precio} c/u → $${(item.cantidad * item.precio).toFixed(2)}</span></div>`).join('')}
+            </div>
+            <div class="total-compra">💰 TOTAL: $${total.toFixed(2)}</div>
+            <div class="acciones-compra">
+              ${comp.estado === 'Debe' ? `<button class="btn btn-success btn-sm marcar-pagado" data-id="${comp.id}">💵 Marcar como Pagado</button>` : `<button class="btn btn-outline btn-sm desmarcar-pagado" data-id="${comp.id}">🔄 Volver a Debe</button>`}
+              <button class="btn btn-outline btn-sm ver-ticket" data-id="${comp.id}">🧾 Ver Ticket</button>
+              <button class="btn delete-compra btn-sm" data-id="${comp.id}">🗑️ Eliminar</button>
+            </div>
+          </div>
+        `;
+      });
     }
-    const headers = ["Cliente", "Producto", "Cantidad", "EstadoPago", "Fecha"];
-    const rows = ventas.map(v => {
-      let fechaMostrar = v.fechaLegible || (v.fecha ? new Date(v.fecha).toLocaleString('es-ES') : '');
-      return [
-        `"${v.cliente.replace(/"/g, '""')}"`,
-        `"${v.producto.replace(/"/g, '""')}"`,
-        v.cantidad,
-        `"${v.estado}"`,
-        `"${fechaMostrar}"`
-      ];
+    
+    // Formulario nueva compra (inicialmente oculto)
+    html += `<div id="formNuevaCompra" style="display:none;" class="nueva-compra">
+              <h4>📝 Nueva compra</h4>
+              <label>📅 Fecha: <input type="date" id="fechaCompra" value="${new Date().toISOString().slice(0,10)}" style="background:#1e293b; border-radius:20px; padding:6px; color:white;"></label>
+              <div id="itemsContainer" style="margin:12px 0;"></div>
+              <button class="btn btn-sm" id="agregarItemBtn">➕ Añadir producto</button>
+              <div style="margin-top:15px;">
+                <button class="btn btn-primary" id="guardarCompraBtn">💾 Guardar compra</button>
+                <button class="btn btn-outline" id="cancelarCompraBtn">Cancelar</button>
+              </div>
+            </div>`;
+    
+    container.innerHTML = html;
+    
+    // Eventos dinámicos
+    document.getElementById('btnAgregarCompra')?.addEventListener('click', () => {
+      const form = document.getElementById('formNuevaCompra');
+      if (form) form.style.display = 'block';
+      inicializarItemsVacios();
     });
-    const csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
-    const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
-    const url = URL.createObjectURL(blob);
-    link.href = url;
-    link.setAttribute("download", "ventas_exportadas.csv");
-    link.click();
-    URL.revokeObjectURL(url);
-  }
-
-  function resetToDemo() {
-    if (confirm("⚠️ Esto reemplazará todos los datos actuales por el demo inicial. ¿Continuar?")) {
-      crearDemoData();
-      saveAndRender();
-      document.getElementById('filterInput').value = '';
-      currentFilter = '';
-      currentSort = { column: 'fecha', direction: 'desc' };
-      renderTable();
-    }
-  }
-
-  function setupSorting() {
-    const ths = document.querySelectorAll('#ventasTable th[data-sort]');
-    ths.forEach(th => {
-      th.addEventListener('click', () => {
-        const column = th.getAttribute('data-sort');
-        if (currentSort.column === column) {
-          currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
-        } else {
-          currentSort.column = column;
-          currentSort.direction = 'asc';
-        }
-        renderTable();
+    document.getElementById('cancelarCompraBtn')?.addEventListener('click', () => {
+      document.getElementById('formNuevaCompra').style.display = 'none';
+    });
+    
+    // botones de acciones de compras existentes
+    document.querySelectorAll('.marcar-pagado').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(btn.dataset.id);
+        marcarPagoCompra(id, true);
       });
     });
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    loadInitialData();
-    setupSorting();
-    document.getElementById('filterInput').addEventListener('input', (e) => {
-      currentFilter = e.target.value;
-      renderTable();
+    document.querySelectorAll('.desmarcar-pagado').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(btn.dataset.id);
+        marcarPagoCompra(id, false);
+      });
     });
-    document.getElementById('addRowBtn').addEventListener('click', addNewRow);
-    document.getElementById('importCsvBtn').addEventListener('click', triggerImport);
-    document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
-    document.getElementById('resetDemoBtn').addEventListener('click', resetToDemo);
+    document.querySelectorAll('.delete-compra').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(btn.dataset.id);
+        if (confirm('¿Eliminar esta compra?')) {
+          compras = compras.filter(c => c.id !== id);
+          guardarDatos();
+          renderFichaCliente(clienteId);
+        }
+      });
+    });
+    document.querySelectorAll('.ver-ticket').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(btn.dataset.id);
+        mostrarTicket(id);
+      });
+    });
+    
+    // guardar nueva compra
+    document.getElementById('guardarCompraBtn')?.addEventListener('click', () => {
+      const fecha = document.getElementById('fechaCompra').value;
+      if (!fecha) return alert('Selecciona fecha');
+      const items = [];
+      const rows = document.querySelectorAll('.item-row');
+      rows.forEach(row => {
+        const producto = row.querySelector('.prod-nombre')?.value.trim();
+        const cantidad = parseInt(row.querySelector('.prod-cantidad')?.value);
+        const precio = parseFloat(row.querySelector('.prod-precio')?.value);
+        if (producto && cantidad > 0 && !isNaN(precio)) {
+          items.push({ producto, cantidad, precio });
+        }
+      });
+      if (items.length === 0) return alert('Agrega al menos un producto válido');
+      const nuevaCompra = {
+        id: nextCompraId++,
+        clienteId: cliente.id,
+        fecha: fecha,
+        items: items,
+        estado: 'Debe',
+        fechaPago: null
+      };
+      compras.push(nuevaCompra);
+      guardarDatos();
+      document.getElementById('formNuevaCompra').style.display = 'none';
+      renderFichaCliente(clienteId);
+    });
+  }
+  
+  function inicializarItemsVacios() {
+    const container = document.getElementById('itemsContainer');
+    container.innerHTML = '';
+    agregarFilaItem();
+    document.getElementById('agregarItemBtn')?.addEventListener('click', () => agregarFilaItem());
+  }
+  
+  function agregarFilaItem() {
+    const container = document.getElementById('itemsContainer');
+    const div = document.createElement('div');
+    div.className = 'item-row';
+    div.style.display = 'flex';
+    div.style.gap = '8px';
+    div.style.marginBottom = '8px';
+    div.style.flexWrap = 'wrap';
+    div.innerHTML = `
+      <input type="text" placeholder="Producto" class="prod-nombre" style="flex:2; background:#0f172a; border-radius:20px; padding:8px;">
+      <input type="number" placeholder="Cantidad" class="prod-cantidad" value="1" style="flex:1; background:#0f172a; border-radius:20px; padding:8px;">
+      <input type="number" placeholder="Precio" class="prod-precio" value="0" step="any" style="flex:1; background:#0f172a; border-radius:20px; padding:8px;">
+      <button class="btn-outline btn-sm eliminar-item" style="padding:4px 10px;">🗑️</button>
+    `;
+    div.querySelector('.eliminar-item')?.addEventListener('click', () => div.remove());
+    container.appendChild(div);
+  }
+  
+  function marcarPagoCompra(compraId, pagado) {
+    const compra = compras.find(c => c.id === compraId);
+    if (compra) {
+      compra.estado = pagado ? 'Pagado' : 'Debe';
+      compra.fechaPago = pagado ? new Date().toISOString().slice(0,10) : null;
+      guardarDatos();
+      if (clienteActivoId) renderFichaCliente(clienteActivoId);
+    }
+  }
+  
+  function mostrarTicket(compraId) {
+    const compra = compras.find(c => c.id === compraId);
+    if (!compra) return;
+    const cliente = clientes.find(c => c.id === compra.clienteId);
+    const total = compra.items.reduce((s, i) => s + (i.cantidad * i.precio), 0);
+    let lineas = `🧾 TICKET DE COMPRA\n`;
+    lineas += `Cliente: ${cliente.nombre}\n`;
+    lineas += `Fecha: ${compra.fecha}\n`;
+    lineas += `Estado: ${compra.estado === 'Pagado' ? '✅ PAGADO' : '⏳ PENDIENTE DE PAGO'}\n`;
+    if (compra.fechaPago) lineas += `Fecha de pago: ${compra.fechaPago}\n`;
+    lineas += `--------------------------------\n`;
+    compra.items.forEach(item => {
+      lineas += `${item.producto}  x${item.cantidad}   $${item.precio} c/u → $${(item.cantidad*item.precio).toFixed(2)}\n`;
+    });
+    lineas += `--------------------------------\n`;
+    lineas += `💰 TOTAL: $${total.toFixed(2)}\n`;
+    lineas += `¡Gracias por su compra!`;
+    
+    const modal = document.getElementById('ticketModal');
+    const textoDiv = document.getElementById('ticketTexto');
+    textoDiv.innerText = lineas;
+    modal.style.display = 'flex';
+    
+    // guardar compra actual para whatsapp
+    window.currentTicketText = lineas;
+  }
+  
+  // Eventos del modal
+  document.getElementById('copiarTicketBtn')?.addEventListener('click', () => {
+    const texto = document.getElementById('ticketTexto').innerText;
+    navigator.clipboard.writeText(texto);
+    alert('Ticket copiado al portapapeles');
   });
+  document.getElementById('enviarWhatsappBtn')?.addEventListener('click', () => {
+    const texto = encodeURIComponent(window.currentTicketText || '');
+    window.open(`https://wa.me/?text=${texto}`, '_blank');
+  });
+  document.getElementById('cerrarModalBtn')?.addEventListener('click', () => {
+    document.getElementById('ticketModal').style.display = 'none';
+  });
+  
+  // Nuevo cliente global
+  document.getElementById('nuevoClienteGlobalBtn')?.addEventListener('click', () => {
+    const nombre = prompt('Nombre del nuevo cliente:');
+    if (nombre && nombre.trim()) {
+      const nuevoId = nextClienteId++;
+      clientes.push({ id: nuevoId, nombre: nombre.trim() });
+      guardarDatos();
+      renderListaClientes();
+      seleccionarCliente(nuevoId);
+    }
+  });
+  
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+  
+  // Inicialización
+  loadData();
+  renderListaClientes();
+  if (clientes.length > 0) seleccionarCliente(clientes[0].id);
 </script>
 </body>
 </html>
